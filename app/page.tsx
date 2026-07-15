@@ -29,8 +29,19 @@ function Counter({ from, to, duration = 2 }: { from: number, to: number, duratio
 }
 
 // --- Section 1: Floating Library Data ---
+type FloatingSubject = {
+  name: string;
+  x: string;
+  y: string;
+  delay: number;
+  size: "sm" | "md" | "lg";
+  rotation: number;
+  topics: string[];
+  tooltipPos?: "top" | "bottom";
+};
+
 // Clustered asymmetrically, varied sizes and rotations
-const floatingSubjects = [
+const floatingSubjects: FloatingSubject[] = [
   // Top Left Cluster
   { name: "Mathematics", x: "15%", y: "15%", delay: 0.1, size: "lg", rotation: -2, topics: ["Algebra", "Geometry", "Calculus"] },
   { name: "Statistics", x: "28%", y: "22%", delay: 0.3, size: "sm", rotation: 1, topics: ["Probability", "Data"] },
