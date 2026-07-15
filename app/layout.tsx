@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Newsreader } from "next/font/google";
+import { Plus_Jakarta_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const newsreader = Newsreader({
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${jakarta.variable} ${newsreader.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans text-foreground bg-background selection:bg-primary/20 selection:text-primary">
         {children}

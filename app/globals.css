@@ -9,7 +9,7 @@
   --primary: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --border: oklch(0.922 0 0);
-  --background: oklch(1 0 0);
+  --background: #FCFCFB;
   --foreground: oklch(0.145 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -81,6 +81,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  
+  /* Subject Colors */
+  --color-subject-math: #2563EB;
+  --color-subject-biology: #22C55E;
+  --color-subject-chemistry: #F97316;
+  --color-subject-physics: #8B5CF6;
+  --color-subject-cs: #4F46E5;
+  --color-subject-history: #92400E;
+  --color-subject-geography: #0F766E;
+  --color-subject-english: #DC2626;
 }
 
 @media (prefers-color-scheme: dark) {
