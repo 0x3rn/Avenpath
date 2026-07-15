@@ -1,0 +1,11 @@
+{
+  "name": "Botany",
+  "slug": "botany",
+  "description": "The study of botany.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

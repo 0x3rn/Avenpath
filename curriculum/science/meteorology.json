@@ -1,0 +1,11 @@
+{
+  "name": "Meteorology",
+  "slug": "meteorology",
+  "description": "The study of meteorology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

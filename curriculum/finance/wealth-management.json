@@ -1,0 +1,11 @@
+{
+  "name": "Wealth Management",
+  "slug": "wealth-management",
+  "description": "The study of wealth management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

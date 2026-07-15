@@ -1,0 +1,11 @@
+{
+  "name": "Interior Design",
+  "slug": "interior-design",
+  "description": "The study of interior design.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

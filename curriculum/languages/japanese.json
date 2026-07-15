@@ -1,0 +1,11 @@
+{
+  "name": "Japanese",
+  "slug": "japanese",
+  "description": "The study of japanese.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Biomedical Engineering",
+  "slug": "biomedical-engineering",
+  "description": "The study of biomedical engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

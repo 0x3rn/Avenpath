@@ -1,0 +1,11 @@
+{
+  "name": "Literature",
+  "slug": "literature",
+  "description": "The study of literature.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

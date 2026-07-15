@@ -1,0 +1,11 @@
+{
+  "name": "Environmental Engineering",
+  "slug": "environmental-engineering",
+  "description": "The study of environmental engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

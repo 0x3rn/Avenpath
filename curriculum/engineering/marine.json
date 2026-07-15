@@ -1,0 +1,11 @@
+{
+  "name": "Marine Engineering",
+  "slug": "marine-engineering",
+  "description": "The study of marine engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

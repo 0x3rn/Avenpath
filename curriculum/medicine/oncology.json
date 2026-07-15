@@ -1,0 +1,11 @@
+{
+  "name": "Oncology",
+  "slug": "oncology",
+  "description": "The study of oncology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

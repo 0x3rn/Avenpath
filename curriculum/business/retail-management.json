@@ -1,0 +1,11 @@
+{
+  "name": "Retail Management",
+  "slug": "retail-management",
+  "description": "The study of retail management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

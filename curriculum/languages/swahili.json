@@ -1,0 +1,11 @@
+{
+  "name": "Swahili",
+  "slug": "swahili",
+  "description": "The study of swahili.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

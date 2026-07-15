@@ -1,0 +1,11 @@
+{
+  "name": "Philosophy",
+  "slug": "philosophy",
+  "description": "The study of philosophy.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

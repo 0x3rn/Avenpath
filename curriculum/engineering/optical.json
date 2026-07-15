@@ -1,0 +1,11 @@
+{
+  "name": "Optical Engineering",
+  "slug": "optical-engineering",
+  "description": "The study of optical engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

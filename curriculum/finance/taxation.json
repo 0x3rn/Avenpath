@@ -1,0 +1,11 @@
+{
+  "name": "Taxation",
+  "slug": "taxation",
+  "description": "The study of taxation.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

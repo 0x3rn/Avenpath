@@ -1,0 +1,11 @@
+{
+  "name": "Astronomy",
+  "slug": "astronomy",
+  "description": "The study of astronomy.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

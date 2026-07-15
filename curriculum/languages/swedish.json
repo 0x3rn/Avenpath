@@ -1,0 +1,11 @@
+{
+  "name": "Swedish",
+  "slug": "swedish",
+  "description": "The study of swedish.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

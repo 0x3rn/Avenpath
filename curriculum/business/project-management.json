@@ -1,0 +1,11 @@
+{
+  "name": "Project Management",
+  "slug": "project-management",
+  "description": "The study of project management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Real Estate Finance",
+  "slug": "real-estate-finance",
+  "description": "The study of real estate finance.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

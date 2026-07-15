@@ -1,0 +1,11 @@
+{
+  "name": "Civil Engineering",
+  "slug": "civil-engineering",
+  "description": "The study of civil engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

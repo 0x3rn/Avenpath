@@ -1,0 +1,11 @@
+{
+  "name": "Pharmacology",
+  "slug": "pharmacology",
+  "description": "The study of pharmacology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Organizational Behavior",
+  "slug": "organizational-behavior",
+  "description": "The study of organizational behavior.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

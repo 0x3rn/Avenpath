@@ -1,0 +1,11 @@
+{
+  "name": "Supply Chain",
+  "slug": "supply-chain",
+  "description": "The study of supply chain.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

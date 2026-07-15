@@ -1,0 +1,11 @@
+{
+  "name": "Mining Engineering",
+  "slug": "mining-engineering",
+  "description": "The study of mining engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

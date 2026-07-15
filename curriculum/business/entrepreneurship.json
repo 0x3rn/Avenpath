@@ -1,0 +1,11 @@
+{
+  "name": "Entrepreneurship",
+  "slug": "entrepreneurship",
+  "description": "The study of entrepreneurship.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

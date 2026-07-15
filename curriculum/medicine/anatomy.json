@@ -1,0 +1,11 @@
+{
+  "name": "Anatomy",
+  "slug": "anatomy",
+  "description": "The study of anatomy.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

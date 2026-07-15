@@ -1,0 +1,11 @@
+{
+  "name": "Management",
+  "slug": "management",
+  "description": "The study of management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

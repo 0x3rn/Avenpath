@@ -1,0 +1,11 @@
+{
+  "name": "Statistics",
+  "slug": "statistics",
+  "description": "The study of statistics.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

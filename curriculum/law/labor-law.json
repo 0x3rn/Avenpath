@@ -1,0 +1,11 @@
+{
+  "name": "Labor Law",
+  "slug": "labor-law",
+  "description": "The study of labor law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

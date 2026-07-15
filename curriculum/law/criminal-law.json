@@ -1,0 +1,11 @@
+{
+  "name": "Criminal Law",
+  "slug": "criminal-law",
+  "description": "The study of criminal law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

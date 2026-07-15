@@ -1,0 +1,11 @@
+{
+  "name": "Contract Law",
+  "slug": "contract-law",
+  "description": "The study of contract law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

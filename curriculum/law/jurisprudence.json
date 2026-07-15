@@ -1,0 +1,11 @@
+{
+  "name": "Jurisprudence",
+  "slug": "jurisprudence",
+  "description": "The study of jurisprudence.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

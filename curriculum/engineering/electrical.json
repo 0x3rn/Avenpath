@@ -1,0 +1,11 @@
+{
+  "name": "Electrical Engineering",
+  "slug": "electrical-engineering",
+  "description": "The study of electrical engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

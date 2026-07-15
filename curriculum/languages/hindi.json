@@ -1,0 +1,11 @@
+{
+  "name": "Hindi",
+  "slug": "hindi",
+  "description": "The study of hindi.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

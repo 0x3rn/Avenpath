@@ -1,0 +1,11 @@
+{
+  "name": "Game Design",
+  "slug": "game-design",
+  "description": "The study of game design.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

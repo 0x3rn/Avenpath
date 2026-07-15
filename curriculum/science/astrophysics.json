@@ -1,0 +1,11 @@
+{
+  "name": "Astrophysics",
+  "slug": "astrophysics",
+  "description": "The study of astrophysics.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

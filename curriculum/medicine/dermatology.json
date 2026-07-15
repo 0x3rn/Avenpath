@@ -1,0 +1,11 @@
+{
+  "name": "Dermatology",
+  "slug": "dermatology",
+  "description": "The study of dermatology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

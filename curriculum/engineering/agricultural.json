@@ -1,0 +1,11 @@
+{
+  "name": "Agricultural Engineering",
+  "slug": "agricultural-engineering",
+  "description": "The study of agricultural engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

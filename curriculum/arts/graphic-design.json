@@ -1,0 +1,11 @@
+{
+  "name": "Graphic Design",
+  "slug": "graphic-design",
+  "description": "The study of graphic design.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

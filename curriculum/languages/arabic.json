@@ -1,0 +1,11 @@
+{
+  "name": "Arabic",
+  "slug": "arabic",
+  "description": "The study of arabic.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

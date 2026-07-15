@@ -1,0 +1,11 @@
+{
+  "name": "Vietnamese",
+  "slug": "vietnamese",
+  "description": "The study of vietnamese.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

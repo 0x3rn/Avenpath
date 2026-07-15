@@ -1,0 +1,11 @@
+{
+  "name": "Endocrinology",
+  "slug": "endocrinology",
+  "description": "The study of endocrinology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

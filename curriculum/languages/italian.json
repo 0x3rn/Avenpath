@@ -1,0 +1,11 @@
+{
+  "name": "Italian",
+  "slug": "italian",
+  "description": "The study of italian.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

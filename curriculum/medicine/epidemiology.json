@@ -1,0 +1,11 @@
+{
+  "name": "Epidemiology",
+  "slug": "epidemiology",
+  "description": "The study of epidemiology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

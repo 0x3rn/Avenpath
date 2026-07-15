@@ -1,0 +1,11 @@
+{
+  "name": "Nonprofit Management",
+  "slug": "nonprofit-management",
+  "description": "The study of nonprofit management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Portfolio Management",
+  "slug": "portfolio-management",
+  "description": "The study of portfolio management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

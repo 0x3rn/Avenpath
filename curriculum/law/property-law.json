@@ -1,0 +1,11 @@
+{
+  "name": "Property Law",
+  "slug": "property-law",
+  "description": "The study of property law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Nuclear Engineering",
+  "slug": "nuclear-engineering",
+  "description": "The study of nuclear engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

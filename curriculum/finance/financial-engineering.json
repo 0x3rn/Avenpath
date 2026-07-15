@@ -1,0 +1,11 @@
+{
+  "name": "Financial Engineering",
+  "slug": "financial-engineering",
+  "description": "The study of financial engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

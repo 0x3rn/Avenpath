@@ -1,0 +1,11 @@
+{
+  "name": "Environmental Science",
+  "slug": "environmental-science",
+  "description": "The study of environmental science.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

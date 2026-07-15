@@ -1,0 +1,11 @@
+{
+  "name": "Pediatrics",
+  "slug": "pediatrics",
+  "description": "The study of pediatrics.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

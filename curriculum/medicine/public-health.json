@@ -1,0 +1,11 @@
+{
+  "name": "Public Health",
+  "slug": "public-health",
+  "description": "The study of public health.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

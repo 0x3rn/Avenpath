@@ -1,0 +1,11 @@
+{
+  "name": "Gastroenterology",
+  "slug": "gastroenterology",
+  "description": "The study of gastroenterology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

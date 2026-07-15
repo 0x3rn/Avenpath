@@ -1,0 +1,11 @@
+{
+  "name": "Materials Engineering",
+  "slug": "materials-engineering",
+  "description": "The study of materials engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,876 @@
+{
+  "name": "Mathematics",
+  "slug": "mathematics",
+  "description": "The study of numbers, quantities, structures, patterns, space, and change.",
+  "icon": "Sigma",
+  "color": "#2563EB",
+  "topics": [
+    {
+      "id": "foundations-of-mathematics",
+      "name": "Foundations of Mathematics",
+      "slug": "foundations-of-mathematics",
+      "description": "Fundamental concepts and mathematical reasoning.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 22,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "history-of-mathematics",
+          "name": "History of Mathematics",
+          "slug": "history-of-mathematics"
+        },
+        {
+          "id": "mathematical-language",
+          "name": "Mathematical Language",
+          "slug": "mathematical-language"
+        },
+        {
+          "id": "mathematical-symbols",
+          "name": "Mathematical Symbols",
+          "slug": "mathematical-symbols"
+        },
+        {
+          "id": "sets",
+          "name": "Sets",
+          "slug": "sets"
+        },
+        {
+          "id": "set-operations",
+          "name": "Set Operations",
+          "slug": "set-operations"
+        },
+        {
+          "id": "logic",
+          "name": "Logic",
+          "slug": "logic"
+        },
+        {
+          "id": "truth-tables",
+          "name": "Truth Tables",
+          "slug": "truth-tables"
+        },
+        {
+          "id": "reasoning",
+          "name": "Reasoning",
+          "slug": "reasoning"
+        },
+        {
+          "id": "proof-techniques",
+          "name": "Proof Techniques",
+          "slug": "proof-techniques"
+        },
+        {
+          "id": "functions",
+          "name": "Functions",
+          "slug": "functions"
+        },
+        {
+          "id": "relations",
+          "name": "Relations",
+          "slug": "relations"
+        }
+      ]
+    },
+    {
+      "id": "arithmetic",
+      "name": "Arithmetic",
+      "slug": "arithmetic",
+      "description": "Working with numbers and basic operations.",
+      "levels": [
+        "high-school"
+      ],
+      "estimatedHours": 28,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "whole-numbers",
+          "name": "Whole Numbers",
+          "slug": "whole-numbers"
+        },
+        {
+          "id": "integers",
+          "name": "Integers",
+          "slug": "integers"
+        },
+        {
+          "id": "fractions",
+          "name": "Fractions",
+          "slug": "fractions"
+        },
+        {
+          "id": "decimals",
+          "name": "Decimals",
+          "slug": "decimals"
+        },
+        {
+          "id": "percentages",
+          "name": "Percentages",
+          "slug": "percentages"
+        },
+        {
+          "id": "ratios",
+          "name": "Ratios",
+          "slug": "ratios"
+        },
+        {
+          "id": "proportions",
+          "name": "Proportions",
+          "slug": "proportions"
+        },
+        {
+          "id": "factors",
+          "name": "Factors",
+          "slug": "factors"
+        },
+        {
+          "id": "multiples",
+          "name": "Multiples",
+          "slug": "multiples"
+        },
+        {
+          "id": "prime-numbers",
+          "name": "Prime Numbers",
+          "slug": "prime-numbers"
+        },
+        {
+          "id": "order-of-operations",
+          "name": "Order of Operations",
+          "slug": "order-of-operations"
+        },
+        {
+          "id": "exponents",
+          "name": "Exponents",
+          "slug": "exponents"
+        },
+        {
+          "id": "roots",
+          "name": "Roots",
+          "slug": "roots"
+        },
+        {
+          "id": "scientific-notation",
+          "name": "Scientific Notation",
+          "slug": "scientific-notation"
+        }
+      ]
+    },
+    {
+      "id": "algebra",
+      "name": "Algebra",
+      "slug": "algebra",
+      "description": "Study of variables, equations, and mathematical structures.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 36,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "variables",
+          "name": "Variables",
+          "slug": "variables"
+        },
+        {
+          "id": "expressions",
+          "name": "Expressions",
+          "slug": "expressions"
+        },
+        {
+          "id": "algebraic-manipulation",
+          "name": "Algebraic Manipulation",
+          "slug": "algebraic-manipulation"
+        },
+        {
+          "id": "linear-equations",
+          "name": "Linear Equations",
+          "slug": "linear-equations"
+        },
+        {
+          "id": "quadratic-equations",
+          "name": "Quadratic Equations",
+          "slug": "quadratic-equations"
+        },
+        {
+          "id": "simultaneous-equations",
+          "name": "Simultaneous Equations",
+          "slug": "simultaneous-equations"
+        },
+        {
+          "id": "inequalities",
+          "name": "Inequalities",
+          "slug": "inequalities"
+        },
+        {
+          "id": "polynomials",
+          "name": "Polynomials",
+          "slug": "polynomials"
+        },
+        {
+          "id": "factoring",
+          "name": "Factoring",
+          "slug": "factoring"
+        },
+        {
+          "id": "rational-expressions",
+          "name": "Rational Expressions",
+          "slug": "rational-expressions"
+        },
+        {
+          "id": "radicals",
+          "name": "Radicals",
+          "slug": "radicals"
+        },
+        {
+          "id": "absolute-value",
+          "name": "Absolute Value",
+          "slug": "absolute-value"
+        },
+        {
+          "id": "complex-numbers",
+          "name": "Complex Numbers",
+          "slug": "complex-numbers"
+        },
+        {
+          "id": "sequences",
+          "name": "Sequences",
+          "slug": "sequences"
+        },
+        {
+          "id": "series",
+          "name": "Series",
+          "slug": "series"
+        },
+        {
+          "id": "binomial-theorem",
+          "name": "Binomial Theorem",
+          "slug": "binomial-theorem"
+        },
+        {
+          "id": "matrices",
+          "name": "Matrices",
+          "slug": "matrices"
+        },
+        {
+          "id": "determinants",
+          "name": "Determinants",
+          "slug": "determinants"
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "name": "Geometry",
+      "slug": "geometry",
+      "description": "Study of shapes, sizes, angles and space.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 32,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "points",
+          "name": "Points",
+          "slug": "points"
+        },
+        {
+          "id": "lines",
+          "name": "Lines",
+          "slug": "lines"
+        },
+        {
+          "id": "planes",
+          "name": "Planes",
+          "slug": "planes"
+        },
+        {
+          "id": "angles",
+          "name": "Angles",
+          "slug": "angles"
+        },
+        {
+          "id": "triangles",
+          "name": "Triangles",
+          "slug": "triangles"
+        },
+        {
+          "id": "quadrilaterals",
+          "name": "Quadrilaterals",
+          "slug": "quadrilaterals"
+        },
+        {
+          "id": "polygons",
+          "name": "Polygons",
+          "slug": "polygons"
+        },
+        {
+          "id": "circles",
+          "name": "Circles",
+          "slug": "circles"
+        },
+        {
+          "id": "coordinate-geometry",
+          "name": "Coordinate Geometry",
+          "slug": "coordinate-geometry"
+        },
+        {
+          "id": "transformations",
+          "name": "Transformations",
+          "slug": "transformations"
+        },
+        {
+          "id": "similarity",
+          "name": "Similarity",
+          "slug": "similarity"
+        },
+        {
+          "id": "congruence",
+          "name": "Congruence",
+          "slug": "congruence"
+        },
+        {
+          "id": "area",
+          "name": "Area",
+          "slug": "area"
+        },
+        {
+          "id": "perimeter",
+          "name": "Perimeter",
+          "slug": "perimeter"
+        },
+        {
+          "id": "surface-area",
+          "name": "Surface Area",
+          "slug": "surface-area"
+        },
+        {
+          "id": "volume",
+          "name": "Volume",
+          "slug": "volume"
+        }
+      ]
+    },
+    {
+      "id": "trigonometry",
+      "name": "Trigonometry",
+      "slug": "trigonometry",
+      "description": "Relationships between angles and sides of triangles.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 22,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "angle-measurement",
+          "name": "Angle Measurement",
+          "slug": "angle-measurement"
+        },
+        {
+          "id": "radians",
+          "name": "Radians",
+          "slug": "radians"
+        },
+        {
+          "id": "degrees",
+          "name": "Degrees",
+          "slug": "degrees"
+        },
+        {
+          "id": "sine",
+          "name": "Sine",
+          "slug": "sine"
+        },
+        {
+          "id": "cosine",
+          "name": "Cosine",
+          "slug": "cosine"
+        },
+        {
+          "id": "tangent",
+          "name": "Tangent",
+          "slug": "tangent"
+        },
+        {
+          "id": "inverse-trigonometric-functions",
+          "name": "Inverse Trigonometric Functions",
+          "slug": "inverse-trigonometric-functions"
+        },
+        {
+          "id": "identities",
+          "name": "Identities",
+          "slug": "identities"
+        },
+        {
+          "id": "graphs",
+          "name": "Graphs",
+          "slug": "graphs"
+        },
+        {
+          "id": "law-of-sines",
+          "name": "Law of Sines",
+          "slug": "law-of-sines"
+        },
+        {
+          "id": "law-of-cosines",
+          "name": "Law of Cosines",
+          "slug": "law-of-cosines"
+        }
+      ]
+    },
+    {
+      "id": "calculus",
+      "name": "Calculus",
+      "slug": "calculus",
+      "description": "Study of change and motion.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 34,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "limits",
+          "name": "Limits",
+          "slug": "limits"
+        },
+        {
+          "id": "continuity",
+          "name": "Continuity",
+          "slug": "continuity"
+        },
+        {
+          "id": "derivatives",
+          "name": "Derivatives",
+          "slug": "derivatives"
+        },
+        {
+          "id": "differentiation-rules",
+          "name": "Differentiation Rules",
+          "slug": "differentiation-rules"
+        },
+        {
+          "id": "applications-of-derivatives",
+          "name": "Applications of Derivatives",
+          "slug": "applications-of-derivatives"
+        },
+        {
+          "id": "optimization",
+          "name": "Optimization",
+          "slug": "optimization"
+        },
+        {
+          "id": "related-rates",
+          "name": "Related Rates",
+          "slug": "related-rates"
+        },
+        {
+          "id": "integrals",
+          "name": "Integrals",
+          "slug": "integrals"
+        },
+        {
+          "id": "integration-techniques",
+          "name": "Integration Techniques",
+          "slug": "integration-techniques"
+        },
+        {
+          "id": "definite-integrals",
+          "name": "Definite Integrals",
+          "slug": "definite-integrals"
+        },
+        {
+          "id": "improper-integrals",
+          "name": "Improper Integrals",
+          "slug": "improper-integrals"
+        },
+        {
+          "id": "applications-of-integration",
+          "name": "Applications of Integration",
+          "slug": "applications-of-integration"
+        },
+        {
+          "id": "sequences-and-series",
+          "name": "Sequences and Series",
+          "slug": "sequences-and-series"
+        },
+        {
+          "id": "multivariable-calculus",
+          "name": "Multivariable Calculus",
+          "slug": "multivariable-calculus"
+        },
+        {
+          "id": "partial-derivatives",
+          "name": "Partial Derivatives",
+          "slug": "partial-derivatives"
+        },
+        {
+          "id": "multiple-integrals",
+          "name": "Multiple Integrals",
+          "slug": "multiple-integrals"
+        },
+        {
+          "id": "vector-calculus",
+          "name": "Vector Calculus",
+          "slug": "vector-calculus"
+        }
+      ]
+    },
+    {
+      "id": "linear-algebra",
+      "name": "Linear Algebra",
+      "slug": "linear-algebra",
+      "description": "Vector spaces and linear transformations.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "vectors",
+          "name": "Vectors",
+          "slug": "vectors"
+        },
+        {
+          "id": "vector-spaces",
+          "name": "Vector Spaces",
+          "slug": "vector-spaces"
+        },
+        {
+          "id": "matrices",
+          "name": "Matrices",
+          "slug": "matrices"
+        },
+        {
+          "id": "matrix-operations",
+          "name": "Matrix Operations",
+          "slug": "matrix-operations"
+        },
+        {
+          "id": "inverse-matrices",
+          "name": "Inverse Matrices",
+          "slug": "inverse-matrices"
+        },
+        {
+          "id": "linear-transformations",
+          "name": "Linear Transformations",
+          "slug": "linear-transformations"
+        },
+        {
+          "id": "eigenvalues",
+          "name": "Eigenvalues",
+          "slug": "eigenvalues"
+        },
+        {
+          "id": "eigenvectors",
+          "name": "Eigenvectors",
+          "slug": "eigenvectors"
+        },
+        {
+          "id": "orthogonality",
+          "name": "Orthogonality",
+          "slug": "orthogonality"
+        },
+        {
+          "id": "diagonalization",
+          "name": "Diagonalization",
+          "slug": "diagonalization"
+        }
+      ]
+    },
+    {
+      "id": "probability",
+      "name": "Probability",
+      "slug": "probability",
+      "description": "Study of uncertainty and random events.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 18,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "random-experiments",
+          "name": "Random Experiments",
+          "slug": "random-experiments"
+        },
+        {
+          "id": "sample-space",
+          "name": "Sample Space",
+          "slug": "sample-space"
+        },
+        {
+          "id": "events",
+          "name": "Events",
+          "slug": "events"
+        },
+        {
+          "id": "probability-rules",
+          "name": "Probability Rules",
+          "slug": "probability-rules"
+        },
+        {
+          "id": "conditional-probability",
+          "name": "Conditional Probability",
+          "slug": "conditional-probability"
+        },
+        {
+          "id": "independent-events",
+          "name": "Independent Events",
+          "slug": "independent-events"
+        },
+        {
+          "id": "bayes-theorem",
+          "name": "Bayes' Theorem",
+          "slug": "bayes-theorem"
+        },
+        {
+          "id": "random-variables",
+          "name": "Random Variables",
+          "slug": "random-variables"
+        },
+        {
+          "id": "probability-distributions",
+          "name": "Probability Distributions",
+          "slug": "probability-distributions"
+        }
+      ]
+    },
+    {
+      "id": "statistics",
+      "name": "Statistics",
+      "slug": "statistics",
+      "description": "Collection, analysis and interpretation of data.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 26,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "data-collection",
+          "name": "Data Collection",
+          "slug": "data-collection"
+        },
+        {
+          "id": "data-visualization",
+          "name": "Data Visualization",
+          "slug": "data-visualization"
+        },
+        {
+          "id": "mean",
+          "name": "Mean",
+          "slug": "mean"
+        },
+        {
+          "id": "median",
+          "name": "Median",
+          "slug": "median"
+        },
+        {
+          "id": "mode",
+          "name": "Mode",
+          "slug": "mode"
+        },
+        {
+          "id": "variance",
+          "name": "Variance",
+          "slug": "variance"
+        },
+        {
+          "id": "standard-deviation",
+          "name": "Standard Deviation",
+          "slug": "standard-deviation"
+        },
+        {
+          "id": "percentiles",
+          "name": "Percentiles",
+          "slug": "percentiles"
+        },
+        {
+          "id": "sampling",
+          "name": "Sampling",
+          "slug": "sampling"
+        },
+        {
+          "id": "confidence-intervals",
+          "name": "Confidence Intervals",
+          "slug": "confidence-intervals"
+        },
+        {
+          "id": "hypothesis-testing",
+          "name": "Hypothesis Testing",
+          "slug": "hypothesis-testing"
+        },
+        {
+          "id": "regression",
+          "name": "Regression",
+          "slug": "regression"
+        },
+        {
+          "id": "correlation",
+          "name": "Correlation",
+          "slug": "correlation"
+        }
+      ]
+    },
+    {
+      "id": "discrete-mathematics",
+      "name": "Discrete Mathematics",
+      "slug": "discrete-mathematics",
+      "description": "Mathematics of finite structures.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 16,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "logic",
+          "name": "Logic",
+          "slug": "logic"
+        },
+        {
+          "id": "proofs",
+          "name": "Proofs",
+          "slug": "proofs"
+        },
+        {
+          "id": "recursion",
+          "name": "Recursion",
+          "slug": "recursion"
+        },
+        {
+          "id": "combinatorics",
+          "name": "Combinatorics",
+          "slug": "combinatorics"
+        },
+        {
+          "id": "graph-theory",
+          "name": "Graph Theory",
+          "slug": "graph-theory"
+        },
+        {
+          "id": "trees",
+          "name": "Trees",
+          "slug": "trees"
+        },
+        {
+          "id": "boolean-algebra",
+          "name": "Boolean Algebra",
+          "slug": "boolean-algebra"
+        },
+        {
+          "id": "finite-state-machines",
+          "name": "Finite State Machines",
+          "slug": "finite-state-machines"
+        }
+      ]
+    },
+    {
+      "id": "differential-equations",
+      "name": "Differential Equations",
+      "slug": "differential-equations",
+      "description": "Equations involving derivatives.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "first-order-differential-equations",
+          "name": "First Order Differential Equations",
+          "slug": "first-order-differential-equations"
+        },
+        {
+          "id": "second-order-differential-equations",
+          "name": "Second Order Differential Equations",
+          "slug": "second-order-differential-equations"
+        },
+        {
+          "id": "systems-of-differential-equations",
+          "name": "Systems of Differential Equations",
+          "slug": "systems-of-differential-equations"
+        },
+        {
+          "id": "laplace-transforms",
+          "name": "Laplace Transforms",
+          "slug": "laplace-transforms"
+        },
+        {
+          "id": "applications",
+          "name": "Applications",
+          "slug": "applications"
+        }
+      ]
+    },
+    {
+      "id": "advanced-mathematics",
+      "name": "Advanced Mathematics",
+      "slug": "advanced-mathematics",
+      "description": "Higher-level mathematical theories.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 18,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "real-analysis",
+          "name": "Real Analysis",
+          "slug": "real-analysis"
+        },
+        {
+          "id": "complex-analysis",
+          "name": "Complex Analysis",
+          "slug": "complex-analysis"
+        },
+        {
+          "id": "abstract-algebra",
+          "name": "Abstract Algebra",
+          "slug": "abstract-algebra"
+        },
+        {
+          "id": "number-theory",
+          "name": "Number Theory",
+          "slug": "number-theory"
+        },
+        {
+          "id": "topology",
+          "name": "Topology",
+          "slug": "topology"
+        },
+        {
+          "id": "numerical-analysis",
+          "name": "Numerical Analysis",
+          "slug": "numerical-analysis"
+        },
+        {
+          "id": "optimization",
+          "name": "Optimization",
+          "slug": "optimization"
+        },
+        {
+          "id": "mathematical-modeling",
+          "name": "Mathematical Modeling",
+          "slug": "mathematical-modeling"
+        },
+        {
+          "id": "operations-research",
+          "name": "Operations Research",
+          "slug": "operations-research"
+        }
+      ]
+    }
+  ]
+}

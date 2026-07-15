@@ -1,0 +1,11 @@
+{
+  "name": "Private Equity",
+  "slug": "private-equity",
+  "description": "The study of private equity.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Dance",
+  "slug": "dance",
+  "description": "The study of dance.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

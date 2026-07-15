@@ -1,0 +1,11 @@
+{
+  "name": "Fashion Design",
+  "slug": "fashion-design",
+  "description": "The study of fashion design.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

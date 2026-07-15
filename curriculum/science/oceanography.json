@@ -1,0 +1,11 @@
+{
+  "name": "Oceanography",
+  "slug": "oceanography",
+  "description": "The study of oceanography.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

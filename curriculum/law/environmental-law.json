@@ -1,0 +1,11 @@
+{
+  "name": "Environmental Law",
+  "slug": "environmental-law",
+  "description": "The study of environmental law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

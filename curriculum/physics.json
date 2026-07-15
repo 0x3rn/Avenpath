@@ -1,0 +1,1029 @@
+{
+  "name": "Physics",
+  "slug": "physics",
+  "description": "The study of physics.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "topics": [
+    {
+      "id": "introduction-to-physics",
+      "name": "Introduction to Physics",
+      "slug": "introduction-to-physics",
+      "description": "Fundamental principles, measurements, and branches of physics.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "what-is-physics",
+          "name": "What is Physics?",
+          "slug": "what-is-physics"
+        },
+        {
+          "id": "branches-of-physics",
+          "name": "Branches of Physics",
+          "slug": "branches-of-physics"
+        },
+        {
+          "id": "scientific-method",
+          "name": "Scientific Method",
+          "slug": "scientific-method"
+        },
+        {
+          "id": "physical-quantities",
+          "name": "Physical Quantities",
+          "slug": "physical-quantities"
+        },
+        {
+          "id": "si-units",
+          "name": "SI Units",
+          "slug": "si-units"
+        },
+        {
+          "id": "scalars-and-vectors",
+          "name": "Scalars and Vectors",
+          "slug": "scalars-and-vectors"
+        },
+        {
+          "id": "dimensions",
+          "name": "Dimensions",
+          "slug": "dimensions"
+        },
+        {
+          "id": "measurement",
+          "name": "Measurement",
+          "slug": "measurement"
+        },
+        {
+          "id": "accuracy-and-precision",
+          "name": "Accuracy and Precision",
+          "slug": "accuracy-and-precision"
+        },
+        {
+          "id": "significant-figures",
+          "name": "Significant Figures",
+          "slug": "significant-figures"
+        }
+      ]
+    },
+    {
+      "id": "mechanics",
+      "name": "Mechanics",
+      "slug": "mechanics",
+      "description": "Study of motion and the forces acting on objects.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 40,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "distance-and-displacement",
+          "name": "Distance and Displacement",
+          "slug": "distance-and-displacement"
+        },
+        {
+          "id": "speed",
+          "name": "Speed",
+          "slug": "speed"
+        },
+        {
+          "id": "velocity",
+          "name": "Velocity",
+          "slug": "velocity"
+        },
+        {
+          "id": "acceleration",
+          "name": "Acceleration",
+          "slug": "acceleration"
+        },
+        {
+          "id": "motion-graphs",
+          "name": "Motion Graphs",
+          "slug": "motion-graphs"
+        },
+        {
+          "id": "projectile-motion",
+          "name": "Projectile Motion",
+          "slug": "projectile-motion"
+        },
+        {
+          "id": "uniform-circular-motion",
+          "name": "Uniform Circular Motion",
+          "slug": "uniform-circular-motion"
+        },
+        {
+          "id": "newton-s-first-law",
+          "name": "Newton's First Law",
+          "slug": "newton-s-first-law"
+        },
+        {
+          "id": "newton-s-second-law",
+          "name": "Newton's Second Law",
+          "slug": "newton-s-second-law"
+        },
+        {
+          "id": "newton-s-third-law",
+          "name": "Newton's Third Law",
+          "slug": "newton-s-third-law"
+        },
+        {
+          "id": "free-body-diagrams",
+          "name": "Free Body Diagrams",
+          "slug": "free-body-diagrams"
+        },
+        {
+          "id": "friction",
+          "name": "Friction",
+          "slug": "friction"
+        },
+        {
+          "id": "tension",
+          "name": "Tension",
+          "slug": "tension"
+        },
+        {
+          "id": "normal-force",
+          "name": "Normal Force",
+          "slug": "normal-force"
+        },
+        {
+          "id": "air-resistance",
+          "name": "Air Resistance",
+          "slug": "air-resistance"
+        },
+        {
+          "id": "momentum",
+          "name": "Momentum",
+          "slug": "momentum"
+        },
+        {
+          "id": "impulse",
+          "name": "Impulse",
+          "slug": "impulse"
+        },
+        {
+          "id": "conservation-of-momentum",
+          "name": "Conservation of Momentum",
+          "slug": "conservation-of-momentum"
+        },
+        {
+          "id": "collisions",
+          "name": "Collisions",
+          "slug": "collisions"
+        },
+        {
+          "id": "center-of-mass",
+          "name": "Center of Mass",
+          "slug": "center-of-mass"
+        }
+      ]
+    },
+    {
+      "id": "work-energy-and-power",
+      "name": "Work, Energy and Power",
+      "slug": "work-energy-and-power",
+      "description": "Relationships between force, motion, and energy.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 16,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "work",
+          "name": "Work",
+          "slug": "work"
+        },
+        {
+          "id": "kinetic-energy",
+          "name": "Kinetic Energy",
+          "slug": "kinetic-energy"
+        },
+        {
+          "id": "potential-energy",
+          "name": "Potential Energy",
+          "slug": "potential-energy"
+        },
+        {
+          "id": "elastic-potential-energy",
+          "name": "Elastic Potential Energy",
+          "slug": "elastic-potential-energy"
+        },
+        {
+          "id": "mechanical-energy",
+          "name": "Mechanical Energy",
+          "slug": "mechanical-energy"
+        },
+        {
+          "id": "conservation-of-energy",
+          "name": "Conservation of Energy",
+          "slug": "conservation-of-energy"
+        },
+        {
+          "id": "power",
+          "name": "Power",
+          "slug": "power"
+        },
+        {
+          "id": "efficiency",
+          "name": "Efficiency",
+          "slug": "efficiency"
+        }
+      ]
+    },
+    {
+      "id": "rotational-motion",
+      "name": "Rotational Motion",
+      "slug": "rotational-motion",
+      "description": "Motion involving rotation and torque.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 16,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "angular-displacement",
+          "name": "Angular Displacement",
+          "slug": "angular-displacement"
+        },
+        {
+          "id": "angular-velocity",
+          "name": "Angular Velocity",
+          "slug": "angular-velocity"
+        },
+        {
+          "id": "angular-acceleration",
+          "name": "Angular Acceleration",
+          "slug": "angular-acceleration"
+        },
+        {
+          "id": "torque",
+          "name": "Torque",
+          "slug": "torque"
+        },
+        {
+          "id": "moment-of-inertia",
+          "name": "Moment of Inertia",
+          "slug": "moment-of-inertia"
+        },
+        {
+          "id": "rotational-kinetic-energy",
+          "name": "Rotational Kinetic Energy",
+          "slug": "rotational-kinetic-energy"
+        },
+        {
+          "id": "angular-momentum",
+          "name": "Angular Momentum",
+          "slug": "angular-momentum"
+        },
+        {
+          "id": "conservation-of-angular-momentum",
+          "name": "Conservation of Angular Momentum",
+          "slug": "conservation-of-angular-momentum"
+        }
+      ]
+    },
+    {
+      "id": "gravitation",
+      "name": "Gravitation",
+      "slug": "gravitation",
+      "description": "Gravitational interactions and orbital motion.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "universal-law-of-gravitation",
+          "name": "Universal Law of Gravitation",
+          "slug": "universal-law-of-gravitation"
+        },
+        {
+          "id": "gravitational-field",
+          "name": "Gravitational Field",
+          "slug": "gravitational-field"
+        },
+        {
+          "id": "gravitational-potential",
+          "name": "Gravitational Potential",
+          "slug": "gravitational-potential"
+        },
+        {
+          "id": "orbital-motion",
+          "name": "Orbital Motion",
+          "slug": "orbital-motion"
+        },
+        {
+          "id": "escape-velocity",
+          "name": "Escape Velocity",
+          "slug": "escape-velocity"
+        },
+        {
+          "id": "kepler-s-laws",
+          "name": "Kepler's Laws",
+          "slug": "kepler-s-laws"
+        }
+      ]
+    },
+    {
+      "id": "oscillations-and-waves",
+      "name": "Oscillations and Waves",
+      "slug": "oscillations-and-waves",
+      "description": "Periodic motion and wave phenomena.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 26,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "simple-harmonic-motion",
+          "name": "Simple Harmonic Motion",
+          "slug": "simple-harmonic-motion"
+        },
+        {
+          "id": "pendulums",
+          "name": "Pendulums",
+          "slug": "pendulums"
+        },
+        {
+          "id": "springs",
+          "name": "Springs",
+          "slug": "springs"
+        },
+        {
+          "id": "wave-properties",
+          "name": "Wave Properties",
+          "slug": "wave-properties"
+        },
+        {
+          "id": "transverse-waves",
+          "name": "Transverse Waves",
+          "slug": "transverse-waves"
+        },
+        {
+          "id": "longitudinal-waves",
+          "name": "Longitudinal Waves",
+          "slug": "longitudinal-waves"
+        },
+        {
+          "id": "wave-speed",
+          "name": "Wave Speed",
+          "slug": "wave-speed"
+        },
+        {
+          "id": "frequency",
+          "name": "Frequency",
+          "slug": "frequency"
+        },
+        {
+          "id": "wavelength",
+          "name": "Wavelength",
+          "slug": "wavelength"
+        },
+        {
+          "id": "interference",
+          "name": "Interference",
+          "slug": "interference"
+        },
+        {
+          "id": "diffraction",
+          "name": "Diffraction",
+          "slug": "diffraction"
+        },
+        {
+          "id": "standing-waves",
+          "name": "Standing Waves",
+          "slug": "standing-waves"
+        },
+        {
+          "id": "resonance",
+          "name": "Resonance",
+          "slug": "resonance"
+        }
+      ]
+    },
+    {
+      "id": "thermodynamics",
+      "name": "Thermodynamics",
+      "slug": "thermodynamics",
+      "description": "Heat, temperature, and energy transfer.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 26,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "temperature",
+          "name": "Temperature",
+          "slug": "temperature"
+        },
+        {
+          "id": "heat",
+          "name": "Heat",
+          "slug": "heat"
+        },
+        {
+          "id": "thermal-expansion",
+          "name": "Thermal Expansion",
+          "slug": "thermal-expansion"
+        },
+        {
+          "id": "specific-heat-capacity",
+          "name": "Specific Heat Capacity",
+          "slug": "specific-heat-capacity"
+        },
+        {
+          "id": "latent-heat",
+          "name": "Latent Heat",
+          "slug": "latent-heat"
+        },
+        {
+          "id": "heat-transfer",
+          "name": "Heat Transfer",
+          "slug": "heat-transfer"
+        },
+        {
+          "id": "ideal-gas-law",
+          "name": "Ideal Gas Law",
+          "slug": "ideal-gas-law"
+        },
+        {
+          "id": "kinetic-theory",
+          "name": "Kinetic Theory",
+          "slug": "kinetic-theory"
+        },
+        {
+          "id": "first-law-of-thermodynamics",
+          "name": "First Law of Thermodynamics",
+          "slug": "first-law-of-thermodynamics"
+        },
+        {
+          "id": "second-law-of-thermodynamics",
+          "name": "Second Law of Thermodynamics",
+          "slug": "second-law-of-thermodynamics"
+        },
+        {
+          "id": "entropy",
+          "name": "Entropy",
+          "slug": "entropy"
+        },
+        {
+          "id": "heat-engines",
+          "name": "Heat Engines",
+          "slug": "heat-engines"
+        },
+        {
+          "id": "refrigerators",
+          "name": "Refrigerators",
+          "slug": "refrigerators"
+        }
+      ]
+    },
+    {
+      "id": "electricity",
+      "name": "Electricity",
+      "slug": "electricity",
+      "description": "Electric charge, current, and circuits.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 26,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "electric-charge",
+          "name": "Electric Charge",
+          "slug": "electric-charge"
+        },
+        {
+          "id": "coulomb-s-law",
+          "name": "Coulomb's Law",
+          "slug": "coulomb-s-law"
+        },
+        {
+          "id": "electric-field",
+          "name": "Electric Field",
+          "slug": "electric-field"
+        },
+        {
+          "id": "electric-potential",
+          "name": "Electric Potential",
+          "slug": "electric-potential"
+        },
+        {
+          "id": "voltage",
+          "name": "Voltage",
+          "slug": "voltage"
+        },
+        {
+          "id": "current",
+          "name": "Current",
+          "slug": "current"
+        },
+        {
+          "id": "resistance",
+          "name": "Resistance",
+          "slug": "resistance"
+        },
+        {
+          "id": "ohm-s-law",
+          "name": "Ohm's Law",
+          "slug": "ohm-s-law"
+        },
+        {
+          "id": "electrical-power",
+          "name": "Electrical Power",
+          "slug": "electrical-power"
+        },
+        {
+          "id": "series-circuits",
+          "name": "Series Circuits",
+          "slug": "series-circuits"
+        },
+        {
+          "id": "parallel-circuits",
+          "name": "Parallel Circuits",
+          "slug": "parallel-circuits"
+        },
+        {
+          "id": "kirchhoff-s-laws",
+          "name": "Kirchhoff's Laws",
+          "slug": "kirchhoff-s-laws"
+        },
+        {
+          "id": "capacitance",
+          "name": "Capacitance",
+          "slug": "capacitance"
+        }
+      ]
+    },
+    {
+      "id": "magnetism",
+      "name": "Magnetism",
+      "slug": "magnetism",
+      "description": "Magnetic fields and electromagnetic interactions.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 18,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "magnetic-fields",
+          "name": "Magnetic Fields",
+          "slug": "magnetic-fields"
+        },
+        {
+          "id": "magnetic-force",
+          "name": "Magnetic Force",
+          "slug": "magnetic-force"
+        },
+        {
+          "id": "magnetic-flux",
+          "name": "Magnetic Flux",
+          "slug": "magnetic-flux"
+        },
+        {
+          "id": "electromagnetic-induction",
+          "name": "Electromagnetic Induction",
+          "slug": "electromagnetic-induction"
+        },
+        {
+          "id": "faraday-s-law",
+          "name": "Faraday's Law",
+          "slug": "faraday-s-law"
+        },
+        {
+          "id": "lenz-s-law",
+          "name": "Lenz's Law",
+          "slug": "lenz-s-law"
+        },
+        {
+          "id": "electric-motors",
+          "name": "Electric Motors",
+          "slug": "electric-motors"
+        },
+        {
+          "id": "generators",
+          "name": "Generators",
+          "slug": "generators"
+        },
+        {
+          "id": "transformers",
+          "name": "Transformers",
+          "slug": "transformers"
+        }
+      ]
+    },
+    {
+      "id": "electromagnetism",
+      "name": "Electromagnetism",
+      "slug": "electromagnetism",
+      "description": "Unified study of electricity and magnetism.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "maxwell-s-equations",
+          "name": "Maxwell's Equations",
+          "slug": "maxwell-s-equations"
+        },
+        {
+          "id": "electromagnetic-waves",
+          "name": "Electromagnetic Waves",
+          "slug": "electromagnetic-waves"
+        },
+        {
+          "id": "wave-propagation",
+          "name": "Wave Propagation",
+          "slug": "wave-propagation"
+        },
+        {
+          "id": "radio-waves",
+          "name": "Radio Waves",
+          "slug": "radio-waves"
+        },
+        {
+          "id": "microwaves",
+          "name": "Microwaves",
+          "slug": "microwaves"
+        },
+        {
+          "id": "infrared-radiation",
+          "name": "Infrared Radiation",
+          "slug": "infrared-radiation"
+        },
+        {
+          "id": "visible-light",
+          "name": "Visible Light",
+          "slug": "visible-light"
+        },
+        {
+          "id": "ultraviolet-radiation",
+          "name": "Ultraviolet Radiation",
+          "slug": "ultraviolet-radiation"
+        },
+        {
+          "id": "x-rays",
+          "name": "X-rays",
+          "slug": "x-rays"
+        },
+        {
+          "id": "gamma-rays",
+          "name": "Gamma Rays",
+          "slug": "gamma-rays"
+        }
+      ]
+    },
+    {
+      "id": "optics",
+      "name": "Optics",
+      "slug": "optics",
+      "description": "Behavior and properties of light.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "reflection",
+          "name": "Reflection",
+          "slug": "reflection"
+        },
+        {
+          "id": "refraction",
+          "name": "Refraction",
+          "slug": "refraction"
+        },
+        {
+          "id": "snell-s-law",
+          "name": "Snell's Law",
+          "slug": "snell-s-law"
+        },
+        {
+          "id": "mirrors",
+          "name": "Mirrors",
+          "slug": "mirrors"
+        },
+        {
+          "id": "lenses",
+          "name": "Lenses",
+          "slug": "lenses"
+        },
+        {
+          "id": "image-formation",
+          "name": "Image Formation",
+          "slug": "image-formation"
+        },
+        {
+          "id": "optical-instruments",
+          "name": "Optical Instruments",
+          "slug": "optical-instruments"
+        },
+        {
+          "id": "diffraction",
+          "name": "Diffraction",
+          "slug": "diffraction"
+        },
+        {
+          "id": "polarization",
+          "name": "Polarization",
+          "slug": "polarization"
+        },
+        {
+          "id": "interference",
+          "name": "Interference",
+          "slug": "interference"
+        }
+      ]
+    },
+    {
+      "id": "modern-physics",
+      "name": "Modern Physics",
+      "slug": "modern-physics",
+      "description": "Physics beyond classical mechanics.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 16,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "photoelectric-effect",
+          "name": "Photoelectric Effect",
+          "slug": "photoelectric-effect"
+        },
+        {
+          "id": "wave-particle-duality",
+          "name": "Wave-Particle Duality",
+          "slug": "wave-particle-duality"
+        },
+        {
+          "id": "bohr-model",
+          "name": "Bohr Model",
+          "slug": "bohr-model"
+        },
+        {
+          "id": "quantum-theory",
+          "name": "Quantum Theory",
+          "slug": "quantum-theory"
+        },
+        {
+          "id": "quantum-mechanics",
+          "name": "Quantum Mechanics",
+          "slug": "quantum-mechanics"
+        },
+        {
+          "id": "special-relativity",
+          "name": "Special Relativity",
+          "slug": "special-relativity"
+        },
+        {
+          "id": "general-relativity",
+          "name": "General Relativity",
+          "slug": "general-relativity"
+        },
+        {
+          "id": "mass-energy-equivalence",
+          "name": "Mass-Energy Equivalence",
+          "slug": "mass-energy-equivalence"
+        }
+      ]
+    },
+    {
+      "id": "atomic-physics",
+      "name": "Atomic Physics",
+      "slug": "atomic-physics",
+      "description": "Structure and behavior of atoms.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "atomic-spectra",
+          "name": "Atomic Spectra",
+          "slug": "atomic-spectra"
+        },
+        {
+          "id": "electron-orbitals",
+          "name": "Electron Orbitals",
+          "slug": "electron-orbitals"
+        },
+        {
+          "id": "atomic-models",
+          "name": "Atomic Models",
+          "slug": "atomic-models"
+        },
+        {
+          "id": "quantum-numbers",
+          "name": "Quantum Numbers",
+          "slug": "quantum-numbers"
+        },
+        {
+          "id": "electron-spin",
+          "name": "Electron Spin",
+          "slug": "electron-spin"
+        }
+      ]
+    },
+    {
+      "id": "nuclear-physics",
+      "name": "Nuclear Physics",
+      "slug": "nuclear-physics",
+      "description": "Atomic nuclei and radioactive processes.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "atomic-nucleus",
+          "name": "Atomic Nucleus",
+          "slug": "atomic-nucleus"
+        },
+        {
+          "id": "radioactivity",
+          "name": "Radioactivity",
+          "slug": "radioactivity"
+        },
+        {
+          "id": "alpha-decay",
+          "name": "Alpha Decay",
+          "slug": "alpha-decay"
+        },
+        {
+          "id": "beta-decay",
+          "name": "Beta Decay",
+          "slug": "beta-decay"
+        },
+        {
+          "id": "gamma-decay",
+          "name": "Gamma Decay",
+          "slug": "gamma-decay"
+        },
+        {
+          "id": "half-life",
+          "name": "Half-Life",
+          "slug": "half-life"
+        },
+        {
+          "id": "nuclear-fission",
+          "name": "Nuclear Fission",
+          "slug": "nuclear-fission"
+        },
+        {
+          "id": "nuclear-fusion",
+          "name": "Nuclear Fusion",
+          "slug": "nuclear-fusion"
+        },
+        {
+          "id": "nuclear-reactors",
+          "name": "Nuclear Reactors",
+          "slug": "nuclear-reactors"
+        },
+        {
+          "id": "radiation-safety",
+          "name": "Radiation Safety",
+          "slug": "radiation-safety"
+        }
+      ]
+    },
+    {
+      "id": "particle-physics",
+      "name": "Particle Physics",
+      "slug": "particle-physics",
+      "description": "Fundamental particles and interactions.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 14,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "standard-model",
+          "name": "Standard Model",
+          "slug": "standard-model"
+        },
+        {
+          "id": "quarks",
+          "name": "Quarks",
+          "slug": "quarks"
+        },
+        {
+          "id": "leptons",
+          "name": "Leptons",
+          "slug": "leptons"
+        },
+        {
+          "id": "bosons",
+          "name": "Bosons",
+          "slug": "bosons"
+        },
+        {
+          "id": "fundamental-forces",
+          "name": "Fundamental Forces",
+          "slug": "fundamental-forces"
+        },
+        {
+          "id": "higgs-boson",
+          "name": "Higgs Boson",
+          "slug": "higgs-boson"
+        },
+        {
+          "id": "particle-accelerators",
+          "name": "Particle Accelerators",
+          "slug": "particle-accelerators"
+        }
+      ]
+    },
+    {
+      "id": "astrophysics-and-cosmology",
+      "name": "Astrophysics and Cosmology",
+      "slug": "astrophysics-and-cosmology",
+      "description": "Physics of celestial objects and the universe.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "solar-system",
+          "name": "Solar System",
+          "slug": "solar-system"
+        },
+        {
+          "id": "stars",
+          "name": "Stars",
+          "slug": "stars"
+        },
+        {
+          "id": "galaxies",
+          "name": "Galaxies",
+          "slug": "galaxies"
+        },
+        {
+          "id": "black-holes",
+          "name": "Black Holes",
+          "slug": "black-holes"
+        },
+        {
+          "id": "neutron-stars",
+          "name": "Neutron Stars",
+          "slug": "neutron-stars"
+        },
+        {
+          "id": "dark-matter",
+          "name": "Dark Matter",
+          "slug": "dark-matter"
+        },
+        {
+          "id": "dark-energy",
+          "name": "Dark Energy",
+          "slug": "dark-energy"
+        },
+        {
+          "id": "big-bang-theory",
+          "name": "Big Bang Theory",
+          "slug": "big-bang-theory"
+        },
+        {
+          "id": "expansion-of-the-universe",
+          "name": "Expansion of the Universe",
+          "slug": "expansion-of-the-universe"
+        },
+        {
+          "id": "cosmic-microwave-background",
+          "name": "Cosmic Microwave Background",
+          "slug": "cosmic-microwave-background"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Behavioral Finance",
+  "slug": "behavioral-finance",
+  "description": "The study of behavioral finance.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

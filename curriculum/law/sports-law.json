@@ -1,0 +1,11 @@
+{
+  "name": "Sports Law",
+  "slug": "sports-law",
+  "description": "The study of sports law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

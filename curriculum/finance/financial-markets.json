@@ -1,0 +1,11 @@
+{
+  "name": "Financial Markets",
+  "slug": "financial-markets",
+  "description": "The study of financial markets.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

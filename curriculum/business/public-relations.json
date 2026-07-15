@@ -1,0 +1,11 @@
+{
+  "name": "Public Relations",
+  "slug": "public-relations",
+  "description": "The study of public relations.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

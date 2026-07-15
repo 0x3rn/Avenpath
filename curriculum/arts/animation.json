@@ -1,0 +1,11 @@
+{
+  "name": "Animation",
+  "slug": "animation",
+  "description": "The study of animation.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

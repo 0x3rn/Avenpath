@@ -1,0 +1,11 @@
+{
+  "name": "Theater",
+  "slug": "theater",
+  "description": "The study of theater.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

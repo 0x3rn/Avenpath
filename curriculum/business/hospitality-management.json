@@ -1,0 +1,11 @@
+{
+  "name": "Hospitality Management",
+  "slug": "hospitality-management",
+  "description": "The study of hospitality management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Risk Management",
+  "slug": "risk-management",
+  "description": "The study of risk management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

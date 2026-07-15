@@ -1,0 +1,11 @@
+{
+  "name": "Human Resources",
+  "slug": "human-resources",
+  "description": "The study of human resources.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

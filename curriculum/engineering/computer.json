@@ -1,0 +1,11 @@
+{
+  "name": "Computer Engineering",
+  "slug": "computer-engineering",
+  "description": "The study of computer engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

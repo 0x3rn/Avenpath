@@ -1,0 +1,11 @@
+{
+  "name": "Molecular Biology",
+  "slug": "molecular-biology",
+  "description": "The study of molecular biology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

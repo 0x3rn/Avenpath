@@ -1,0 +1,11 @@
+{
+  "name": "Human Rights Law",
+  "slug": "human-rights-law",
+  "description": "The study of human rights law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

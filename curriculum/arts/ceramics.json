@@ -1,0 +1,11 @@
+{
+  "name": "Ceramics",
+  "slug": "ceramics",
+  "description": "The study of ceramics.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Investment Banking",
+  "slug": "investment-banking",
+  "description": "The study of investment banking.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

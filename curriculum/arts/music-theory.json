@@ -1,0 +1,11 @@
+{
+  "name": "Music Theory",
+  "slug": "music-theory",
+  "description": "The study of music theory.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

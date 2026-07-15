@@ -1,0 +1,11 @@
+{
+  "name": "Microbiology",
+  "slug": "microbiology",
+  "description": "The study of microbiology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

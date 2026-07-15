@@ -1,0 +1,11 @@
+{
+  "name": "Aerospace Engineering",
+  "slug": "aerospace-engineering",
+  "description": "The study of aerospace engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

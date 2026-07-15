@@ -1,0 +1,11 @@
+{
+  "name": "Mechanical Engineering",
+  "slug": "mechanical-engineering",
+  "description": "The study of mechanical engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

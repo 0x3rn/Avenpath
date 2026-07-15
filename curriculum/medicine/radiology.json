@@ -1,0 +1,11 @@
+{
+  "name": "Radiology",
+  "slug": "radiology",
+  "description": "The study of radiology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

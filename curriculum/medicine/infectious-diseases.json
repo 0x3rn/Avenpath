@@ -1,0 +1,11 @@
+{
+  "name": "Infectious Diseases",
+  "slug": "infectious-diseases",
+  "description": "The study of infectious diseases.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Business Ethics",
+  "slug": "business-ethics",
+  "description": "The study of business ethics.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

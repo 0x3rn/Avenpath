@@ -1,0 +1,11 @@
+{
+  "name": "International Business",
+  "slug": "international-business",
+  "description": "The study of international business.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

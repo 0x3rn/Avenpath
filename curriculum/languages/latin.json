@@ -1,0 +1,11 @@
+{
+  "name": "Latin",
+  "slug": "latin",
+  "description": "The study of latin.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

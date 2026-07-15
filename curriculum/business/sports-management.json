@@ -1,0 +1,11 @@
+{
+  "name": "Sports Management",
+  "slug": "sports-management",
+  "description": "The study of sports management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

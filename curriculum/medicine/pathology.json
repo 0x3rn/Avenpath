@@ -1,0 +1,11 @@
+{
+  "name": "Pathology",
+  "slug": "pathology",
+  "description": "The study of pathology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

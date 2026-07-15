@@ -1,0 +1,11 @@
+{
+  "name": "Chemical Engineering",
+  "slug": "chemical-engineering",
+  "description": "The study of chemical engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Robotics Engineering",
+  "slug": "robotics-engineering",
+  "description": "The study of robotics engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Marine Biology",
+  "slug": "marine-biology",
+  "description": "The study of marine biology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

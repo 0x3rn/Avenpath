@@ -1,0 +1,11 @@
+{
+  "name": "Earth Science",
+  "slug": "earth-science",
+  "description": "The study of earth science.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

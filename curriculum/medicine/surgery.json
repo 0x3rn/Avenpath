@@ -1,0 +1,11 @@
+{
+  "name": "Surgery",
+  "slug": "surgery",
+  "description": "The study of surgery.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

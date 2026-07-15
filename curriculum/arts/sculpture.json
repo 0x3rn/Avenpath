@@ -1,0 +1,11 @@
+{
+  "name": "Sculpture",
+  "slug": "sculpture",
+  "description": "The study of sculpture.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Russian",
+  "slug": "russian",
+  "description": "The study of russian.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

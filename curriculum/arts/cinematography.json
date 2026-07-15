@@ -1,0 +1,11 @@
+{
+  "name": "Cinematography",
+  "slug": "cinematography",
+  "description": "The study of cinematography.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

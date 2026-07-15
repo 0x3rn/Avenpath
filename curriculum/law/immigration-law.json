@@ -1,0 +1,11 @@
+{
+  "name": "Immigration Law",
+  "slug": "immigration-law",
+  "description": "The study of immigration law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Ophthalmology",
+  "slug": "ophthalmology",
+  "description": "The study of ophthalmology.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

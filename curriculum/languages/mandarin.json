@@ -1,0 +1,11 @@
+{
+  "name": "Mandarin",
+  "slug": "mandarin",
+  "description": "The study of mandarin.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

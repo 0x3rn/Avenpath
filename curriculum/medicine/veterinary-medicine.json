@@ -1,0 +1,11 @@
+{
+  "name": "Veterinary Medicine",
+  "slug": "veterinary-medicine",
+  "description": "The study of veterinary medicine.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

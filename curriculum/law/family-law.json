@@ -1,0 +1,11 @@
+{
+  "name": "Family Law",
+  "slug": "family-law",
+  "description": "The study of family law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Fine Arts",
+  "slug": "fine-arts",
+  "description": "The study of fine arts.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

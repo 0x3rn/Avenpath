@@ -1,0 +1,11 @@
+{
+  "name": "Industrial Design",
+  "slug": "industrial-design",
+  "description": "The study of industrial design.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

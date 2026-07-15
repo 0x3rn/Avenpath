@@ -1,0 +1,11 @@
+{
+  "name": "Strategic Management",
+  "slug": "strategic-management",
+  "description": "The study of strategic management.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

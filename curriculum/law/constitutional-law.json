@@ -1,0 +1,11 @@
+{
+  "name": "Constitutional Law",
+  "slug": "constitutional-law",
+  "description": "The study of constitutional law.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

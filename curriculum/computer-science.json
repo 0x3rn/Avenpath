@@ -1,0 +1,1071 @@
+{
+  "name": "Computer Science",
+  "slug": "computer-science",
+  "description": "The study of computer science.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "topics": [
+    {
+      "id": "introduction-to-computer-science",
+      "name": "Introduction to Computer Science",
+      "slug": "introduction-to-computer-science",
+      "description": "Fundamental concepts and history of computing.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "what-is-computer-science",
+          "name": "What is Computer Science?",
+          "slug": "what-is-computer-science"
+        },
+        {
+          "id": "history-of-computing",
+          "name": "History of Computing",
+          "slug": "history-of-computing"
+        },
+        {
+          "id": "computer-systems",
+          "name": "Computer Systems",
+          "slug": "computer-systems"
+        },
+        {
+          "id": "computer-generations",
+          "name": "Computer Generations",
+          "slug": "computer-generations"
+        },
+        {
+          "id": "digital-representation",
+          "name": "Digital Representation",
+          "slug": "digital-representation"
+        },
+        {
+          "id": "binary-number-system",
+          "name": "Binary Number System",
+          "slug": "binary-number-system"
+        },
+        {
+          "id": "hexadecimal",
+          "name": "Hexadecimal",
+          "slug": "hexadecimal"
+        },
+        {
+          "id": "data-representation",
+          "name": "Data Representation",
+          "slug": "data-representation"
+        },
+        {
+          "id": "ethics-in-computing",
+          "name": "Ethics in Computing",
+          "slug": "ethics-in-computing"
+        },
+        {
+          "id": "careers-in-computer-science",
+          "name": "Careers in Computer Science",
+          "slug": "careers-in-computer-science"
+        }
+      ]
+    },
+    {
+      "id": "programming-fundamentals",
+      "name": "Programming Fundamentals",
+      "slug": "programming-fundamentals",
+      "description": "Core programming concepts applicable to any language.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 30,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "algorithms",
+          "name": "Algorithms",
+          "slug": "algorithms"
+        },
+        {
+          "id": "pseudocode",
+          "name": "Pseudocode",
+          "slug": "pseudocode"
+        },
+        {
+          "id": "flowcharts",
+          "name": "Flowcharts",
+          "slug": "flowcharts"
+        },
+        {
+          "id": "variables",
+          "name": "Variables",
+          "slug": "variables"
+        },
+        {
+          "id": "data-types",
+          "name": "Data Types",
+          "slug": "data-types"
+        },
+        {
+          "id": "operators",
+          "name": "Operators",
+          "slug": "operators"
+        },
+        {
+          "id": "input-and-output",
+          "name": "Input and Output",
+          "slug": "input-and-output"
+        },
+        {
+          "id": "conditional-statements",
+          "name": "Conditional Statements",
+          "slug": "conditional-statements"
+        },
+        {
+          "id": "loops",
+          "name": "Loops",
+          "slug": "loops"
+        },
+        {
+          "id": "functions",
+          "name": "Functions",
+          "slug": "functions"
+        },
+        {
+          "id": "recursion",
+          "name": "Recursion",
+          "slug": "recursion"
+        },
+        {
+          "id": "arrays",
+          "name": "Arrays",
+          "slug": "arrays"
+        },
+        {
+          "id": "strings",
+          "name": "Strings",
+          "slug": "strings"
+        },
+        {
+          "id": "debugging",
+          "name": "Debugging",
+          "slug": "debugging"
+        },
+        {
+          "id": "error-handling",
+          "name": "Error Handling",
+          "slug": "error-handling"
+        }
+      ]
+    },
+    {
+      "id": "object-oriented-programming",
+      "name": "Object-Oriented Programming",
+      "slug": "object-oriented-programming",
+      "description": "Programming using objects and classes.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "classes",
+          "name": "Classes",
+          "slug": "classes"
+        },
+        {
+          "id": "objects",
+          "name": "Objects",
+          "slug": "objects"
+        },
+        {
+          "id": "constructors",
+          "name": "Constructors",
+          "slug": "constructors"
+        },
+        {
+          "id": "encapsulation",
+          "name": "Encapsulation",
+          "slug": "encapsulation"
+        },
+        {
+          "id": "inheritance",
+          "name": "Inheritance",
+          "slug": "inheritance"
+        },
+        {
+          "id": "polymorphism",
+          "name": "Polymorphism",
+          "slug": "polymorphism"
+        },
+        {
+          "id": "abstraction",
+          "name": "Abstraction",
+          "slug": "abstraction"
+        },
+        {
+          "id": "interfaces",
+          "name": "Interfaces",
+          "slug": "interfaces"
+        },
+        {
+          "id": "composition",
+          "name": "Composition",
+          "slug": "composition"
+        },
+        {
+          "id": "design-principles",
+          "name": "Design Principles",
+          "slug": "design-principles"
+        }
+      ]
+    },
+    {
+      "id": "data-structures",
+      "name": "Data Structures",
+      "slug": "data-structures",
+      "description": "Efficient ways to organize and store data.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 26,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "arrays",
+          "name": "Arrays",
+          "slug": "arrays"
+        },
+        {
+          "id": "linked-lists",
+          "name": "Linked Lists",
+          "slug": "linked-lists"
+        },
+        {
+          "id": "stacks",
+          "name": "Stacks",
+          "slug": "stacks"
+        },
+        {
+          "id": "queues",
+          "name": "Queues",
+          "slug": "queues"
+        },
+        {
+          "id": "hash-tables",
+          "name": "Hash Tables",
+          "slug": "hash-tables"
+        },
+        {
+          "id": "trees",
+          "name": "Trees",
+          "slug": "trees"
+        },
+        {
+          "id": "binary-trees",
+          "name": "Binary Trees",
+          "slug": "binary-trees"
+        },
+        {
+          "id": "binary-search-trees",
+          "name": "Binary Search Trees",
+          "slug": "binary-search-trees"
+        },
+        {
+          "id": "heaps",
+          "name": "Heaps",
+          "slug": "heaps"
+        },
+        {
+          "id": "graphs",
+          "name": "Graphs",
+          "slug": "graphs"
+        },
+        {
+          "id": "trie",
+          "name": "Trie",
+          "slug": "trie"
+        },
+        {
+          "id": "sets",
+          "name": "Sets",
+          "slug": "sets"
+        },
+        {
+          "id": "maps",
+          "name": "Maps",
+          "slug": "maps"
+        }
+      ]
+    },
+    {
+      "id": "algorithms",
+      "name": "Algorithms",
+      "slug": "algorithms",
+      "description": "Design and analysis of algorithms.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 24,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "algorithm-analysis",
+          "name": "Algorithm Analysis",
+          "slug": "algorithm-analysis"
+        },
+        {
+          "id": "time-complexity",
+          "name": "Time Complexity",
+          "slug": "time-complexity"
+        },
+        {
+          "id": "space-complexity",
+          "name": "Space Complexity",
+          "slug": "space-complexity"
+        },
+        {
+          "id": "big-o-notation",
+          "name": "Big O Notation",
+          "slug": "big-o-notation"
+        },
+        {
+          "id": "searching-algorithms",
+          "name": "Searching Algorithms",
+          "slug": "searching-algorithms"
+        },
+        {
+          "id": "sorting-algorithms",
+          "name": "Sorting Algorithms",
+          "slug": "sorting-algorithms"
+        },
+        {
+          "id": "greedy-algorithms",
+          "name": "Greedy Algorithms",
+          "slug": "greedy-algorithms"
+        },
+        {
+          "id": "divide-and-conquer",
+          "name": "Divide and Conquer",
+          "slug": "divide-and-conquer"
+        },
+        {
+          "id": "dynamic-programming",
+          "name": "Dynamic Programming",
+          "slug": "dynamic-programming"
+        },
+        {
+          "id": "backtracking",
+          "name": "Backtracking",
+          "slug": "backtracking"
+        },
+        {
+          "id": "graph-algorithms",
+          "name": "Graph Algorithms",
+          "slug": "graph-algorithms"
+        },
+        {
+          "id": "shortest-path-algorithms",
+          "name": "Shortest Path Algorithms",
+          "slug": "shortest-path-algorithms"
+        }
+      ]
+    },
+    {
+      "id": "computer-architecture",
+      "name": "Computer Architecture",
+      "slug": "computer-architecture",
+      "description": "Internal organization and operation of computers.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "cpu",
+          "name": "CPU",
+          "slug": "cpu"
+        },
+        {
+          "id": "memory",
+          "name": "Memory",
+          "slug": "memory"
+        },
+        {
+          "id": "registers",
+          "name": "Registers",
+          "slug": "registers"
+        },
+        {
+          "id": "instruction-cycle",
+          "name": "Instruction Cycle",
+          "slug": "instruction-cycle"
+        },
+        {
+          "id": "alu",
+          "name": "ALU",
+          "slug": "alu"
+        },
+        {
+          "id": "control-unit",
+          "name": "Control Unit",
+          "slug": "control-unit"
+        },
+        {
+          "id": "cache-memory",
+          "name": "Cache Memory",
+          "slug": "cache-memory"
+        },
+        {
+          "id": "storage-devices",
+          "name": "Storage Devices",
+          "slug": "storage-devices"
+        },
+        {
+          "id": "input-devices",
+          "name": "Input Devices",
+          "slug": "input-devices"
+        },
+        {
+          "id": "output-devices",
+          "name": "Output Devices",
+          "slug": "output-devices"
+        }
+      ]
+    },
+    {
+      "id": "operating-systems",
+      "name": "Operating Systems",
+      "slug": "operating-systems",
+      "description": "Software that manages computer hardware and resources.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "processes",
+          "name": "Processes",
+          "slug": "processes"
+        },
+        {
+          "id": "threads",
+          "name": "Threads",
+          "slug": "threads"
+        },
+        {
+          "id": "scheduling",
+          "name": "Scheduling",
+          "slug": "scheduling"
+        },
+        {
+          "id": "memory-management",
+          "name": "Memory Management",
+          "slug": "memory-management"
+        },
+        {
+          "id": "virtual-memory",
+          "name": "Virtual Memory",
+          "slug": "virtual-memory"
+        },
+        {
+          "id": "file-systems",
+          "name": "File Systems",
+          "slug": "file-systems"
+        },
+        {
+          "id": "synchronization",
+          "name": "Synchronization",
+          "slug": "synchronization"
+        },
+        {
+          "id": "deadlocks",
+          "name": "Deadlocks",
+          "slug": "deadlocks"
+        },
+        {
+          "id": "system-calls",
+          "name": "System Calls",
+          "slug": "system-calls"
+        },
+        {
+          "id": "linux-fundamentals",
+          "name": "Linux Fundamentals",
+          "slug": "linux-fundamentals"
+        }
+      ]
+    },
+    {
+      "id": "databases",
+      "name": "Databases",
+      "slug": "databases",
+      "description": "Storage, retrieval, and management of data.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "database-concepts",
+          "name": "Database Concepts",
+          "slug": "database-concepts"
+        },
+        {
+          "id": "relational-databases",
+          "name": "Relational Databases",
+          "slug": "relational-databases"
+        },
+        {
+          "id": "sql",
+          "name": "SQL",
+          "slug": "sql"
+        },
+        {
+          "id": "normalization",
+          "name": "Normalization",
+          "slug": "normalization"
+        },
+        {
+          "id": "indexes",
+          "name": "Indexes",
+          "slug": "indexes"
+        },
+        {
+          "id": "transactions",
+          "name": "Transactions",
+          "slug": "transactions"
+        },
+        {
+          "id": "acid-properties",
+          "name": "ACID Properties",
+          "slug": "acid-properties"
+        },
+        {
+          "id": "nosql-databases",
+          "name": "NoSQL Databases",
+          "slug": "nosql-databases"
+        },
+        {
+          "id": "database-design",
+          "name": "Database Design",
+          "slug": "database-design"
+        },
+        {
+          "id": "database-security",
+          "name": "Database Security",
+          "slug": "database-security"
+        }
+      ]
+    },
+    {
+      "id": "computer-networks",
+      "name": "Computer Networks",
+      "slug": "computer-networks",
+      "description": "Communication between computers and devices.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 26,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "network-fundamentals",
+          "name": "Network Fundamentals",
+          "slug": "network-fundamentals"
+        },
+        {
+          "id": "osi-model",
+          "name": "OSI Model",
+          "slug": "osi-model"
+        },
+        {
+          "id": "tcp-ip",
+          "name": "TCP/IP",
+          "slug": "tcp-ip"
+        },
+        {
+          "id": "ip-addressing",
+          "name": "IP Addressing",
+          "slug": "ip-addressing"
+        },
+        {
+          "id": "subnetting",
+          "name": "Subnetting",
+          "slug": "subnetting"
+        },
+        {
+          "id": "routing",
+          "name": "Routing",
+          "slug": "routing"
+        },
+        {
+          "id": "switching",
+          "name": "Switching",
+          "slug": "switching"
+        },
+        {
+          "id": "dns",
+          "name": "DNS",
+          "slug": "dns"
+        },
+        {
+          "id": "http",
+          "name": "HTTP",
+          "slug": "http"
+        },
+        {
+          "id": "https",
+          "name": "HTTPS",
+          "slug": "https"
+        },
+        {
+          "id": "ftp",
+          "name": "FTP",
+          "slug": "ftp"
+        },
+        {
+          "id": "email-protocols",
+          "name": "Email Protocols",
+          "slug": "email-protocols"
+        },
+        {
+          "id": "wireless-networks",
+          "name": "Wireless Networks",
+          "slug": "wireless-networks"
+        }
+      ]
+    },
+    {
+      "id": "cybersecurity",
+      "name": "Cybersecurity",
+      "slug": "cybersecurity",
+      "description": "Protecting systems, networks, and data.",
+      "levels": [
+        "high-school",
+        "university"
+      ],
+      "estimatedHours": 24,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "security-principles",
+          "name": "Security Principles",
+          "slug": "security-principles"
+        },
+        {
+          "id": "authentication",
+          "name": "Authentication",
+          "slug": "authentication"
+        },
+        {
+          "id": "authorization",
+          "name": "Authorization",
+          "slug": "authorization"
+        },
+        {
+          "id": "encryption",
+          "name": "Encryption",
+          "slug": "encryption"
+        },
+        {
+          "id": "hashing",
+          "name": "Hashing",
+          "slug": "hashing"
+        },
+        {
+          "id": "digital-signatures",
+          "name": "Digital Signatures",
+          "slug": "digital-signatures"
+        },
+        {
+          "id": "network-security",
+          "name": "Network Security",
+          "slug": "network-security"
+        },
+        {
+          "id": "malware",
+          "name": "Malware",
+          "slug": "malware"
+        },
+        {
+          "id": "firewalls",
+          "name": "Firewalls",
+          "slug": "firewalls"
+        },
+        {
+          "id": "social-engineering",
+          "name": "Social Engineering",
+          "slug": "social-engineering"
+        },
+        {
+          "id": "web-security",
+          "name": "Web Security",
+          "slug": "web-security"
+        },
+        {
+          "id": "cloud-security",
+          "name": "Cloud Security",
+          "slug": "cloud-security"
+        }
+      ]
+    },
+    {
+      "id": "software-engineering",
+      "name": "Software Engineering",
+      "slug": "software-engineering",
+      "description": "Engineering practices for software development.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 22,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "software-development-life-cycle",
+          "name": "Software Development Life Cycle",
+          "slug": "software-development-life-cycle"
+        },
+        {
+          "id": "requirements-engineering",
+          "name": "Requirements Engineering",
+          "slug": "requirements-engineering"
+        },
+        {
+          "id": "software-design",
+          "name": "Software Design",
+          "slug": "software-design"
+        },
+        {
+          "id": "design-patterns",
+          "name": "Design Patterns",
+          "slug": "design-patterns"
+        },
+        {
+          "id": "version-control",
+          "name": "Version Control",
+          "slug": "version-control"
+        },
+        {
+          "id": "testing",
+          "name": "Testing",
+          "slug": "testing"
+        },
+        {
+          "id": "debugging",
+          "name": "Debugging",
+          "slug": "debugging"
+        },
+        {
+          "id": "continuous-integration",
+          "name": "Continuous Integration",
+          "slug": "continuous-integration"
+        },
+        {
+          "id": "continuous-deployment",
+          "name": "Continuous Deployment",
+          "slug": "continuous-deployment"
+        },
+        {
+          "id": "agile",
+          "name": "Agile",
+          "slug": "agile"
+        },
+        {
+          "id": "scrum",
+          "name": "Scrum",
+          "slug": "scrum"
+        }
+      ]
+    },
+    {
+      "id": "artificial-intelligence",
+      "name": "Artificial Intelligence",
+      "slug": "artificial-intelligence",
+      "description": "Building systems that perform intelligent tasks.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "introduction-to-ai",
+          "name": "Introduction to AI",
+          "slug": "introduction-to-ai"
+        },
+        {
+          "id": "machine-learning",
+          "name": "Machine Learning",
+          "slug": "machine-learning"
+        },
+        {
+          "id": "supervised-learning",
+          "name": "Supervised Learning",
+          "slug": "supervised-learning"
+        },
+        {
+          "id": "unsupervised-learning",
+          "name": "Unsupervised Learning",
+          "slug": "unsupervised-learning"
+        },
+        {
+          "id": "reinforcement-learning",
+          "name": "Reinforcement Learning",
+          "slug": "reinforcement-learning"
+        },
+        {
+          "id": "neural-networks",
+          "name": "Neural Networks",
+          "slug": "neural-networks"
+        },
+        {
+          "id": "deep-learning",
+          "name": "Deep Learning",
+          "slug": "deep-learning"
+        },
+        {
+          "id": "natural-language-processing",
+          "name": "Natural Language Processing",
+          "slug": "natural-language-processing"
+        },
+        {
+          "id": "computer-vision",
+          "name": "Computer Vision",
+          "slug": "computer-vision"
+        },
+        {
+          "id": "expert-systems",
+          "name": "Expert Systems",
+          "slug": "expert-systems"
+        }
+      ]
+    },
+    {
+      "id": "data-science",
+      "name": "Data Science",
+      "slug": "data-science",
+      "description": "Extracting knowledge and insights from data.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 18,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "data-collection",
+          "name": "Data Collection",
+          "slug": "data-collection"
+        },
+        {
+          "id": "data-cleaning",
+          "name": "Data Cleaning",
+          "slug": "data-cleaning"
+        },
+        {
+          "id": "exploratory-data-analysis",
+          "name": "Exploratory Data Analysis",
+          "slug": "exploratory-data-analysis"
+        },
+        {
+          "id": "data-visualization",
+          "name": "Data Visualization",
+          "slug": "data-visualization"
+        },
+        {
+          "id": "statistics-for-data-science",
+          "name": "Statistics for Data Science",
+          "slug": "statistics-for-data-science"
+        },
+        {
+          "id": "machine-learning-pipelines",
+          "name": "Machine Learning Pipelines",
+          "slug": "machine-learning-pipelines"
+        },
+        {
+          "id": "feature-engineering",
+          "name": "Feature Engineering",
+          "slug": "feature-engineering"
+        },
+        {
+          "id": "model-evaluation",
+          "name": "Model Evaluation",
+          "slug": "model-evaluation"
+        },
+        {
+          "id": "big-data",
+          "name": "Big Data",
+          "slug": "big-data"
+        }
+      ]
+    },
+    {
+      "id": "theory-of-computation",
+      "name": "Theory of Computation",
+      "slug": "theory-of-computation",
+      "description": "Mathematical foundations of computing.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 16,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "finite-automata",
+          "name": "Finite Automata",
+          "slug": "finite-automata"
+        },
+        {
+          "id": "regular-expressions",
+          "name": "Regular Expressions",
+          "slug": "regular-expressions"
+        },
+        {
+          "id": "context-free-grammars",
+          "name": "Context-Free Grammars",
+          "slug": "context-free-grammars"
+        },
+        {
+          "id": "pushdown-automata",
+          "name": "Pushdown Automata",
+          "slug": "pushdown-automata"
+        },
+        {
+          "id": "turing-machines",
+          "name": "Turing Machines",
+          "slug": "turing-machines"
+        },
+        {
+          "id": "computability",
+          "name": "Computability",
+          "slug": "computability"
+        },
+        {
+          "id": "complexity-theory",
+          "name": "Complexity Theory",
+          "slug": "complexity-theory"
+        },
+        {
+          "id": "np-completeness",
+          "name": "NP-Completeness",
+          "slug": "np-completeness"
+        }
+      ]
+    },
+    {
+      "id": "distributed-and-cloud-computing",
+      "name": "Distributed and Cloud Computing",
+      "slug": "distributed-and-cloud-computing",
+      "description": "Computing across multiple machines and cloud platforms.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 20,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "distributed-systems",
+          "name": "Distributed Systems",
+          "slug": "distributed-systems"
+        },
+        {
+          "id": "client-server-architecture",
+          "name": "Client-Server Architecture",
+          "slug": "client-server-architecture"
+        },
+        {
+          "id": "microservices",
+          "name": "Microservices",
+          "slug": "microservices"
+        },
+        {
+          "id": "containers",
+          "name": "Containers",
+          "slug": "containers"
+        },
+        {
+          "id": "docker",
+          "name": "Docker",
+          "slug": "docker"
+        },
+        {
+          "id": "kubernetes",
+          "name": "Kubernetes",
+          "slug": "kubernetes"
+        },
+        {
+          "id": "cloud-computing",
+          "name": "Cloud Computing",
+          "slug": "cloud-computing"
+        },
+        {
+          "id": "serverless-computing",
+          "name": "Serverless Computing",
+          "slug": "serverless-computing"
+        },
+        {
+          "id": "load-balancing",
+          "name": "Load Balancing",
+          "slug": "load-balancing"
+        },
+        {
+          "id": "fault-tolerance",
+          "name": "Fault Tolerance",
+          "slug": "fault-tolerance"
+        }
+      ]
+    },
+    {
+      "id": "human-computer-interaction",
+      "name": "Human-Computer Interaction",
+      "slug": "human-computer-interaction",
+      "description": "Designing effective interactions between people and computers.",
+      "levels": [
+        "university"
+      ],
+      "estimatedHours": 14,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "user-experience",
+          "name": "User Experience",
+          "slug": "user-experience"
+        },
+        {
+          "id": "user-interface-design",
+          "name": "User Interface Design",
+          "slug": "user-interface-design"
+        },
+        {
+          "id": "accessibility",
+          "name": "Accessibility",
+          "slug": "accessibility"
+        },
+        {
+          "id": "interaction-design",
+          "name": "Interaction Design",
+          "slug": "interaction-design"
+        },
+        {
+          "id": "usability-testing",
+          "name": "Usability Testing",
+          "slug": "usability-testing"
+        },
+        {
+          "id": "information-architecture",
+          "name": "Information Architecture",
+          "slug": "information-architecture"
+        },
+        {
+          "id": "responsive-design",
+          "name": "Responsive Design",
+          "slug": "responsive-design"
+        }
+      ]
+    }
+  ]
+}

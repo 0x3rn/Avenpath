@@ -1,0 +1,11 @@
+{
+  "name": "Negotiations",
+  "slug": "negotiations",
+  "description": "The study of negotiations.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Manufacturing Engineering",
+  "slug": "manufacturing-engineering",
+  "description": "The study of manufacturing engineering.",
+  "icon": "BookOpen",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": []
+}
