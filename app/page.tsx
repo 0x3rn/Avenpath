@@ -81,7 +81,7 @@ export default function Home() {
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full absolute top-0 left-0 right-0 z-50">
         <div className="font-serif text-2xl font-semibold tracking-tight">Avenpath.</div>
         <div className="flex items-center gap-8">
-          <button className="flex items-center gap-2 text-muted hover:text-foreground transition-colors">
+          <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <Search className="w-4 h-4" />
             <span className="text-sm font-medium">Search</span>
           </button>
@@ -128,7 +128,7 @@ export default function Home() {
                     <div className="bg-card border border-border rounded-2xl p-4 shadow-xl">
                       <ul className="space-y-3 mb-4">
                         {subject.topics.map(topic => (
-                          <li key={topic} className="text-sm text-muted flex items-center gap-2">
+                          <li key={topic} className="text-sm text-muted-foreground flex items-center gap-2">
                             <div className="w-1.5 h-1.5 rounded-full bg-primary/40"></div>
                             {topic}
                           </li>
@@ -145,23 +145,23 @@ export default function Home() {
           </motion.div>
 
           <div className="relative z-20 mt-auto mb-40 flex flex-col items-center text-center px-4 max-w-4xl mx-auto pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              style={{ opacity: heroOpacity, y: heroY }}
-              className="pointer-events-auto"
-            >
-              <div className="w-16 h-[2px] bg-foreground mx-auto mb-10 opacity-20"></div>
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] text-foreground font-medium leading-[1.1] mb-8 tracking-tight">
-                Knowledge,<br />organized beautifully.
-              </h1>
-              <p className="text-xl md:text-2xl text-muted mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-                Explore thousands of topics, lessons, and practice questions in a distraction-free environment.
-              </p>
-              <button className="bg-foreground text-card px-10 py-5 rounded-full text-lg font-medium hover:bg-primary hover:scale-105 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 flex items-center gap-3 mx-auto group">
-                Start Learning <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+            <motion.div style={{ opacity: heroOpacity, y: heroY }} className="pointer-events-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.8 }}
+              >
+                <div className="w-16 h-[2px] bg-foreground mx-auto mb-10 opacity-20"></div>
+                <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl xl:text-[5.5rem] text-foreground font-medium leading-[1.1] mb-8 tracking-tight">
+                  Knowledge,<br />organized beautifully.
+                </h1>
+                <p className="text-lg md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                  Explore thousands of topics, lessons, and practice questions in a distraction-free environment.
+                </p>
+                <button className="bg-foreground text-card px-10 py-5 rounded-full text-lg font-medium hover:bg-primary hover:scale-105 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 flex items-center gap-3 mx-auto group">
+                  Start Learning <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -191,7 +191,7 @@ export default function Home() {
                       <subject.icon className="w-6 h-6 text-foreground group-hover:text-primary transition-colors" strokeWidth={1.5} />
                     </div>
                   </div>
-                  <span className="text-xs font-semibold text-muted bg-background px-3 py-1.5 rounded-full border border-border tracking-wider">
+                  <span className="text-xs font-semibold text-muted-foreground bg-background px-3 py-1.5 rounded-full border border-border tracking-wider">
                     {subject.count} TOPICS
                   </span>
                 </div>
@@ -202,7 +202,7 @@ export default function Home() {
                 
                 <ul className="space-y-4 mb-10 relative z-10">
                   {subject.topics.map(topic => (
-                    <li key={topic} className="text-muted group-hover:text-foreground transition-colors flex items-center gap-3">
+                    <li key={topic} className="text-muted-foreground group-hover:text-foreground transition-colors flex items-center gap-3">
                       <div className="w-1 h-1 rounded-full bg-border group-hover:bg-primary/50 transition-colors"></div>
                       {topic}
                     </li>
@@ -272,7 +272,7 @@ export default function Home() {
               <div key={i} className="group cursor-pointer flex flex-col h-full">
                 <div className="aspect-[3/4] bg-card border border-border rounded-3xl mb-8 overflow-hidden relative shadow-sm group-hover:shadow-xl transition-all duration-500">
                   <div className="absolute inset-0 bg-gradient-to-br from-background to-border/40 group-hover:scale-[1.02] transition-transform duration-700 flex items-center justify-center">
-                    <BookOpen className="w-16 h-16 text-muted/20" strokeWidth={1} />
+                    <BookOpen className="w-16 h-16 text-muted-foreground/20" strokeWidth={1} />
                   </div>
                   {/* Overlay for magazine feel */}
                   <div className="absolute inset-0 border border-black/5 rounded-3xl pointer-events-none"></div>
@@ -286,7 +286,7 @@ export default function Home() {
                     {lesson.title}
                   </h3>
                   
-                  <div className="mt-auto pt-6 border-t border-border flex items-center justify-between text-sm text-muted">
+                  <div className="mt-auto pt-6 border-t border-border flex items-center justify-between text-sm text-muted-foreground">
                     <span className="font-medium italic">By Avenpath Editorial</span>
                     <div className="flex items-center gap-4">
                       <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{lesson.time}</span>
@@ -304,23 +304,23 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-12 text-center md:text-left">
               <div className="flex flex-col items-center md:items-start pl-0">
-                <span className="text-muted font-bold mb-6 uppercase tracking-widest text-xs">Subjects</span>
+                <span className="text-muted-foreground font-bold mb-6 uppercase tracking-widest text-xs">Subjects</span>
                 <span className="font-serif text-5xl lg:text-6xl font-medium tracking-tight"><Counter from={0} to={58} /></span>
               </div>
               <div className="flex flex-col items-center md:items-start pl-0 md:pl-12">
-                <span className="text-muted font-bold mb-6 uppercase tracking-widest text-xs">Topics</span>
+                <span className="text-muted-foreground font-bold mb-6 uppercase tracking-widest text-xs">Topics</span>
                 <span className="font-serif text-5xl lg:text-6xl font-medium tracking-tight"><Counter from={0} to={8324} /></span>
               </div>
               <div className="flex flex-col items-center md:items-start pl-0 md:pl-12">
-                <span className="text-muted font-bold mb-6 uppercase tracking-widest text-xs">Lessons</span>
+                <span className="text-muted-foreground font-bold mb-6 uppercase tracking-widest text-xs">Lessons</span>
                 <span className="font-serif text-5xl lg:text-6xl font-medium tracking-tight"><Counter from={0} to={29842} /></span>
               </div>
               <div className="flex flex-col items-center md:items-start pl-0 md:pl-12">
-                <span className="text-muted font-bold mb-6 uppercase tracking-widest text-xs">Questions</span>
+                <span className="text-muted-foreground font-bold mb-6 uppercase tracking-widest text-xs">Questions</span>
                 <span className="font-serif text-5xl lg:text-6xl font-medium tracking-tight">115k</span>
               </div>
               <div className="flex flex-col items-center md:items-start pl-0 md:pl-12">
-                <span className="text-muted font-bold mb-6 uppercase tracking-widest text-xs">Study Hours</span>
+                <span className="text-muted-foreground font-bold mb-6 uppercase tracking-widest text-xs">Study Hours</span>
                 <span className="font-serif text-5xl lg:text-6xl font-medium tracking-tight text-primary">2.8M</span>
               </div>
             </div>
@@ -337,7 +337,7 @@ export default function Home() {
                 <Bookmark className="w-10 h-10 text-foreground group-hover:text-primary transition-colors" strokeWidth={1.5} />
               </div>
               <h3 className="font-serif text-3xl font-medium mb-6">Ace Exams</h3>
-              <p className="text-muted text-lg leading-relaxed flex-grow">
+              <p className="text-muted-foreground text-lg leading-relaxed flex-grow">
                 Prepare for school, university, and professional certifications with highly structured study guides.
               </p>
             </div>
@@ -349,7 +349,7 @@ export default function Home() {
               <h3 className="font-serif text-3xl font-medium mb-6">Learn a Skill</h3>
               <div className="flex-grow space-y-4 mt-2">
                 {["Programming", "Design", "Finance", "Marketing"].map(skill => (
-                  <div key={skill} className="flex items-center gap-4 text-muted text-lg">
+                  <div key={skill} className="flex items-center gap-4 text-muted-foreground text-lg">
                     <div className="w-2 h-2 rounded-full bg-border group-hover:bg-primary/60 transition-colors"></div>
                     {skill}
                   </div>
@@ -364,7 +364,7 @@ export default function Home() {
               <h3 className="font-serif text-3xl font-medium mb-6">Explore Curiosity</h3>
               <div className="flex-grow flex flex-wrap gap-3 mt-2 content-start">
                 {["History", "Astronomy", "Psychology", "Philosophy", "Art"].map(topic => (
-                  <span key={topic} className="px-5 py-2.5 rounded-full border border-border text-sm font-medium text-muted bg-background group-hover:border-primary/30 transition-colors">
+                  <span key={topic} className="px-5 py-2.5 rounded-full border border-border text-sm font-medium text-muted-foreground bg-background group-hover:border-primary/30 transition-colors">
                     {topic}
                   </span>
                 ))}
@@ -379,7 +379,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto px-4 md:px-8">
             <div className="flex items-end justify-between border-b-2 border-foreground pb-8 mb-16">
               <h2 className="font-serif text-6xl font-medium tracking-tight">Today's Picks</h2>
-              <span className="font-serif text-xl italic text-muted mb-2">Edition No. 142</span>
+              <span className="font-serif text-xl italic text-muted-foreground mb-2">Edition No. 142</span>
             </div>
             
             <div className="flex flex-col gap-16">
@@ -418,7 +418,7 @@ export default function Home() {
                 <div key={i} className="group cursor-pointer flex flex-col md:flex-row gap-12 items-start border-b border-border/50 pb-16 last:border-0 last:pb-0">
                   <div className="md:w-2/3">
                     <h3 className="font-serif text-4xl font-medium mb-6 group-hover:text-primary transition-colors leading-[1.2]">{pick.title}</h3>
-                    <p className="text-muted text-xl mb-8 leading-relaxed font-light">{pick.desc}</p>
+                    <p className="text-muted-foreground text-xl mb-8 leading-relaxed font-light">{pick.desc}</p>
                     <div className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-foreground">
                       <Clock className="w-4 h-4 text-primary" />
                       {pick.time}
@@ -466,7 +466,7 @@ export default function Home() {
                 <h3 className="font-serif text-5xl font-medium leading-[1.1] mb-10">
                   A library that remembers your place.
                 </h3>
-                <ul className="space-y-6 text-xl text-muted font-light">
+                <ul className="space-y-6 text-xl text-muted-foreground font-light">
                   <li className="flex items-center gap-5">
                     <CheckCircle2 className="w-6 h-6 text-primary" />
                     Save lessons for later
@@ -507,7 +507,7 @@ export default function Home() {
                 <h3 className="font-serif text-5xl font-medium leading-[1.1] mb-10">
                   Practice after every lesson.
                 </h3>
-                <p className="text-xl text-muted leading-relaxed font-light mb-10">
+                <p className="text-xl text-muted-foreground leading-relaxed font-light mb-10">
                   Reading is just the beginning. Solidify your understanding with targeted, immediate practice questions and flashcards that ensure concepts are deeply rooted in your memory.
                 </p>
               </div>
@@ -541,7 +541,7 @@ export default function Home() {
                 <h3 className="font-serif text-5xl font-medium leading-[1.1] mb-10">
                   Review difficult topics easily.
                 </h3>
-                <p className="text-xl text-muted leading-relaxed font-light mb-10">
+                <p className="text-xl text-muted-foreground leading-relaxed font-light mb-10">
                   Our system identifies areas where you struggle and gently reintroduces them over time. It’s a personalized path to mastery, without the frustration.
                 </p>
               </div>
@@ -553,7 +553,7 @@ export default function Home() {
         {/* SECTION 9: Community Picks */}
         <section className="py-16 md:py-24 bg-card border-y border-border">
           <div className="max-w-3xl mx-auto px-8 text-center">
-            <h2 className="font-sans font-bold text-sm mb-12 text-muted uppercase tracking-[0.2em]">Trending Now</h2>
+            <h2 className="font-sans font-bold text-sm mb-12 text-muted-foreground uppercase tracking-[0.2em]">Trending Now</h2>
             <div className="flex flex-wrap justify-center gap-5">
               {["Calculus", "Photosynthesis", "Machine Learning", "Shakespeare", "World War II", "Thermodynamics", "JavaScript"].map(topic => (
                 <div key={topic} className="px-8 py-4 rounded-full border border-border bg-background text-foreground font-serif text-xl hover:border-primary hover:-translate-y-1 hover:shadow-md cursor-pointer transition-all duration-300 flex items-center gap-3">
@@ -580,14 +580,14 @@ export default function Home() {
             {/* Added short descriptive line as requested */}
             <div className="col-span-1 md:col-span-4 lg:col-span-2">
               <div className="font-serif text-3xl font-semibold tracking-tight mb-8">Avenpath.</div>
-              <p className="text-muted text-base max-w-sm leading-relaxed font-light">
+              <p className="text-muted-foreground text-base max-w-sm leading-relaxed font-light">
                 Learn with structured lessons, practical quizzes, and curated study paths across a growing library of subjects.
               </p>
             </div>
             
             <div className="lg:col-start-4">
               <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Subjects</h4>
-              <ul className="space-y-5 text-sm text-muted font-medium">
+              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-primary transition-colors">Mathematics</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Programming</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Biology</a></li>
@@ -598,7 +598,7 @@ export default function Home() {
 
             <div>
               <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Company</h4>
-              <ul className="space-y-5 text-sm text-muted font-medium">
+              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
@@ -608,7 +608,7 @@ export default function Home() {
 
             <div>
               <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Legal</h4>
-              <ul className="space-y-5 text-sm text-muted font-medium">
+              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Terms</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Support</a></li>
@@ -617,13 +617,13 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col md:flex-row items-center justify-between pt-10 border-t border-border gap-8">
-            <div className="text-sm text-muted font-medium">
+            <div className="text-sm text-muted-foreground font-medium">
               © {new Date().getFullYear()} Avenpath. All rights reserved.
             </div>
             <div className="flex gap-8">
-              <a href="#" className="text-muted font-medium hover:text-foreground transition-colors text-sm">Twitter</a>
-              <a href="#" className="text-muted font-medium hover:text-foreground transition-colors text-sm">Instagram</a>
-              <a href="#" className="text-muted font-medium hover:text-foreground transition-colors text-sm">GitHub</a>
+              <a href="#" className="text-muted-foreground font-medium hover:text-foreground transition-colors text-sm">Twitter</a>
+              <a href="#" className="text-muted-foreground font-medium hover:text-foreground transition-colors text-sm">Instagram</a>
+              <a href="#" className="text-muted-foreground font-medium hover:text-foreground transition-colors text-sm">GitHub</a>
             </div>
           </div>
         </div>
