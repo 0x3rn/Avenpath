@@ -379,7 +379,7 @@ export default function Home() {
             <div className="flex items-end justify-between border-b-2 border-foreground pb-8 mb-16">
               <div>
                 <div className="w-12 h-1 bg-subject-math mb-4"></div>
-                <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] text-foreground">Today's Picks</h2>
+                <h2 className="text-3xl lg:text-5xl font-extrabold text-foreground">Today's Picks</h2>
               </div>
               <span className="text-[15px] italic text-muted-foreground mb-2 font-medium">Edition No. 142</span>
             </div>
@@ -404,9 +404,9 @@ export default function Home() {
               ].map((pick, i) => (
                 <div key={i} className="group cursor-pointer flex flex-col md:flex-row gap-12 items-center border-b border-border/50 pb-20 last:border-0 last:pb-0">
                   <div className="md:w-3/5">
-                    <h3 className="text-[30px] font-bold mb-6 transition-colors leading-[1.2] group-hover:text-subject-math">{pick.title}</h3>
-                    <p className="text-muted-foreground text-[15px] font-medium leading-[1.6] mb-10">{pick.desc}</p>
-                    <div className="flex items-center gap-3 text-[15px] font-bold uppercase tracking-widest text-muted-foreground">
+                    <h3 className="text-lg font-bold mb-6 transition-colors group-hover:text-subject-math">{pick.title}</h3>
+                    <p className="text-muted-foreground text-[15px] font-medium mb-10">{pick.desc}</p>
+                    <div className="flex items-center gap-3 text-[15px] lg:text-base font-bold uppercase tracking-widest text-muted-foreground">
                       <Clock className="w-4 h-4" />
                       {pick.time}
                       <span className="mx-2 text-border">|</span>
@@ -435,10 +435,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="w-16 h-[4px] bg-subject-math mb-10 rounded-full"></div>
-                <h3 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-10">
+                <h3 className="text-3xl lg:text-5xl font-extrabold mb-10">
                   A library that remembers your place.
                 </h3>
-                <ul className="space-y-6 text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground font-medium leading-[1.7] lg:leading-[1.75]">
+                <ul className="space-y-6 text-[17px] lg:text-xl text-muted-foreground font-medium">
                   <li className="flex items-center gap-5">
                     <div className="p-1 rounded-full bg-muted border border-border"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /></div>
                     Save lessons for later
@@ -462,10 +462,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="w-16 h-[4px] bg-subject-math mb-10 rounded-full"></div>
-                <h3 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-10">
+                <h3 className="text-3xl lg:text-5xl font-extrabold mb-10">
                   Practice after every lesson.
                 </h3>
-                <p className="text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground font-medium leading-[1.7] lg:leading-[1.75] mb-10">
+                <p className="text-[17px] lg:text-xl text-muted-foreground font-medium mb-10">
                   Reading is just the beginning. Solidify your understanding with targeted, immediate practice questions and flashcards that ensure concepts are deeply rooted in your memory.
                 </p>
               </div>
@@ -478,10 +478,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="w-16 h-[4px] bg-subject-math mb-10 rounded-full"></div>
-                <h3 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-10">
+                <h3 className="text-3xl lg:text-5xl font-extrabold mb-10">
                   Review difficult topics easily.
                 </h3>
-                <p className="text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground font-medium leading-[1.7] lg:leading-[1.75] mb-10">
+                <p className="text-[17px] lg:text-xl text-muted-foreground font-medium mb-10">
                   Our system identifies areas where you struggle and gently reintroduces them over time. It’s a personalized path to mastery, without the frustration.
                 </p>
               </div>
@@ -499,7 +499,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-5">
               {["Calculus", "Photosynthesis", "Machine Learning", "Shakespeare", "World War II", "Thermodynamics", "JavaScript"].map((topic, i) => {
                 return (
-                  <div key={topic} className={`px-8 py-4 rounded-full border border-border bg-background text-foreground font-bold text-[15px] hover:border-subject-math hover:-translate-y-1 hover:shadow-md cursor-pointer transition-all duration-300 flex items-center gap-3 group/trend`}>
+                  <div key={topic} className={`px-8 py-4 rounded-full border border-border bg-background text-foreground text-[15px] lg:text-base font-bold hover:border-subject-math hover:-translate-y-1 hover:shadow-md cursor-pointer transition-all duration-300 flex items-center gap-3 group/trend`}>
                     <TrendingUp className="w-5 h-5 text-muted-foreground group-hover/trend:text-subject-math transition-colors" /> {topic}
                   </div>
                 )
@@ -511,7 +511,7 @@ export default function Home() {
         {/* SECTION 9: Quotes (Soft radial background) */}
         <section className="py-32 md:py-64 px-4 md:px-8 flex items-center justify-center text-center mx-auto relative overflow-hidden bg-background">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-subject-math/5 via-background to-background"></div>
-          <h2 className="relative z-10 text-[40px] md:text-[56px] lg:text-[72px] font-extrabold leading-[1.05] lg:leading-[0.95] tracking-[-0.03em] lg:tracking-[-0.04em] text-foreground max-w-5xl">
+          <h2 className="relative z-10 text-4xl lg:text-7xl font-extrabold text-foreground max-w-5xl">
             "The beautiful thing about learning is that nobody can take it away from you."
           </h2>
         </section>
