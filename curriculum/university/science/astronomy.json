@@ -1,0 +1,1087 @@
+{
+  "name": "Astronomy",
+  "slug": "astronomy",
+  "description": "A comprehensive study of the universe, from our solar system to the cosmos, including stars, galaxies, and cosmology.",
+  "icon": "Telescope",
+  "color": "#2563EB",
+  "levels": [
+    "university"
+  ],
+  "topics": [
+    {
+      "id": "science-and-the-universe-a-brief-tour",
+      "name": "Science and the Universe: A Brief Tour",
+      "slug": "science-and-the-universe-a-brief-tour",
+      "description": "An introduction to the nature of astronomy, science, and the scale of the universe.",
+      "estimatedHours": 8,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-nature-of-astronomy",
+          "name": "The Nature of Astronomy",
+          "slug": "the-nature-of-astronomy"
+        },
+        {
+          "id": "the-nature-of-science",
+          "name": "The Nature of Science",
+          "slug": "the-nature-of-science"
+        },
+        {
+          "id": "the-laws-of-nature",
+          "name": "The Laws of Nature",
+          "slug": "the-laws-of-nature"
+        },
+        {
+          "id": "numbers-in-astronomy",
+          "name": "Numbers in Astronomy",
+          "slug": "numbers-in-astronomy"
+        },
+        {
+          "id": "consequences-of-light-travel-time",
+          "name": "Consequences of Light Travel Time",
+          "slug": "consequences-of-light-travel-time"
+        },
+        {
+          "id": "a-tour-of-the-universe",
+          "name": "A Tour of the Universe",
+          "slug": "a-tour-of-the-universe"
+        },
+        {
+          "id": "the-universe-on-the-large-scale",
+          "name": "The Universe on the Large Scale",
+          "slug": "the-universe-on-the-large-scale"
+        },
+        {
+          "id": "the-universe-of-the-very-small",
+          "name": "The Universe of the Very Small",
+          "slug": "the-universe-of-the-very-small"
+        },
+        {
+          "id": "a-conclusion-and-a-beginning",
+          "name": "A Conclusion and a Beginning",
+          "slug": "a-conclusion-and-a-beginning"
+        }
+      ]
+    },
+    {
+      "id": "observing-the-sky-the-birth-of-astronomy",
+      "name": "Observing the Sky: The Birth of Astronomy",
+      "slug": "observing-the-sky-the-birth-of-astronomy",
+      "description": "The history of how humanity began observing the sky and the transition to modern astronomy.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-sky-above",
+          "name": "The Sky Above",
+          "slug": "the-sky-above"
+        },
+        {
+          "id": "ancient-astronomy",
+          "name": "Ancient Astronomy",
+          "slug": "ancient-astronomy"
+        },
+        {
+          "id": "astrology-and-astronomy",
+          "name": "Astrology and Astronomy",
+          "slug": "astrology-and-astronomy"
+        },
+        {
+          "id": "the-birth-of-modern-astronomy",
+          "name": "The Birth of Modern Astronomy",
+          "slug": "the-birth-of-modern-astronomy"
+        }
+      ]
+    },
+    {
+      "id": "orbits-and-gravity",
+      "name": "Orbits and Gravity",
+      "slug": "orbits-and-gravity",
+      "description": "Understanding planetary motion, Newton's laws, and gravitational forces.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-laws-of-planetary-motion",
+          "name": "The Laws of Planetary Motion",
+          "slug": "the-laws-of-planetary-motion"
+        },
+        {
+          "id": "newtons-great-synthesis",
+          "name": "Newton’s Great Synthesis",
+          "slug": "newtons-great-synthesis"
+        },
+        {
+          "id": "newtons-universal-law-of-gravitation",
+          "name": "Newton’s Universal Law of Gravitation",
+          "slug": "newtons-universal-law-of-gravitation"
+        },
+        {
+          "id": "orbits-in-the-solar-system",
+          "name": "Orbits in the Solar System",
+          "slug": "orbits-in-the-solar-system"
+        },
+        {
+          "id": "motions-of-satellites-and-spacecraft",
+          "name": "Motions of Satellites and Spacecraft",
+          "slug": "motions-of-satellites-and-spacecraft"
+        },
+        {
+          "id": "gravity-with-more-than-two-bodies",
+          "name": "Gravity with More Than Two Bodies",
+          "slug": "gravity-with-more-than-two-bodies"
+        }
+      ]
+    },
+    {
+      "id": "earth-moon-and-sky",
+      "name": "Earth, Moon, and Sky",
+      "slug": "earth-moon-and-sky",
+      "description": "The mechanics of seasons, timekeeping, lunar phases, and eclipses.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "earth-and-sky",
+          "name": "Earth and Sky",
+          "slug": "earth-and-sky"
+        },
+        {
+          "id": "the-seasons",
+          "name": "The Seasons",
+          "slug": "the-seasons"
+        },
+        {
+          "id": "keeping-time",
+          "name": "Keeping Time",
+          "slug": "keeping-time"
+        },
+        {
+          "id": "the-calendar",
+          "name": "The Calendar",
+          "slug": "the-calendar"
+        },
+        {
+          "id": "phases-and-motions-of-the-moon",
+          "name": "Phases and Motions of the Moon",
+          "slug": "phases-and-motions-of-the-moon"
+        },
+        {
+          "id": "ocean-tides-and-the-moon",
+          "name": "Ocean Tides and the Moon",
+          "slug": "ocean-tides-and-the-moon"
+        },
+        {
+          "id": "eclipses-of-the-sun-and-moon",
+          "name": "Eclipses of the Sun and Moon",
+          "slug": "eclipses-of-the-sun-and-moon"
+        }
+      ]
+    },
+    {
+      "id": "radiation-and-spectra",
+      "name": "Radiation and Spectra",
+      "slug": "radiation-and-spectra",
+      "description": "The behavior of light, the electromagnetic spectrum, and astronomical spectroscopy.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-behavior-of-light",
+          "name": "The Behavior of Light",
+          "slug": "the-behavior-of-light"
+        },
+        {
+          "id": "the-electromagnetic-spectrum",
+          "name": "The Electromagnetic Spectrum",
+          "slug": "the-electromagnetic-spectrum"
+        },
+        {
+          "id": "spectroscopy-in-astronomy",
+          "name": "Spectroscopy in Astronomy",
+          "slug": "spectroscopy-in-astronomy"
+        },
+        {
+          "id": "the-structure-of-the-atom",
+          "name": "The Structure of the Atom",
+          "slug": "the-structure-of-the-atom"
+        },
+        {
+          "id": "formation-of-spectral-lines",
+          "name": "Formation of Spectral Lines",
+          "slug": "formation-of-spectral-lines"
+        },
+        {
+          "id": "the-doppler-effect",
+          "name": "The Doppler Effect",
+          "slug": "the-doppler-effect"
+        }
+      ]
+    },
+    {
+      "id": "astronomical-instruments",
+      "name": "Astronomical Instruments",
+      "slug": "astronomical-instruments",
+      "description": "Telescopes and detectors used to observe the universe across the spectrum.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "telescopes",
+          "name": "Telescopes",
+          "slug": "telescopes"
+        },
+        {
+          "id": "telescopes-today",
+          "name": "Telescopes Today",
+          "slug": "telescopes-today"
+        },
+        {
+          "id": "visible-light-detectors-and-instruments",
+          "name": "Visible-Light Detectors and Instruments",
+          "slug": "visible-light-detectors-and-instruments"
+        },
+        {
+          "id": "radio-telescopes",
+          "name": "Radio Telescopes",
+          "slug": "radio-telescopes"
+        },
+        {
+          "id": "observations-outside-earths-atmosphere",
+          "name": "Observations outside Earth’s Atmosphere",
+          "slug": "observations-outside-earths-atmosphere"
+        },
+        {
+          "id": "the-future-of-large-telescopes",
+          "name": "The Future of Large Telescopes",
+          "slug": "the-future-of-large-telescopes"
+        }
+      ]
+    },
+    {
+      "id": "other-worlds-an-introduction-to-the-solar-system",
+      "name": "Other Worlds: An Introduction to the Solar System",
+      "slug": "other-worlds-an-introduction-to-the-solar-system",
+      "description": "An overview of planetary system structure, composition, and formation.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "overview-of-our-planetary-system",
+          "name": "Overview of Our Planetary System",
+          "slug": "overview-of-our-planetary-system"
+        },
+        {
+          "id": "composition-and-structure-of-planets",
+          "name": "Composition and Structure of Planets",
+          "slug": "composition-and-structure-of-planets"
+        },
+        {
+          "id": "dating-planetary-surfaces",
+          "name": "Dating Planetary Surfaces",
+          "slug": "dating-planetary-surfaces"
+        },
+        {
+          "id": "origin-of-the-solar-system",
+          "name": "Origin of the Solar System",
+          "slug": "origin-of-the-solar-system"
+        }
+      ]
+    },
+    {
+      "id": "earth-as-a-planet",
+      "name": "Earth as a Planet",
+      "slug": "earth-as-a-planet",
+      "description": "The geology, atmosphere, and cosmic evolution of planet Earth.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-global-perspective",
+          "name": "The Global Perspective",
+          "slug": "the-global-perspective"
+        },
+        {
+          "id": "earths-crust",
+          "name": "Earth’s Crust",
+          "slug": "earths-crust"
+        },
+        {
+          "id": "earths-atmosphere",
+          "name": "Earth’s Atmosphere",
+          "slug": "earths-atmosphere"
+        },
+        {
+          "id": "life-chemical-evolution-and-climate-change",
+          "name": "Life, Chemical Evolution, and Climate Change",
+          "slug": "life-chemical-evolution-and-climate-change"
+        },
+        {
+          "id": "cosmic-influences-on-the-evolution-of-earth",
+          "name": "Cosmic Influences on the Evolution of Earth",
+          "slug": "cosmic-influences-on-the-evolution-of-earth"
+        }
+      ]
+    },
+    {
+      "id": "cratered-worlds",
+      "name": "Cratered Worlds",
+      "slug": "cratered-worlds",
+      "description": "A detailed look at Earth's Moon and the planet Mercury.",
+      "estimatedHours": 8,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "general-properties-of-the-moon",
+          "name": "General Properties of the Moon",
+          "slug": "general-properties-of-the-moon"
+        },
+        {
+          "id": "the-lunar-surface",
+          "name": "The Lunar Surface",
+          "slug": "the-lunar-surface"
+        },
+        {
+          "id": "impact-craters",
+          "name": "Impact Craters",
+          "slug": "impact-craters"
+        },
+        {
+          "id": "the-origin-of-the-moon",
+          "name": "The Origin of the Moon",
+          "slug": "the-origin-of-the-moon"
+        },
+        {
+          "id": "mercury",
+          "name": "Mercury",
+          "slug": "mercury"
+        }
+      ]
+    },
+    {
+      "id": "earthlike-planets-venus-and-mars",
+      "name": "Earthlike Planets: Venus and Mars",
+      "slug": "earthlike-planets-venus-and-mars",
+      "description": "Geology, atmospheres, and evolutionary divergence of Venus and Mars.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-nearest-planets-an-overview",
+          "name": "The Nearest Planets: An Overview",
+          "slug": "the-nearest-planets-an-overview"
+        },
+        {
+          "id": "the-geology-of-venus",
+          "name": "The Geology of Venus",
+          "slug": "the-geology-of-venus"
+        },
+        {
+          "id": "the-massive-atmosphere-of-venus",
+          "name": "The Massive Atmosphere of Venus",
+          "slug": "the-massive-atmosphere-of-venus"
+        },
+        {
+          "id": "the-geology-of-mars",
+          "name": "The Geology of Mars",
+          "slug": "the-geology-of-mars"
+        },
+        {
+          "id": "water-and-life-on-mars",
+          "name": "Water and Life on Mars",
+          "slug": "water-and-life-on-mars"
+        },
+        {
+          "id": "divergent-planetary-evolution",
+          "name": "Divergent Planetary Evolution",
+          "slug": "divergent-planetary-evolution"
+        }
+      ]
+    },
+    {
+      "id": "the-giant-planets",
+      "name": "The Giant Planets",
+      "slug": "the-giant-planets",
+      "description": "Exploring Jupiter, Saturn, Uranus, and Neptune and their atmospheres.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "exploring-the-outer-planets",
+          "name": "Exploring the Outer Planets",
+          "slug": "exploring-the-outer-planets"
+        },
+        {
+          "id": "the-giant-planets-overview",
+          "name": "The Giant Planets",
+          "slug": "the-giant-planets-overview"
+        },
+        {
+          "id": "atmospheres-of-the-giant-planets",
+          "name": "Atmospheres of the Giant Planets",
+          "slug": "atmospheres-of-the-giant-planets"
+        }
+      ]
+    },
+    {
+      "id": "rings-moons-and-pluto",
+      "name": "Rings, Moons, and Pluto",
+      "slug": "rings-moons-and-pluto",
+      "description": "Study of planetary ring systems, Galilean moons, Titan, and dwarf planets.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "ring-and-moon-systems-introduced",
+          "name": "Ring and Moon Systems Introduced",
+          "slug": "ring-and-moon-systems-introduced"
+        },
+        {
+          "id": "the-galilean-moons-of-jupiter",
+          "name": "The Galilean Moons of Jupiter",
+          "slug": "the-galilean-moons-of-jupiter"
+        },
+        {
+          "id": "titan-and-triton",
+          "name": "Titan and Triton",
+          "slug": "titan-and-triton"
+        },
+        {
+          "id": "pluto-and-charon",
+          "name": "Pluto and Charon",
+          "slug": "pluto-and-charon"
+        },
+        {
+          "id": "planetary-rings-and-enceladus",
+          "name": "Planetary Rings (and Enceladus)",
+          "slug": "planetary-rings-and-enceladus"
+        }
+      ]
+    },
+    {
+      "id": "comets-and-asteroids-debris-of-the-solar-system",
+      "name": "Comets and Asteroids: Debris of the Solar System",
+      "slug": "comets-and-asteroids-debris-of-the-solar-system",
+      "description": "Understanding the leftover remnants of solar system formation.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "asteroids",
+          "name": "Asteroids",
+          "slug": "asteroids"
+        },
+        {
+          "id": "asteroids-and-planetary-defense",
+          "name": "Asteroids and Planetary Defense",
+          "slug": "asteroids-and-planetary-defense"
+        },
+        {
+          "id": "the-long-haired-comets",
+          "name": "The “Long-Haired” Comets",
+          "slug": "the-long-haired-comets"
+        },
+        {
+          "id": "the-origin-and-fate-of-comets-and-related-objects",
+          "name": "The Origin and Fate of Comets and Related Objects",
+          "slug": "the-origin-and-fate-of-comets-and-related-objects"
+        }
+      ]
+    },
+    {
+      "id": "cosmic-samples-and-the-origin-of-the-solar-system",
+      "name": "Cosmic Samples and the Origin of the Solar System",
+      "slug": "cosmic-samples-and-the-origin-of-the-solar-system",
+      "description": "Meteorites and the early history and formation models of the Solar System.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "meteors",
+          "name": "Meteors",
+          "slug": "meteors"
+        },
+        {
+          "id": "meteorites-stones-from-heaven",
+          "name": "Meteorites: Stones from Heaven",
+          "slug": "meteorites-stones-from-heaven"
+        },
+        {
+          "id": "formation-of-the-solar-system",
+          "name": "Formation of the Solar System",
+          "slug": "formation-of-the-solar-system"
+        },
+        {
+          "id": "comparison-with-other-planetary-systems",
+          "name": "Comparison with Other Planetary Systems",
+          "slug": "comparison-with-other-planetary-systems"
+        },
+        {
+          "id": "planetary-evolution",
+          "name": "Planetary Evolution",
+          "slug": "planetary-evolution"
+        }
+      ]
+    },
+    {
+      "id": "the-sun-a-garden-variety-star",
+      "name": "The Sun: A Garden-Variety Star",
+      "slug": "the-sun-a-garden-variety-star",
+      "description": "The structure, solar cycles, and dynamic activity of our Sun.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-structure-and-composition-of-the-sun",
+          "name": "The Structure and Composition of the Sun",
+          "slug": "the-structure-and-composition-of-the-sun"
+        },
+        {
+          "id": "the-solar-cycle",
+          "name": "The Solar Cycle",
+          "slug": "the-solar-cycle"
+        },
+        {
+          "id": "solar-activity-above-the-photosphere",
+          "name": "Solar Activity above the Photosphere",
+          "slug": "solar-activity-above-the-photosphere"
+        },
+        {
+          "id": "space-weather",
+          "name": "Space Weather",
+          "slug": "space-weather"
+        }
+      ]
+    },
+    {
+      "id": "the-sun-a-nuclear-powerhouse",
+      "name": "The Sun: A Nuclear Powerhouse",
+      "slug": "the-sun-a-nuclear-powerhouse",
+      "description": "How the Sun produces thermal energy through nuclear reactions.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "sources-of-sunshine-thermal-and-gravitational-energy",
+          "name": "Sources of Sunshine: Thermal and Gravitational Energy",
+          "slug": "sources-of-sunshine-thermal-and-gravitational-energy"
+        },
+        {
+          "id": "mass-energy-and-the-theory-of-relativity",
+          "name": "Mass, Energy, and the Theory of Relativity",
+          "slug": "mass-energy-and-the-theory-of-relativity"
+        },
+        {
+          "id": "the-solar-interior-theory",
+          "name": "The Solar Interior: Theory",
+          "slug": "the-solar-interior-theory"
+        },
+        {
+          "id": "the-solar-interior-observations",
+          "name": "The Solar Interior: Observations",
+          "slug": "the-solar-interior-observations"
+        }
+      ]
+    },
+    {
+      "id": "analyzing-starlight",
+      "name": "Analyzing Starlight",
+      "slug": "analyzing-starlight",
+      "description": "Using spectra to deduce stellar brightness, colors, and compositions.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-brightness-of-stars",
+          "name": "The Brightness of Stars",
+          "slug": "the-brightness-of-stars"
+        },
+        {
+          "id": "colors-of-stars",
+          "name": "Colors of Stars",
+          "slug": "colors-of-stars"
+        },
+        {
+          "id": "the-spectra-of-stars-and-brown-dwarfs",
+          "name": "The Spectra of Stars (and Brown Dwarfs)",
+          "slug": "the-spectra-of-stars-and-brown-dwarfs"
+        },
+        {
+          "id": "using-spectra-to-measure-stellar-radius-composition-and-motion",
+          "name": "Using Spectra to Measure Stellar Radius, Composition, and Motion",
+          "slug": "using-spectra-to-measure-stellar-radius-composition-and-motion"
+        }
+      ]
+    },
+    {
+      "id": "the-stars-a-celestial-census",
+      "name": "The Stars: A Celestial Census",
+      "slug": "the-stars-a-celestial-census",
+      "description": "Classifying stars, calculating masses, and the Hertzsprung-Russell diagram.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "a-stellar-census",
+          "name": "A Stellar Census",
+          "slug": "a-stellar-census"
+        },
+        {
+          "id": "measuring-stellar-masses",
+          "name": "Measuring Stellar Masses",
+          "slug": "measuring-stellar-masses"
+        },
+        {
+          "id": "diameters-of-stars",
+          "name": "Diameters of Stars",
+          "slug": "diameters-of-stars"
+        },
+        {
+          "id": "the-h-r-diagram",
+          "name": "The H–R Diagram",
+          "slug": "the-h-r-diagram"
+        }
+      ]
+    },
+    {
+      "id": "celestial-distances",
+      "name": "Celestial Distances",
+      "slug": "celestial-distances",
+      "description": "The fundamental units and techniques for measuring cosmic distances.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "fundamental-units-of-distance",
+          "name": "Fundamental Units of Distance",
+          "slug": "fundamental-units-of-distance"
+        },
+        {
+          "id": "surveying-the-stars",
+          "name": "Surveying the Stars",
+          "slug": "surveying-the-stars"
+        },
+        {
+          "id": "variable-stars-one-key-to-cosmic-distances",
+          "name": "Variable Stars: One Key to Cosmic Distances",
+          "slug": "variable-stars-one-key-to-cosmic-distances"
+        },
+        {
+          "id": "the-h-r-diagram-and-cosmic-distances",
+          "name": "The H–R Diagram and Cosmic Distances",
+          "slug": "the-h-r-diagram-and-cosmic-distances"
+        }
+      ]
+    },
+    {
+      "id": "between-the-stars-gas-and-dust-in-space",
+      "name": "Between the Stars: Gas and Dust in Space",
+      "slug": "between-the-stars-gas-and-dust-in-space",
+      "description": "The interstellar medium, cosmic dust, and the life cycle of stellar material.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-interstellar-medium",
+          "name": "The Interstellar Medium",
+          "slug": "the-interstellar-medium"
+        },
+        {
+          "id": "interstellar-gas",
+          "name": "Interstellar Gas",
+          "slug": "interstellar-gas"
+        },
+        {
+          "id": "cosmic-dust",
+          "name": "Cosmic Dust",
+          "slug": "cosmic-dust"
+        },
+        {
+          "id": "cosmic-rays",
+          "name": "Cosmic Rays",
+          "slug": "cosmic-rays"
+        },
+        {
+          "id": "the-life-cycle-of-cosmic-material",
+          "name": "The Life Cycle of Cosmic Material",
+          "slug": "the-life-cycle-of-cosmic-material"
+        },
+        {
+          "id": "interstellar-matter-around-the-sun",
+          "name": "Interstellar Matter around the Sun",
+          "slug": "interstellar-matter-around-the-sun"
+        }
+      ]
+    },
+    {
+      "id": "the-birth-of-stars-and-the-discovery-of-planets-outside-the-solar-system",
+      "name": "The Birth of Stars and the Discovery of Planets outside the Solar System",
+      "slug": "the-birth-of-stars-and-the-discovery-of-planets-outside-the-solar-system",
+      "description": "Star formation processes and the growing field of exoplanet discovery.",
+      "estimatedHours": 14,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "star-formation",
+          "name": "Star Formation",
+          "slug": "star-formation"
+        },
+        {
+          "id": "the-h-r-diagram-and-the-study-of-stellar-evolution",
+          "name": "The H–R Diagram and the Study of Stellar Evolution",
+          "slug": "the-h-r-diagram-and-the-study-of-stellar-evolution"
+        },
+        {
+          "id": "evidence-that-planets-form-around-other-stars",
+          "name": "Evidence That Planets Form around Other Stars",
+          "slug": "evidence-that-planets-form-around-other-stars"
+        },
+        {
+          "id": "planets-beyond-the-solar-system-search-and-discovery",
+          "name": "Planets beyond the Solar System: Search and Discovery",
+          "slug": "planets-beyond-the-solar-system-search-and-discovery"
+        },
+        {
+          "id": "exoplanets-everywhere-what-we-are-learning",
+          "name": "Exoplanets Everywhere: What We Are Learning",
+          "slug": "exoplanets-everywhere-what-we-are-learning"
+        },
+        {
+          "id": "new-perspectives-on-planet-formation",
+          "name": "New Perspectives on Planet Formation",
+          "slug": "new-perspectives-on-planet-formation"
+        }
+      ]
+    },
+    {
+      "id": "stars-from-adolescence-to-old-age",
+      "name": "Stars from Adolescence to Old Age",
+      "slug": "stars-from-adolescence-to-old-age",
+      "description": "The evolutionary paths of different stars, giant phases, and star clusters.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "evolution-from-the-main-sequence-to-red-giants",
+          "name": "Evolution from the Main Sequence to Red Giants",
+          "slug": "evolution-from-the-main-sequence-to-red-giants"
+        },
+        {
+          "id": "star-clusters",
+          "name": "Star Clusters",
+          "slug": "star-clusters"
+        },
+        {
+          "id": "checking-out-the-theory",
+          "name": "Checking Out the Theory",
+          "slug": "checking-out-the-theory"
+        },
+        {
+          "id": "further-evolution-of-stars",
+          "name": "Further Evolution of Stars",
+          "slug": "further-evolution-of-stars"
+        },
+        {
+          "id": "the-evolution-of-more-massive-stars",
+          "name": "The Evolution of More Massive Stars",
+          "slug": "the-evolution-of-more-massive-stars"
+        }
+      ]
+    },
+    {
+      "id": "the-death-of-stars",
+      "name": "The Death of Stars",
+      "slug": "the-death-of-stars",
+      "description": "White dwarfs, supernovae, pulsars, neutron stars, and gamma-ray bursts.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-death-of-low-mass-stars",
+          "name": "The Death of Low-Mass Stars",
+          "slug": "the-death-of-low-mass-stars"
+        },
+        {
+          "id": "evolution-of-massive-stars-an-explosive-finish",
+          "name": "Evolution of Massive Stars: An Explosive Finish",
+          "slug": "evolution-of-massive-stars-an-explosive-finish"
+        },
+        {
+          "id": "supernova-observations",
+          "name": "Supernova Observations",
+          "slug": "supernova-observations"
+        },
+        {
+          "id": "pulsars-and-the-discovery-of-neutron-stars",
+          "name": "Pulsars and the Discovery of Neutron Stars",
+          "slug": "pulsars-and-the-discovery-of-neutron-stars"
+        },
+        {
+          "id": "the-evolution-of-binary-star-systems",
+          "name": "The Evolution of Binary Star Systems",
+          "slug": "the-evolution-of-binary-star-systems"
+        },
+        {
+          "id": "the-mystery-of-the-gamma-ray-bursts",
+          "name": "The Mystery of the Gamma-Ray Bursts",
+          "slug": "the-mystery-of-the-gamma-ray-bursts"
+        }
+      ]
+    },
+    {
+      "id": "black-holes-and-curved-spacetime",
+      "name": "Black Holes and Curved Spacetime",
+      "slug": "black-holes-and-curved-spacetime",
+      "description": "General relativity, black hole physics, and gravitational wave astronomy.",
+      "estimatedHours": 14,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "introducing-general-relativity",
+          "name": "Introducing General Relativity",
+          "slug": "introducing-general-relativity"
+        },
+        {
+          "id": "spacetime-and-gravity",
+          "name": "Spacetime and Gravity",
+          "slug": "spacetime-and-gravity"
+        },
+        {
+          "id": "tests-of-general-relativity",
+          "name": "Tests of General Relativity",
+          "slug": "tests-of-general-relativity"
+        },
+        {
+          "id": "time-in-general-relativity",
+          "name": "Time in General Relativity",
+          "slug": "time-in-general-relativity"
+        },
+        {
+          "id": "black-holes",
+          "name": "Black Holes",
+          "slug": "black-holes"
+        },
+        {
+          "id": "evidence-for-black-holes",
+          "name": "Evidence for Black Holes",
+          "slug": "evidence-for-black-holes"
+        },
+        {
+          "id": "gravitational-wave-astronomy",
+          "name": "Gravitational Wave Astronomy",
+          "slug": "gravitational-wave-astronomy"
+        }
+      ]
+    },
+    {
+      "id": "the-milky-way-galaxy",
+      "name": "The Milky Way Galaxy",
+      "slug": "the-milky-way-galaxy",
+      "description": "Structure, spiral arms, mass, and stellar populations of our home galaxy.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-architecture-of-the-galaxy",
+          "name": "The Architecture of the Galaxy",
+          "slug": "the-architecture-of-the-galaxy"
+        },
+        {
+          "id": "spiral-structure",
+          "name": "Spiral Structure",
+          "slug": "spiral-structure"
+        },
+        {
+          "id": "the-mass-of-the-galaxy",
+          "name": "The Mass of the Galaxy",
+          "slug": "the-mass-of-the-galaxy"
+        },
+        {
+          "id": "the-center-of-the-galaxy",
+          "name": "The Center of the Galaxy",
+          "slug": "the-center-of-the-galaxy"
+        },
+        {
+          "id": "stellar-populations-in-the-galaxy",
+          "name": "Stellar Populations in the Galaxy",
+          "slug": "stellar-populations-in-the-galaxy"
+        },
+        {
+          "id": "the-formation-of-the-galaxy",
+          "name": "The Formation of the Galaxy",
+          "slug": "the-formation-of-the-galaxy"
+        }
+      ]
+    },
+    {
+      "id": "galaxies",
+      "name": "Galaxies",
+      "slug": "galaxies",
+      "description": "Galaxy classification, properties, the extragalactic distance scale, and cosmic expansion.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-discovery-of-galaxies",
+          "name": "The Discovery of Galaxies",
+          "slug": "the-discovery-of-galaxies"
+        },
+        {
+          "id": "types-of-galaxies",
+          "name": "Types of Galaxies",
+          "slug": "types-of-galaxies"
+        },
+        {
+          "id": "properties-of-galaxies",
+          "name": "Properties of Galaxies",
+          "slug": "properties-of-galaxies"
+        },
+        {
+          "id": "the-extragalactic-distance-scale",
+          "name": "The Extragalactic Distance Scale",
+          "slug": "the-extragalactic-distance-scale"
+        },
+        {
+          "id": "the-expanding-universe",
+          "name": "The Expanding Universe",
+          "slug": "the-expanding-universe"
+        }
+      ]
+    },
+    {
+      "id": "active-galaxies-quasars-and-supermassive-black-holes",
+      "name": "Active Galaxies, Quasars, and Supermassive Black Holes",
+      "slug": "active-galaxies-quasars-and-supermassive-black-holes",
+      "description": "Understanding active galactic nuclei, quasars, and their evolution in the universe.",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "quasars",
+          "name": "Quasars",
+          "slug": "quasars"
+        },
+        {
+          "id": "supermassive-black-holes-what-quasars-really-are",
+          "name": "Supermassive Black Holes: What Quasars Really Are",
+          "slug": "supermassive-black-holes-what-quasars-really-are"
+        },
+        {
+          "id": "quasars-as-probes-of-evolution-in-the-universe",
+          "name": "Quasars as Probes of Evolution in the Universe",
+          "slug": "quasars-as-probes-of-evolution-in-the-universe"
+        }
+      ]
+    },
+    {
+      "id": "the-evolution-and-distribution-of-galaxies",
+      "name": "The Evolution and Distribution of Galaxies",
+      "slug": "the-evolution-and-distribution-of-galaxies",
+      "description": "Galaxy mergers, large-scale structure, and the role of dark matter.",
+      "estimatedHours": 12,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "observations-of-distant-galaxies",
+          "name": "Observations of Distant Galaxies",
+          "slug": "observations-of-distant-galaxies"
+        },
+        {
+          "id": "galaxy-mergers-and-active-galactic-nuclei",
+          "name": "Galaxy Mergers and Active Galactic Nuclei",
+          "slug": "galaxy-mergers-and-active-galactic-nuclei"
+        },
+        {
+          "id": "the-distribution-of-galaxies-in-space",
+          "name": "The Distribution of Galaxies in Space",
+          "slug": "the-distribution-of-galaxies-in-space"
+        },
+        {
+          "id": "the-challenge-of-dark-matter",
+          "name": "The Challenge of Dark Matter",
+          "slug": "the-challenge-of-dark-matter"
+        },
+        {
+          "id": "the-formation-and-evolution-of-galaxies-and-structure-in-the-universe",
+          "name": "The Formation and Evolution of Galaxies and Structure in the Universe",
+          "slug": "the-formation-and-evolution-of-galaxies-and-structure-in-the-universe"
+        }
+      ]
+    },
+    {
+      "id": "the-big-bang",
+      "name": "The Big Bang",
+      "slug": "the-big-bang",
+      "description": "Cosmology, the beginning of the universe, cosmic microwave background, and inflation.",
+      "estimatedHours": 14,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-age-of-the-universe",
+          "name": "The Age of the Universe",
+          "slug": "the-age-of-the-universe"
+        },
+        {
+          "id": "a-model-of-the-universe",
+          "name": "A Model of the Universe",
+          "slug": "a-model-of-the-universe"
+        },
+        {
+          "id": "the-beginning-of-the-universe",
+          "name": "The Beginning of the Universe",
+          "slug": "the-beginning-of-the-universe"
+        },
+        {
+          "id": "the-cosmic-microwave-background",
+          "name": "The Cosmic Microwave Background",
+          "slug": "the-cosmic-microwave-background"
+        },
+        {
+          "id": "what-is-the-universe-really-made-of",
+          "name": "What Is the Universe Really Made Of?",
+          "slug": "what-is-the-universe-really-made-of"
+        },
+        {
+          "id": "the-inflationary-universe",
+          "name": "The Inflationary Universe",
+          "slug": "the-inflationary-universe"
+        },
+        {
+          "id": "the-anthropic-principle",
+          "name": "The Anthropic Principle",
+          "slug": "the-anthropic-principle"
+        }
+      ]
+    },
+    {
+      "id": "life-in-the-universe",
+      "name": "Life in the Universe",
+      "slug": "life-in-the-universe",
+      "description": "Astrobiology and the search for extraterrestrial intelligence (SETI).",
+      "estimatedHours": 10,
+      "prerequisites": [],
+      "subtopics": [
+        {
+          "id": "the-cosmic-context-for-life",
+          "name": "The Cosmic Context for Life",
+          "slug": "the-cosmic-context-for-life"
+        },
+        {
+          "id": "astrobiology",
+          "name": "Astrobiology",
+          "slug": "astrobiology"
+        },
+        {
+          "id": "searching-for-life-beyond-earth",
+          "name": "Searching for Life beyond Earth",
+          "slug": "searching-for-life-beyond-earth"
+        },
+        {
+          "id": "the-search-for-extraterrestrial-intelligence",
+          "name": "The Search for Extraterrestrial Intelligence",
+          "slug": "the-search-for-extraterrestrial-intelligence"
+        }
+      ]
+    }
+  ]
+}
