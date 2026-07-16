@@ -1,0 +1,100 @@
+{
+  "id": "ng-waec-civic-education-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Civic Education",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Citizenship, Democracy and Human Rights",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Citizenship",
+          "slug": "citizenship",
+          "subtopics": [
+            "Importance of citizenship education"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Democracy and National Development",
+          "slug": "democracy-and-national-development",
+          "subtopics": [
+            "Capitalist democracy"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Dangers of Political Apathy",
+          "slug": "dangers-of-political-apathy",
+          "subtopics": [
+            "Meaning and forms of apathy"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Political Participation",
+          "slug": "political-participation",
+          "subtopics": [
+            "Achieving Popular Participation in Politics"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Human Rights",
+          "slug": "human-rights",
+          "subtopics": [
+            "Limitation of Human Rights"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Drugs and Drug Abuse",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Drugs and Drug Abuse",
+          "slug": "drugs-and-drug-abuse",
+          "subtopics": [
+            "Drug Use and Abuse",
+            "Effect of Drugs and Drug Abuse",
+            "Prevention of Drug Abuse",
+            "Drug Law, Enforcement and Administration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Social Issues and Relationships",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Social Issues",
+          "slug": "social-issues",
+          "subtopics": [
+            "Responsible Parenthood",
+            "Traffic Regulations"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Relationships",
+          "slug": "relationships",
+          "subtopics": [
+            "Interpersonal Relations",
+            "Inter-Communal Relationship"
+          ]
+        }
+      ]
+    }
+  ]
+}

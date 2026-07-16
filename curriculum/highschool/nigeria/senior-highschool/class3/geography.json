@@ -1,0 +1,79 @@
+{
+  "id": "ng-waec-geography-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Geography",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Geomorphology and Regional Geography",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Earth's Internal Processes",
+          "slug": "earths-internal-processes"
+        },
+        {
+          "order": 2,
+          "title": "Denudation Processes",
+          "slug": "denudation-processes"
+        },
+        {
+          "order": 3,
+          "title": "Weathering",
+          "slug": "weathering"
+        },
+        {
+          "order": 4,
+          "title": "Mass Movements",
+          "slug": "mass-movements"
+        },
+        {
+          "order": 5,
+          "title": "Climatic Change",
+          "slug": "climatic-change"
+        },
+        {
+          "order": 6,
+          "title": "ECOWAS",
+          "slug": "ecowas"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Economic Geography and GIS Applications",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Trade",
+          "slug": "trade"
+        },
+        {
+          "order": 2,
+          "title": "Tourism",
+          "slug": "tourism"
+        },
+        {
+          "order": 3,
+          "title": "Satellite Remote Sensing",
+          "slug": "satellite-remote-sensing"
+        },
+        {
+          "order": 4,
+          "title": "GIS Application",
+          "slug": "gis-application"
+        },
+        {
+          "order": 5,
+          "title": "General revision",
+          "slug": "general-revision"
+        }
+      ]
+    }
+  ]
+}

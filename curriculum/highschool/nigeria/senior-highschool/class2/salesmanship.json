@@ -1,0 +1,65 @@
+{
+  "id": "ng-waec-salesmanship-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Salesmanship",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Pricing and Demand",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Pricing and Demand",
+          "slug": "pricing-and-demand",
+          "subtopics": [
+            "Pricing",
+            "Demand",
+            "Cost Ease",
+            "Discount"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Consumer Behaviour",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Consumer Behaviour",
+          "slug": "consumer-behaviour",
+          "subtopics": [
+            "Consumer",
+            "Decision process",
+            "Environmental factors affecting consumer behavior",
+            "Corporate buying behavior",
+            "Major Sales influences"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Distribution",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Distribution",
+          "slug": "distribution",
+          "subtopics": [
+            "Channels of Distribution",
+            "Retailer",
+            "Wholesaler and Warehousing",
+            "Consumer Co-operative societies"
+          ]
+        }
+      ]
+    }
+  ]
+}

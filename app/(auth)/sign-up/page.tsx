@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Check, Loader2, ArrowRight } from "lucide-react";
+import { Check, Loader2, ArrowRight, AlertCircle } from "lucide-react";
+import { signup } from "@/app/actions/auth";
 
 export default function SignUpPage() {
-  const router = useRouter();
   
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
 
   // Password validation logic
   const hasMinLength = password.length >= 8;
@@ -32,14 +32,23 @@ export default function SignUpPage() {
     passwordsMatch && 
     agreed;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
 
-    setIsLoading(true);
-    // Simulate network request
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    router.push("/verify-email");
+    setError(null);
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      // We are not using name yet in Supabase auth metadata, but we could!
+      formData.append("name", name);
+      
+      const result = await signup(formData);
+      if (result?.error) {
+        setError(result.error);
+      }
+    });
   };
 
   return (
@@ -53,6 +62,13 @@ export default function SignUpPage() {
         <h1 className="text-3xl font-extrabold tracking-tight mb-2">Welcome to Avenpath</h1>
         <p className="text-muted-foreground font-medium">Start learning in less than a minute.</p>
       </div>
+
+      {error && (
+        <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-xl flex items-start gap-3 text-destructive">
+          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          <p className="text-sm font-medium">{error}</p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
         
@@ -87,6 +103,9 @@ export default function SignUpPage() {
           <label className="text-sm font-bold text-foreground">Password</label>
           <input 
             type="password" 
+            id="reg_password"
+            name="reg_password"
+            autoComplete="new-password"
             placeholder="••••••••"
             value={password}
             onChange={e => setPassword(e.target.value)}
@@ -95,22 +114,20 @@ export default function SignUpPage() {
           />
           
           {/* Live Validation Indicators */}
-          {password.length > 0 && (
-            <div className="grid grid-cols-2 gap-2 mt-3 p-3 bg-muted/50 rounded-xl border border-border/50">
-              <div className={`flex items-center gap-2 text-xs font-semibold ${hasMinLength ? 'text-green-600' : 'text-muted-foreground'}`}>
-                <Check className="w-3.5 h-3.5" /> 8+ characters
-              </div>
-              <div className={`flex items-center gap-2 text-xs font-semibold ${hasUppercase ? 'text-green-600' : 'text-muted-foreground'}`}>
-                <Check className="w-3.5 h-3.5" /> One uppercase
-              </div>
-              <div className={`flex items-center gap-2 text-xs font-semibold ${hasNumber ? 'text-green-600' : 'text-muted-foreground'}`}>
-                <Check className="w-3.5 h-3.5" /> One number
-              </div>
-              <div className={`flex items-center gap-2 text-xs font-semibold ${hasSpecial ? 'text-green-600' : 'text-muted-foreground'}`}>
-                <Check className="w-3.5 h-3.5" /> One special
-              </div>
+          <div className="grid grid-cols-2 gap-2 mt-3 p-3 bg-muted/50 rounded-xl border border-border/50">
+            <div className={`flex items-center gap-2 text-xs font-semibold ${hasMinLength ? 'text-green-600' : 'text-muted-foreground'}`}>
+              <Check className="w-3.5 h-3.5" /> 8+ characters
             </div>
-          )}
+            <div className={`flex items-center gap-2 text-xs font-semibold ${hasUppercase ? 'text-green-600' : 'text-muted-foreground'}`}>
+              <Check className="w-3.5 h-3.5" /> One uppercase
+            </div>
+            <div className={`flex items-center gap-2 text-xs font-semibold ${hasNumber ? 'text-green-600' : 'text-muted-foreground'}`}>
+              <Check className="w-3.5 h-3.5" /> One number
+            </div>
+            <div className={`flex items-center gap-2 text-xs font-semibold ${hasSpecial ? 'text-green-600' : 'text-muted-foreground'}`}>
+              <Check className="w-3.5 h-3.5" /> One special
+            </div>
+          </div>
         </div>
 
         {/* Confirm Password */}
@@ -118,6 +135,9 @@ export default function SignUpPage() {
           <label className="text-sm font-bold text-foreground">Confirm Password</label>
           <input 
             type="password" 
+            id="reg_confirm_password"
+            name="reg_confirm_password"
+            autoComplete="new-password"
             placeholder="••••••••"
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}

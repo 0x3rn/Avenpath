@@ -1,0 +1,141 @@
+{
+  "id": "ng-waec-history-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "History",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Historiography and Pre-Colonial Nigeria",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Historiography and Historical Skills",
+          "slug": "historiography-and-historical-skills",
+          "subtopics": [
+            "What History is and why we teach History",
+            "Sources of History and Dating",
+            "Historical skills (ancient and modern approaches)",
+            "Prospects of ICT in Historical Studies"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Pre-Colonial Nigeria I",
+          "slug": "pre-colonial-nigeria-i",
+          "subtopics": [
+            "Land and peoples of Nigeria",
+            "Traditions of origin and Historical links among certain groups",
+            "Early Centres of Civilization in Nigeria",
+            "The State Formation Process (Centralised and Non-Centralised States)",
+            "Centralised States",
+            "Non-Centralised States 1. Social Political Organization",
+            "Aspects of the History of the non-centralised states of Nigeria"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Nigerian States and Kingdoms to 1800",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Kanem and Bornu to 1800",
+          "slug": "kanem-and-bornu-to-1800"
+        },
+        {
+          "order": 2,
+          "title": "The Hausa States to 1800",
+          "slug": "the-hausa-states-to-1800"
+        },
+        {
+          "order": 3,
+          "title": "Nupe",
+          "slug": "nupe"
+        },
+        {
+          "order": 4,
+          "title": "The Jukun",
+          "slug": "the-jukun"
+        },
+        {
+          "order": 5,
+          "title": "Ife and Oyo",
+          "slug": "ife-and-oyo"
+        },
+        {
+          "order": 6,
+          "title": "Benin",
+          "slug": "benin"
+        },
+        {
+          "order": 7,
+          "title": "The Efik",
+          "slug": "the-efik"
+        },
+        {
+          "order": 8,
+          "title": "Inter-group relations a) Economic activities and Inter-group relations",
+          "slug": "inter-group-relations-economic-activities"
+        },
+        {
+          "order": 9,
+          "title": "The Impact of Migrations, War and Politics on Inter-group Relations",
+          "slug": "the-impact-of-migrations-war-and-politics"
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Early External Influences and Trade",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Indigenous Technology, Crafts and Industries",
+          "slug": "indigenous-technology-crafts-and-industries"
+        },
+        {
+          "order": 2,
+          "title": "Early external influences: a) Contact with North African Trade and Islam 1. The Trans Saharan Trade",
+          "slug": "early-external-influences-contact-with-north-african-trade"
+        },
+        {
+          "order": 3,
+          "title": "Islam in Kanem Bornu",
+          "slug": "islam-in-kanem-bornu"
+        },
+        {
+          "order": 4,
+          "title": "Islam in Hausa land",
+          "slug": "islam-in-hausa-land"
+        },
+        {
+          "order": 5,
+          "title": "Early European Contacts with the Coastal States",
+          "slug": "early-european-contacts-with-the-coastal-states"
+        },
+        {
+          "order": 6,
+          "title": "Trans-Atlantic Slave Trade Origin of the Atlantic Slave Trade",
+          "slug": "trans-atlantic-slave-trade-origin"
+        },
+        {
+          "order": 7,
+          "title": "Organization of the slave trade",
+          "slug": "organization-of-the-slave-trade"
+        },
+        {
+          "order": 8,
+          "title": "The effects of the Atlantic slave trade",
+          "slug": "the-effects-of-the-atlantic-slave-trade"
+        }
+      ]
+    }
+  ]
+}

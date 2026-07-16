@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, CheckCircle2, RefreshCw, ExternalLink, Edit2, Loader2 } from "lucide-react";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") || "your email address";
   const [isVerified, setIsVerified] = useState(false);
   const [isResending, setIsResending] = useState(false);
 
@@ -59,7 +61,7 @@ export default function VerifyEmailPage() {
       {/* Header */}
       <h1 className="text-3xl font-extrabold tracking-tight mb-4">Verify Your Email</h1>
       <p className="text-muted-foreground font-medium mb-10 max-w-sm">
-        We sent a verification link to <span className="text-foreground font-bold">you@example.com</span>
+        We sent a verification link to <span className="text-foreground font-bold">{email}</span>
       </p>
 
       {/* Primary Actions */}
@@ -93,5 +95,13 @@ export default function VerifyEmailPage() {
       </div>
 
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-muted-foreground" /></div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

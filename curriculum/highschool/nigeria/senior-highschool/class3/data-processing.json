@@ -1,0 +1,56 @@
+{
+  "id": "ng-waec-data-processing-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Data Processing",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Data Management and Networking",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Data Management",
+          "slug": "data-management",
+          "subtopics": [
+            "Indexes",
+            "Database security",
+            "Crash recovery",
+            "Parallel and distributed databases",
+            "Networking"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Security, Maintenance and Careers",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Computer virus",
+          "slug": "computer-virus"
+        },
+        {
+          "order": 2,
+          "title": "Maintenance of computer 11",
+          "slug": "maintenance-of-computer-11"
+        },
+        {
+          "order": 3,
+          "title": "Career options in data processing",
+          "slug": "career-options-in-data-processing"
+        },
+        {
+          "order": 4,
+          "title": "Projects",
+          "slug": "projects"
+        }
+      ]
+    }
+  ]
+}

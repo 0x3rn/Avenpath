@@ -1,0 +1,62 @@
+{
+  "id": "ng-waec-further-mathematics-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Further Mathematics",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Algebra and Calculus",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Inequalities",
+          "slug": "inequalities"
+        },
+        {
+          "order": 2,
+          "title": "Matrices & determinants (2*2, 3*3)",
+          "slug": "matrices-and-determinants"
+        },
+        {
+          "order": 3,
+          "title": "Partial fractions",
+          "slug": "partial-fractions"
+        },
+        {
+          "order": 4,
+          "title": "Integration",
+          "slug": "integration"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Geometry, Statistics and Probability",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Conic sections",
+          "slug": "conic-sections"
+        },
+        {
+          "order": 2,
+          "title": "Statistics and Probability",
+          "slug": "statistics-and-probability",
+          "subtopics": [
+            "Correlation",
+            "Probability distributions and approximations",
+            "Variance",
+            "Mechanics: Statics",
+            "Modelling",
+            "Games theory"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "ng-waec-mathematics-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Mathematics",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Algebra, Finance and Geometry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Surds",
+          "slug": "surds"
+        },
+        {
+          "order": 2,
+          "title": "Matrices and determinants",
+          "slug": "matrices-and-determinants"
+        },
+        {
+          "order": 3,
+          "title": "Logarithm",
+          "slug": "logarithm"
+        },
+        {
+          "order": 4,
+          "title": "Arithmetic of finance",
+          "slug": "arithmetic-of-finance"
+        },
+        {
+          "order": 5,
+          "title": "Longitude and latitude",
+          "slug": "longitude-and-latitude"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Calculus and Advanced Geometry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Application of Linear and quadratic equations to capital market etc.",
+          "slug": "application-of-linear-and-quadratic-equations-to-capital-market"
+        },
+        {
+          "order": 2,
+          "title": "Trigonometry Graphs of Trigonometric Ratios",
+          "slug": "trigonometry-graphs-of-trigonometric-ratios"
+        },
+        {
+          "order": 3,
+          "title": "Surface Area and volume of sphere",
+          "slug": "surface-area-and-volume-of-sphere"
+        },
+        {
+          "order": 4,
+          "title": "Coordinates geometry of straight lines",
+          "slug": "coordinates-geometry-of-straight-lines"
+        },
+        {
+          "order": 5,
+          "title": "Differentiation of Algebraic fractions",
+          "slug": "differentiation-of-algebraic-fractions"
+        },
+        {
+          "order": 6,
+          "title": "Integration of simple Algebraic functions",
+          "slug": "integration-of-simple-algebraic-functions"
+        }
+      ]
+    }
+  ]
+}

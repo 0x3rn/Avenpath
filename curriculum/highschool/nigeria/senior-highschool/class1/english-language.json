@@ -1,0 +1,222 @@
+{
+  "id": "ng-waec-english-language-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "English Language",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Basic Language Skills",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Oracy Skills: Spoken English",
+          "slug": "oracy-skills-spoken-english",
+          "subtopics": [
+            "Selected consonant sounds (j, z, etc.)",
+            "Consonants followed by /w/",
+            "Consonants followed by /j/",
+            "Syllabic consonants /I/",
+            "Consonants sounds followed by K + W",
+            "Consonants followed by /J/ and /U/ sounds"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Vocabulary Development",
+          "slug": "vocabulary-development",
+          "subtopics": [
+            "Vocabulary Associated with Home and Family",
+            "Vocabulary Associated with Agriculture",
+            "Vocabulary Associated with Fishing and Animal Husbandry-Fishing",
+            "Vocabulary Associated with Animal Husbandry",
+            "Vocabulary Associated with Religion - Traditional Religion"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "English Grammatical Structures",
+          "slug": "english-grammatical-structures",
+          "subtopics": [
+            "Nouns and Noun Phrases with the Definite Articles",
+            "Countable and Uncountable Nouns",
+            "Introducing Nominalisation of adjectives and verbs"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Literacy Skills: Writing For Effective Communication",
+          "slug": "literacy-skills-writing-for-effective-communication",
+          "subtopics": [
+            "Continuous writing - Narrative",
+            "Letter Writing - informal letter",
+            "Record Keeping"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Oracy Skills: Reading for Comprehension and Effective Study",
+          "slug": "oracy-skills-reading-for-comprehension-and-effective-study",
+          "subtopics": [
+            "Reading to comprehend main ideas or story line",
+            "Reading to comprehend supporting details",
+            "Reading to comprehend word-meanings through context",
+            "Reading to identify the writer's mood, tone and purpose and the relationship between purpose and tone",
+            "Reading for Summary"
+          ]
+        },
+        {
+          "order": 6,
+          "title": "Oracy Skills: Listening For Comprehension",
+          "slug": "oracy-skills-listening-for-comprehension",
+          "subtopics": [
+            "Listening to grasp main points or ideas (in a speech, conversation, lecture, poem, recorded material, radio broadcast and short debates)",
+            "Listening to identify a speaker's mood, tone and purpose"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Intermediate Language Skills",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Oracy Skills: Spoken English",
+          "slug": "oracy-skills-spoken-english-term-2",
+          "subtopics": [
+            "Words of two syllables, stressed on the second syllable",
+            "Words of three syllables stressed on first, second or third syllables",
+            "Words of four syllables stressed on first, second or third syllables",
+            "Oral Composition skills I; Narrative & Descriptive"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Vocabulary Development",
+          "slug": "vocabulary-development-term-2",
+          "subtopics": [
+            "Vocabulary Associated with Religion - Christian Religion",
+            "Vocabulary Associated with Religion - Islamic Religion",
+            "Other Expressions Associated with Religion",
+            "Antonyms As words (i) Exactly Opposite in Meaning (ii) Nearly Opposite in Meaning"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "English Grammatical Structures",
+          "slug": "english-grammatical-structures-term-2",
+          "subtopics": [
+            "Irregular Verbs",
+            "Complex Tense form",
+            "Phrasal Verbs I",
+            "Phrasal Verbs II"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Literacy Skills: Writing For Effective Communication",
+          "slug": "literacy-skills-writing-for-effective-communication-term-2",
+          "subtopics": [
+            "Continuous writing - descriptive",
+            "Semi - Formal letters",
+            "Speech Writing"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Oracy Skills: Reading for Comprehension and Effective Study",
+          "slug": "oracy-skills-reading-for-comprehension-and-effective-study-term-2",
+          "subtopics": [
+            "Reading to comprehend main ideas or story line",
+            "Reading to comprehend supporting details",
+            "Reading to comprehend word-meanings through context",
+            "Reading to identify the writer's mood, tone and purpose and the relationship between purpose and tone",
+            "Reading for Summary"
+          ]
+        },
+        {
+          "order": 6,
+          "title": "Oracy Skills: Listening For Comprehension",
+          "slug": "oracy-skills-listening-for-comprehension-term-2",
+          "subtopics": [
+            "Listening to identify details",
+            "Listening for summary through identifying key words"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Advanced Language Skills",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Oracy Skills: Spoken English",
+          "slug": "oracy-skills-spoken-english-term-3",
+          "subtopics": [
+            "Stress timing in English Sentences; correct phrasing and voice modulation in continuous prose reading",
+            "Speaking to persuade/convince",
+            "Oral Composition skills II; Expository & Argumentative"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Vocabulary Development",
+          "slug": "vocabulary-development-term-3",
+          "subtopics": [
+            "Synonyms As words (i) With the same Meaning (ii) Nearly same in Meaning",
+            "Words Associated with Profession - Advertising",
+            "Words Associated with Profession - Stock Exchange",
+            "Spelling of Commonly Misspelt words and the use of the dictionary"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "English Grammatical Structures",
+          "slug": "english-grammatical-structures-term-3",
+          "subtopics": [
+            "Adjuncts (Adverbs)",
+            "Complex Sentences",
+            "Compound Sentences"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Literacy Skills: Writing For Effective Communication",
+          "slug": "literacy-skills-writing-for-effective-communication-term-3",
+          "subtopics": [
+            "Popular Articles for Various Reading Audiences"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Oracy Skills: Reading for Comprehension and Effective Study",
+          "slug": "oracy-skills-reading-for-comprehension-and-effective-study-term-3",
+          "subtopics": [
+            "Reading to comprehend main ideas or story line",
+            "Reading to comprehend supporting details",
+            "Reading to comprehend word-meanings through context",
+            "Reading to identify the writer's mood, tone and purpose and the relationship between purpose and tone",
+            "Reading for Summary"
+          ]
+        },
+        {
+          "order": 6,
+          "title": "Oracy Skills: Listening For Comprehension",
+          "slug": "oracy-skills-listening-for-comprehension-term-3",
+          "subtopics": [
+            "Listening attentively to follow directions effectively",
+            "Listening to tell the meanings of words in context",
+            "Listening to identity a speaker's style"
+          ]
+        }
+      ]
+    }
+  ]
+}

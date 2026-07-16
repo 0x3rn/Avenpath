@@ -1,0 +1,118 @@
+{
+  "id": "ng-waec-agriculture-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Agriculture",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Agricultural Ecology, Engineering, and Forestry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Agricultural Ecology",
+          "slug": "agricultural-ecology",
+          "subtopics": [
+            "Plant Nutrient and Nutrient Cycle",
+            "Irrigation",
+            "Drainage",
+            "Agricultural Pollution"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Agricultural Engineering",
+          "slug": "agricultural-engineering",
+          "subtopics": [
+            "Farm Surveying and Planning",
+            "Farm Planning",
+            "Principles of Farm Stead, Planning and Location of Buildings/Structures"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Forestry",
+          "slug": "forestry",
+          "subtopics": [
+            "Forest Management",
+            "Agro-forestry Practices in Nigeria"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Plants, Crop Production, and Animal Science",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Ornamental Plants",
+          "slug": "ornamental-plants",
+          "subtopics": [
+            "Meaning and Importance of Ornamental Plants",
+            "Common Types of Ornamental Plants each type",
+            "Settings and Locations for planting each type",
+            "Method of cultivating ornamental plants",
+            "Maintenance of ornamental plants"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Crop Production",
+          "slug": "crop-production",
+          "subtopics": [
+            "Diseases of Crop",
+            "Pests of Crops",
+            "Weeds and Weed Control"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Animal Science",
+          "slug": "animal-science",
+          "subtopics": [
+            "Types and Classification of Farm Animals",
+            "Anatomy and Physiology of Farm Animals"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Animal Science and Agricultural Economics",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Animal Science",
+          "slug": "animal-science-contd",
+          "subtopics": [
+            "Animal Reproduction",
+            "Environmental Physiology",
+            "Livestock Management",
+            "Animal Nutrition",
+            "Rangeland Management"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Agricultural Economics and Extension",
+          "slug": "agricultural-economics-and-extension",
+          "subtopics": [
+            "Basic Economic Principles",
+            "Factors of Production",
+            "Principles of Demand",
+            "Principles of Supply",
+            "Implication of Demand and Supply for Agricultural Production",
+            "Functions of Farm Manager",
+            "Problems Faced by Farm Managers"
+          ]
+        }
+      ]
+    }
+  ]
+}

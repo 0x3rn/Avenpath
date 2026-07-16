@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, GraduationCap } from "lucide-react";
 import { getLevels } from "@/lib/curriculum";
 
-export default function SubjectsDirectory() {
-  const levels = getLevels();
+export default async function SubjectsDirectory() {
+  const levels = await getLevels();
   
   // Custom format for presentation (e.g. "highschool" -> "High School")
   const formatLevelName = (level: string) => {

@@ -1,0 +1,65 @@
+{
+  "id": "ng-waec-salesmanship-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Salesmanship",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Principles of Salesmanship",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Principles of Salesmanship",
+          "slug": "principles-of-salesmanship",
+          "subtopics": [
+            "History of Salesmanship",
+            "Concept of salesmanship",
+            "Functions of a salesman and his/ her characteristics",
+            "Difference between Salesmanship and Marketing",
+            "Job Opportunities in salesmanship and Marketing",
+            "Types of Salesmen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Sales Management and Finance",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Sales Management and Finance",
+          "slug": "sales-management-and-finance",
+          "subtopics": [
+            "Sales management and factors affecting sales",
+            "Sales forecasting",
+            "Finance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Advertising and Sales Promotion",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Advertising and Sales Promotion",
+          "slug": "advertising-and-sales-promotion",
+          "subtopics": [
+            "Advertising",
+            "Communication Process",
+            "Branding and Packaging",
+            "Promotion"
+          ]
+        }
+      ]
+    }
+  ]
+}

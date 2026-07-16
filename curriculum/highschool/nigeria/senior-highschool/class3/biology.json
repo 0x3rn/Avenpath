@@ -1,0 +1,94 @@
+{
+  "id": "ng-waec-biology-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Biology",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Co-ordination, Ecology and Reproduction",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Regulation of Internal Environment",
+          "slug": "regulation-of-internal-environment"
+        },
+        {
+          "order": 2,
+          "title": "Nervous Co-ordination",
+          "slug": "nervous-co-ordination"
+        },
+        {
+          "order": 3,
+          "title": "Sense Organs",
+          "slug": "sense-organs"
+        },
+        {
+          "order": 4,
+          "title": "Ecology of Population",
+          "slug": "ecology-of-population"
+        },
+        {
+          "order": 5,
+          "title": "Balance in Nature",
+          "slug": "balance-in-nature"
+        },
+        {
+          "order": 6,
+          "title": "Reproductive System and Reproduction in Humans",
+          "slug": "reproductive-system-and-reproduction-in-humans"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Genetics, Evolution and Revision",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Development of New Seeds",
+          "slug": "development-of-new-seeds"
+        },
+        {
+          "order": 2,
+          "title": "Fruits",
+          "slug": "fruits"
+        },
+        {
+          "order": 3,
+          "title": "Reproductive Behaviours",
+          "slug": "reproductive-behaviours"
+        },
+        {
+          "order": 4,
+          "title": "Biology of Heredity (Genetics)",
+          "slug": "biology-of-heredity-genetics"
+        },
+        {
+          "order": 5,
+          "title": "Variation and Evolution",
+          "slug": "variation-and-evolution"
+        },
+        {
+          "order": 6,
+          "title": "Adaptation for Survival",
+          "slug": "adaptation-for-survival"
+        },
+        {
+          "order": 7,
+          "title": "Evolution",
+          "slug": "evolution"
+        },
+        {
+          "order": 8,
+          "title": "General Revision...General Revision...General Revision",
+          "slug": "general-revision"
+        }
+      ]
+    }
+  ]
+}

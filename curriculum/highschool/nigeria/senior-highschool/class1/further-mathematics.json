@@ -1,0 +1,84 @@
+{
+  "id": "ng-waec-further-mathematics-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Further Mathematics",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Pure Mathematics",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Pure Mathematics",
+          "slug": "pure-mathematics",
+          "subtopics": [
+            "Sets",
+            "Binary operation",
+            "Indices",
+            "Logarithm",
+            "Surds",
+            "Functions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Pure Mathematics and Logic",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Pure Mathematics (Cont'd)",
+          "slug": "pure-mathematics-contd",
+          "subtopics": [
+            "Sequence",
+            "Series",
+            "Linear inequalities",
+            "Trigonometry",
+            "Logical reasoning",
+            "Calculating and processing device"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Geometry, Statistics and Operations Research",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Coordinate Geometry",
+          "slug": "coordinate-geometry",
+          "subtopics": [
+            "The straight line"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Statistics",
+          "slug": "statistics",
+          "subtopics": [
+            "Measures of location",
+            "Measures of dispersion",
+            "Vectors: Vectors in two dimension"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Operations Research",
+          "slug": "operations-research",
+          "subtopics": [
+            "History and nature of operation research",
+            "Models"
+          ]
+        }
+      ]
+    }
+  ]
+}

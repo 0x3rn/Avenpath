@@ -1,32 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Loader2, ArrowRight, Eye, EyeOff, Check } from "lucide-react";
+import { Loader2, ArrowRight, Eye, EyeOff, Check, AlertCircle } from "lucide-react";
+import { login } from "@/app/actions/auth";
 
 export default function LoginPage() {
-  const router = useRouter();
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
 
   const isValid = email.trim().length > 0 && password.length > 0;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid) return;
 
-    setIsLoading(true);
-    // Simulate network request
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // In Phase 3, we'll check if onboarding is complete via Supabase.
-    // For now, redirect to the onboarding wizard.
-    router.push("/onboarding");
+    setError(null);
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+      
+      const result = await login(formData);
+      if (result?.error) {
+        setError(result.error);
+      }
+    });
   };
 
   return (
@@ -37,6 +41,13 @@ export default function LoginPage() {
         <h1 className="text-3xl font-extrabold tracking-tight mb-2">Welcome Back</h1>
         <p className="text-muted-foreground font-medium">Continue your learning journey.</p>
       </div>
+
+      {error && (
+        <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-xl flex items-start gap-3 text-destructive">
+          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          <p className="text-sm font-medium">{error}</p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
         

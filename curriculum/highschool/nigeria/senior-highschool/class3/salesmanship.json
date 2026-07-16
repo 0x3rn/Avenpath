@@ -1,0 +1,50 @@
+{
+  "id": "ng-waec-salesmanship-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Salesmanship",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Export, Import and Entrepreneurship",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Export and Import",
+          "slug": "export-and-import",
+          "subtopics": [
+            "Export Trade and Import Trade",
+            "Basic Concepts & Documents used in export and import trade"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Entrepreneurship in Salesmanship",
+          "slug": "entrepreneurship-in-salesmanship",
+          "subtopics": [
+            "Concept of Entrepreneurship in Salesmanship",
+            "Sources of finance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Revision and Projects",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Project",
+          "slug": "project",
+          "subtopics": [
+            "General revision"
+          ]
+        }
+      ]
+    }
+  ]
+}

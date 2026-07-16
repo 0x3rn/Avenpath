@@ -1,0 +1,133 @@
+{
+  "id": "ng-waec-economics-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Economics",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Economic Concepts and Systems",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Tools of Economic Analysis",
+          "slug": "tools-of-economic-analysis"
+        },
+        {
+          "order": 2,
+          "title": "Concept of Demand and Supply",
+          "slug": "concept-of-demand-and-supply"
+        },
+        {
+          "order": 3,
+          "title": "The Production Possibility Curve",
+          "slug": "the-production-possibility-curve"
+        },
+        {
+          "order": 4,
+          "title": "Cost Concepts",
+          "slug": "cost-concepts"
+        },
+        {
+          "order": 5,
+          "title": "Revenue Concepts",
+          "slug": "revenue-concepts"
+        },
+        {
+          "order": 6,
+          "title": "Economic Systems",
+          "slug": "economic-systems"
+        },
+        {
+          "order": 7,
+          "title": "Types and Features of Economic systems",
+          "slug": "types-and-features-of-economic-systems",
+          "subtopics": [
+            "Market Economy",
+            "Command Economy",
+            "Mixed Economy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Market Structures and Nigerian Economy",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Labour Market",
+          "slug": "labour-market"
+        },
+        {
+          "order": 2,
+          "title": "Elementary treatment of Utility Theory",
+          "slug": "elementary-treatment-of-utility-theory"
+        },
+        {
+          "order": 3,
+          "title": "Price Determination",
+          "slug": "price-determination"
+        },
+        {
+          "order": 4,
+          "title": "Market Structures",
+          "slug": "market-structures"
+        },
+        {
+          "order": 5,
+          "title": "Nigerian Economy and Major Natural Resources",
+          "slug": "nigerian-economy-and-major-natural-resources"
+        },
+        {
+          "order": 6,
+          "title": "Industries in Nigeria",
+          "slug": "industries-in-nigeria",
+          "subtopics": [
+            "Agriculture",
+            "Manufacturing",
+            "Services"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Finance, Income and Inflation",
+      "topics": [
+        {
+          "order": 1,
+          "title": "National Income and Public Finance",
+          "slug": "national-income-and-public-finance",
+          "subtopics": [
+            "Elementary treatment of fiscal policy",
+            "Balanced and Unbalanced budget",
+            "Elements of National Income Accounting"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Financial Institutions and Regulatory Agencies",
+          "slug": "financial-institutions-and-regulatory-agencies",
+          "subtopics": [
+            "Types of Financial Institutions and their functions"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Money and Inflation/Deflation",
+          "slug": "money-and-inflation-deflation",
+          "subtopics": [
+            "Demand for and supply of money",
+            "Inflation and deflation"
+          ]
+        }
+      ]
+    }
+  ]
+}

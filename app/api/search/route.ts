@@ -8,16 +8,16 @@ let cachedIndex: {
   lessons: any[];
 } | null = null;
 
-function buildSearchIndex() {
+async function buildSearchIndex() {
   if (cachedIndex) return cachedIndex;
 
   const subjects = [];
   const topics = [];
   const lessons = [];
 
-  const levels = getLevels();
+  const levels = await getLevels();
   for (const level of levels) {
-    const levelSubjects = getSubjectsByLevel(level);
+    const levelSubjects = await getSubjectsByLevel(level);
     for (const subject of levelSubjects) {
       // Add subject
       subjects.push({
@@ -67,7 +67,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ subjects: [], topics: [], lessons: [] });
   }
 
-  const index = buildSearchIndex();
+  const index = await buildSearchIndex();
 
   // Basic fuzzy search by name
   const filteredSubjects = index.subjects.filter(s => s.name.toLowerCase().includes(q)).slice(0, 4);

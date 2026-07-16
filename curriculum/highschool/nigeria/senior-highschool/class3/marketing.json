@@ -1,0 +1,56 @@
+{
+  "id": "ng-waec-marketing-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "Marketing",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "International Marketing",
+      "topics": [
+        {
+          "order": 1,
+          "title": "International Marketing",
+          "slug": "international-marketing",
+          "subtopics": [
+            "Meaning and Reasons for International Marketing",
+            "Organizing for International Marketing",
+            "Application of Information and Communication Technology (ICT) in International Marketing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Entrepreneurship in Marketing",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Entrepreneurship in Marketing",
+          "slug": "entrepreneurship-in-marketing",
+          "subtopics": [
+            "Planning for a Personal Marketing Outlet",
+            "Purchase, supplies and Merchandising of goods and Services",
+            "Projects"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Revision",
+      "topics": [
+        {
+          "order": 1,
+          "title": "General revision",
+          "slug": "general-revision"
+        }
+      ]
+    }
+  ]
+}

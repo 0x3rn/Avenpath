@@ -1,0 +1,152 @@
+{
+  "id": "ng-waec-english-language-ss3",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 3",
+  "subject": "English Language",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Revision and Advanced Language Skills",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Oracy Skills: Spoken English",
+          "slug": "oracy-skills-spoken-english",
+          "subtopics": [
+            "Revision of Sentence Intonation Pattern",
+            "Clusters of Two Consonant Words Occurring at Final Position",
+            "Clusters of three and Four Consonant words that Occur at the Final Position",
+            "The Schwa/a/ as Final Unstressed Syllable"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Vocabulary Development",
+          "slug": "vocabulary-development",
+          "subtopics": [
+            "Words Associated with Culture, Institutions and Ceremonies",
+            "Words Associated with Motor Vehicles and Travelling",
+            "Words Associated with Government and Administration",
+            "Words Associated with Law and Order",
+            "Words Associated with Science and Technology"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "English Grammatical Structures",
+          "slug": "english-grammatical-structures",
+          "subtopics": [
+            "Revising Nouns and Noun Phrases",
+            "Revising Pronouns and their Uses",
+            "Revising Verbs and Verbs Phrases",
+            "Revising Sequence of Tenses"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Literacy Skills: Writing For Effective Communication",
+          "slug": "literacy-skills-writing-for-effective-communication",
+          "subtopics": [
+            "Revising Continuous Writing (in given length)",
+            "Revising Letter Writing (In given length)"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Oracy Skills: Reading for Comprehension and Effective Study",
+          "slug": "oracy-skills-reading-for-comprehension-and-effective-study",
+          "subtopics": [
+            "Reading Silently to Answer Questions",
+            "Reading to Summarize by Outlining Main Points",
+            "Reading and Summarising Expository Passages",
+            "Reading and Summarising Argumentative Passages"
+          ]
+        },
+        {
+          "order": 6,
+          "title": "Oracy Skills: Listening For Comprehension",
+          "slug": "oracy-skills-listening-for-comprehension",
+          "subtopics": [
+            "Listening to reproduce main points and ideas in a speech, lecture or discussion",
+            "Summarising a Talk or Lecture",
+            "Paraphrasing Poems Listened to"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Effective Communication and Comprehension",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Oracy Skills: Spoken English",
+          "slug": "oracy-skills-spoken-english-term-2",
+          "subtopics": [
+            "Engaging in a meaningful Dialogue on a given Subject matter",
+            "Arguing given Topics effectively",
+            "Reading Aloud Confidently",
+            "Reading and Appreciating Poetry"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Vocabulary Development",
+          "slug": "vocabulary-development-term-2",
+          "subtopics": [
+            "Differentiating between British and American Spellings of Common Words",
+            "Idioms and Idiomatic Expressions",
+            "Collocations",
+            "Foreign Elements in English Usage - French Words",
+            "Foreign Elements in English Usage - Latin and Greek Words"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "English Grammatical Structures",
+          "slug": "english-grammatical-structures-term-2",
+          "subtopics": [
+            "Modals: Forms and Uses",
+            "Adjuncts: Forms and Functions",
+            "Revising Adjectival Clauses",
+            "Revising Adverbial Clauses"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Literacy Skills: Writing For Effective Communication",
+          "slug": "literacy-skills-writing-for-effective-communication-term-2",
+          "subtopics": [
+            "Writing for Different Audiences",
+            "Revising Report Writing"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Oracy Skills: Reading for Comprehension and Effective Study",
+          "slug": "oracy-skills-reading-for-comprehension-and-effective-study-term-2",
+          "subtopics": [
+            "Paraphrasing Prose",
+            "Paraphrasing Poetry",
+            "Paraphrasing Dramatic Works",
+            "Reading and Making Notes"
+          ]
+        },
+        {
+          "order": 6,
+          "title": "Oracy Skills: Listening For Comprehension",
+          "slug": "oracy-skills-listening-for-comprehension-term-2",
+          "subtopics": [
+            "Listening to Lectures and Taking Notes",
+            "Following Argument Efficiently",
+            "Listening to Directions and Following them Accurately"
+          ]
+        }
+      ]
+    }
+  ]
+}

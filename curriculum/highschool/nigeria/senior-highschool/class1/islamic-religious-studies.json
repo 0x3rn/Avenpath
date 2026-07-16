@@ -1,0 +1,121 @@
+{
+  "id": "ng-waec-islamic-religious-studies-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Islamic Religious Studies",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Foundations of Islam I",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Qur'an and Hadith",
+          "slug": "quran-and-hadith",
+          "subtopics": [
+            "The Qur'an",
+            "Hadith"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Core Islamic Concepts",
+          "slug": "core-islamic-concepts",
+          "subtopics": [
+            "Tawhid",
+            "Ibadah",
+            "Tarikh",
+            "Sirah"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Islamic Jurisprudence",
+          "slug": "islamic-jurisprudence",
+          "subtopics": [
+            "Tawid and fiqh",
+            "Ibadah",
+            "Tarikh"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Foundations of Islam II",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Qur'an and Hadith",
+          "slug": "quran-and-hadith-term-2",
+          "subtopics": [
+            "The Qur'an",
+            "Hadith"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Core Islamic Concepts",
+          "slug": "core-islamic-concepts-term-2",
+          "subtopics": [
+            "Tawhid",
+            "Ibadah",
+            "Tarikh",
+            "Sirah"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Islamic Jurisprudence",
+          "slug": "islamic-jurisprudence-term-2",
+          "subtopics": [
+            "Tawid and fiqh",
+            "Ibadah",
+            "Tarikh"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Foundations of Islam III",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Qur'an and Hadith",
+          "slug": "quran-and-hadith-term-3",
+          "subtopics": [
+            "The Qur'an",
+            "Hadith"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Core Islamic Concepts",
+          "slug": "core-islamic-concepts-term-3",
+          "subtopics": [
+            "Tawhid",
+            "Ibadah",
+            "Tarikh",
+            "Sirah"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Islamic Jurisprudence",
+          "slug": "islamic-jurisprudence-term-3",
+          "subtopics": [
+            "Tawid and fiqh",
+            "Ibadah",
+            "Tarikh"
+          ]
+        }
+      ]
+    }
+  ]
+}

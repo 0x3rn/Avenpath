@@ -1,0 +1,86 @@
+{
+  "id": "ng-waec-chemistry-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Chemistry",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Basic Concepts and Principles",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Introduction to Chemistry",
+          "slug": "introduction-to-chemistry"
+        },
+        {
+          "order": 2,
+          "title": "Particulate Nature of Matter",
+          "slug": "particulate-nature-of-matter"
+        },
+        {
+          "order": 3,
+          "title": "Symbols, Formulae and Equations",
+          "slug": "symbols-formulae-and-equations"
+        },
+        {
+          "order": 4,
+          "title": "Chemical Combination",
+          "slug": "chemical-combination"
+        },
+        {
+          "order": 5,
+          "title": "Gas Laws",
+          "slug": "gas-laws"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "States of Matter and Chemical Processes",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Gas Laws (Cont'd)",
+          "slug": "gas-laws-contd"
+        },
+        {
+          "order": 2,
+          "title": "Standard Separation Techniques for Mixtures",
+          "slug": "standard-separation-techniques-for-mixtures"
+        },
+        {
+          "order": 3,
+          "title": "Acids, Bases and Salts",
+          "slug": "acids-bases-and-salts"
+        },
+        {
+          "order": 4,
+          "title": "Water",
+          "slug": "water"
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Elements and Industry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Carbon and its Compounds",
+          "slug": "carbon-and-its-compounds"
+        },
+        {
+          "order": 2,
+          "title": "Chemical Industries",
+          "slug": "chemical-industries"
+        }
+      ]
+    }
+  ]
+}

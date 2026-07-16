@@ -1,0 +1,96 @@
+{
+  "id": "ng-waec-christian-religious-studies-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Christian Religious Studies",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Sovereignty of God and Leadership",
+      "topics": [
+        {
+          "order": 1,
+          "title": "The Sovereignty of God",
+          "slug": "the-sovereignty-of-god",
+          "subtopics": [
+            "God the Creator",
+            "God, the Controller of the Universe",
+            "The Apostles Creed"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Leadership of Joseph, Moses, Joshua and Deborah",
+          "slug": "leadership-of-joseph-moses-joshua-and-deborah",
+          "subtopics": [
+            "God Cares For His People",
+            "Parental Responsibility",
+            "Consequences Of obedience and Disobedience"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Christian Living and Values",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Friendship",
+          "slug": "friendship"
+        },
+        {
+          "order": 2,
+          "title": "Submission to the Will of God",
+          "slug": "submission-to-the-will-of-god"
+        },
+        {
+          "order": 3,
+          "title": "Making Decision as a Christian",
+          "slug": "making-decision-as-a-christian"
+        },
+        {
+          "order": 4,
+          "title": "Greed and It Effects",
+          "slug": "greed-and-it-effects"
+        },
+        {
+          "order": 5,
+          "title": "The Supremacy of God",
+          "slug": "the-supremacy-of-god"
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Faith and Society",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Religious Reforms",
+          "slug": "religious-reforms"
+        },
+        {
+          "order": 2,
+          "title": "Concern for One Nation",
+          "slug": "concern-for-one-nation"
+        },
+        {
+          "order": 3,
+          "title": "Faith in God",
+          "slug": "faith-in-god"
+        },
+        {
+          "order": 4,
+          "title": "True Religion and Social Justice",
+          "slug": "true-religion-and-social-justice"
+        }
+      ]
+    }
+  ]
+}

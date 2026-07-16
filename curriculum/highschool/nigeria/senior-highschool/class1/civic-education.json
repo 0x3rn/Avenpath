@@ -1,0 +1,90 @@
+{
+  "id": "ng-waec-civic-education-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Civic Education",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Values and Citizenship",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Values",
+          "slug": "values"
+        },
+        {
+          "order": 2,
+          "title": "HIV/ AIDS",
+          "slug": "hiv-aids"
+        },
+        {
+          "order": 3,
+          "title": "Youth empowerment",
+          "slug": "youth-empowerment"
+        },
+        {
+          "order": 4,
+          "title": "Citizenship",
+          "slug": "citizenship"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Democracy and Human Rights",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Representative Democracy",
+          "slug": "representative-democracy",
+          "subtopics": [
+            "Characteristics of democracy",
+            "Pillars of Democracy"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Human Rights",
+          "slug": "human-rights",
+          "subtopics": [
+            "Brief history background of UDHR",
+            "The seven core freedom of UDHR",
+            "Responsibility of individuals, groups and Government in UDHR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Law and Order",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Cultism",
+          "slug": "cultism"
+        },
+        {
+          "order": 2,
+          "title": "Law and Order",
+          "slug": "law-and-order"
+        },
+        {
+          "order": 3,
+          "title": "Orderliness",
+          "slug": "orderliness"
+        },
+        {
+          "order": 4,
+          "title": "Respect for constituted authority",
+          "slug": "respect-for-constituted-authority"
+        }
+      ]
+    }
+  ]
+}

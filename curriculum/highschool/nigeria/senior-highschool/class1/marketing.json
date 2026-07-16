@@ -1,0 +1,72 @@
+{
+  "id": "ng-waec-marketing-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Marketing",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Meaning and Concept of Marketing",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Meaning and Concept of Marketing",
+          "slug": "meaning-and-concept-of-marketing",
+          "subtopics": [
+            "Introduction to Marketing",
+            "Marketing Concepts",
+            "Classification of Products",
+            "Marketing Mix",
+            "What markets do"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Consumer Markets, Behaviour and Distribution",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Consumer Markets and Behaviour",
+          "slug": "consumer-markets-and-behaviour",
+          "subtopics": [
+            "Types of Markets",
+            "Consumer Behaviour and Organisation Behaviour"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Distribution",
+          "slug": "distribution",
+          "subtopics": [
+            "Types and Functions of Distribution"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Marketing Management",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Marketing Management",
+          "slug": "marketing-management",
+          "subtopics": [
+            "Marketing, planning, process and Research",
+            "Pricing",
+            "Advertising",
+            "Promotion",
+            "Merchandising"
+          ]
+        }
+      ]
+    }
+  ]
+}

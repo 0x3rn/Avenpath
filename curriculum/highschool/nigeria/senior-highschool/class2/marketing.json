@@ -1,0 +1,97 @@
+{
+  "id": "ng-waec-marketing-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Marketing",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Distribution and Transportation",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Distribution",
+          "slug": "distribution",
+          "subtopics": [
+            "Meaning",
+            "Types of Distribution",
+            "Channels of Distribution",
+            "Factors that Influence the Choice of Distribution Channels",
+            "Benefits of Intermediaries"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Transportation",
+          "slug": "transportation",
+          "subtopics": [
+            "Meaning",
+            "Importance of Transportation in Marketing",
+            "Major Modes of Transportation",
+            "Factors Affecting the Choice of Transportation",
+            "Main Documents Used in Transportation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Warehousing and Market Unions",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Warehousing",
+          "slug": "warehousing",
+          "subtopics": [
+            "Meaning",
+            "Functions of Warehousing",
+            "Advantages of Warehousing",
+            "Types of Warehousing",
+            "Characteristics of Ideal Warehousing",
+            "Activities of Warehousing"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Structure and Market Union Involvement for Sales of Goods",
+          "slug": "structure-and-market-union-involvement-for-sales-of-goods",
+          "subtopics": [
+            "Primary and Secondary Products",
+            "Channels for Marketing Primary and Secondary Products",
+            "Market Union Involvement in Marketing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Facilitators and Mineral Marketing",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Role of Facilitators",
+          "slug": "role-of-facilitators",
+          "subtopics": [
+            "Meaning of Facilitator",
+            "Role of Facilitator in Marketing Agriculture Products"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Marketing of Mineral Products",
+          "slug": "marketing-of-mineral-products",
+          "subtopics": [
+            "Meaning of Mineral Products",
+            "Oil and Non-oil Products",
+            "Methods of Marketing Mineral Products"
+          ]
+        }
+      ]
+    }
+  ]
+}

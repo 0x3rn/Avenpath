@@ -1,0 +1,129 @@
+{
+  "id": "ng-waec-literature-in-english-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Literature-in-English",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Drama and Prose",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Introduction to A Midsummer Night's Dream by William Shakespeare",
+          "slug": "introduction-to-a-midsummer-nights-dream"
+        },
+        {
+          "order": 2,
+          "title": "Reading of A Midsummer Night's Dream, with explanations",
+          "slug": "reading-of-a-midsummer-nights-dream"
+        },
+        {
+          "order": 3,
+          "title": "Summary of books for the term",
+          "slug": "summary-of-books-for-the-term"
+        },
+        {
+          "order": 4,
+          "title": "Introduction to Wuthering Heights by Emily Bronte",
+          "slug": "introduction-to-wuthering-heights"
+        },
+        {
+          "order": 5,
+          "title": "Character Analysis",
+          "slug": "character-analysis"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "African Prose and Drama",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Introduction to Unexpected Joy at Dawn by Alex Agyei-Agyiri",
+          "slug": "introduction-to-unexpected-joy-at-dawn"
+        },
+        {
+          "order": 2,
+          "title": "The themes and styles",
+          "slug": "the-themes-and-styles-unexpected-joy-at-dawn"
+        },
+        {
+          "order": 3,
+          "title": "Character Analysis 1",
+          "slug": "character-analysis-1-unexpected-joy-at-dawn"
+        },
+        {
+          "order": 4,
+          "title": "General Overview of the novel - Unexpected Joy at Dawn",
+          "slug": "general-overview-of-the-novel-unexpected-joy-at-dawn"
+        },
+        {
+          "order": 5,
+          "title": "Introduction to Let Me Die Alone by John K. Kargbo",
+          "slug": "introduction-to-let-me-die-alone"
+        },
+        {
+          "order": 6,
+          "title": "The themes and styles",
+          "slug": "the-themes-and-styles-let-me-die-alone"
+        },
+        {
+          "order": 7,
+          "title": "Introduction to Look Back in Anger by John Osborne",
+          "slug": "introduction-to-look-back-in-anger"
+        },
+        {
+          "order": 8,
+          "title": "Character Analysis",
+          "slug": "character-analysis-look-back-in-anger"
+        },
+        {
+          "order": 9,
+          "title": "Role Play: Let Me Die Alone and Look Back in Anger",
+          "slug": "role-play-let-me-die-alone-and-look-back-in-anger"
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Poetry Analysis",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Poetry Analysis",
+          "slug": "poetry-analysis",
+          "subtopics": [
+            "Introduction to \"The Grieved Lands\" by Agostinho Neto",
+            "Introduction to \"The Song of the Woman of My Land\" by Oumar Farouk Sesay",
+            "Introduction to \"Raider of the Treasure Trove\" by Lade Wosomu",
+            "Introduction to \"The Good-Morrow\" by John Donne",
+            "Introduction to \"Caged Bird\" by Maya Angelou",
+            "Introduction to \"The Journey of the Magi\" by T.S Eliot",
+            "Introduction to \"Do not Go Gentle into the Good Night\" by Dylan Thomas",
+            "Introduction to \"Bat\" by David H. Lawrence",
+            "General Overview of the poems"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Poetry Analysis Framework (for each poem)",
+          "slug": "poetry-analysis-framework",
+          "subtopics": [
+            "The background and setting of the poet/poem",
+            "Subject matter/summary of the poem",
+            "Effective use of poetic devices/techniques",
+            "Effective use of imagery/symbolism",
+            "Themes and style"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "id": "ng-waec-accounting-ss1",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 1",
+  "subject": "Accounting",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Basic Accounting Principles and Journals",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Introduction and Historical Development of Book-Keeping Accounting",
+          "slug": "introduction-to-book-keeping-and-accounting",
+          "subtopics": [
+            "Book Keeping and Accounting",
+            "Ethics of Accounting"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Principles and Concepts of Accounting",
+          "slug": "principles-and-concepts-of-accounting",
+          "subtopics": [
+            "Principles of Double Entry",
+            "Accounting Concepts"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Journals and Cash Account",
+          "slug": "journals-and-cash-account",
+          "subtopics": [
+            "General Journal",
+            "Analytical Cash Book"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Bank Reconciliation and Final Accounts",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Journals and Cash Account (Cont'd)",
+          "slug": "journals-and-cash-account-contd",
+          "subtopics": [
+            "Bank Reconciliation Statement"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Classes of Accounts and Final Account of a Sole Trader (Proprietor)",
+          "slug": "classes-of-accounts-and-final-account",
+          "subtopics": [
+            "Classification of Accounts",
+            "Trial Balance and Correction of Error",
+            "Trading Account",
+            "Profit and Loss Account"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Adjustments and Control Accounts",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Classes of Accounts and Final Account of a Sole Trader/Proprietor (Cont'd)",
+          "slug": "classes-of-accounts-and-final-account-contd",
+          "subtopics": [
+            "Adjustments in Profit and Loss Account",
+            "Balance Sheet"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Control Account",
+          "slug": "control-account",
+          "subtopics": [
+            "Sales Ledger (Total Debtors Control Account)",
+            "Purchases Ledger (Total Creditors Account)"
+          ]
+        }
+      ]
+    }
+  ]
+}

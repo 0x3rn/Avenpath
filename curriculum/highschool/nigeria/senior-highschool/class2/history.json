@@ -1,0 +1,122 @@
+{
+  "id": "ng-waec-history-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "History",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Nigeria in the 19th Century and British Rule",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Nigeria in the 19th Century I",
+          "slug": "nigeria-in-the-19th-century-i",
+          "subtopics": [
+            "The Sokoto Caliphate",
+            "The administration of the Caliphate",
+            "The impact of the Jihad",
+            "Bornu under the Shehus The emergence of El-kanemi",
+            "Developments under El-Kanemi and the Shehus",
+            "Yoruba land in the 19th Century Oyo Empire",
+            "The era of Ibadan imperialism",
+            "The peace treaty of 1886 and its aftermath",
+            "Benin in the 19th century",
+            "The first Phase of British Conquest 1851-1900",
+            "The Second Phase of British Conquest, 1900-1914"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "British Rule and Nigerian Reaction 1900-1914",
+          "slug": "british-rule-and-nigerian-reaction-1900-1914",
+          "subtopics": [
+            "The early Phase of British rule, 1900-1914",
+            "The Amalgamation of Nigeria and its Significance",
+            "Colonial Rule and Its Impact",
+            "Central Administration",
+            "The Colonial Economy",
+            "Social Development and Liter- Group Relations"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Decolonization and Independence",
+      "topics": [
+        {
+          "order": 1,
+          "title": "The Decolonization Process in Nigeria, 1922-1945",
+          "slug": "the-decolonization-process-in-nigeria-1922-1945",
+          "subtopics": [
+            "Origins of Nationalism"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "The Decolonization Process in Nigeria, 1945-1960",
+          "slug": "the-decolonization-process-in-nigeria-1945-1960",
+          "subtopics": [
+            "Nationalist movement-s after the Second World War",
+            "The road to Independence and the attainment of Independence"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Nigeria since Independence",
+          "slug": "nigeria-since-independence",
+          "subtopics": [
+            "The First Republic, 1960-1966: Political Developments",
+            "The First Republic 1960-1966: Social and Economic Developments"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Military Intervention in Governance",
+          "slug": "military-intervention-in-governance",
+          "subtopics": [
+            "The 1966 Coup D'etat and the Nigerian Civil War"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Military Rule and the Return to Democracy",
+      "topics": [
+        {
+          "order": 1,
+          "title": "The Military Rule and the Reconstruction",
+          "slug": "the-military-rule-and-the-reconstruction"
+        },
+        {
+          "order": 2,
+          "title": "The Military Administration of 1975-1979",
+          "slug": "the-military-administration-of-1975-1979"
+        },
+        {
+          "order": 3,
+          "title": "The Second Republic 1979-1983",
+          "slug": "the-second-republic-1979-1983"
+        },
+        {
+          "order": 4,
+          "title": "The Return of the Military",
+          "slug": "the-return-of-the-military",
+          "subtopics": [
+            "The Ibrahim Babangida Regime, 1985-1993",
+            "The Challenges of Democratic Governance. Interim National Government and the Return of the Military, 1993-1998",
+            "The Transition and the Fourth Republic",
+            "Enduring Issues in an Attempt at Nation Building"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "ng-waec-mathematics-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Mathematics",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Algebra and Calculus",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Logarithm",
+          "slug": "logarithm"
+        },
+        {
+          "order": 2,
+          "title": "Approximations",
+          "slug": "approximations"
+        },
+        {
+          "order": 3,
+          "title": "Sequence and Series",
+          "slug": "sequence-and-series"
+        },
+        {
+          "order": 4,
+          "title": "Quadratic equation",
+          "slug": "quadratic-equation"
+        },
+        {
+          "order": 5,
+          "title": "Simultaneous linear and Quadratic Equations",
+          "slug": "simultaneous-linear-and-quadratic-equations"
+        },
+        {
+          "order": 6,
+          "title": "Gradient of a Curve",
+          "slug": "gradient-of-a-curve"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Algebra and Geometry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Logical Reasoning (Revision)",
+          "slug": "logical-reasoning-revision"
+        },
+        {
+          "order": 2,
+          "title": "Linear Inequalities",
+          "slug": "linear-inequalities"
+        },
+        {
+          "order": 3,
+          "title": "Algebraic Fractions",
+          "slug": "algebraic-fractions"
+        },
+        {
+          "order": 4,
+          "title": "Chord Property",
+          "slug": "chord-property"
+        },
+        {
+          "order": 5,
+          "title": "Circle Theorems",
+          "slug": "circle-theorems"
+        },
+        {
+          "order": 6,
+          "title": "Trigonometry",
+          "slug": "trigonometry"
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Statistics, Probability, and Trigonometry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Bearings",
+          "slug": "bearings"
+        },
+        {
+          "order": 2,
+          "title": "Measures of Central Tendency",
+          "slug": "measures-of-central-tendency"
+        },
+        {
+          "order": 3,
+          "title": "Measures of Dispersion",
+          "slug": "measures-of-dispersion"
+        },
+        {
+          "order": 4,
+          "title": "Histograms of Grouped Data (Revision)",
+          "slug": "histograms-of-grouped-data-revision"
+        },
+        {
+          "order": 5,
+          "title": "Cumulative Frequency graph",
+          "slug": "cumulative-frequency-graph"
+        },
+        {
+          "order": 6,
+          "title": "Measures of central tendency for grouped data",
+          "slug": "measures-of-central-tendency-for-grouped-data"
+        },
+        {
+          "order": 7,
+          "title": "Probability",
+          "slug": "probability"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "id": "ng-waec-chemistry-ss2",
+  "country": "Nigeria",
+  "curriculum": "WAEC",
+  "level": "Senior High School",
+  "class": "Class 2",
+  "subject": "Chemistry",
+  "terms": [
+    {
+      "id": "term1",
+      "name": "First Term",
+      "theme": "Chemical Principles and Reactions",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Periodic Table",
+          "slug": "periodic-table"
+        },
+        {
+          "order": 2,
+          "title": "Chemical Reactions",
+          "slug": "chemical-reactions"
+        },
+        {
+          "order": 3,
+          "title": "Mass, Volume Relationships",
+          "slug": "mass-volume-relationships"
+        },
+        {
+          "order": 4,
+          "title": "Acid-Base Reactions",
+          "slug": "acid-base-reactions"
+        },
+        {
+          "order": 5,
+          "title": "Water",
+          "slug": "water"
+        }
+      ]
+    },
+    {
+      "id": "term2",
+      "name": "Second Term",
+      "theme": "Non-Metals and their Compounds",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Air",
+          "slug": "air"
+        },
+        {
+          "order": 2,
+          "title": "Hydrogen",
+          "slug": "hydrogen"
+        },
+        {
+          "order": 3,
+          "title": "Oxygen",
+          "slug": "oxygen"
+        },
+        {
+          "order": 4,
+          "title": "Halogens",
+          "slug": "halogens"
+        },
+        {
+          "order": 5,
+          "title": "Nitrogen",
+          "slug": "nitrogen"
+        },
+        {
+          "order": 6,
+          "title": "Sulphur",
+          "slug": "sulphur"
+        }
+      ]
+    },
+    {
+      "id": "term3",
+      "name": "Third Term",
+      "theme": "Redox, Electrolysis and Organic Chemistry",
+      "topics": [
+        {
+          "order": 1,
+          "title": "Oxidation-Reduction (Redox) Reactions",
+          "slug": "oxidation-reduction-redox-reactions"
+        },
+        {
+          "order": 2,
+          "title": "Ionic Theory",
+          "slug": "ionic-theory"
+        },
+        {
+          "order": 3,
+          "title": "Electrolysis",
+          "slug": "electrolysis"
+        },
+        {
+          "order": 4,
+          "title": "Hydrocarbons",
+          "slug": "hydrocarbons"
+        },
+        {
+          "order": 5,
+          "title": "Alkanols",
+          "slug": "alkanols"
+        }
+      ]
+    }
+  ]
+}
