@@ -41,20 +41,20 @@ function SubjectChip({ name, topics, colorCls, bgCls, delay }: { name: string, t
       className="group cursor-pointer relative w-full"
     >
       <div className="bg-card/90 backdrop-blur-sm rounded-3xl border border-border shadow-sm group-hover:shadow-xl transition-all duration-300 px-6 h-20 flex items-center w-full">
-        <h3 className={`text-foreground font-medium transition-colors ${colorCls.replace('text-', 'group-hover:text-')}`}>{name}</h3>
+        <h3 className={`text-foreground font-bold text-lg transition-colors ${colorCls.replace('text-', 'group-hover:text-')}`}>{name}</h3>
         
         {/* Hover Reveal Topics */}
         <div className="absolute left-1/2 -translate-x-1/2 w-52 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-50 top-full pt-3">
           <div className="bg-card border border-border rounded-2xl p-4 shadow-xl">
             <ul className="space-y-3 mb-4">
               {topics.map(topic => (
-                <li key={topic} className="text-sm text-muted-foreground flex items-center gap-2">
+                <li key={topic} className="text-[15px] font-medium leading-[1.6] text-muted-foreground flex items-center gap-2">
                   <div className={`w-1.5 h-1.5 rounded-full ${bgCls}`}></div>
                   {topic}
                 </li>
               ))}
             </ul>
-            <div className={`text-xs font-medium flex items-center gap-1 hover:gap-2 transition-all ${colorCls}`}>
+            <div className={`text-xs font-bold flex items-center gap-1 hover:gap-2 transition-all ${colorCls}`}>
               Open Subject <ArrowRight className="w-3 h-3" />
             </div>
           </div>
@@ -76,15 +76,15 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-background selection:bg-subject-math/20">
       {/* Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full absolute top-0 left-0 right-0 z-50">
-        <div className="text-2xl font-semibold tracking-tight">Avenpath.</div>
+        <div className="text-2xl font-bold tracking-tight">Avenpath.</div>
         <div className="flex items-center gap-8">
           <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <Search className="w-4 h-4" />
-            <span className="text-sm font-medium">Search</span>
+            <span className="text-[15px] font-semibold">Search</span>
           </button>
-          <button className="flex items-center gap-2 text-foreground font-medium hover:text-subject-math transition-colors">
+          <button className="flex items-center gap-2 text-foreground hover:text-subject-math transition-colors">
             <LogIn className="w-4 h-4" />
-            <span className="text-sm">Login</span>
+            <span className="text-[15px] font-semibold">Login</span>
           </button>
         </div>
       </nav>
@@ -147,13 +147,13 @@ export default function Home() {
                 className="w-full"
               >
                 <div className="w-16 h-[2px] bg-subject-math mx-auto mb-10 hidden md:block"></div>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl text-foreground font-bold leading-[1.05] mb-8 tracking-tight">
+                <h1 className="text-[40px] md:text-[56px] lg:text-[72px] text-foreground font-extrabold leading-[1.05] lg:leading-[0.95] tracking-[-0.03em] lg:tracking-[-0.04em] mb-8">
                   Knowledge,<br />organized <i className="text-muted-foreground">beautifully.</i>
                 </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                <p className="text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground mb-12 max-w-2xl mx-auto font-medium leading-[1.7] lg:leading-[1.75]">
                   Explore thousands of topics, lessons, and practice questions in a distraction-free, colorful environment.
                 </p>
-                <button className="bg-foreground text-background px-10 py-5 rounded-full text-lg font-medium hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto group">
+                <button className="bg-foreground text-background px-10 py-5 rounded-full text-[15px] md:text-base font-bold hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto group">
                   Start Learning <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </motion.div>
@@ -176,16 +176,16 @@ export default function Home() {
                 ].map((subj) => (
                   <div key={subj.name} className="snap-center shrink-0 w-[280px]">
                     <div className="bg-card/90 backdrop-blur-sm rounded-3xl border border-border shadow-sm px-6 py-5 cursor-pointer hover:shadow-md transition-shadow">
-                      <h3 className={`text-foreground font-medium mb-3 ${subj.colorCls}`}>{subj.name}</h3>
+                      <h3 className={`text-foreground font-bold text-lg mb-3 ${subj.colorCls}`}>{subj.name}</h3>
                       <ul className="space-y-2 mb-4">
                         {subj.topics.map(topic => (
-                          <li key={topic} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <li key={topic} className="text-[15px] font-medium leading-[1.6] text-muted-foreground flex items-center gap-2">
                             <div className={`w-1.5 h-1.5 rounded-full ${subj.bgCls}`}></div>
                             {topic}
                           </li>
                         ))}
                       </ul>
-                      <div className={`text-xs font-medium flex items-center gap-1 ${subj.colorCls}`}>
+                      <div className={`text-xs font-bold flex items-center gap-1 ${subj.colorCls}`}>
                         Open Subject <ArrowRight className="w-3 h-3" />
                       </div>
                     </div>
@@ -206,7 +206,7 @@ export default function Home() {
         >  
           <div className="max-w-7xl mx-auto relative z-30">
             <div className="w-12 h-1 bg-subject-math mb-6"></div>
-            <h2 className="text-5xl mb-20 text-foreground font-semibold">Explore by Subject</h2>
+            <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-20 text-foreground">Explore by Subject</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { name: "MATHEMATICS", icon: Calculator, count: 217, topics: ["Algebra", "Geometry", "Calculus"], desc: "Master numbers, space, and structure.", color: "text-subject-math", bg: "bg-subject-math", border: "hover:border-subject-math", bgBadge: "bg-subject-math/[0.03]" },
@@ -231,14 +231,14 @@ export default function Home() {
                     </span>
                   </div>
                   
-                  <h3 className="font-medium text-xl tracking-widest text-foreground mb-4 relative z-10">{subject.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-8 leading-relaxed">{subject.desc}</p>
+                  <h3 className="font-bold text-lg tracking-widest text-foreground mb-4 relative z-10">{subject.name}</h3>
+                  <p className="text-muted-foreground text-[15px] font-medium leading-[1.6] mb-8">{subject.desc}</p>
                   
                   <div className={`h-[1px] w-full bg-border mb-6 transition-colors relative z-10 group-hover:${subject.bgBadge}`}></div>
                   
                   <ul className="space-y-4 mb-10 relative z-10">
                     {subject.topics.map(topic => (
-                      <li key={topic} className="text-muted-foreground group-hover:text-foreground transition-colors flex items-center gap-3 font-medium">
+                      <li key={topic} className="text-[15px] font-medium leading-[1.6] text-muted-foreground group-hover:text-foreground transition-colors flex items-center gap-3">
                         <div className={`w-1.5 h-1.5 rounded-full ${subject.bg}`}></div>
                         {topic}
                       </li>
@@ -260,7 +260,7 @@ export default function Home() {
         <section className="py-32 md:py-48 bg-white border-b border-border">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="w-12 h-1 bg-subject-math mb-6 mx-auto"></div>
-            <h2 className="text-5xl mb-20 text-center font-semibold">Guided Paths</h2>
+            <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-20 text-center text-foreground">Guided Paths</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
               
               {[
@@ -269,7 +269,7 @@ export default function Home() {
                 { title: "Master Biology", steps: ["Cells", "Genetics", "Evolution", "Ecology", "Human Anatomy"], colorCls: "text-subject-math", groupHoverColorCls: "group-hover:text-subject-math", groupHoverCls: "group-hover/path:bg-subject-math/20", groupHoverBorder: "group-hover:border-subject-math", groupHoverBg: "group-hover:bg-subject-math" }
               ].map((path, pIdx) => (
                 <div key={pIdx} className="flex flex-col group/path">
-                  <h3 className="text-2xl font-medium mb-12 text-center text-foreground">{path.title}</h3>
+                  <h3 className="font-bold text-lg mb-12 text-center text-foreground">{path.title}</h3>
                   <div className="relative pl-8">
                     {/* Vertical Timeline Line */}
                     <div className={`absolute left-[15px] top-6 bottom-6 w-[2px] bg-border transition-colors duration-500 ${path.groupHoverCls}`}></div>
@@ -284,7 +284,7 @@ export default function Home() {
                           
                           {/* Content Card */}
                           <div className={`w-full bg-white border border-border rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300 transform group-hover:translate-x-2 ${path.groupHoverBorder} ${i === 2 ? 'max-md:border-subject-math' : ''}`}>
-                            <span className={`font-medium text-foreground transition-colors ${path.groupHoverColorCls} ${i === 2 ? 'max-md:text-subject-math' : ''}`}>{step}</span>
+                            <span className={`text-[15px] font-medium text-foreground transition-colors ${path.groupHoverColorCls} ${i === 2 ? 'max-md:text-subject-math' : ''}`}>{step}</span>
                           </div>
                         </div>
                       ))}
@@ -302,24 +302,24 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-12 text-center md:text-left">
               <div className="flex flex-col items-center md:items-start">
-                <span className="text-muted-foreground font-bold mb-4 uppercase tracking-widest text-xs">Subjects</span>
-                <span className="text-5xl lg:text-6xl font-medium tracking-tight text-foreground"><Counter from={0} to={58} /></span>
+                <span className="text-[14px] font-semibold mb-4 uppercase tracking-widest text-muted-foreground">Subjects</span>
+                <span className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold tracking-tight text-foreground"><Counter from={0} to={58} /></span>
               </div>
               <div className="flex flex-col items-center md:items-start">
-                <span className="text-muted-foreground font-bold mb-4 uppercase tracking-widest text-xs">Topics</span>
-                <span className="text-5xl lg:text-6xl font-medium tracking-tight text-foreground"><Counter from={0} to={8324} /></span>
+                <span className="text-[14px] font-semibold mb-4 uppercase tracking-widest text-muted-foreground">Topics</span>
+                <span className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold tracking-tight text-foreground"><Counter from={0} to={8324} /></span>
               </div>
               <div className="flex flex-col items-center md:items-start">
-                <span className="text-muted-foreground font-bold mb-4 uppercase tracking-widest text-xs">Lessons</span>
-                <span className="text-5xl lg:text-6xl font-medium tracking-tight text-foreground"><Counter from={0} to={29842} /></span>
+                <span className="text-[14px] font-semibold mb-4 uppercase tracking-widest text-muted-foreground">Lessons</span>
+                <span className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold tracking-tight text-foreground"><Counter from={0} to={29842} /></span>
               </div>
               <div className="flex flex-col items-center md:items-start">
-                <span className="text-muted-foreground font-bold mb-4 uppercase tracking-widest text-xs">Questions</span>
-                <span className="text-5xl lg:text-6xl font-medium tracking-tight text-foreground">115k</span>
+                <span className="text-[14px] font-semibold mb-4 uppercase tracking-widest text-muted-foreground">Questions</span>
+                <span className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold tracking-tight text-foreground">115k</span>
               </div>
               <div className="flex flex-col items-center md:items-start">
-                <span className="text-muted-foreground font-bold mb-4 uppercase tracking-widest text-xs">Study Hours</span>
-                <span className="text-5xl lg:text-6xl font-medium tracking-tight text-foreground">2.8M</span>
+                <span className="text-[14px] font-semibold mb-4 uppercase tracking-widest text-muted-foreground">Study Hours</span>
+                <span className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold tracking-tight text-foreground">2.8M</span>
               </div>
             </div>
           </div>
@@ -328,15 +328,15 @@ export default function Home() {
         {/* SECTION 5: Pick Your Goal (Off-white) */}
         <section className="py-32 md:py-48 px-4 md:px-8 max-w-7xl mx-auto bg-background">
           <div className="w-12 h-1 bg-subject-math mb-6 mx-auto"></div>
-          <h2 className="text-5xl mb-20 text-center font-semibold">What is your goal?</h2>
+          <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-20 text-center text-foreground">What is your goal?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <div className="bg-card border border-border rounded-[2.5rem] p-12 hover:-translate-y-2 hover:shadow-2xl hover:shadow-border/50 hover:border-subject-math transition-all duration-500 cursor-pointer flex flex-col h-full group">
               <div className="w-20 h-20 rounded-3xl bg-muted/50 border border-border flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
                 <Bookmark className="w-10 h-10 text-muted-foreground group-hover:text-subject-math transition-colors" strokeWidth={2} />
               </div>
-              <h3 className="text-3xl font-medium mb-6">Ace Exams</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed flex-grow">
+              <h3 className="font-bold text-lg mb-6">Ace Exams</h3>
+              <p className="text-muted-foreground text-[15px] font-medium leading-[1.6] flex-grow">
                 Prepare for school, university, and professional certifications with highly structured study guides.
               </p>
             </div>
@@ -345,10 +345,10 @@ export default function Home() {
               <div className="w-20 h-20 rounded-3xl bg-muted/50 border border-border flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
                 <CheckCircle2 className="w-10 h-10 text-muted-foreground group-hover:text-subject-math transition-colors" strokeWidth={2} />
               </div>
-              <h3 className="text-3xl font-medium mb-6">Learn a Skill</h3>
+              <h3 className="font-bold text-lg mb-6">Learn a Skill</h3>
               <div className="flex-grow space-y-4 mt-2">
                 {["Programming", "Design", "Finance", "Marketing"].map(skill => (
-                  <div key={skill} className="flex items-center gap-4 text-muted-foreground text-lg">
+                  <div key={skill} className="flex items-center gap-4 text-[15px] font-medium leading-[1.6] text-muted-foreground">
                     <div className="w-2 h-2 rounded-full bg-border group-hover:bg-subject-math transition-colors"></div>
                     {skill}
                   </div>
@@ -360,10 +360,10 @@ export default function Home() {
               <div className="w-20 h-20 rounded-3xl bg-muted/50 border border-border flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
                 <Globe className="w-10 h-10 text-muted-foreground group-hover:text-subject-math transition-colors" strokeWidth={2} />
               </div>
-              <h3 className="text-3xl font-medium mb-6">Explore Curiosity</h3>
+              <h3 className="font-bold text-lg mb-6">Explore Curiosity</h3>
               <div className="flex-grow flex flex-wrap gap-3 mt-2 content-start">
                 {["History", "Astronomy", "Psychology", "Philosophy", "Art"].map(topic => (
-                  <span key={topic} className="px-5 py-2.5 rounded-full border border-border text-sm font-medium text-muted-foreground bg-background group-hover:border-subject-math group-hover:text-subject-math transition-colors">
+                  <span key={topic} className="px-5 py-2.5 rounded-full border border-border text-[15px] font-bold text-muted-foreground bg-background group-hover:border-subject-math group-hover:text-subject-math transition-colors">
                     {topic}
                   </span>
                 ))}
@@ -379,9 +379,9 @@ export default function Home() {
             <div className="flex items-end justify-between border-b-2 border-foreground pb-8 mb-16">
               <div>
                 <div className="w-12 h-1 bg-subject-math mb-4"></div>
-                <h2 className="text-5xl md:text-6xl tracking-tight font-semibold">Today's Picks</h2>
+                <h2 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] text-foreground">Today's Picks</h2>
               </div>
-              <span className="text-xl italic text-muted-foreground mb-2">Edition No. 142</span>
+              <span className="text-[15px] italic text-muted-foreground mb-2 font-medium">Edition No. 142</span>
             </div>
             
             <div className="flex flex-col gap-20">
@@ -404,9 +404,9 @@ export default function Home() {
               ].map((pick, i) => (
                 <div key={i} className="group cursor-pointer flex flex-col md:flex-row gap-12 items-center border-b border-border/50 pb-20 last:border-0 last:pb-0">
                   <div className="md:w-3/5">
-                    <h3 className="text-4xl font-medium mb-6 transition-colors leading-[1.2] group-hover:text-subject-math">{pick.title}</h3>
-                    <p className="text-muted-foreground text-xl mb-10 leading-relaxed font-light">{pick.desc}</p>
-                    <div className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                    <h3 className="text-[30px] font-bold mb-6 transition-colors leading-[1.2] group-hover:text-subject-math">{pick.title}</h3>
+                    <p className="text-muted-foreground text-[15px] font-medium leading-[1.6] mb-10">{pick.desc}</p>
+                    <div className="flex items-center gap-3 text-[15px] font-bold uppercase tracking-widest text-muted-foreground">
                       <Clock className="w-4 h-4" />
                       {pick.time}
                       <span className="mx-2 text-border">|</span>
@@ -435,10 +435,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="w-16 h-[4px] bg-subject-math mb-10 rounded-full"></div>
-                <h3 className="text-5xl font-semibold leading-[1.1] mb-10">
+                <h3 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-10">
                   A library that remembers your place.
                 </h3>
-                <ul className="space-y-6 text-xl text-muted-foreground font-light">
+                <ul className="space-y-6 text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground font-medium leading-[1.7] lg:leading-[1.75]">
                   <li className="flex items-center gap-5">
                     <div className="p-1 rounded-full bg-muted border border-border"><CheckCircle2 className="w-5 h-5 text-muted-foreground" /></div>
                     Save lessons for later
@@ -462,10 +462,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="w-16 h-[4px] bg-subject-math mb-10 rounded-full"></div>
-                <h3 className="text-5xl font-semibold leading-[1.1] mb-10">
+                <h3 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-10">
                   Practice after every lesson.
                 </h3>
-                <p className="text-xl text-muted-foreground leading-relaxed font-light mb-10">
+                <p className="text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground font-medium leading-[1.7] lg:leading-[1.75] mb-10">
                   Reading is just the beginning. Solidify your understanding with targeted, immediate practice questions and flashcards that ensure concepts are deeply rooted in your memory.
                 </p>
               </div>
@@ -478,10 +478,10 @@ export default function Home() {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="w-16 h-[4px] bg-subject-math mb-10 rounded-full"></div>
-                <h3 className="text-5xl font-semibold leading-[1.1] mb-10">
+                <h3 className="text-[30px] md:text-[40px] lg:text-[48px] font-extrabold leading-[1.15] mb-10">
                   Review difficult topics easily.
                 </h3>
-                <p className="text-xl text-muted-foreground leading-relaxed font-light mb-10">
+                <p className="text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground font-medium leading-[1.7] lg:leading-[1.75] mb-10">
                   Our system identifies areas where you struggle and gently reintroduces them over time. It’s a personalized path to mastery, without the frustration.
                 </p>
               </div>
@@ -493,13 +493,13 @@ export default function Home() {
         {/* SECTION 8: Community Picks */}
         <section className="py-24 md:py-32 bg-white border-y border-border">
           <div className="max-w-3xl mx-auto px-8 text-center">
-            <h2 className="font-semibold text-sm mb-12 text-muted-foreground uppercase tracking-[0.2em] flex items-center justify-center gap-2">
+            <h2 className="font-extrabold text-[15px] mb-12 text-muted-foreground uppercase tracking-[0.2em] flex items-center justify-center gap-2">
               Trending Now <TrendingUp className="w-4 h-4 text-muted-foreground" />
             </h2>
             <div className="flex flex-wrap justify-center gap-5">
               {["Calculus", "Photosynthesis", "Machine Learning", "Shakespeare", "World War II", "Thermodynamics", "JavaScript"].map((topic, i) => {
                 return (
-                  <div key={topic} className={`px-8 py-4 rounded-full border border-border bg-background text-foreground font-medium text-xl hover:border-subject-math hover:-translate-y-1 hover:shadow-md cursor-pointer transition-all duration-300 flex items-center gap-3 group/trend`}>
+                  <div key={topic} className={`px-8 py-4 rounded-full border border-border bg-background text-foreground font-bold text-[15px] hover:border-subject-math hover:-translate-y-1 hover:shadow-md cursor-pointer transition-all duration-300 flex items-center gap-3 group/trend`}>
                     <TrendingUp className="w-5 h-5 text-muted-foreground group-hover/trend:text-subject-math transition-colors" /> {topic}
                   </div>
                 )
@@ -511,7 +511,7 @@ export default function Home() {
         {/* SECTION 9: Quotes (Soft radial background) */}
         <section className="py-32 md:py-64 px-4 md:px-8 flex items-center justify-center text-center mx-auto relative overflow-hidden bg-background">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-subject-math/5 via-background to-background"></div>
-          <h2 className="relative z-10 text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.1] text-foreground max-w-5xl">
+          <h2 className="relative z-10 text-[40px] md:text-[56px] lg:text-[72px] font-extrabold leading-[1.05] lg:leading-[0.95] tracking-[-0.03em] lg:tracking-[-0.04em] text-foreground max-w-5xl">
             "The beautiful thing about learning is that nobody can take it away from you."
           </h2>
         </section>
@@ -523,8 +523,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-16 mb-32">
             
             <div className="col-span-1 md:col-span-4 lg:col-span-2">
-              <div className="text-3xl font-semibold tracking-tight mb-8">Avenpath.</div>
-              <p className="text-muted-foreground text-base max-w-sm leading-relaxed font-light mb-8">
+              <div className="text-3xl font-extrabold tracking-tight mb-8">Avenpath.</div>
+              <p className="text-muted-foreground text-[14px] font-medium leading-[1.6] max-w-sm mb-8">
                 Learn with structured lessons, practical quizzes, and curated study paths across a growing library of subjects.
               </p>
               <div className="flex gap-6">
@@ -535,8 +535,8 @@ export default function Home() {
             </div>
             
             <div className="lg:col-start-3">
-              <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Subjects</h4>
-              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
+              <h4 className="text-[16px] font-bold mb-8 uppercase tracking-widest text-foreground">Subjects</h4>
+              <ul className="space-y-5 text-[14px] text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-subject-math transition-colors">Mathematics</a></li>
                 <li><a href="#" className="hover:text-subject-math transition-colors">Programming</a></li>
                 <li><a href="#" className="hover:text-subject-math transition-colors">Biology</a></li>
@@ -546,8 +546,8 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Resources</h4>
-              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
+              <h4 className="text-[16px] font-bold mb-8 uppercase tracking-widest text-foreground">Resources</h4>
+              <ul className="space-y-5 text-[14px] text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-subject-math transition-colors">Study Guides</a></li>
                 <li><a href="#" className="hover:text-subject-math transition-colors">Flashcards</a></li>
                 <li><a href="#" className="hover:text-subject-math transition-colors">Practice Tests</a></li>
@@ -556,8 +556,8 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Company</h4>
-              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
+              <h4 className="text-[16px] font-bold mb-8 uppercase tracking-widest text-foreground">Company</h4>
+              <ul className="space-y-5 text-[14px] text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-subject-math transition-colors">About Us</a></li>
                 <li><a href="#" className="hover:text-subject-math transition-colors">Careers</a></li>
                 <li><a href="#" className="hover:text-subject-math transition-colors">Blog</a></li>
@@ -566,8 +566,8 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-8 uppercase tracking-widest text-xs text-foreground">Legal</h4>
-              <ul className="space-y-5 text-sm text-muted-foreground font-medium">
+              <h4 className="text-[16px] font-bold mb-8 uppercase tracking-widest text-foreground">Legal</h4>
+              <ul className="space-y-5 text-[14px] text-muted-foreground font-medium">
                 <li><a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Terms of Service</a></li>
                 <li><a href="#" className="hover:text-foreground transition-colors">Cookie Policy</a></li>
@@ -576,7 +576,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col md:flex-row items-center justify-between pt-10 border-t border-border gap-8">
-            <div className="text-sm text-muted-foreground font-medium">
+            <div className="text-[14px] text-muted-foreground font-medium">
               © {new Date().getFullYear()} Avenpath. All rights reserved. Made for lifelong learners.
             </div>
           </div>
