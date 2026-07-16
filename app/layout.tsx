@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
-
+import GlobalSearch from "@/components/GlobalSearch";
 const manrope = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -29,6 +29,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${newsreader.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans font-medium text-foreground bg-background selection:bg-primary/20 selection:text-primary">
+        <GlobalSearch />
         {children}
       </body>
     </html>

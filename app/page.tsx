@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
 import { ArrowRight, BookOpen, Star, Clock, Bookmark, Play, CheckCircle2, Search, LogIn, Calculator, Atom, FlaskConical, Globe, ScrollText, Code, LineChart, TrendingUp, ChevronRight, Library, Beaker, Map } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 // --- Custom CountUp Component ---
@@ -78,9 +79,9 @@ export default function Home() {
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full absolute top-0 left-0 right-0 z-50">
         <div className="text-2xl font-bold tracking-tight">Avenpath.</div>
         <div className="flex items-center gap-8">
-          <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+          <button onClick={() => window.dispatchEvent(new Event("open-search"))} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <Search className="w-4 h-4" />
-            <span className="text-[15px] font-semibold">Search</span>
+            <span className="text-[15px] font-semibold">Search <kbd className="hidden md:inline-block ml-2 text-xs bg-muted px-1.5 py-0.5 rounded border border-border">⌘K</kbd></span>
           </button>
           <button className="flex items-center gap-2 text-foreground hover:text-subject-math transition-colors">
             <LogIn className="w-4 h-4" />
@@ -153,9 +154,9 @@ export default function Home() {
                 <p className="text-[17px] md:text-[19px] lg:text-[20px] text-muted-foreground mb-12 max-w-2xl mx-auto font-medium leading-[1.7] lg:leading-[1.75]">
                   Explore thousands of topics, lessons, and practice questions in a distraction-free, colorful environment.
                 </p>
-                <button className="bg-foreground text-background px-10 py-5 rounded-full text-[15px] md:text-base font-bold hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto group">
+                <Link href="/subjects" className="w-fit bg-foreground text-background px-10 py-5 rounded-full text-[15px] md:text-base font-bold hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto group">
                   Start Learning <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
