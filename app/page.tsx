@@ -83,10 +83,10 @@ export default function Home() {
             <Search className="w-4 h-4" />
             <span className="text-[15px] font-semibold">Search <kbd className="hidden md:inline-block ml-2 text-xs bg-muted px-1.5 py-0.5 rounded border border-border">⌘K</kbd></span>
           </button>
-          <button className="flex items-center gap-2 text-foreground hover:text-subject-math transition-colors">
+          <Link href="/login" className="flex items-center gap-2 text-foreground hover:text-subject-math transition-colors">
             <LogIn className="w-4 h-4" />
             <span className="text-[15px] font-semibold">Login</span>
-          </button>
+          </Link>
         </div>
       </nav>
 
