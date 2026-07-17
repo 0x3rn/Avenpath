@@ -109,9 +109,13 @@ export const userProfiles = pgTable("user_profiles", {
   avatarUrl: text("avatar_url"),
   university: text("university"),
   major: text("major"),
+  bio: text("bio"),
+  learningGoals: jsonb("learning_goals").$type<string[]>(),
+  onboardingCompleted: boolean("onboarding_completed").default(false).notNull(),
   points: integer("points").default(0).notNull(),
   streak: integer("streak").default(0).notNull(),
   lastActiveDate: timestamp("last_active_date"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
@@ -119,6 +123,8 @@ export const userProfilesRelations = relations(userProfiles, ({ many }) => ({
   progress: many(userProgress),
   bookmarks: many(bookmarks),
   studySessions: many(studySessions),
+  badges: many(userBadges),
+  certificates: many(userCertificates),
 }));
 
 // --- Progress Tracking ---
@@ -219,3 +225,55 @@ export const discussionPosts = pgTable("discussion_posts", {
   upvotes: integer("upvotes").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+// --- Badges & Certificates ---
+export const badges = pgTable("badges", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  iconName: text("icon_name").notNull(), // e.g. "Zap", "Flame"
+  color: text("color").notNull(),
+});
+
+export const userBadges = pgTable("user_badges", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  badgeId: integer("badge_id").references(() => badges.id, { onDelete: "cascade" }).notNull(),
+  earnedAt: timestamp("earned_at").defaultNow().notNull(),
+});
+
+export const userBadgesRelations = relations(userBadges, ({ one }) => ({
+  user: one(userProfiles, {
+    fields: [userBadges.userId],
+    references: [userProfiles.id],
+  }),
+  badge: one(badges, {
+    fields: [userBadges.badgeId],
+    references: [badges.id],
+  }),
+}));
+
+export const certificates = pgTable("certificates", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description"),
+  imageUrl: text("image_url"),
+});
+
+export const userCertificates = pgTable("user_certificates", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  certificateId: integer("certificate_id").references(() => certificates.id, { onDelete: "cascade" }).notNull(),
+  earnedAt: timestamp("earned_at").defaultNow().notNull(),
+});
+
+export const userCertificatesRelations = relations(userCertificates, ({ one }) => ({
+  user: one(userProfiles, {
+    fields: [userCertificates.userId],
+    references: [userProfiles.id],
+  }),
+  certificate: one(certificates, {
+    fields: [userCertificates.certificateId],
+    references: [certificates.id],
+  }),
+}));

@@ -71,9 +71,7 @@ export default function DashboardPage() {
         <div className="lg:col-span-2 space-y-6">
           
           {/* HERO CARD */}
-          <div className="bg-card border border-border rounded-3xl p-8 relative overflow-hidden group">
-            {/* Subtle Illustration background */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-subject-math/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-1000" />
+          <div className={`border rounded-3xl p-8 relative overflow-hidden group ${continueLearning[0]?.color ? continueLearning[0].color.replace('text-', 'bg-').replace('500', '500/10') : 'bg-blue-500/10'} ${continueLearning[0]?.color ? continueLearning[0].color.replace('text-', 'border-').replace('500', '500/20') : 'border-blue-500/20'}`}>
             <div className="absolute right-8 top-8 opacity-10">
                {/* Decorative Math SVG */}
                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>

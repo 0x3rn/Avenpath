@@ -14,7 +14,8 @@ export default function SettingsPage() {
     name: "",
     university: "",
     major: "",
-    email: ""
+    email: "",
+    bio: ""
   });
 
   useEffect(() => {
@@ -24,7 +25,8 @@ export default function SettingsPage() {
           name: p.name || "",
           university: p.university || "",
           major: p.major || "",
-          email: p.email || ""
+          email: p.email || "",
+          bio: p.bio || ""
         });
       }
       setIsLoading(false);
@@ -42,7 +44,8 @@ export default function SettingsPage() {
       await updateProfile({
         name: formData.name,
         university: formData.university,
-        major: formData.major
+        major: formData.major,
+        bio: formData.bio
       });
       setHasChanges(false);
     } catch (e) {
@@ -120,7 +123,9 @@ export default function SettingsPage() {
                   <div>
                     <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 block">Bio</label>
                     <textarea 
-                      defaultValue="Computer Science major passionate about AI and machine learning."
+                      value={formData.bio}
+                      onChange={e => handleChange('bio', e.target.value)}
+                      placeholder="Tell us about yourself..."
                       className="w-full bg-muted/50 border border-border rounded-xl px-4 py-3 font-bold text-sm min-h-[100px] resize-none focus:border-foreground/30 outline-none transition-colors" 
                     />
                   </div>
@@ -140,6 +145,19 @@ export default function SettingsPage() {
                     </div>
                   </div>
                 </div>
+
+                <div className="flex justify-end mt-8 border-t border-border pt-6 min-h-[70px]">
+                  {hasChanges && (
+                    <button 
+                      onClick={handleSave}
+                      disabled={isSaving}
+                      className="px-6 py-2.5 rounded-xl font-extrabold text-sm bg-foreground text-background hover:scale-105 active:scale-95 transition-transform flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 animate-in slide-in-from-right-4 duration-300"
+                    >
+                      {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save Changes
+                    </button>
+                  )}
+                </div>
+
               </section>
             </div>
           )}
@@ -270,29 +288,6 @@ export default function SettingsPage() {
 
       </div>
 
-      {/* STICKY SAVE BAR */}
-      {hasChanges && (
-        <div className="fixed bottom-0 left-0 md:left-[280px] right-0 p-4 sm:p-6 z-40 animate-in slide-in-from-bottom-8 duration-300">
-          <div className="max-w-4xl mx-auto bg-foreground text-background rounded-2xl p-4 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span className="font-bold text-sm">You have unsaved changes.</span>
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <button 
-                onClick={() => setHasChanges(false)}
-                className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl font-bold text-sm text-background/70 hover:text-background hover:bg-background/10 transition-colors"
-              >
-                Discard
-              </button>
-              <button 
-                onClick={handleSave}
-                disabled={isSaving}
-                className="flex-1 sm:flex-none px-6 py-2.5 rounded-xl font-extrabold text-sm bg-background text-foreground hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-lg disabled:opacity-50"
-              >
-                {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save Changes
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
     </div>
   );

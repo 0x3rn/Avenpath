@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Sparkles, PlayCircle, Clock, ThumbsUp, ThumbsDown, Bookmark, Target, Zap, Activity } from "lucide-react";
+import { BookOpen, PlayCircle, Clock, ThumbsUp, ThumbsDown, Bookmark, Target, Zap, Activity } from "lucide-react";
 import { getContinueLearning } from "@/app/actions/dashboard";
 import { getMySubjects } from "@/app/actions/subjects";
 
@@ -32,7 +32,7 @@ export default function RecommendationsPage() {
       <div className="max-w-7xl mx-auto space-y-12 animate-in fade-in duration-500 pb-24 text-center">
         <div className="max-w-2xl mx-auto mt-20">
           <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
-            <Sparkles className="w-12 h-12 text-yellow-500" />
+            <BookOpen className="w-12 h-12 text-yellow-500" />
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight mb-4">No Recommendations Yet</h1>
           <p className="text-muted-foreground font-medium text-lg mb-8">
@@ -55,7 +55,7 @@ export default function RecommendationsPage() {
       {/* HEADER */}
       <div className="max-w-2xl">
         <h1 className="text-3xl font-extrabold tracking-tight mb-2 flex items-center gap-3">
-          <Sparkles className="w-8 h-8 text-yellow-500" /> Recommendations
+          <BookOpen className="w-8 h-8 text-yellow-500" /> Recommendations
         </h1>
         <p className="text-muted-foreground font-medium text-lg leading-relaxed">
           Personalized learning suggestions built around your goals, progress, and study habits.
@@ -64,11 +64,7 @@ export default function RecommendationsPage() {
 
       {/* CONTINUE LEARNING HERO */}
       {heroItem && (
-        <div className="bg-card border border-border rounded-3xl p-6 sm:p-10 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700">
-            <div className={`w-32 h-32 rounded-full blur-3xl ${heroItem.color ? heroItem.color.replace('text-', 'bg-') : 'bg-muted'}`} />
-          </div>
-          
+        <div className={`border rounded-3xl p-6 sm:p-10 relative overflow-hidden group ${heroItem.color ? heroItem.color.replace('text-', 'bg-').replace('500', '500/10') : 'bg-blue-500/10'} ${heroItem.color ? heroItem.color.replace('text-', 'border-').replace('500', '500/20') : 'border-blue-500/20'}`}>
           <div className="relative z-10">
             <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg mb-6 inline-flex items-center gap-2 ${heroItem.color ? heroItem.color.replace('text-', 'bg-').replace('500', '500/10') + ' ' + heroItem.color : 'bg-muted text-muted-foreground'}`}>
               <PlayCircle className="w-4 h-4" /> Top Recommendation

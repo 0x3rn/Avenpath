@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, Library, PlayCircle, TrendingUp, Bookmark, 
   FileQuestion, Layers, Calendar, User, Settings, 
-  Bell, Search, Flame, Menu, X, BookOpen, MessageSquare, Users, Trophy, Sparkles, Award
+  Bell, Search, Flame, Menu, X, BookOpen, MessageSquare, Users, Trophy, Compass, Award
 } from "lucide-react";
 import { getUserProfile } from "@/app/actions/user";
 
 const PRIMARY_LINKS = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Recommendations", href: "/recommendations", icon: Sparkles },
+  { name: "Recommendations", href: "/recommendations", icon: BookOpen },
   { name: "My Subjects", href: "/dashboard/subjects", icon: Library },
   { name: "Continue Learning", href: "/dashboard/continue", icon: PlayCircle },
   { name: "Progress", href: "/dashboard/progress", icon: TrendingUp },
@@ -40,14 +40,21 @@ const SETTINGS_LINKS = [
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [profile, setProfile] = useState<{ name: string; avatarUrl: string | null; streak: number } | null>(null);
+  const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
     getUserProfile().then(p => {
-      if (p) setProfile({ name: p.name, avatarUrl: p.avatarUrl, streak: p.streak });
+      if (p) {
+        if (p.onboardingCompleted === false) {
+          router.push("/onboarding");
+          return;
+        }
+        setProfile({ name: p.name, avatarUrl: p.avatarUrl, streak: p.streak });
+      }
     });
-  }, []);
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-muted/30 flex flex-col md:flex-row">
@@ -189,11 +196,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-background"></span>
             </button>
 
-            <Link href="/profile" className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-subject-math to-subject-science cursor-pointer overflow-hidden shadow-sm">
+            <Link href="/profile" className="flex items-center justify-center w-9 h-9 rounded-full bg-muted cursor-pointer overflow-hidden shadow-sm">
               {profile?.avatarUrl ? (
                 <img src={profile.avatarUrl} alt={profile.name} className="w-full h-full object-cover" />
               ) : (
-                <span className="text-white font-bold text-xs uppercase">
+                <span className="text-foreground font-bold text-xs uppercase">
                   {profile?.name ? profile.name.substring(0, 2) : "ME"}
                 </span>
               )}
@@ -210,7 +217,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* --- MOBILE BOTTOM NAV --- */}
       <nav className="md:hidden fixed bottom-0 left-0 w-full bg-card border-t border-border flex items-center justify-around px-2 py-3 z-30 pb-safe">
-        {PRIMARY_LINKS.map(link => {
+        {PRIMARY_LINKS.filter(link => link.name !== "Recommendations").map(link => {
           const isActive = pathname === link.href;
           return (
             <Link 

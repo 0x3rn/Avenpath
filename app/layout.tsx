@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
 import GlobalSearch from "@/components/GlobalSearch";
@@ -16,6 +16,13 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "Avenpath | Digital Library",
   description: "Knowledge, organized beautifully.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({

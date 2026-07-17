@@ -2,8 +2,8 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { db } from '@/db'
-import { userProfiles, userProgress } from '@/db/schema'
-import { eq } from 'drizzle-orm'
+import { userProfiles, userProgress, userBadges, userCertificates, badges, certificates } from '@/db/schema'
+import { eq, desc } from 'drizzle-orm'
 
 export async function getUserProfile() {
   const supabase = await createClient()
@@ -31,7 +31,7 @@ export async function getUserProfile() {
   return newProfile[0]
 }
 
-export async function updateProfile(data: { name?: string, university?: string, major?: string }) {
+export async function updateProfile(data: { name?: string, university?: string, major?: string, bio?: string }) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -46,4 +46,71 @@ export async function updateProfile(data: { name?: string, university?: string, 
     .returning()
 
   return updated[0]
+}
+
+export async function completeOnboarding(data: {
+  name?: string;
+  university?: string;
+  major?: string;
+  learningGoals?: string[];
+  skipped?: boolean;
+}) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) throw new Error("Unauthorized")
+
+  const updated = await db.update(userProfiles)
+    .set({
+      ...(data.skipped ? {} : {
+        name: data.name,
+        university: data.university,
+        major: data.major,
+        learningGoals: data.learningGoals,
+      }),
+      onboardingCompleted: true,
+      updatedAt: new Date(),
+    })
+    .where(eq(userProfiles.id, user.id))
+    .returning()
+
+  return updated[0]
+}
+
+export async function getUserBadges() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return []
+
+  const earned = await db.select({
+    id: userBadges.id,
+    earnedAt: userBadges.earnedAt,
+    badge: badges
+  })
+  .from(userBadges)
+  .innerJoin(badges, eq(userBadges.badgeId, badges.id))
+  .where(eq(userBadges.userId, user.id))
+  .orderBy(desc(userBadges.earnedAt))
+
+  return earned
+}
+
+export async function getUserCertificates() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return []
+
+  const earned = await db.select({
+    id: userCertificates.id,
+    earnedAt: userCertificates.earnedAt,
+    certificate: certificates
+  })
+  .from(userCertificates)
+  .innerJoin(certificates, eq(userCertificates.certificateId, certificates.id))
+  .where(eq(userCertificates.userId, user.id))
+  .orderBy(desc(userCertificates.earnedAt))
+
+  return earned
 }
