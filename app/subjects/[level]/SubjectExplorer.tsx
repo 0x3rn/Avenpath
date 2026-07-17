@@ -22,13 +22,16 @@ function SubjectIcon({ name, className }: { name: string, className?: string }) 
 export default function SubjectExplorer({ 
   level, 
   initialSubjects, 
-  categories 
+  categories,
+  isLoggedIn = false
 }: { 
   level: string; 
   initialSubjects: Subject[]; 
   categories: string[]; 
+  isLoggedIn?: boolean;
 }) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [activeSubLevel, setActiveSubLevel] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("Popular");
 
@@ -42,6 +45,10 @@ export default function SubjectExplorer({
   
   if (activeCategory !== "All") {
     filteredSubjects = filteredSubjects.filter(s => s.category === activeCategory);
+  }
+
+  if (activeCategory === "nigeria" && activeSubLevel !== "All") {
+    filteredSubjects = filteredSubjects.filter(s => s.levelName === activeSubLevel);
   }
   
   if (searchQuery.trim() !== "") {
@@ -65,15 +72,17 @@ export default function SubjectExplorer({
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Navbar placeholder */}
-      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
-        <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-          <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-foreground">{formattedLevel}</span>
-        </div>
-      </nav>
+      {/* Navbar placeholder - hidden if inside dashboard shell */}
+      {!isLoggedIn && (
+        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
+          <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
+          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+            <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-foreground">{formattedLevel}</span>
+          </div>
+        </nav>
+      )}
 
       <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-16">
         
@@ -113,7 +122,10 @@ export default function SubjectExplorer({
               return (
                 <button 
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    setActiveSubLevel("All"); // Reset sub-level on category change
+                  }}
                   className={`px-5 py-2.5 rounded-full text-[15px] font-bold transition-all ${activeCategory === cat ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"}`}
                 >
                   {formattedCat}
@@ -121,6 +133,21 @@ export default function SubjectExplorer({
               );
             })}
           </div>
+
+          {/* SUB-LEVEL CHIPS (For Nigeria) */}
+          {activeCategory === 'nigeria' && (
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-5 animate-in fade-in slide-in-from-top-2 duration-300">
+              {["All", "Junior High School", "Senior High School"].map(subLvl => (
+                <button 
+                  key={subLvl}
+                  onClick={() => setActiveSubLevel(subLvl)}
+                  className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all ${activeSubLevel === subLvl ? "bg-muted-foreground text-background" : "bg-card border border-border text-muted-foreground hover:bg-muted"}`}
+                >
+                  {subLvl}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* CONTROLS */}
@@ -156,7 +183,7 @@ export default function SubjectExplorer({
               const totalLessons = subject.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
               
               return (
-                <Link key={subject.slug} href={`/subjects/${level}/${subject.slug}`}>
+                <Link key={subject.id} href={`/subjects/${level}/${subject.slug}`}>
                   <div 
                     className="group flex flex-col h-full bg-card border border-border rounded-3xl p-6 hover:shadow-2xl transition-all duration-300 relative overflow-hidden -translate-y-0 hover:-translate-y-1"
                   >
@@ -170,11 +197,11 @@ export default function SubjectExplorer({
                       <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300" style={{ backgroundColor: `${subject.color}15`, color: subject.color }}>
                         <SubjectIcon name={subject.icon} className="w-7 h-7" />
                       </div>
-                      
-                      <h3 className="text-2xl font-extrabold mb-3 text-foreground group-hover:text-foreground transition-colors">
-                        {subject.name}
-                      </h3>
-                      
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-extrabold text-foreground group-hover:text-foreground transition-colors">
+                          {subject.name} {subject.className && <span className="text-muted-foreground text-sm font-semibold ml-1">({subject.className})</span>}
+                        </h3>
+                      </div>
                       <p className="text-muted-foreground text-[15px] font-medium leading-relaxed mb-6 line-clamp-3">
                         {subject.description}
                       </p>

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, GraduationCap } from "lucide-react";
 import { getLevels } from "@/lib/curriculum";
+import { getUserProfile } from "@/app/actions/user";
 
 export default async function SubjectsDirectory() {
   const levels = await getLevels();
+  const profile = await getUserProfile();
   
   // Custom format for presentation (e.g. "highschool" -> "High School")
   const formatLevelName = (level: string) => {
@@ -26,10 +28,12 @@ export default async function SubjectsDirectory() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Navigation Bar (simplified for this view, we can extract this to a layout later if needed) */}
-      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50">
-        <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
-      </nav>
+      {/* Navigation Bar (conditionally hidden if inside dashboard shell) */}
+      {!profile && (
+        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50">
+          <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
+        </nav>
+      )}
 
       <main className="flex-grow flex flex-col items-center justify-center pt-12 pb-24 px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getSubject, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
+import { getUserProfile } from "@/app/actions/user";
 import SubjectView from "./SubjectView";
 
 export async function generateStaticParams() {
@@ -21,10 +22,11 @@ export default async function SubjectPage({ params }: { params: Promise<{ level:
 
   // Fetch the subject
   const subject = await getSubject(level, subjectSlug);
+  const profile = await getUserProfile();
 
   if (!subject) {
     notFound();
   }
 
-  return <SubjectView level={level} subject={subject} />;
+  return <SubjectView level={level} subject={subject} isLoggedIn={!!profile} />;
 }

@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { sql } from "drizzle-orm";
 import * as schema from "../db/schema";
 import fs from "fs";
 import path from "path";
@@ -57,12 +58,7 @@ async function main() {
 
   // First, clear existing data
   console.log("Clearing existing data...");
-  await db.delete(schema.subtopics);
-  await db.delete(schema.topics);
-  await db.delete(schema.terms);
-  await db.delete(schema.subjects);
-  await db.delete(schema.categories);
-  await db.delete(schema.levels);
+  await db.execute(sql`TRUNCATE TABLE subtopics, topics, terms, subjects, categories, levels CASCADE;`);
   console.log("Data cleared.");
 
   // Discover levels
@@ -93,8 +89,9 @@ async function main() {
         const content = fs.readFileSync(file, "utf-8");
         const data = JSON.parse(content);
         
-        const subjectSlug = path.basename(file, ".json");
-        const name = data.subject || subjectSlug || "Unknown Subject";
+        const baseSlug = path.basename(file, ".json");
+        const subjectSlug = data.class ? `${baseSlug}-${data.class.toString().toLowerCase().replace(/\s+/g, "")}` : baseSlug;
+        const name = data.subject || baseSlug || "Unknown Subject";
         console.log(`    Processing subject: ${name} (${subjectSlug})`);
 
         await db.insert(schema.subjects).values({

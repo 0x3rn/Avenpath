@@ -18,15 +18,35 @@ export interface Topic {
   subtopics: Subtopic[];
 }
 
-export interface Subject {
+export interface Term {
+  id: string;
+  name: string;
+  theme: string | null;
+  topics: Topic[];
+}
+
+export interface Topic {
   id: string;
   name: string;
   slug: string;
   description: string;
+  estimatedHours: number;
+  prerequisites: string[];
+  subtopics: Subtopic[];
+}
+
+export interface Subject {
+  id: string;
+  name: string;
+  slug: string;
+  levelName: string;
+  className: string;
+  description: string;
   icon: string;
   color: string;
   levels: string[];
-  topics: Topic[];
+  topics: Topic[]; // kept for backwards compatibility
+  terms: Term[];
   category?: string;
 }
 
@@ -81,11 +101,12 @@ export async function getSubjectsByLevel(levelSlug: string): Promise<Subject[]> 
   
   for (const s of filteredSubjects) {
     const topics: Topic[] = [];
+    const terms: Term[] = [];
     
-    // Flatten topics from all terms
     for (const term of s.terms) {
+      const termTopics: Topic[] = [];
       for (const t of term.topics) {
-        topics.push({
+        const topicObj = {
           id: t.slug,
           name: t.title,
           slug: t.slug,
@@ -97,20 +118,35 @@ export async function getSubjectsByLevel(levelSlug: string): Promise<Subject[]> 
             name: st.title,
             slug: st.slug
           }))
-        });
+        };
+        topics.push(topicObj);
+        termTopics.push(topicObj);
       }
+      
+      terms.push({
+        id: term.termId,
+        name: term.name,
+        theme: term.theme,
+        topics: termTopics
+      });
     }
+
+    // Capitalize slug if name is stored as lowercase slug in DB
+    const formatName = (name: string) => name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
     result.push({
       id: s.id,
-      name: s.name,
+      name: formatName(s.name),
       slug: s.slug,
+      levelName: s.levelName,
+      className: s.className,
       description: s.description || "",
       icon: s.icon || "BookOpen",
       color: s.color || "#3b82f6",
       levels: [levelSlug],
       category: s.category.slug,
-      topics
+      topics,
+      terms
     });
   }
 
