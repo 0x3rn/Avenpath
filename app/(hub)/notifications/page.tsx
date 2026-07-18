@@ -1,8 +1,38 @@
 "use client";
 
-import { Bell, BookOpen, Target, PlayCircle, Layers, Map, Trophy, Flame, Sparkles, MessageSquare, Users, Settings2, MoreHorizontal, CalendarCheck2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Bell, BookOpen, Target, PlayCircle, Layers, Map, Trophy, Flame, Sparkles, MessageSquare, Users, Settings2, MoreHorizontal, CalendarCheck2, ArrowRight } from "lucide-react";
+import { getUserNotifications, markNotificationRead } from "@/app/actions/notifications";
+import Link from "next/link";
+import { toast } from "sonner";
 
 export default function NotificationsPage() {
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadNotifications();
+  }, []);
+
+  async function loadNotifications() {
+    try {
+      const data = await getUserNotifications();
+      setNotifications(data);
+    } catch (e) {
+      toast.error("Failed to load notifications");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleAction = async (id: number, url: string | null) => {
+    await markNotificationRead(id);
+    if (url) {
+      window.location.href = url;
+    } else {
+      loadNotifications();
+    }
+  };
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500 pb-24">
       
@@ -35,38 +65,44 @@ export default function NotificationsPage() {
         {/* MAIN FEED */}
         <div className="lg:col-span-2 space-y-4">
           
-          {[
-            { icon: BookOpen, color: "bg-blue-500", textColor: "text-blue-500", title: "Time to study!", desc: "Your Mathematics session starts in 15 minutes.", time: "10m ago", unread: true, action: "Start Now" },
-            { icon: Target, color: "bg-green-500", textColor: "text-green-500", title: "Daily Goal", desc: "You're only 12 minutes away from completing today's study goal.", time: "1h ago", unread: true },
-            { icon: PlayCircle, color: "bg-subject-science", textColor: "text-subject-science", title: "Resume Learning", desc: "You left 'Linear Equations' unfinished. Resume where you left off.", time: "3h ago", unread: false, action: "Resume" },
-            { icon: Trophy, color: "bg-yellow-500", textColor: "text-yellow-500", title: "Achievement Unlocked!", desc: "Congratulations! You've earned the Quiz Master Badge.", time: "Yesterday", unread: false },
-            { icon: Flame, color: "bg-orange-500", textColor: "text-orange-500", title: "Streak at Risk", desc: "Your 21-day study streak is on the line. Study for just 10 minutes today.", time: "Yesterday", unread: false },
-            { icon: MessageSquare, color: "bg-purple-500", textColor: "text-purple-500", title: "Community Reply", desc: "Sarah replied to your question in Calculus Beginners.", time: "2 days ago", unread: false, action: "View Reply" },
-          ].map((notif, i) => (
-            <div key={i} className={`bg-card border p-4 sm:p-6 rounded-2xl flex gap-4 transition-colors group ${notif.unread ? "border-foreground/30 shadow-sm" : "border-border hover:border-foreground/20"}`}>
-              <div className={`w-12 h-12 rounded-full ${notif.color}/10 flex items-center justify-center shrink-0`}>
-                <notif.icon className={`w-6 h-6 ${notif.textColor}`} />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-start justify-between gap-4 mb-1">
-                  <h3 className={`text-lg font-extrabold ${notif.unread ? "text-foreground" : "text-foreground/80"}`}>{notif.title}</h3>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-xs font-bold text-muted-foreground">{notif.time}</span>
-                    <button className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-muted rounded"><MoreHorizontal className="w-4 h-4 text-muted-foreground" /></button>
-                  </div>
-                </div>
-                <p className="text-muted-foreground font-medium text-sm mb-3">
-                  {notif.desc}
-                </p>
-                {notif.action && (
-                  <button className="text-sm font-bold bg-muted px-4 py-2 rounded-lg hover:bg-foreground hover:text-background transition-colors">
-                    {notif.action}
-                  </button>
-                )}
-              </div>
-              {notif.unread && <div className="w-2 h-2 rounded-full bg-foreground mt-2 shrink-0" />}
+          {loading ? (
+            <div className="text-center py-8 text-sm text-muted-foreground">Loading...</div>
+          ) : notifications.length === 0 ? (
+            <div className="text-center py-8 bg-muted/30 rounded-xl border border-dashed border-border">
+              <p className="text-sm font-medium text-muted-foreground">No notifications yet.</p>
             </div>
-          ))}
+          ) : (
+            notifications.map((notif, i) => (
+              <div key={i} className={`bg-card border p-4 sm:p-6 rounded-2xl flex gap-4 transition-colors group ${!notif.isRead ? "border-foreground/30 shadow-sm" : "border-border hover:border-foreground/20"}`}>
+                <div className={`w-12 h-12 rounded-full ${notif.type === 'management_request' ? "bg-blue-500/10" : "bg-muted"} flex items-center justify-center shrink-0`}>
+                  {notif.type === 'management_request' ? <Users className="w-6 h-6 text-blue-500" /> : <Bell className="w-6 h-6 text-muted-foreground" />}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-start justify-between gap-4 mb-1">
+                    <h3 className={`text-lg font-extrabold ${!notif.isRead ? "text-foreground" : "text-foreground/80"}`}>{notif.title}</h3>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-xs font-bold text-muted-foreground">{new Date(notif.createdAt).toLocaleDateString()}</span>
+                      <button className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-muted rounded"><MoreHorizontal className="w-4 h-4 text-muted-foreground" /></button>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground font-medium text-sm mb-3">
+                    {notif.message}
+                  </p>
+                  {notif.actionUrl && (
+                    <button onClick={() => handleAction(notif.id, notif.actionUrl)} className="flex items-center gap-2 text-sm font-bold bg-foreground text-background px-4 py-2 rounded-lg hover:bg-foreground/90 transition-colors">
+                      Action Required <ArrowRight className="w-4 h-4" />
+                    </button>
+                  )}
+                  {!notif.actionUrl && !notif.isRead && (
+                    <button onClick={() => handleAction(notif.id, null)} className="text-xs font-bold text-muted-foreground hover:text-foreground transition-colors">
+                      Mark Read
+                    </button>
+                  )}
+                </div>
+                {!notif.isRead && <div className="w-2 h-2 rounded-full bg-foreground mt-2 shrink-0" />}
+              </div>
+            ))
+          )}
 
         </div>
 

@@ -58,7 +58,12 @@ async function main() {
 
   // First, clear existing data
   console.log("Clearing existing data...");
-  await db.execute(sql`TRUNCATE TABLE subtopics, topics, terms, subjects, categories, levels CASCADE;`);
+  await db.delete(schema.subtopics);
+  await db.delete(schema.topics);
+  await db.delete(schema.terms);
+  await db.delete(schema.subjects);
+  await db.delete(schema.categories);
+  await db.delete(schema.levels);
   console.log("Data cleared.");
 
   // Discover levels
@@ -72,30 +77,41 @@ async function main() {
     }).returning();
 
     const categoriesDir = path.join(CURRICULUM_DIR, levelName);
-    const categoryNames = fs.readdirSync(categoriesDir).filter((file) => fs.statSync(path.join(categoriesDir, file)).isDirectory());
+    const dirItems = fs.readdirSync(categoriesDir);
+    const categoryDirs = dirItems.filter((file) => fs.statSync(path.join(categoriesDir, file)).isDirectory());
+    const rootJsonFiles = dirItems.filter((file) => file.endsWith(".json")).map(f => path.join(categoriesDir, f));
 
-    for (const categoryName of categoryNames) {
-      console.log(`  Processing category: ${categoryName}`);
+    const allGroups = [];
+    if (rootJsonFiles.length > 0) {
+      allGroups.push({ categoryName: "general", files: rootJsonFiles });
+    }
+    for (const dir of categoryDirs) {
+      allGroups.push({ categoryName: dir, files: getJsonFiles(path.join(categoriesDir, dir)) });
+    }
+
+    for (const group of allGroups) {
+      console.log(`  Processing category: ${group.categoryName}`);
       const [category] = await db.insert(schema.categories).values({
         levelId: level.id,
-        name: categoryName,
-        slug: categoryName,
+        name: group.categoryName === "general" ? "General" : group.categoryName,
+        slug: group.categoryName,
       }).returning();
 
-      const categoryDir = path.join(categoriesDir, categoryName);
-      const jsonFiles = getJsonFiles(categoryDir);
-
-      for (const file of jsonFiles) {
+      for (const file of group.files) {
         const content = fs.readFileSync(file, "utf-8");
         const data = JSON.parse(content);
         
         const baseSlug = path.basename(file, ".json");
         const subjectSlug = data.class ? `${baseSlug}-${data.class.toString().toLowerCase().replace(/\s+/g, "")}` : baseSlug;
-        const name = data.subject || baseSlug || "Unknown Subject";
-        console.log(`    Processing subject: ${name} (${subjectSlug})`);
+        const name = data.subject || data.name || baseSlug || "Unknown Subject";
+        
+        // Ensure ID uniqueness across levels if not explicitly provided
+        const subjectId = data.id || `${levelName}-${subjectSlug}`;
+        
+        console.log(`    Processing subject: ${name} (${subjectId})`);
 
-        await db.insert(schema.subjects).values({
-          id: data.id || subjectSlug,
+        const [insertedSubject] = await db.insert(schema.subjects).values({
+          id: subjectId,
           categoryId: category.id,
           country: data.country || "",
           curriculum: data.curriculum || "",
@@ -106,12 +122,23 @@ async function main() {
           description: `Comprehensive curriculum for ${name}.`,
           icon: "BookOpen", // Default icon
           color: generateColor(name),
-        });
+        }).returning();
 
-        if (data.terms && Array.isArray(data.terms)) {
-          for (const term of data.terms) {
+        let termsToProcess = data.terms || data.modules;
+        if (!termsToProcess && data.topics && Array.isArray(data.topics)) {
+          // If a subject doesn't have terms or modules, create a default term
+          termsToProcess = [{
+            id: "general",
+            name: "General Curriculum",
+            theme: "Core Topics",
+            topics: data.topics
+          }];
+        }
+
+        if (termsToProcess && Array.isArray(termsToProcess)) {
+          for (const term of termsToProcess) {
             const [insertedTerm] = await db.insert(schema.terms).values({
-              subjectId: data.id,
+              subjectId: insertedSubject.id,
               termId: term.id,
               name: term.name,
               theme: term.theme || "",
@@ -119,23 +146,40 @@ async function main() {
 
             if (term.topics && Array.isArray(term.topics)) {
               for (const topic of term.topics) {
-                const topicSlug = topic.slug || slugify(topic.title);
+                const topicTitle = topic.title || topic.name || "Unknown Topic";
+                const topicSlug = topic.slug || slugify(topicTitle);
                 const [insertedTopic] = await db.insert(schema.topics).values({
                   termId: insertedTerm.id,
-                  title: topic.title,
+                  title: topicTitle,
                   slug: topicSlug,
                   order: topic.order || 1,
                 }).returning();
 
                 if (topic.subtopics && Array.isArray(topic.subtopics)) {
+                  const subtopicsToInsert = [];
                   for (let i = 0; i < topic.subtopics.length; i++) {
-                    const subtopicStr = topic.subtopics[i];
-                    await db.insert(schema.subtopics).values({
+                    const subtopicItem = topic.subtopics[i];
+                    let subtopicTitle = "Unknown Subtopic";
+                    let subtopicSlug = "";
+                    
+                    if (typeof subtopicItem === 'string') {
+                      subtopicTitle = subtopicItem;
+                      subtopicSlug = slugify(subtopicTitle);
+                    } else if (typeof subtopicItem === 'object' && subtopicItem !== null) {
+                      subtopicTitle = subtopicItem.title || subtopicItem.name || "Unknown Subtopic";
+                      subtopicSlug = subtopicItem.slug || slugify(subtopicTitle);
+                    }
+
+                    subtopicsToInsert.push({
                       topicId: insertedTopic.id,
-                      title: subtopicStr,
-                      slug: slugify(subtopicStr),
+                      title: subtopicTitle,
+                      slug: subtopicSlug,
                       order: i + 1,
                     });
+                  }
+                  
+                  if (subtopicsToInsert.length > 0) {
+                    await db.insert(schema.subtopics).values(subtopicsToInsert);
                   }
                 }
               }

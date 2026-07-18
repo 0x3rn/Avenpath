@@ -30,8 +30,9 @@ export default function SubjectExplorer({
   categories: string[]; 
   isLoggedIn?: boolean;
 }) {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [activeSubLevel, setActiveSubLevel] = useState<string>("All");
+  const defaultCategory = categories.length > 0 ? categories[0] : "All";
+  const [activeCategory, setActiveCategory] = useState<string>(defaultCategory);
+  const [activeSubLevel, setActiveSubLevel] = useState<string>("Senior High School");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("Popular");
 
@@ -51,6 +52,15 @@ export default function SubjectExplorer({
     filteredSubjects = filteredSubjects.filter(s => s.levelName === activeSubLevel);
   }
   
+  // Deduplicate by name
+  const uniqueSubjectsMap = new Map<string, typeof filteredSubjects[0]>();
+  filteredSubjects.forEach(s => {
+    if (!uniqueSubjectsMap.has(s.name)) {
+      uniqueSubjectsMap.set(s.name, s);
+    }
+  });
+  filteredSubjects = Array.from(uniqueSubjectsMap.values());
+
   if (searchQuery.trim() !== "") {
     const q = searchQuery.toLowerCase();
     filteredSubjects = filteredSubjects.filter(s => 
@@ -72,17 +82,19 @@ export default function SubjectExplorer({
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Navbar placeholder - hidden if inside dashboard shell */}
-      {!isLoggedIn && (
-        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
+      {/* Navbar placeholder */}
+      <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
+        {!isLoggedIn ? (
           <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
-          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-            <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-foreground">{formattedLevel}</span>
-          </div>
-        </nav>
-      )}
+        ) : (
+          <div />
+        )}
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+          <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-foreground">{formattedLevel}</span>
+        </div>
+      </nav>
 
       <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-16">
         
@@ -111,12 +123,6 @@ export default function SubjectExplorer({
 
           {/* CATEGORY CHIPS */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <button 
-              onClick={() => setActiveCategory("All")}
-              className={`px-5 py-2.5 rounded-full text-[15px] font-bold transition-all ${activeCategory === "All" ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"}`}
-            >
-              All
-            </button>
             {categories.map(cat => {
               const formattedCat = cat.charAt(0).toUpperCase() + cat.slice(1);
               return (
@@ -124,7 +130,7 @@ export default function SubjectExplorer({
                   key={cat}
                   onClick={() => {
                     setActiveCategory(cat);
-                    setActiveSubLevel("All"); // Reset sub-level on category change
+                    setActiveSubLevel("Senior High School"); // Reset sub-level on category change
                   }}
                   className={`px-5 py-2.5 rounded-full text-[15px] font-bold transition-all ${activeCategory === cat ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"}`}
                 >
@@ -137,7 +143,7 @@ export default function SubjectExplorer({
           {/* SUB-LEVEL CHIPS (For Nigeria) */}
           {activeCategory === 'nigeria' && (
             <div className="flex flex-wrap items-center justify-center gap-2 mt-5 animate-in fade-in slide-in-from-top-2 duration-300">
-              {["All", "Junior High School", "Senior High School"].map(subLvl => (
+              {["Junior High School", "Senior High School"].map(subLvl => (
                 <button 
                   key={subLvl}
                   onClick={() => setActiveSubLevel(subLvl)}
@@ -182,15 +188,16 @@ export default function SubjectExplorer({
             {filteredSubjects.map(subject => {
               const totalLessons = subject.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
               
+              const baseSlug = subject.slug.split('-class')[0];
               return (
-                <Link key={subject.id} href={`/subjects/${level}/${subject.slug}`}>
+                <Link key={subject.id} href={`/subjects/${level}/${baseSlug}`}>
                   <div 
-                    className="group flex flex-col h-full bg-card border border-border rounded-3xl p-6 hover:shadow-2xl transition-all duration-300 relative overflow-hidden -translate-y-0 hover:-translate-y-1"
+                    className="group flex flex-col h-full bg-card border border-border rounded-3xl p-6 hover:shadow-md transition-all duration-300 relative overflow-hidden -translate-y-0 hover:-translate-y-1"
                   >
                     {/* Hover Border Accent */}
                     <div 
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl"
-                      style={{ border: `2px solid ${subject.color}` }}
+                      style={{ border: `1px solid ${subject.color}` }}
                     />
                     
                     <div className="flex-grow">
@@ -199,7 +206,7 @@ export default function SubjectExplorer({
                       </div>
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-xl font-extrabold text-foreground group-hover:text-foreground transition-colors">
-                          {subject.name} {subject.className && <span className="text-muted-foreground text-sm font-semibold ml-1">({subject.className})</span>}
+                          {subject.name}
                         </h3>
                       </div>
                       <p className="text-muted-foreground text-[15px] font-medium leading-relaxed mb-6 line-clamp-3">

@@ -1,0 +1,116 @@
+'use server'
+
+import { createClient } from '@/utils/supabase/server'
+import { db } from '@/db'
+import { userProfiles, parentChildLinks, notifications } from '@/db/schema'
+import { eq, and } from 'drizzle-orm'
+import { sendEmail } from '@/utils/email'
+import crypto from 'crypto'
+
+export async function requestChildManagement(email: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) throw new Error("Unauthorized")
+  
+  if (user.email === email) {
+    throw new Error("You cannot manage your own account.")
+  }
+
+  // Find child
+  const childProfiles = await db.select().from(userProfiles).where(eq(userProfiles.email, email))
+  if (childProfiles.length === 0) {
+    throw new Error("No user found with this email.")
+  }
+  
+  const child = childProfiles[0]
+
+  // Check if already linked or pending
+  const existingLinks = await db.select().from(parentChildLinks)
+    .where(and(eq(parentChildLinks.parentId, user.id), eq(parentChildLinks.childId, child.id)))
+    
+  if (existingLinks.length > 0) {
+    throw new Error("A request or link already exists for this child.")
+  }
+
+  // Get parent profile for names
+  const parentProfiles = await db.select().from(userProfiles).where(eq(userProfiles.id, user.id))
+  const parent = parentProfiles[0]
+
+  const token = crypto.randomUUID()
+
+  // Insert Link
+  await db.insert(parentChildLinks).values({
+    parentId: user.id,
+    childId: child.id,
+    token,
+    status: 'pending'
+  })
+  
+  const confirmUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/dashboard/confirm-management?token=${token}`
+
+  // Insert Notification
+  await db.insert(notifications).values({
+    userId: child.id,
+    type: 'management_request',
+    title: 'Management Request',
+    message: `${parent.name} has requested to manage your account.`,
+    actionUrl: `/dashboard/confirm-management?token=${token}`,
+  })
+
+  // Try send email
+  await sendEmail({
+    to: email,
+    subject: 'Action Required: Parent Management Request',
+    html: `
+      <h2>Account Management Request</h2>
+      <p><strong>${parent.name}</strong> has requested to manage your Avenpath account.</p>
+      <p>To confirm this request, please click the link below:</p>
+      <a href="${confirmUrl}">Confirm Management Request</a>
+      <p>If you do not recognize this person, you can ignore this email or reject the request in your dashboard.</p>
+    `
+  })
+  
+  return { success: true }
+}
+
+export async function answerManagementRequest(token: string, accept: boolean) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) throw new Error("Unauthorized")
+  
+  const links = await db.select().from(parentChildLinks).where(eq(parentChildLinks.token, token))
+  if (links.length === 0) throw new Error("Invalid token")
+  
+  const link = links[0]
+  if (link.childId !== user.id) {
+    throw new Error("You are not authorized to respond to this request.")
+  }
+  
+  if (link.status !== 'pending') {
+    throw new Error("This request has already been answered.")
+  }
+
+  await db.update(parentChildLinks)
+    .set({ status: accept ? 'approved' : 'rejected' })
+    .where(eq(parentChildLinks.id, link.id))
+    
+  return { success: true }
+}
+
+export async function getManagedChildren() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return []
+  
+  const links = await db.select({
+    link: parentChildLinks,
+    child: userProfiles
+  })
+  .from(parentChildLinks)
+  .innerJoin(userProfiles, eq(parentChildLinks.childId, userProfiles.id))
+  .where(eq(parentChildLinks.parentId, user.id))
+  
+  return links
+}

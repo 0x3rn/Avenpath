@@ -3,6 +3,8 @@
 import { Users, Activity, BookOpen, Layers, HelpCircle, Clock, Plus, AlertCircle, FileEdit, CheckCircle2, ChevronRight, MoreHorizontal, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
+const CHART_HEIGHTS = [45, 60, 35, 80, 50, 70, 90, 40, 55, 75, 85, 30, 65, 95, 50, 40, 80, 60, 70, 55, 85, 45, 75, 90, 35, 65, 50, 80, 40, 70];
+
 export default function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 pb-12">
@@ -68,12 +70,9 @@ export default function AdminDashboard() {
             </div>
             <div className="h-64 w-full flex items-end justify-between gap-1 sm:gap-2 px-2 pb-2 border-b border-border relative">
               {/* Simulated Chart Bars */}
-              {[...Array(30)].map((_, i) => {
-                const height = 20 + Math.random() * 80;
-                return (
+              {CHART_HEIGHTS.map((height, i) => (
                   <div key={i} className="w-full bg-blue-500/20 hover:bg-blue-500 transition-colors rounded-t-sm" style={{ height: `${height}%` }} />
-                );
-              })}
+              ))}
             </div>
             <div className="flex justify-between mt-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider px-2">
               <span>May 1</span>

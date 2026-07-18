@@ -5,7 +5,22 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Users, CheckCircle2, Clock } from "lucide-react";
 import type { Subject } from "@/lib/curriculum";
 
-export default function SubjectView({ level, subject, isLoggedIn = false }: { level: string, subject: Subject, isLoggedIn?: boolean }) {
+export default function SubjectView({ level, subjects, isLoggedIn = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean }) {
+  const availableClasses = subjects.map(s => s.className).filter(Boolean);
+  const hasClasses = availableClasses.length > 0;
+  
+  // Custom sort to ensure Class 1, Class 2, Class 3 order
+  if (hasClasses) {
+    availableClasses.sort((a, b) => {
+      const aNum = parseInt(a.replace(/\D/g, '')) || 0;
+      const bNum = parseInt(b.replace(/\D/g, '')) || 0;
+      return aNum - bNum;
+    });
+  }
+
+  const [activeClass, setActiveClass] = useState<string | null>(hasClasses ? availableClasses[0] : null);
+  const subject = activeClass ? subjects.find(s => s.className === activeClass) || subjects[0] : subjects[0];
+
   const [activeTab, setActiveTab] = useState("Overview");
   const [activeTermId, setActiveTermId] = useState<string | null>(subject.terms?.[0]?.id || null);
 
@@ -26,27 +41,27 @@ export default function SubjectView({ level, subject, isLoggedIn = false }: { le
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Navbar Placeholder - hidden if inside dashboard shell */}
-      {!isLoggedIn && (
-        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
+      {/* Navigation Bar */}
+      <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
+        {!isLoggedIn ? (
           <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
-          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-            <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
-            <ChevronRight className="w-4 h-4" />
-            <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-foreground">{subject.name}</span>
-          </div>
-        </nav>
-      )}
+        ) : (
+          <div />
+        )}
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+          <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+          <ChevronRight className="w-4 h-4" />
+          <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
+          <ChevronRight className="w-4 h-4" />
+          <span className="text-foreground">{subject.name}</span>
+        </div>
+      </nav>
 
       {/* HERO SECTION */}
-      <section className="bg-card border-b border-border w-full py-20 relative overflow-hidden">
-        {/* Subtle background glow based on subject color */}
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] opacity-10 rounded-full blur-[120px] pointer-events-none"
-          style={{ backgroundColor: subject.color }}
-        />
+      <section 
+        className="border-b border-border w-full py-20 relative overflow-hidden"
+        style={{ backgroundColor: `${subject.color}0A` }}
+      >
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
@@ -91,7 +106,7 @@ export default function SubjectView({ level, subject, isLoggedIn = false }: { le
       </section>
 
       {/* QUICK NAVIGATION (Sticky Tabs) */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border shadow-sm">
+      <div className={`sticky ${isLoggedIn ? 'top-40' : 'top-20'} z-30 bg-background/80 backdrop-blur-xl border-b border-border shadow-sm`}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-8 overflow-x-auto hide-scrollbar">
             {tabs.map(tab => (
@@ -114,6 +129,25 @@ export default function SubjectView({ level, subject, isLoggedIn = false }: { le
         {/* OVERVIEW / ABOUT */}
         {(activeTab === "Overview" || activeTab === "Topics") && (
           <section className="mb-24">
+            {/* Class Switcher */}
+            {hasClasses && availableClasses.length > 1 && (
+              <div className="flex flex-wrap items-center gap-2 mb-8">
+                {availableClasses.map(cls => (
+                  <button
+                    key={cls}
+                    onClick={() => {
+                      setActiveClass(cls);
+                      const newSubject = subjects.find(s => s.className === cls) || subjects[0];
+                      setActiveTermId(newSubject.terms?.[0]?.id || null);
+                    }}
+                    className={`px-6 py-2 rounded-xl text-[15px] font-bold transition-all ${activeClass === cls ? "bg-primary text-primary-foreground shadow-md" : "bg-card border border-border text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+                  >
+                    {cls}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Term Switcher */}
             {subject.terms && subject.terms.length > 0 && (
               <div className="flex flex-wrap items-center gap-3 mb-10 pb-4 border-b border-border">
@@ -140,16 +174,17 @@ export default function SubjectView({ level, subject, isLoggedIn = false }: { le
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {displayTopics.map((topic, idx) => (
                       <Link key={topic.slug} href={`/subjects/${level}/${subject.slug}/${topic.slug}`}>
-                        <div className="group bg-card border border-border rounded-3xl p-8 hover:shadow-xl transition-all duration-300 h-full flex flex-col relative overflow-hidden">
-                          <div className="absolute top-0 left-0 w-full h-1 bg-border group-hover:bg-foreground transition-colors duration-300" />
-                          
+                        <div 
+                          className="group border border-border rounded-3xl p-8 hover:shadow-xl transition-all duration-300 h-full flex flex-col relative overflow-hidden"
+                          style={{ backgroundColor: `${subject.color}05` }}
+                        >
                           <h3 className="text-xl font-bold mb-3">{topic.name}</h3>
                           <p className="text-muted-foreground text-[15px] font-medium mb-8 flex-grow">
                             {topic.description || "Explore this comprehensive topic."}
                           </p>
                           
                           <div className="flex items-center justify-between mt-auto">
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-3">
                               <span className="text-[13px] font-bold text-muted-foreground">{topic.subtopics.length} Lessons</span>
                               <span className="text-[13px] font-bold text-foreground px-2 py-0.5 bg-muted rounded-md w-fit">
                                 {idx === 0 ? "Beginner" : "Intermediate"}

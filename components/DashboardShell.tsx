@@ -13,6 +13,7 @@ import { getUserProfile } from "@/app/actions/user";
 const PRIMARY_LINKS = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Recommendations", href: "/recommendations", icon: BookOpen },
+  { name: "Subjects", href: "/subjects", icon: Compass },
   { name: "My Subjects", href: "/dashboard/subjects", icon: Library },
   { name: "Continue Learning", href: "/dashboard/continue", icon: PlayCircle },
   { name: "Progress", href: "/dashboard/progress", icon: TrendingUp },
@@ -33,28 +34,39 @@ const COMMUNITY_LINKS = [
 ];
 
 const SETTINGS_LINKS = [
+  { name: "Manage Child", href: "/dashboard/manage-child", icon: Users },
   { name: "Profile", href: "/profile", icon: User },
   { name: "Notifications", href: "/notifications", icon: Bell },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export default function DashboardShell({ children }: { children: React.ReactNode }) {
+export default function DashboardShell({ children, initialProfile }: { children: React.ReactNode, initialProfile?: any }) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(initialProfile || null);
 
   useEffect(() => {
-    getUserProfile().then(p => {
-      if (p) {
-        if (p.onboardingCompleted === false) {
-          router.push("/onboarding");
-          return;
+    if (!initialProfile) {
+      getUserProfile().then(p => {
+        if (p) {
+          if (p.onboardingCompleted === false) {
+            router.push("/onboarding");
+            return;
+          }
+          setProfile({ name: p.name, avatarUrl: p.avatarUrl, streak: p.streak, role: p.role });
         }
-        setProfile({ name: p.name, avatarUrl: p.avatarUrl, streak: p.streak });
+      });
+    } else {
+      if (initialProfile.onboardingCompleted === false) {
+        router.push("/onboarding");
       }
-    });
-  }, [router]);
+    }
+  }, [router, initialProfile]);
+
+  const currentSettingsLinks = profile?.role === 'admin'
+    ? [...SETTINGS_LINKS, { name: "Admin Dashboard", href: "/admin", icon: LayoutDashboard }]
+    : SETTINGS_LINKS;
 
   return (
     <div className="min-h-screen bg-muted/30 flex flex-col md:flex-row">
@@ -74,7 +86,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
           
           <nav className="space-y-1">
             {PRIMARY_LINKS.map(link => {
-              const isActive = pathname === link.href;
+              const isActive = link.href === "/subjects" ? pathname.startsWith("/subjects") : pathname === link.href;
               return (
                 <Link 
                   key={link.name} 
@@ -93,7 +105,29 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
           <div className="h-[1px] bg-border mx-4" />
 
-          <nav className="space-y-1">
+          <nav className="space-y-1 mt-4">
+            <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 px-4 mt-2">Study Tools</div>
+            {SECONDARY_LINKS.map(link => {
+              const isActive = pathname.startsWith(link.href);
+              return (
+                <Link 
+                  key={link.name} 
+                  href={link.href}
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-sm transition-colors ${
+                    isActive 
+                      ? "bg-muted text-foreground" 
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  <link.icon className="w-4 h-4" /> {link.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="h-[1px] bg-border mx-4 mt-4" />
+
+          <nav className="space-y-1 mt-4">
             <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 px-4 mt-2">Community</div>
             {COMMUNITY_LINKS.map(link => {
               const isActive = pathname.startsWith(link.href);
@@ -116,11 +150,15 @@ export default function DashboardShell({ children }: { children: React.ReactNode
           <div className="h-[1px] bg-border mx-4 mt-4" />
 
           <nav className="space-y-1 mt-4">
-            {SETTINGS_LINKS.map(link => (
+            {currentSettingsLinks.map(link => (
               <Link 
                 key={link.name} 
                 href={link.href}
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-sm transition-colors ${
+                  link.href === "/admin" 
+                    ? "text-blue-500 hover:bg-blue-500/10" 
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
               >
                 <link.icon className="w-4 h-4" /> {link.name}
               </Link>
@@ -143,8 +181,8 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             </div>
             <nav className="px-4 space-y-1 flex-1 overflow-y-auto pb-24">
               <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-4 px-2 mt-4">Menu</div>
-              {[...PRIMARY_LINKS, ...SECONDARY_LINKS, ...COMMUNITY_LINKS, ...SETTINGS_LINKS].map(link => {
-                const isActive = pathname === link.href;
+              {[...PRIMARY_LINKS, ...SECONDARY_LINKS, ...COMMUNITY_LINKS, ...currentSettingsLinks].map(link => {
+                const isActive = link.href === "/subjects" ? pathname.startsWith("/subjects") : pathname === link.href;
                 return (
                   <Link 
                     key={link.name} 
@@ -199,10 +237,12 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             <Link href="/profile" className="flex items-center justify-center w-9 h-9 rounded-full bg-muted cursor-pointer overflow-hidden shadow-sm">
               {profile?.avatarUrl ? (
                 <img src={profile.avatarUrl} alt={profile.name} className="w-full h-full object-cover" />
-              ) : (
+              ) : profile?.name ? (
                 <span className="text-foreground font-bold text-xs uppercase">
-                  {profile?.name ? profile.name.substring(0, 2) : "ME"}
+                  {profile.name.substring(0, 2)}
                 </span>
+              ) : (
+                <User className="w-5 h-5 text-muted-foreground" />
               )}
             </Link>
           </div>
@@ -217,7 +257,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
 
       {/* --- MOBILE BOTTOM NAV --- */}
       <nav className="md:hidden fixed bottom-0 left-0 w-full bg-card border-t border-border flex items-center justify-around px-2 py-3 z-30 pb-safe">
-        {PRIMARY_LINKS.filter(link => link.name !== "Recommendations").map(link => {
+        {PRIMARY_LINKS.filter(link => link.name !== "Recommendations" && link.name !== "Subjects").map(link => {
           const isActive = pathname === link.href;
           return (
             <Link 

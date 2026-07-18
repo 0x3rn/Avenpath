@@ -158,6 +158,11 @@ export async function getSubject(levelSlug: string, subjectSlug: string): Promis
   return subjects.find(s => s.slug === subjectSlug) || null;
 }
 
+export async function getSubjectsGroup(levelSlug: string, baseSlug: string): Promise<Subject[]> {
+  const subjects = await getSubjectsByLevel(levelSlug);
+  return subjects.filter(s => s.slug === baseSlug || s.slug.startsWith(`${baseSlug}-class`));
+}
+
 export async function getTopic(levelSlug: string, subjectSlug: string, topicSlug: string): Promise<Topic | null> {
   const subject = await getSubject(levelSlug, subjectSlug);
   if (!subject) return null;

@@ -106,6 +106,7 @@ export const userProfiles = pgTable("user_profiles", {
   id: text("id").primaryKey(), // Matches Supabase auth.users.id
   email: text("email").notNull().unique(), // Synced from auth
   name: text("name").notNull(),
+  role: text("role").default("student").notNull(),
   avatarUrl: text("avatar_url"),
   university: text("university"),
   major: text("major"),
@@ -253,6 +254,7 @@ export const userBadgesRelations = relations(userBadges, ({ one }) => ({
   }),
 }));
 
+
 export const certificates = pgTable("certificates", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -277,3 +279,25 @@ export const userCertificatesRelations = relations(userCertificates, ({ one }) =
     references: [certificates.id],
   }),
 }));
+
+// --- Parent-Child Management ---
+export const parentChildLinks = pgTable("parent_child_links", {
+  id: serial("id").primaryKey(),
+  parentId: text("parent_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  childId: text("child_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  status: text("status").notNull().default("pending"), // 'pending', 'approved', 'rejected'
+  token: text("token").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// --- Notifications ---
+export const notifications = pgTable("notifications", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  type: text("type").notNull(), // e.g. 'management_request', 'system'
+  title: text("title").notNull(),
+  message: text("message").notNull(),
+  actionUrl: text("action_url"),
+  isRead: boolean("is_read").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

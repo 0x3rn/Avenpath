@@ -68,11 +68,26 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Admin Route Protection
+  if (request.nextUrl.pathname.startsWith('/admin') && user) {
+    const { data: profile } = await supabase
+      .from('user_profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single()
+      
+    if (!profile || profile.role !== 'admin') {
+      const url = request.nextUrl.clone()
+      url.pathname = '/dashboard'
+      return NextResponse.redirect(url)
+    }
+  }
+
   // If user is logged in, restrict access to auth pages like /login and /sign-up
   const authPaths = ['/login', '/sign-up']
   const isAuthPage = authPaths.some(path => request.nextUrl.pathname.startsWith(path))
   
-  if (isAuthPage && user) {
+  if ((isAuthPage || request.nextUrl.pathname === '/') && user) {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)

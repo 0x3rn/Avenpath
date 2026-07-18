@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, BookOpen, Layers, Edit3, HelpCircle, 
   Image as ImageIcon, Users, BarChart3, FileText, Settings, 
-  Bell, Search, Menu, X, ShieldAlert, User, ShieldCheck 
+  Bell, Search, Menu, X, ShieldAlert, User, ShieldCheck, Home
 } from "lucide-react";
 
 const ADMIN_LINKS = [
@@ -23,11 +24,25 @@ const ADMIN_LINKS = [
 const SYSTEM_LINKS = [
   { name: "Reports", href: "#", icon: FileText },
   { name: "Settings", href: "#", icon: Settings },
+  { name: "Back to Dashboard", href: "/dashboard", icon: Home },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userProfile, setUserProfile] = useState<{name: string, role: string} | null>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase.from('user_profiles').select('name, role').eq('id', user.id).single();
+        if (data) setUserProfile(data);
+      }
+    }
+    loadProfile();
+  }, []);
 
   return (
     <div className="min-h-screen bg-muted/20 flex">
@@ -150,8 +165,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <div className="w-[1px] h-6 bg-border hidden sm:block" />
             <div className="flex items-center gap-3">
               <div className="hidden sm:block text-right">
-                <div className="text-sm font-bold text-foreground leading-none">Admin User</div>
-                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-1">Superadmin</div>
+                <div className="text-sm font-bold text-foreground leading-none">{userProfile?.name || "Loading..."}</div>
+                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-1">{userProfile?.role || "..."}</div>
               </div>
               <div className="w-8 h-8 rounded-full bg-blue-500/10 text-blue-600 flex items-center justify-center border border-blue-500/20">
                 <User className="w-4 h-4" />

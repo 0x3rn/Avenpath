@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getSubject, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
+import { getSubjectsGroup, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";
 import SubjectView from "./SubjectView";
 
@@ -10,7 +10,10 @@ export async function generateStaticParams() {
   for (const level of levels) {
     const subjects = await getSubjectsByLevel(level);
     for (const subject of subjects) {
-      params.push({ level, subject: subject.slug });
+      const baseSlug = subject.slug.split('-class')[0];
+      if (!params.find(p => p.level === level && p.subject === baseSlug)) {
+        params.push({ level, subject: baseSlug });
+      }
     }
   }
   
@@ -20,13 +23,13 @@ export async function generateStaticParams() {
 export default async function SubjectPage({ params }: { params: Promise<{ level: string, subject: string }> }) {
   const { level, subject: subjectSlug } = await params;
 
-  // Fetch the subject
-  const subject = await getSubject(level, subjectSlug);
+  // Fetch the subjects group
+  const subjectsGroup = await getSubjectsGroup(level, subjectSlug);
   const profile = await getUserProfile();
 
-  if (!subject) {
+  if (!subjectsGroup || subjectsGroup.length === 0) {
     notFound();
   }
 
-  return <SubjectView level={level} subject={subject} isLoggedIn={!!profile} />;
+  return <SubjectView level={level} subjects={subjectsGroup} isLoggedIn={!!profile} />;
 }

@@ -28,12 +28,21 @@ export default async function SubjectsDirectory() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Navigation Bar (conditionally hidden if inside dashboard shell) */}
-      {!profile && (
-        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50">
+      {/* Navigation Bar */}
+      <nav className={`sticky ${profile ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
+        {!profile ? (
           <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
-        </nav>
-      )}
+        ) : (
+          <div />
+        )}
+        {profile && (
+          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+            <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
+            <ArrowRight className="w-4 h-4" />
+            <span className="text-foreground">Subjects</span>
+          </div>
+        )}
+      </nav>
 
       <main className="flex-grow flex flex-col items-center justify-center pt-12 pb-24 px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">
@@ -48,7 +57,7 @@ export default async function SubjectsDirectory() {
         <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
           {levels.map(level => (
             <Link key={level} href={`/subjects/${level}`}>
-              <div className="group bg-card border border-border hover:border-foreground/20 rounded-3xl p-10 shadow-sm hover:shadow-2xl transition-all duration-300 relative overflow-hidden h-full flex flex-col cursor-pointer">
+              <div className="group bg-card border border-border hover:border-foreground/20 rounded-3xl p-10 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden h-full flex flex-col cursor-pointer">
                 
                 {/* Accent Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -61,7 +70,7 @@ export default async function SubjectsDirectory() {
                   </p>
                   
                   <div className="mt-10 flex items-center gap-2 font-bold text-foreground group-hover:gap-4 transition-all duration-300">
-                    Explore Subjects <ArrowRight className="w-5 h-5" />
+                    Explore {level === 'university' ? 'Courses' : 'Subjects'} <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
               </div>
