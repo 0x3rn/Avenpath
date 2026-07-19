@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BookOpen, GraduationCap } from "lucide-react";
+import { ArrowRight, BookOpen, GraduationCap, Palette } from "lucide-react";
 import { getLevels } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";
 
@@ -9,18 +9,21 @@ export default async function SubjectsDirectory() {
   
   // Custom format for presentation (e.g. "highschool" -> "High School")
   const formatLevelName = (level: string) => {
+    if (level === 'primaryschool') return 'Primary School';
     if (level === 'highschool') return 'High School';
     if (level === 'university') return 'University';
     return level.charAt(0).toUpperCase() + level.slice(1);
   };
 
   const getLevelIcon = (level: string) => {
+    if (level === 'primaryschool') return <Palette className="w-12 h-12 mb-6 text-foreground" />;
     if (level === 'highschool') return <BookOpen className="w-12 h-12 mb-6 text-foreground" />;
     if (level === 'university') return <GraduationCap className="w-12 h-12 mb-6 text-foreground" />;
     return <BookOpen className="w-12 h-12 mb-6 text-foreground" />;
   };
 
   const getLevelDescription = (level: string) => {
+    if (level === 'primaryschool') return "Discover fun, interactive basics in math, language, and the world around us.";
     if (level === 'highschool') return "Build a strong foundation with structured paths across core subjects.";
     if (level === 'university') return "Dive deep into advanced concepts, professional studies, and specialized fields.";
     return "Explore subjects and structured learning paths.";

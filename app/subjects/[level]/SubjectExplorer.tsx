@@ -30,11 +30,11 @@ export default function SubjectExplorer({
   categories: string[]; 
   isLoggedIn?: boolean;
 }) {
-  const defaultCategory = categories.length > 0 ? categories[0] : "All";
+  const defaultCategory = categories.includes("all") ? "all" : (categories.length > 0 ? categories[0] : "All");
   const [activeCategory, setActiveCategory] = useState<string>(defaultCategory);
   const [activeSubLevel, setActiveSubLevel] = useState<string>("Senior High School");
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("Popular");
+  const [sortBy, setSortBy] = useState("A-Z");
 
   // Format level
   const formattedLevel = level === 'highschool' ? 'High School' : 
@@ -164,10 +164,11 @@ export default function SubjectExplorer({
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground font-medium text-sm">Sort by:</span>
             <div className="relative group cursor-pointer">
-              <div className="flex items-center gap-1 font-bold text-[15px]">
+              {/* Desktop Sort Dropdown */}
+              <div className="hidden sm:flex items-center gap-1 font-bold text-[15px]">
                 {sortBy} <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </div>
-              <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
+              <div className="hidden sm:block absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
                 {["Popular", "A-Z", "Newest", "Most Lessons"].map(option => (
                   <div 
                     key={option} 
@@ -177,6 +178,20 @@ export default function SubjectExplorer({
                     {option}
                   </div>
                 ))}
+              </div>
+              
+              {/* Mobile Sort Dropdown */}
+              <div className="sm:hidden flex items-center relative">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="bg-transparent font-bold text-[15px] appearance-none pr-6 focus:outline-none relative z-10"
+                >
+                  {["Popular", "A-Z", "Newest", "Most Lessons"].map(option => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+                <ChevronDown className="w-4 h-4 text-muted-foreground absolute right-0 z-0 pointer-events-none" />
               </div>
             </div>
           </div>

@@ -45,3 +45,4 @@ next-env.d.ts
 /content
 /scripts
 /scratch
+.seed_checkpoint.json

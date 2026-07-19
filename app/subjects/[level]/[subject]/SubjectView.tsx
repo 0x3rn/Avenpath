@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Users, CheckCircle2, Clock } from "lucide-react";
+import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Users, CheckCircle2, Clock, ChevronDown } from "lucide-react";
 import type { Subject } from "@/lib/curriculum";
 
 export default function SubjectView({ level, subjects, isLoggedIn = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean }) {
@@ -150,16 +150,35 @@ export default function SubjectView({ level, subjects, isLoggedIn = false }: { l
 
             {/* Term Switcher */}
             {subject.terms && subject.terms.length > 0 && (
-              <div className="flex flex-wrap items-center gap-3 mb-10 pb-4 border-b border-border">
-                {subject.terms.map(term => (
-                  <button
-                    key={term.id}
-                    onClick={() => setActiveTermId(term.id)}
-                    className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${activeTermId === term.id ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+              <div className="mb-10 pb-4 border-b border-border">
+                {/* Mobile Dropdown */}
+                <div className="sm:hidden w-full relative">
+                  <select 
+                    value={activeTermId || ""}
+                    onChange={(e) => setActiveTermId(e.target.value)}
+                    className="w-full bg-card border-2 border-border text-foreground font-bold rounded-xl py-3 px-4 appearance-none focus:outline-none focus:border-foreground transition-colors"
                   >
-                    {term.name}
-                  </button>
-                ))}
+                    {subject.terms.map(term => (
+                      <option key={term.id} value={term.id}>{term.name}</option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  </div>
+                </div>
+
+                {/* Desktop Tabs */}
+                <div className="hidden sm:flex flex-wrap items-center gap-3">
+                  {subject.terms.map(term => (
+                    <button
+                      key={term.id}
+                      onClick={() => setActiveTermId(term.id)}
+                      className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all ${activeTermId === term.id ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+                    >
+                      {term.name}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
