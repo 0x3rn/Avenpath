@@ -139,7 +139,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       )}
 
       {/* --- MAIN CONTENT WRAPPER --- */}
-      <div className="flex-1 lg:ml-[260px] flex flex-col min-h-screen">
+      <div className="flex-1 lg:ml-[260px] flex flex-col min-h-screen w-full min-w-0 max-w-[100vw] overflow-x-hidden">
         
         {/* --- TOP NAV --- */}
         <header className="h-16 bg-card border-b border-border sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">

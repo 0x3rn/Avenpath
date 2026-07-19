@@ -6,9 +6,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, Library, PlayCircle, TrendingUp, Bookmark, 
   FileQuestion, Layers, Calendar, User, Settings, 
-  Bell, Search, Flame, Menu, X, BookOpen, MessageSquare, Users, Trophy, Compass, Award
+  Bell, Search, Flame, Menu, X, BookOpen, MessageSquare, Users, Trophy, Compass, Award, LogOut
 } from "lucide-react";
 import { getUserProfile } from "@/app/actions/user";
+import { logout } from "@/app/actions/auth";
 
 const PRIMARY_LINKS = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -163,6 +164,13 @@ export default function DashboardShell({ children, initialProfile }: { children:
                 <link.icon className="w-4 h-4" /> {link.name}
               </Link>
             ))}
+            
+            <button 
+              onClick={() => logout()}
+              className="flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold text-sm text-red-500 hover:bg-red-500/10 transition-colors w-full text-left mt-2"
+            >
+              <LogOut className="w-4 h-4" /> Log Out
+            </button>
           </nav>
         </div>
 
@@ -198,6 +206,14 @@ export default function DashboardShell({ children, initialProfile }: { children:
                   </Link>
                 );
               })}
+              
+              <div className="h-[1px] bg-border mx-2 my-2" />
+              <button 
+                onClick={() => logout()}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-red-500 hover:bg-red-500/10 transition-colors w-full text-left"
+              >
+                <LogOut className="w-5 h-5" /> Log Out
+              </button>
             </nav>
           </aside>
         </div>
