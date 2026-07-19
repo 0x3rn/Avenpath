@@ -151,7 +151,12 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
 export const studySessions = pgTable("study_sessions", {
   id: serial("id").primaryKey(),
   userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  subjectSlug: text("subject_slug"),
+  topicSlug: text("topic_slug"),
+  title: text("title"),
+  scheduledDate: timestamp("scheduled_date"),
   durationMinutes: integer("duration_minutes").notNull(),
+  isCompleted: boolean("is_completed").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

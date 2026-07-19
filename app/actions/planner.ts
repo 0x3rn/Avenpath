@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { studyPlans, studySessions, userProfiles } from "@/db/schema";
+import { studySessions, userProfiles } from "@/db/schema";
 import { createClient } from "@/utils/supabase/server";
 import { eq, and, gte, lte } from "drizzle-orm";
 import { endOfWeek, startOfWeek } from "date-fns";

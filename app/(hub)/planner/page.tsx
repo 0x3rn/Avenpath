@@ -10,7 +10,7 @@ export default async function PlannerPage() {
   const { data: { user } } = await supabase.auth.getUser();
 
   // Fetch user's existing scheduled sessions
-  let sessions = [];
+  let sessions: any[] = [];
   if (user) {
     sessions = await db.query.studySessions.findMany({
       where: eq(studySessions.userId, user.id)
