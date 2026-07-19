@@ -3,13 +3,7 @@ import { getSubjectsByLevel, getCategories, getLevels } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";
 import SubjectExplorer from "./SubjectExplorer";
 
-// Generate static params so the route is statically rendered
-export async function generateStaticParams() {
-  const levels = await getLevels();
-  return levels.map(level => ({
-    level: level
-  }));
-}
+
 
 export default async function LevelSubjectsPage({ params }: { params: Promise<{ level: string }> }) {
   const { level } = await params;
