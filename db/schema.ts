@@ -92,6 +92,8 @@ export const subtopics = pgTable("subtopics", {
   title: text("title").notNull(),
   slug: text("slug").notNull(),
   order: integer("order").notNull(),
+  content: text("content"),
+  flashcards: jsonb("flashcards").$type<any[]>(),
 });
 
 export const subtopicsRelations = relations(subtopics, ({ one }) => ({
@@ -189,7 +191,8 @@ export const bookmarksRelations = relations(bookmarks, ({ one }) => ({
 // --- Quizzes ---
 export const quizzes = pgTable("quizzes", {
   id: serial("id").primaryKey(),
-  subtopicId: integer("subtopic_id").references(() => subtopics.id, { onDelete: "cascade" }).notNull(),
+  subtopicId: integer("subtopic_id").references(() => subtopics.id, { onDelete: "cascade" }),
+  termId: integer("term_id").references(() => terms.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
   description: text("description"),
 });

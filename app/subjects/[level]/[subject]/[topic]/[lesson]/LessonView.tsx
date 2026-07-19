@@ -8,6 +8,8 @@ import {
   List, Check, Search, Download
 } from "lucide-react";
 import type { Subject, Topic, Subtopic } from "@/lib/curriculum";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function LessonView({ 
   level, 
@@ -135,118 +137,57 @@ export default function LessonView({
             </div>
           </header>
 
-          {/* Article Content - MOCK DATA */}
+          {/* Article Content */}
           <article className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-[1.8] font-medium text-[17px]">
-            <p>
-              Welcome to the first core lesson of <strong>{topic.name}</strong>. In this module, we will explore the foundational principles that govern the subject and build intuition for complex scenarios you'll face later on.
-            </p>
+            {lesson.content ? (
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {lesson.content}
+              </ReactMarkdown>
+            ) : (
+              <div className="py-12 text-center border-2 border-dashed border-border rounded-2xl">
+                <p className="text-muted-foreground mb-0">This lesson is currently being drafted.</p>
+              </div>
+            )}
             
-            <h2 className="text-2xl font-extrabold text-foreground mt-12 mb-6">Understanding the Basics</h2>
-            <p>
-              The most critical aspect of mastering this subject is recognizing patterns. Below is a formalized definition of the core concept.
-            </p>
-
-            {/* INFO BLOCKS */}
-            <div className="my-8 bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-              <div className="flex items-center gap-3 text-blue-500 font-bold mb-3">
-                <Info className="w-5 h-5" /> DEFINITION
-              </div>
-              <p className="text-foreground m-0">
-                <strong>{lesson.name}</strong> refers to the fundamental structure underlying the observable phenomena within {subject.name}. It provides a predictive model for future interactions.
-              </p>
-            </div>
-
-            <p>
-              With the definition out of the way, let's look at how this applies in the real world. Many students mistakenly assume that theoretical definitions don't map cleanly to practical examples.
-            </p>
-
-            <div className="my-8 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-6">
-              <div className="flex items-center gap-3 text-yellow-500 font-bold mb-3">
-                <AlertTriangle className="w-5 h-5" /> COMMON MISTAKE
-              </div>
-              <p className="text-foreground m-0">
-                Do not confuse correlation with causation when analyzing these systems. Just because two variables move together does not mean one causes the other.
-              </p>
-            </div>
-
-            <h2 className="text-2xl font-extrabold text-foreground mt-12 mb-6">Interactive Example</h2>
-            <p>
-              Let's walk through a step-by-step example. Try to identify the correct output before continuing.
-            </p>
-
-            {/* Mock Interactive Widget */}
-            <div className="my-8 border border-border rounded-2xl overflow-hidden">
-              <div className="bg-muted px-6 py-4 border-b border-border flex items-center justify-between">
-                <span className="font-bold text-foreground text-sm">Example 1.1</span>
-                <span className="text-xs font-bold text-muted-foreground bg-background px-2 py-1 rounded">Interactive</span>
-              </div>
-              <div className="p-8 bg-card flex flex-col items-center justify-center text-center">
-                <div className="text-2xl font-mono text-foreground font-bold mb-6">
-                  f(x) = 2x + 3
-                </div>
-                <button className="bg-foreground text-background px-6 py-3 rounded-full text-sm font-bold hover:scale-[1.02] transition-transform">
-                  Reveal Solution
-                </button>
-              </div>
-            </div>
-
-            <div className="my-8 bg-green-500/10 border border-green-500/20 rounded-2xl p-6">
-              <div className="flex items-center gap-3 text-green-500 font-bold mb-3">
-                <Lightbulb className="w-5 h-5" /> REMEMBER
-              </div>
-              <p className="text-foreground m-0">
-                The core principle always holds true in a closed system.
-              </p>
-            </div>
-
             {/* KNOWLEDGE CHECK (Mini Quiz) */}
-            <div className="my-16 border-2 border-border rounded-3xl p-8">
-              <h3 className="text-xl font-extrabold text-foreground mb-2 flex items-center gap-2">
-                <CheckCircle2 className="w-6 h-6 text-foreground" /> Knowledge Check
-              </h3>
-              <p className="text-sm font-medium mb-8">Test your understanding before moving on.</p>
+            {(lesson as any).quizzes && (lesson as any).quizzes.length > 0 && (
+              <div className="my-16 border-2 border-border rounded-3xl p-8">
+                <h3 className="text-xl font-extrabold text-foreground mb-2 flex items-center gap-2">
+                  <CheckCircle2 className="w-6 h-6 text-foreground" /> Knowledge Check
+                </h3>
+                <p className="text-sm font-medium mb-8">Test your understanding before moving on.</p>
 
-              <div className="space-y-4">
-                <div className="font-bold text-foreground text-lg mb-4">What is the primary function of {lesson.name}?</div>
-                
-                {[
-                  "To predict unpredictable outcomes.",
-                  "To provide a structured model for observable phenomena.",
-                  "To confuse students.",
-                  "None of the above."
-                ].map((option, idx) => {
-                  const isSelected = quizAnswer === idx;
-                  const isCorrect = idx === 1;
-                  const showResult = quizAnswer !== null && isSelected;
+                {((lesson as any).quizzes[0].questions || []).map((q: any, i: number) => (
+                  <div key={i} className="mb-8">
+                    <div className="font-bold text-foreground text-lg mb-4">{q.questionText}</div>
+                    <div className="space-y-4">
+                      {q.options.map((option: string, idx: number) => {
+                        const isSelected = quizAnswer === idx;
+                        const isCorrect = idx === q.correctAnswer;
+                        const showResult = quizAnswer !== null && isSelected;
 
-                  return (
-                    <button 
-                      key={idx}
-                      onClick={() => setQuizAnswer(idx)}
-                      disabled={quizAnswer !== null}
-                      className={`w-full text-left p-4 rounded-xl border-2 font-medium transition-all flex items-center justify-between ${
-                        showResult && isCorrect ? "border-green-500 bg-green-500/10 text-green-500" :
-                        showResult && !isCorrect ? "border-red-500 bg-red-500/10 text-red-500" :
-                        isSelected ? "border-foreground" : "border-border hover:border-foreground/30 text-foreground bg-card"
-                      }`}
-                    >
-                      <span>{option}</span>
-                      {showResult && isCorrect && <CheckCircle2 className="w-5 h-5" />}
-                      {showResult && !isCorrect && <XCircle className="w-5 h-5" />}
-                    </button>
-                  );
-                })}
+                        return (
+                          <button 
+                            key={idx}
+                            onClick={() => setQuizAnswer(idx)}
+                            disabled={quizAnswer !== null}
+                            className={`w-full text-left p-4 rounded-xl border-2 font-medium transition-all flex items-center justify-between ${
+                              showResult && isCorrect ? "border-green-500 bg-green-500/10 text-green-500" :
+                              showResult && !isCorrect ? "border-red-500 bg-red-500/10 text-red-500" :
+                              isSelected ? "border-foreground" : "border-border hover:border-foreground/30 text-foreground bg-card"
+                            }`}
+                          >
+                            <span>{option}</span>
+                            {showResult && isCorrect && <CheckCircle2 className="w-5 h-5" />}
+                            {showResult && !isCorrect && <XCircle className="w-5 h-5" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-
-            {/* SUMMARY */}
-            <h2 className="text-2xl font-extrabold text-foreground mt-12 mb-6">Summary</h2>
-            <ul className="list-disc pl-6 space-y-2 text-foreground font-medium">
-              <li>{lesson.name} is the foundation of {topic.name}.</li>
-              <li>Always check for common mistakes like correlation vs causation.</li>
-              <li>The rule applies strictly to closed systems.</li>
-            </ul>
-
+            )}
           </article>
 
           {/* BOTTOM NAVIGATION */}

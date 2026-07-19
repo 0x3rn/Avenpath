@@ -3,9 +3,11 @@ import * as schema from "../db/schema";
 import { eq, and } from "drizzle-orm";
 
 export interface Subtopic {
-  id: string; // Used slug as ID
+  id: string | number; // String if mock, number if DB
   name: string;
   slug: string;
+  content?: string | null;
+  quizzes?: any[];
 }
 
 export interface Topic {
@@ -173,4 +175,18 @@ export async function getSubtopic(levelSlug: string, subjectSlug: string, topicS
   const topic = await getTopic(levelSlug, subjectSlug, topicSlug);
   if (!topic) return null;
   return topic.subtopics.find(s => s.slug === subtopicSlug) || null;
+}
+
+export async function getSubtopicWithContent(subtopicSlug: string) {
+  const st = await db.query.subtopics.findFirst({
+    where: eq(schema.subtopics.slug, subtopicSlug)
+  });
+  
+  if (!st) return null;
+  
+  const quizzesData = await db.query.quizzes.findMany({
+    where: eq(schema.quizzes.subtopicId, st.id)
+  });
+  
+  return { ...st, name: st.title, quizzes: quizzesData };
 }

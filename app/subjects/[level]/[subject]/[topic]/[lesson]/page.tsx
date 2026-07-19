@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getSubject, getTopic, getSubtopic, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
+import { getSubject, getTopic, getSubtopicWithContent, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
 import LessonView from "./LessonView";
 
 export async function generateStaticParams() {
@@ -31,7 +31,7 @@ export default async function LessonPage({ params }: { params: Promise<{ level: 
   // Fetch the data
   const subject = await getSubject(level, subjectSlug);
   const topic = await getTopic(level, subjectSlug, topicSlug);
-  const lesson = await getSubtopic(level, subjectSlug, topicSlug, lessonSlug);
+  const lesson = await getSubtopicWithContent(lessonSlug);
 
   if (!subject || !topic || !lesson) {
     notFound();
