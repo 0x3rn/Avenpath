@@ -3,6 +3,7 @@
 import { TopicMenu, SubtopicMenu, NewTopicDialog, NewSubtopicDialog } from "./TopicClientActions";
 import { Plus, Search, Filter, Folder, FolderOpen, MoreVertical, FileText, MoveRight } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 type TreeNode = {
   name: string;
@@ -181,13 +182,13 @@ export default function TopicsTree({ subjects }: { subjects: any[] }) {
                       {openTopics.has(topic.id) && (
                         <div className="ml-5 border-l border-border pl-4 space-y-1">
                           {(topic.subtopics || []).map((sub: any) => (
-                            <div key={sub.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 cursor-pointer group">
-                              <div className="flex items-center gap-2">
+                            <div key={sub.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 group">
+                              <Link href={`/admin/lessons/${sub.id}/edit`} className="flex flex-1 items-center gap-2 cursor-pointer">
                                 <FileText className="w-4 h-4 text-muted-foreground" />
                                 <span className="font-medium text-sm text-muted-foreground group-hover:text-foreground transition-colors">{sub.title}</span>
-                              </div>
+                              </Link>
                               <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button className="p-1 hover:bg-card border border-transparent hover:border-border rounded"><MoveRight className="w-3 h-3 text-muted-foreground" /></button>
+                                <Link href={`/admin/lessons/${sub.id}/edit`} className="p-1 hover:bg-card border border-transparent hover:border-border rounded"><MoveRight className="w-3 h-3 text-muted-foreground" /></Link>
                                 <SubtopicMenu subtopicId={sub.id} />
                               </div>
                             </div>

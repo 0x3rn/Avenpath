@@ -59,8 +59,16 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
         <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
           <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={levelHref} className="hover:text-foreground transition-colors capitalize">{level}</Link>
+          <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
           <ChevronRight className="w-4 h-4" />
+          {subject.category && subject.categoryName && (
+            <>
+              <Link href={`/subjects/${level}?category=${subject.category}#${subject.slug.replace(/-class\d+/, '')}`} className="hover:text-foreground transition-colors">
+                {subject.categoryName}
+              </Link>
+              <ChevronRight className="w-4 h-4" />
+            </>
+          )}
           <span className="text-foreground">{subject.name}</span>
         </div>
       </nav>

@@ -8,12 +8,12 @@ export async function extractTextFromPDF(formData: FormData): Promise<string> {
   }
 
   const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
+  const buffer = new Uint8Array(arrayBuffer);
 
   try {
-    const pdfParse = require("pdf-parse");
-    const data = await pdfParse(buffer);
-    return data.text;
+    const { extractText } = await import("unpdf");
+    const { text } = await extractText(buffer);
+    return text.join("\n\n");
   } catch (error) {
     console.error("PDF Parsing error:", error);
     throw new Error("Failed to parse PDF");

@@ -6,6 +6,7 @@ import { eq, and, desc } from "drizzle-orm";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Clock, Calendar, CheckCircle2, ChevronRight, Activity, Award, BarChart2 } from "lucide-react";
 import AssignModal from "./AssignModal";
+import AssignTaskModal from "./AssignTaskModal";
 
 export default async function ChildDetailDashboard(props: { params: Promise<{ childId: string }> }) {
   const params = await props.params;
@@ -76,6 +77,7 @@ export default async function ChildDetailDashboard(props: { params: Promise<{ ch
         </div>
         
         <div className="flex items-center gap-3">
+          <AssignTaskModal childId={child.id} />
           <AssignModal childId={child.id} />
         </div>
       </div>

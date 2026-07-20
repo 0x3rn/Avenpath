@@ -85,3 +85,13 @@ export async function getMySubjects() {
      };
   });
 }
+
+export async function getBasicSubjects() {
+  const allLevels = await db.query.levels.findMany();
+  const allCategories = await db.query.categories.findMany();
+  const allSubjects = await db.query.subjects.findMany({
+    columns: { id: true, name: true, categoryId: true, levelName: true, className: true }
+  });
+
+  return { levels: allLevels, categories: allCategories, subjects: allSubjects };
+}

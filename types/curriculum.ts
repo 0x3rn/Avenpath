@@ -36,4 +36,5 @@ export interface Subject {
   topics: Topic[]; // kept for backwards compatibility
   terms: Term[];
   category?: string;
+  categoryName?: string;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Search, ArrowRight, BookOpen, Clock, BarChart, ChevronDown, Activity, Microscope, Telescope, ChevronRight } from "lucide-react";
@@ -46,6 +46,19 @@ export default function SubjectExplorer({
 
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("A-Z");
+
+  // Handle auto-scroll to hash when it exists
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const id = window.location.hash.substring(1); // Remove the #
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    }
+  }, [searchParams]);
 
   // Format level
   const formattedLevel = level === 'highschool' ? 'High School' : 
@@ -236,7 +249,7 @@ export default function SubjectExplorer({
               const subjectHref = queryString ? `/subjects/${level}/${baseSlug}?${queryString}` : `/subjects/${level}/${baseSlug}`;
               
               return (
-                <Link key={subject.id} href={subjectHref}>
+                <Link key={subject.id} href={subjectHref} id={baseSlug} className="scroll-mt-24">
                   <div 
                     className="group flex flex-col h-full bg-card border border-border rounded-3xl p-6 hover:shadow-md transition-all duration-300 relative overflow-hidden -translate-y-0 hover:-translate-y-1"
                   >

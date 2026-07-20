@@ -2,7 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { db } from '@/db'
-import { userProfiles, parentChildLinks, notifications, assignments } from '@/db/schema'
+import { userProfiles, parentChildLinks, notifications, assignments, userSubjects } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { sendEmail } from '@/utils/email'
 import crypto from 'crypto'
@@ -166,6 +166,17 @@ export async function createAssignment(childId: string, entityType: string, enti
     entityType,
     entityId,
   })
+
+  if (entityType === "subject") {
+    // Check if the subject is already enrolled
+    const existing = await db.select().from(userSubjects).where(and(eq(userSubjects.userId, childId), eq(userSubjects.subjectId, entityId)))
+    if (existing.length === 0) {
+      await db.insert(userSubjects).values({
+        userId: childId,
+        subjectId: entityId
+      })
+    }
+  }
 
   // Send notification
   await db.insert(notifications).values({

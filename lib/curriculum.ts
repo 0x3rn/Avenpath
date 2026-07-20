@@ -98,6 +98,7 @@ export async function getSubjectsByLevel(levelSlug: string): Promise<Subject[]> 
       color: s.color || "#3b82f6",
       levels: [levelSlug],
       category: s.category.slug,
+      categoryName: s.category.name,
       topics,
       terms
     });
