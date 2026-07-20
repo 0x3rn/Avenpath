@@ -45,7 +45,7 @@ export default async function AdminDashboard() {
       {/* HEADER & QUICK ACTIONS */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight mb-2">Admin Dashboard</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight mb-2">Overview</h1>
           <p className="text-muted-foreground font-medium">Platform overview and quick actions.</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">

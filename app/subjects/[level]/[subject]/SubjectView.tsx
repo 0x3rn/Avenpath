@@ -4,8 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Users, CheckCircle2, Clock, ChevronDown } from "lucide-react";
 import type { Subject } from "@/lib/curriculum";
+import { SaveSubjectButton } from "./SaveSubjectButton";
 
-export default function SubjectView({ level, subjects, isLoggedIn = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean }) {
+export default function SubjectView({ level, subjects, isLoggedIn = false, isSaved = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean, isSaved?: boolean }) {
   const availableClasses = subjects.map(s => s.className).filter(Boolean);
   const hasClasses = availableClasses.length > 0;
   
@@ -97,9 +98,9 @@ export default function SubjectView({ level, subjects, isLoggedIn = false }: { l
               <button className="bg-foreground text-background px-8 py-4 rounded-full text-[15px] font-bold hover:scale-[1.02] hover:shadow-xl transition-all flex items-center gap-3">
                 Start Learning <ArrowRight className="w-5 h-5" />
               </button>
-              <button className="bg-transparent border-2 border-border text-foreground px-8 py-4 rounded-full text-[15px] font-bold hover:border-foreground/30 transition-all flex items-center gap-3">
-                Continue
-              </button>
+              {isLoggedIn && (
+                <SaveSubjectButton subjectId={subject.slug} initialSaved={isSaved} />
+              )}
             </div>
           </div>
         </div>

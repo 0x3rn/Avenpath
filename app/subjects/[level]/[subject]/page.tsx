@@ -2,8 +2,9 @@ import { notFound } from "next/navigation";
 import { getSubjectsGroup, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";
 import SubjectView from "./SubjectView";
-
-
+import { db } from "@/db";
+import { eq, and } from "drizzle-orm";
+import * as schema from "@/db/schema";
 
 export default async function SubjectPage({ params }: { params: Promise<{ level: string, subject: string }> }) {
   const { level, subject: subjectSlug } = await params;
@@ -16,5 +17,15 @@ export default async function SubjectPage({ params }: { params: Promise<{ level:
     notFound();
   }
 
-  return <SubjectView level={level} subjects={subjectsGroup} isLoggedIn={!!profile} />;
+  // Check if subject is saved
+  let isSaved = false;
+  if (profile) {
+    const mainSubject = subjectsGroup[0]; // Assuming all share same core slug or we just use the first one
+    const saved = await db.query.userSubjects.findFirst({
+      where: (us, { eq, and }) => and(eq(us.userId, profile.id), eq(us.subjectId, mainSubject.slug))
+    });
+    isSaved = !!saved;
+  }
+
+  return <SubjectView level={level} subjects={subjectsGroup} isLoggedIn={!!profile} isSaved={isSaved} />;
 }

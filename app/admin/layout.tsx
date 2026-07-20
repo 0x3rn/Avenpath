@@ -7,18 +7,19 @@ import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, BookOpen, Layers, Edit3, HelpCircle, 
   Image as ImageIcon, Users, BarChart3, FileText, Settings, 
-  Bell, Search, Menu, X, ShieldAlert, User, ShieldCheck, Home
+  Bell, Search, Menu, X, ShieldAlert, User, ShieldCheck, Home, CheckCircle2
 } from "lucide-react";
 
 const ADMIN_LINKS = [
-  { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { name: "Subjects", href: "/admin/subjects", icon: BookOpen },
-  { name: "Topics", href: "/admin/topics", icon: Layers },
-  { name: "Lessons", href: "/admin/lessons", icon: Edit3 },
-  { name: "Quizzes", href: "/admin/quizzes", icon: HelpCircle },
-  { name: "Media", href: "/admin/media", icon: ImageIcon },
-  { name: "Users", href: "/admin/users", icon: Users },
-  { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+  { name: "Overview", href: "/admin", icon: LayoutDashboard, roles: ["admin", "moderator"] },
+  { name: "Review Queue", href: "/admin/reviews", icon: CheckCircle2, roles: ["admin"] },
+  { name: "Subjects", href: "/admin/subjects", icon: BookOpen, roles: ["admin", "moderator"] },
+  { name: "Topics", href: "/admin/topics", icon: Layers, roles: ["admin", "moderator"] },
+  { name: "Lessons", href: "/admin/lessons", icon: Edit3, roles: ["admin", "moderator"] },
+  { name: "Quizzes", href: "/admin/quizzes", icon: HelpCircle, roles: ["admin", "moderator"] },
+  { name: "Media", href: "/admin/media", icon: ImageIcon, roles: ["admin", "moderator"] },
+  { name: "Users", href: "/admin/users", icon: Users, roles: ["admin"] },
+  { name: "Analytics", href: "/admin/analytics", icon: BarChart3, roles: ["admin"] },
 ];
 
 const SYSTEM_LINKS = [
@@ -50,15 +51,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* --- DESKTOP SIDEBAR --- */}
       <aside className="hidden lg:flex flex-col w-[260px] bg-[#0c0c0c] text-white fixed h-screen top-0 left-0 z-40 overflow-y-auto shrink-0 border-r border-white/10">
         <div className="p-6 flex items-center gap-3">
-          <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center">
-            <ShieldCheck className="w-5 h-5 text-white" />
-          </div>
-          <span className="font-extrabold tracking-tight text-xl">Avenpath CMS</span>
+          <span className="font-extrabold tracking-tight text-xl">Admin Dashboard</span>
         </div>
 
         <nav className="px-4 space-y-1 flex-1">
           <div className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-4 px-2 mt-2">Content</div>
-          {ADMIN_LINKS.map(link => {
+          {ADMIN_LINKS.filter(link => !userProfile || link.roles.includes(userProfile.role)).map(link => {
             const isActive = pathname === link.href || (link.href !== "/admin" && pathname.startsWith(link.href));
             return (
               <Link 
@@ -76,9 +74,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           })}
 
           <div className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-4 px-2 mt-8">System</div>
-          {SYSTEM_LINKS.map(link => (
+          {userProfile?.role === "admin" && SYSTEM_LINKS.map(link => (
             <Link 
-              key={link.name} 
+              key={link.name}  
               href={link.href}
               className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-white/60 hover:bg-white/5 hover:text-white transition-colors"
             >
@@ -105,10 +103,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <aside className="w-[260px] bg-[#0c0c0c] text-white relative flex flex-col shadow-2xl h-full animate-in slide-in-from-left duration-300">
             <div className="p-6 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center">
-                  <ShieldCheck className="w-4 h-4 text-white" />
-                </div>
-                <span className="font-extrabold tracking-tight">CMS</span>
+                <span className="font-extrabold tracking-tight text-lg">Admin Dashboard</span>
               </div>
               <button onClick={() => setMobileMenuOpen(false)} className="p-2 -mr-2 bg-white/10 rounded-md">
                 <X className="w-4 h-4 text-white" />
@@ -116,7 +111,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
             <nav className="px-4 space-y-1 flex-1 overflow-y-auto pb-24">
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-4 px-2 mt-2">Content</div>
-              {ADMIN_LINKS.map(link => {
+              {ADMIN_LINKS.filter(link => !userProfile || link.roles.includes(userProfile.role)).map(link => {
                 const isActive = pathname === link.href || (link.href !== "/admin" && pathname.startsWith(link.href));
                 return (
                   <Link 

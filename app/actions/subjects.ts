@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/db";
-import { subjects, userProgress, terms, subtopics, topics } from "@/db/schema";
-import { eq, inArray } from "drizzle-orm";
+import { subjects, userProgress, terms, subtopics, topics, userSubjects } from "@/db/schema";
+import { eq, inArray, sql } from "drizzle-orm";
 import { createClient } from "@/utils/supabase/server";
 
 export async function getMySubjects() {
@@ -23,18 +23,53 @@ export async function getMySubjects() {
     .innerJoin(terms, eq(topics.termId, terms.id))
     .where(eq(userProgress.userId, userId));
 
-  if (progress.length === 0) return [];
+  // 2. Find all explicitly saved subjects
+  const saved = await db
+    .select({ subjectId: userSubjects.subjectId })
+    .from(userSubjects)
+    .where(eq(userSubjects.userId, userId));
 
-  const activeSubjectIds = [...new Set(progress.map(p => p.subjectId))];
+  const activeSubjectIds = [...new Set([...progress.map(p => p.subjectId), ...saved.map(s => s.subjectId)])];
 
-  // 2. Fetch those subjects
+  if (activeSubjectIds.length === 0) return [];
+
+  // 3. Fetch true totals for these subjects
+  const totalsRaw = await db.select({
+      subjectId: terms.subjectId,
+      count: sql<number>`count(*)`.as("count")
+    })
+    .from(subtopics)
+    .innerJoin(topics, eq(subtopics.topicId, topics.id))
+    .innerJoin(terms, eq(topics.termId, terms.id))
+    .where(inArray(terms.subjectId, activeSubjectIds))
+    .groupBy(terms.subjectId);
+    
+  const subjectTotals = totalsRaw.reduce((acc, curr) => {
+    acc[curr.subjectId] = Number(curr.count) || 0;
+    return acc;
+  }, {} as Record<string, number>);
+
+  // 4. Fetch those subjects
   const mySubjects = await db.select().from(subjects).where(inArray(subjects.id, activeSubjectIds));
 
   return mySubjects.map(sub => {
      const completed = progress.filter(p => p.subjectId === sub.id).length;
-     // Fake total topics to avoid complex join for now, just to show a clean UI
-     const total = completed + 20; 
-     const percentage = Math.round((completed / total) * 100);
+     const total = subjectTotals[sub.id] || 0; 
+     const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+     
+     let status = "Not Started";
+     if (completed > 0 && completed < total) status = "Started";
+     else if (completed > 0 && completed >= total) status = "Finished";
+
+     // Format the pill logic. E.g. Senior Highschool
+     let levelPill = sub.levelName;
+     if (sub.className !== "General") {
+       levelPill = `${sub.levelName} - ${sub.className}`;
+     }
+     // specific formatting requested: "Nigerian Junior Highschool"
+     if (sub.slug.includes('-nigerian-')) {
+        levelPill = "Nigerian " + levelPill;
+     }
 
      return {
        id: sub.id,
@@ -45,6 +80,8 @@ export async function getMySubjects() {
        percentage,
        slug: sub.slug,
        levelName: sub.levelName,
+       levelPill,
+       status
      };
   });
 }

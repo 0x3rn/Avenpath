@@ -73,8 +73,17 @@ export default function MySubjectsPage() {
                 </button>
               </div>
 
-              <div className="flex items-center gap-6 text-sm font-bold text-muted-foreground mb-8 relative z-10">
-                <span className="uppercase tracking-wider">{sub.levelName}</span>
+              <div className="flex flex-wrap items-center gap-3 text-xs font-bold mb-8 relative z-10">
+                <span className="px-3 py-1 bg-muted text-muted-foreground rounded-full uppercase tracking-wider">
+                  {sub.levelPill}
+                </span>
+                <span className={`px-3 py-1 rounded-full uppercase tracking-wider ${
+                  sub.status === "Finished" ? "bg-green-500/20 text-green-600" :
+                  sub.status === "Started" ? "bg-blue-500/20 text-blue-600" :
+                  "bg-muted/50 text-muted-foreground"
+                }`}>
+                  {sub.status === "Started" ? `Started (${sub.percentage}%)` : sub.status}
+                </span>
               </div>
 
               <div className="space-y-2 mb-8 relative z-10">
@@ -90,10 +99,10 @@ export default function MySubjectsPage() {
               <div className="bg-muted/50 rounded-2xl p-4 mb-8 flex items-center justify-between relative z-10">
                 <div>
                   <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Status</span>
-                  <span className="font-extrabold">In Progress</span>
+                  <span className="font-extrabold">{sub.status}</span>
                 </div>
-                <Link href={`/subjects/${sub.id}`} className="bg-foreground text-background px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
-                  Continue <ArrowRight className="w-4 h-4" />
+                <Link href={`/subjects/${sub.levelName.toLowerCase().replace(/ /g, '-')}/${sub.slug}`} className="bg-foreground text-background px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-opacity">
+                  {sub.status === "Not Started" ? "Start" : "Continue"} <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
 

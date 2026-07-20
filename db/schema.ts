@@ -149,6 +149,24 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
   }),
 }));
 
+export const userSubjects = pgTable("user_subjects", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  subjectId: text("subject_id").references(() => subjects.id, { onDelete: "cascade" }).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const userSubjectsRelations = relations(userSubjects, ({ one }) => ({
+  user: one(userProfiles, {
+    fields: [userSubjects.userId],
+    references: [userProfiles.id],
+  }),
+  subject: one(subjects, {
+    fields: [userSubjects.subjectId],
+    references: [subjects.id],
+  }),
+}));
+
 // --- Study Sessions (Activity Tracking) ---
 export const studySessions = pgTable("study_sessions", {
   id: serial("id").primaryKey(),
@@ -309,3 +327,48 @@ export const notifications = pgTable("notifications", {
   isRead: boolean("is_read").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+// --- Media ---
+export const mediaAssets = pgTable("media_assets", {
+  id: text("id").primaryKey(), // We'll use uuid or a nano ID
+  userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(), // Who uploaded it
+  filename: text("filename").notNull(),
+  fileType: text("file_type").notNull(), // image/png, video/mp4, application/pdf
+  sizeBytes: integer("size_bytes").notNull(),
+  url: text("url").notNull(), // Full public URL
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const mediaAssetsRelations = relations(mediaAssets, ({ one }) => ({
+  user: one(userProfiles, {
+    fields: [mediaAssets.userId],
+    references: [userProfiles.id],
+  }),
+}));
+
+// --- Content Revisions (Moderation Drafts) ---
+export const contentRevisions = pgTable("content_revisions", {
+  id: serial("id").primaryKey(),
+  authorId: text("author_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  entityType: text("entity_type").notNull(), // 'lesson', 'quiz', 'media', 'subject'
+  entityId: text("entity_id"), // Original entity ID if editing. Null if creating new.
+  proposedPayload: jsonb("proposed_payload").notNull(), // The draft data
+  status: text("status").default("pending").notNull(), // 'pending', 'approved', 'rejected'
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  reviewedAt: timestamp("reviewed_at"),
+  reviewedBy: text("reviewed_by").references(() => userProfiles.id, { onDelete: "set null" }),
+  reviewNotes: text("review_notes"),
+});
+
+export const contentRevisionsRelations = relations(contentRevisions, ({ one }) => ({
+  author: one(userProfiles, {
+    fields: [contentRevisions.authorId],
+    references: [userProfiles.id],
+    relationName: "author",
+  }),
+  reviewer: one(userProfiles, {
+    fields: [contentRevisions.reviewedBy],
+    references: [userProfiles.id],
+    relationName: "reviewer",
+  }),
+}));
