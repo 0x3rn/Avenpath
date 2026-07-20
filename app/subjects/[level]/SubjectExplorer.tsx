@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Search, ArrowRight, BookOpen, Clock, BarChart, ChevronDown, Activity, Microscope, Telescope, ChevronRight } from "lucide-react";
 import type { Subject } from "@/lib/curriculum";
 import dynamic from "next/dynamic";
@@ -30,9 +31,28 @@ export default function SubjectExplorer({
   categories: string[]; 
   isLoggedIn?: boolean;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const defaultCategory = categories.includes("all") ? "all" : (categories.length > 0 ? categories[0] : "All");
-  const [activeCategory, setActiveCategory] = useState<string>(defaultCategory);
-  const [activeSubLevel, setActiveSubLevel] = useState<string>("Senior High School");
+  
+  const activeCategory = searchParams.get('category') || defaultCategory;
+  const activeSubLevel = searchParams.get('sublevel') || "Junior High School";
+  
+  const setActiveCategory = (cat: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('category', cat);
+    params.set('sublevel', "Junior High School");
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const setActiveSubLevel = (sub: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('sublevel', sub);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("A-Z");
 
@@ -74,8 +94,8 @@ export default function SubjectExplorer({
     filteredSubjects.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortBy === "Most Lessons") {
     filteredSubjects.sort((a, b) => {
-      const aLessons = a.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
-      const bLessons = b.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
+      const aLessons = a.topics.reduce((acc, t) => acc + (t.subtopics.length > 0 ? t.subtopics.length : 1), 0);
+      const bLessons = b.topics.reduce((acc, t) => acc + (t.subtopics.length > 0 ? t.subtopics.length : 1), 0);
       return bLessons - aLessons;
     });
   }
@@ -121,23 +141,34 @@ export default function SubjectExplorer({
             />
           </div>
 
-          {/* CATEGORY CHIPS */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          {/* CATEGORY CHIPS - Desktop */}
+          <div className="hidden sm:flex flex-wrap items-center justify-center gap-3">
             {categories.map(cat => {
               const formattedCat = cat.charAt(0).toUpperCase() + cat.slice(1);
               return (
                 <button 
                   key={cat}
-                  onClick={() => {
-                    setActiveCategory(cat);
-                    setActiveSubLevel("Senior High School"); // Reset sub-level on category change
-                  }}
+                  onClick={() => setActiveCategory(cat)}
                   className={`px-5 py-2.5 rounded-full text-[15px] font-bold transition-all ${activeCategory === cat ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"}`}
                 >
                   {formattedCat}
                 </button>
               );
             })}
+          </div>
+
+          {/* CATEGORY DROPDOWN - Mobile */}
+          <div className="sm:hidden w-full max-w-xs mx-auto relative mb-4">
+             <select 
+               value={activeCategory} 
+               onChange={(e) => setActiveCategory(e.target.value)}
+               className="w-full bg-card border-2 border-border focus:border-foreground rounded-full py-3 px-5 text-lg font-bold appearance-none relative z-10 outline-none text-foreground"
+             >
+               {categories.map(cat => (
+                 <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+               ))}
+             </select>
+             <ChevronDown className="w-5 h-5 text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 z-0 pointer-events-none" />
           </div>
 
           {/* SUB-LEVEL CHIPS (For Nigeria) */}
@@ -201,11 +232,14 @@ export default function SubjectExplorer({
         {filteredSubjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredSubjects.map(subject => {
-              const totalLessons = subject.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
+              const totalLessons = subject.topics.reduce((acc, t) => acc + (t.subtopics.length > 0 ? t.subtopics.length : 1), 0);
               
               const baseSlug = subject.slug.split('-class')[0];
+              const queryString = searchParams.toString();
+              const subjectHref = queryString ? `/subjects/${level}/${baseSlug}?${queryString}` : `/subjects/${level}/${baseSlug}`;
+              
               return (
-                <Link key={subject.id} href={`/subjects/${level}/${baseSlug}`}>
+                <Link key={subject.id} href={subjectHref}>
                   <div 
                     className="group flex flex-col h-full bg-card border border-border rounded-3xl p-6 hover:shadow-md transition-all duration-300 relative overflow-hidden -translate-y-0 hover:-translate-y-1"
                   >

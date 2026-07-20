@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Users, CheckCircle2, Clock, ChevronDown } from "lucide-react";
 import type { Subject } from "@/lib/curriculum";
 import { SaveSubjectButton } from "./SaveSubjectButton";
 
 export default function SubjectView({ level, subjects, isLoggedIn = false, isSaved = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean, isSaved?: boolean }) {
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
+  const levelHref = queryString ? `/subjects/${level}?${queryString}` : `/subjects/${level}`;
+  
   const availableClasses = subjects.map(s => s.className).filter(Boolean);
   const hasClasses = availableClasses.length > 0;
   
@@ -52,7 +57,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
         <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
           <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
+          <Link href={levelHref} className="hover:text-foreground transition-colors capitalize">{level}</Link>
           <ChevronRight className="w-4 h-4" />
           <span className="text-foreground">{subject.name}</span>
         </div>
@@ -192,8 +197,13 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                   <h2 className="text-3xl font-extrabold mb-8">{displayTheme}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {displayTopics.map((topic, idx) => (
-                      <Link key={topic.slug} href={`/subjects/${level}/${subject.slug}/${topic.slug}`}>
+                    {displayTopics.map((topic, idx) => {
+                      const topicHref = queryString 
+                        ? `/subjects/${level}/${subject.slug}/${topic.slug}?${queryString}`
+                        : `/subjects/${level}/${subject.slug}/${topic.slug}`;
+                      
+                      return (
+                      <Link key={topic.slug} href={topicHref}>
                         <div 
                           className="group border border-border rounded-3xl p-8 hover:shadow-xl transition-all duration-300 h-full flex flex-col relative overflow-hidden"
                           style={{ backgroundColor: `${subject.color}05` }}
@@ -216,7 +226,8 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
                           </div>
                         </div>
                       </Link>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               );

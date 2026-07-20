@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import { getSubjectsGroup, getSubjectsByLevel, getLevels } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";

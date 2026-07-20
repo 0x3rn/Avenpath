@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { 
   ChevronRight, Bookmark, Share2, Moon, Sun, Clock, BookOpen, 
   AlertTriangle, Lightbulb, Info, CheckCircle2, XCircle, ArrowRight,
@@ -22,6 +23,13 @@ export default function LessonView({
   topic: Topic,
   lesson: Subtopic
 }) {
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
+  
+  const levelHref = queryString ? `/subjects/${level}?${queryString}` : `/subjects/${level}`;
+  const subjectHref = queryString ? `/subjects/${level}/${subject.slug}?${queryString}` : `/subjects/${level}/${subject.slug}`;
+  const topicHref = queryString ? `/subjects/${level}/${subject.slug}/${topic.slug}?${queryString}` : `/subjects/${level}/${subject.slug}/${topic.slug}`;
+
   const [readingProgress, setReadingProgress] = useState(0);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
@@ -49,14 +57,16 @@ export default function LessonView({
       {/* TOP BAR */}
       <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border px-6 py-4 flex items-center justify-between">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground overflow-x-auto hide-scrollbar whitespace-nowrap">
-          <Link href="/" className="hover:text-foreground">Avenpath.</Link>
+        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
+          <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
           <ChevronRight className="w-4 h-4 shrink-0" />
-          <Link href={`/subjects/${level}/${subject.slug}`} className="hover:text-foreground">{subject.name}</Link>
+          <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
           <ChevronRight className="w-4 h-4 shrink-0" />
-          <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}`} className="hover:text-foreground">{topic.name}</Link>
+          <Link href={subjectHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{subject.name}</Link>
           <ChevronRight className="w-4 h-4 shrink-0" />
-          <span className="text-foreground">{lesson.name}</span>
+          <Link href={topicHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{topic.name}</Link>
+          <ChevronRight className="w-4 h-4 shrink-0" />
+          <span className="text-foreground shrink-0 max-w-[150px] truncate">{lesson.name}</span>
         </div>
 
         {/* Actions */}

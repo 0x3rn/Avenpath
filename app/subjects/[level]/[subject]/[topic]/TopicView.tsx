@@ -1,10 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, Clock, BookOpen, CheckCircle2, ChevronRight, Lock } from "lucide-react";
 import type { Subject, Topic } from "@/lib/curriculum";
 
 export default function TopicView({ level, subject, topic }: { level: string, subject: Subject, topic: Topic }) {
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
+  
+  const levelHref = queryString ? `/subjects/${level}?${queryString}` : `/subjects/${level}`;
+  const subjectHref = queryString ? `/subjects/${level}/${subject.slug}?${queryString}` : `/subjects/${level}/${subject.slug}`;
+  
+  const [activeTab, setActiveTab] = useState("Lessons");
+  
   // Mock data for UI presentation based on the spec
   const progress = 14;
   const learningOutcomes = [
@@ -19,14 +29,14 @@ export default function TopicView({ level, subject, topic }: { level: string, su
       {/* Top Bar Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
         <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground hidden md:flex">
-          <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
-          <ChevronRight className="w-4 h-4" />
-          <Link href={`/subjects/${level}/${subject.slug}`} className="hover:text-foreground transition-colors">{subject.name}</Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="text-foreground">{topic.name}</span>
+        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
+          <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
+          <ChevronRight className="w-4 h-4 shrink-0" />
+          <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
+          <ChevronRight className="w-4 h-4 shrink-0" />
+          <Link href={subjectHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{subject.name}</Link>
+          <ChevronRight className="w-4 h-4 shrink-0" />
+          <span className="text-foreground shrink-0 max-w-[150px] truncate">{topic.name}</span>
         </div>
       </nav>
 
@@ -99,9 +109,12 @@ export default function TopicView({ level, subject, topic }: { level: string, su
               const isCompleted = idx === 0;
               const isCurrent = idx === 1;
               const isLocked = idx > 1;
+              const subtopicHref = queryString 
+                ? `/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}?${queryString}`
+                : `/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}`;
 
               return (
-                <Link key={subtopic.slug} href={`/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}`} className="block group">
+                <Link key={subtopic.slug} href={subtopicHref} className="block group">
                   <div className="relative pl-10 flex items-center">
                     {/* Timeline Node */}
                     <div className={`absolute -left-[11px] w-[20px] h-[20px] rounded-full border-4 border-background transition-colors ${
