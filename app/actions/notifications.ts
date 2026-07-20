@@ -19,6 +19,19 @@ export async function getUserNotifications() {
   return notifs
 }
 
+export async function getUnreadNotificationCount() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return 0
+
+  const notifs = await db.select()
+    .from(notifications)
+    .where(eq(notifications.userId, user.id))
+
+  return notifs.filter(n => !n.isRead).length
+}
+
 export async function markNotificationRead(id: number) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

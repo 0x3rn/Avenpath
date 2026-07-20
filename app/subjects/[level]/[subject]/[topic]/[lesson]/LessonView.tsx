@@ -8,7 +8,7 @@ import {
   AlertTriangle, Lightbulb, Info, CheckCircle2, XCircle, ArrowRight,
   List, Check, Search, Download
 } from "lucide-react";
-import type { Subject, Topic, Subtopic } from "@/lib/curriculum";
+import type { Subject, Topic, Subtopic } from "@/types/curriculum";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 

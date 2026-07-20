@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Users, CheckCircle2, Clock, ChevronDown } from "lucide-react";
-import type { Subject } from "@/lib/curriculum";
+import type { Subject } from "@/types/curriculum";
 import { SaveSubjectButton } from "./SaveSubjectButton";
 
 export default function SubjectView({ level, subjects, isLoggedIn = false, isSaved = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean, isSaved?: boolean }) {
@@ -50,7 +50,9 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
       {/* Navigation Bar */}
       <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
         {!isLoggedIn ? (
-          <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+          </Link>
         ) : (
           <div />
         )}

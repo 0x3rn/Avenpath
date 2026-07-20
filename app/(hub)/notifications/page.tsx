@@ -46,9 +46,6 @@ export default function NotificationsPage() {
           <button className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors px-4 py-2">
             Mark all read
           </button>
-          <button className="bg-muted p-2 rounded-xl text-foreground hover:bg-foreground hover:text-background transition-colors">
-            <Settings2 className="w-5 h-5" />
-          </button>
         </div>
       </div>
 
@@ -60,10 +57,10 @@ export default function NotificationsPage() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8 pt-4">
+      <div className="pt-4">
         
         {/* MAIN FEED */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-4">
           
           {loading ? (
             <div className="text-center py-8 text-sm text-muted-foreground">Loading...</div>
@@ -105,57 +102,6 @@ export default function NotificationsPage() {
           )}
 
         </div>
-
-        {/* RIGHT SIDEBAR */}
-        <div className="space-y-8">
-          
-          {/* WEEKLY SUMMARY */}
-          <div className="bg-card border border-border rounded-3xl p-6">
-            <h3 className="font-extrabold text-lg flex items-center gap-2 mb-6">
-              <CalendarCheck2 className="w-5 h-5 text-muted-foreground" /> This Week
-            </h3>
-            
-            <div className="text-center mb-6">
-              <div className="text-4xl font-extrabold mb-1">6.4</div>
-              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Hours Studied</div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex justify-between items-center text-sm font-bold">
-                <span className="text-muted-foreground">Lessons</span>
-                <span>18</span>
-              </div>
-              <div className="flex justify-between items-center text-sm font-bold">
-                <span className="text-muted-foreground">Quizzes</span>
-                <span>4</span>
-              </div>
-              <div className="flex justify-between items-center text-sm font-bold">
-                <span className="text-muted-foreground">Accuracy</span>
-                <span className="text-green-500">89%</span>
-              </div>
-            </div>
-          </div>
-
-          {/* QUICK PREFERENCES */}
-          <div className="bg-muted/30 border border-border rounded-3xl p-6">
-            <h3 className="font-extrabold text-sm uppercase tracking-wider mb-6 text-muted-foreground">Quick Settings</h3>
-            <div className="space-y-4">
-              {["Study Reminders", "Achievements", "Quiz Reminders", "Community Updates"].map((setting, i) => (
-                <div key={i} className="flex items-center justify-between">
-                  <span className="font-bold text-sm">{setting}</span>
-                  <div className={`w-10 h-6 rounded-full p-1 transition-colors ${i === 3 ? "bg-muted" : "bg-green-500"}`}>
-                    <div className={`w-4 h-4 rounded-full bg-white transition-transform ${i === 3 ? "translate-x-0" : "translate-x-4"}`} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <button className="w-full mt-6 text-sm font-bold text-muted-foreground hover:text-foreground transition-colors text-center">
-              View All Settings
-            </button>
-          </div>
-
-        </div>
-
       </div>
 
     </div>

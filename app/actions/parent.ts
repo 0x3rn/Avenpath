@@ -2,7 +2,7 @@
 
 import { createClient } from '@/utils/supabase/server'
 import { db } from '@/db'
-import { userProfiles, parentChildLinks, notifications } from '@/db/schema'
+import { userProfiles, parentChildLinks, notifications, assignments } from '@/db/schema'
 import { eq, and } from 'drizzle-orm'
 import { sendEmail } from '@/utils/email'
 import crypto from 'crypto'
@@ -113,4 +113,81 @@ export async function getManagedChildren() {
   .where(eq(parentChildLinks.parentId, user.id))
   
   return links
+}
+
+export async function getChildDetails(childId: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) throw new Error("Unauthorized")
+
+  // Verify parent link
+  const links = await db.select().from(parentChildLinks)
+    .where(and(
+      eq(parentChildLinks.parentId, user.id), 
+      eq(parentChildLinks.childId, childId),
+      eq(parentChildLinks.status, 'approved')
+    ))
+    
+  if (links.length === 0) throw new Error("Unauthorized to view this child")
+
+  const profiles = await db.select().from(userProfiles).where(eq(userProfiles.id, childId))
+  const child = profiles[0]
+
+  const childAssignments = await db.select().from(assignments).where(eq(assignments.childId, childId))
+
+  return { child, assignments: childAssignments }
+}
+
+export async function createAssignment(childId: string, entityType: string, entityId: string, title: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) throw new Error("Unauthorized")
+
+  // Verify parent link
+  const links = await db.select().from(parentChildLinks)
+    .where(and(
+      eq(parentChildLinks.parentId, user.id), 
+      eq(parentChildLinks.childId, childId),
+      eq(parentChildLinks.status, 'approved')
+    ))
+    
+  if (links.length === 0) throw new Error("Unauthorized")
+  
+  const parentProfiles = await db.select().from(userProfiles).where(eq(userProfiles.id, user.id))
+  const parent = parentProfiles[0]
+  const childProfiles = await db.select().from(userProfiles).where(eq(userProfiles.id, childId))
+  const child = childProfiles[0]
+
+  await db.insert(assignments).values({
+    parentId: user.id,
+    childId: childId,
+    entityType,
+    entityId,
+  })
+
+  // Send notification
+  await db.insert(notifications).values({
+    userId: childId,
+    type: 'system',
+    title: 'New Assignment',
+    message: `${parent.name} has assigned you a new ${entityType}: ${title}`,
+    actionUrl: `/dashboard`,
+  })
+
+  // Send Email
+  if (child.email) {
+    await sendEmail({
+      to: child.email,
+      subject: 'New Assignment from your Parent',
+      html: `
+        <h2>New Assignment</h2>
+        <p><strong>${parent.name}</strong> has assigned you a new ${entityType}: <strong>${title}</strong>.</p>
+        <p>Log in to your dashboard to view it.</p>
+      `
+    })
+  }
+
+  return { success: true }
 }

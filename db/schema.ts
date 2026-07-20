@@ -60,6 +60,7 @@ export const terms = pgTable("terms", {
   termId: text("term_id").notNull(), // term1, term2
   name: text("name").notNull(), // First Term
   theme: text("theme"),
+  summary: text("summary"),
 });
 
 export const termsRelations = relations(terms, ({ one, many }) => ({
@@ -76,6 +77,7 @@ export const topics = pgTable("topics", {
   title: text("title").notNull(),
   slug: text("slug").notNull(),
   order: integer("order").notNull(),
+  summary: text("summary"),
 });
 
 export const topicsRelations = relations(topics, ({ one, many }) => ({
@@ -315,6 +317,42 @@ export const parentChildLinks = pgTable("parent_child_links", {
   token: text("token").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const parentChildLinksRelations = relations(parentChildLinks, ({ one }) => ({
+  parent: one(userProfiles, {
+    fields: [parentChildLinks.parentId],
+    references: [userProfiles.id],
+    relationName: "parent",
+  }),
+  child: one(userProfiles, {
+    fields: [parentChildLinks.childId],
+    references: [userProfiles.id],
+    relationName: "child",
+  }),
+}));
+
+export const assignments = pgTable("assignments", {
+  id: serial("id").primaryKey(),
+  parentId: text("parent_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  childId: text("child_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  entityType: text("entity_type").notNull(), // 'subject', 'quiz'
+  entityId: text("entity_id").notNull(), 
+  status: text("status").default("pending").notNull(), // 'pending', 'completed'
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const assignmentsRelations = relations(assignments, ({ one }) => ({
+  parent: one(userProfiles, {
+    fields: [assignments.parentId],
+    references: [userProfiles.id],
+    relationName: "assignmentParent",
+  }),
+  child: one(userProfiles, {
+    fields: [assignments.childId],
+    references: [userProfiles.id],
+    relationName: "assignmentChild",
+  }),
+}));
 
 // --- Notifications ---
 export const notifications = pgTable("notifications", {

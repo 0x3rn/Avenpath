@@ -4,21 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Search, ArrowRight, BookOpen, Clock, BarChart, ChevronDown, Activity, Microscope, Telescope, ChevronRight } from "lucide-react";
-import type { Subject } from "@/lib/curriculum";
+import type { Subject } from "@/types/curriculum";
 import dynamic from "next/dynamic";
 
-// Dynamic Lucide Icon loader helper
-const IconMap: Record<string, any> = {
-  Activity,
-  Microscope,
-  Telescope,
-  BookOpen
-};
-
-function SubjectIcon({ name, className }: { name: string, className?: string }) {
-  const Icon = IconMap[name] || BookOpen;
-  return <Icon className={className} />;
-}
+import { SubjectIcon } from "@/components/SubjectIcon";
 
 export default function SubjectExplorer({ 
   level, 
@@ -37,10 +26,12 @@ export default function SubjectExplorer({
 
   const defaultCategory = categories.includes("all") ? "all" : (categories.length > 0 ? categories[0] : "All");
   
-  const activeCategory = searchParams.get('category') || defaultCategory;
+  const [optimisticCategory, setOptimisticCategory] = useState<string | null>(null);
+  const activeCategory = optimisticCategory || searchParams.get('category') || defaultCategory;
   const activeSubLevel = searchParams.get('sublevel') || "Junior High School";
   
   const setActiveCategory = (cat: string) => {
+    setOptimisticCategory(cat);
     const params = new URLSearchParams(searchParams.toString());
     params.set('category', cat);
     params.set('sublevel', "Junior High School");
@@ -69,7 +60,11 @@ export default function SubjectExplorer({
   }
 
   if (activeCategory === "nigeria" && activeSubLevel !== "All") {
-    filteredSubjects = filteredSubjects.filter(s => s.levelName === activeSubLevel);
+    if (activeSubLevel === "Junior High School") {
+      filteredSubjects = filteredSubjects.filter(s => s.slug.includes("junior-highschool"));
+    } else if (activeSubLevel === "Senior High School") {
+      filteredSubjects = filteredSubjects.filter(s => s.slug.includes("senior-highschool"));
+    }
   }
   
   // Deduplicate by name
@@ -105,7 +100,9 @@ export default function SubjectExplorer({
       {/* Navbar placeholder */}
       <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
         {!isLoggedIn ? (
-          <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+          </Link>
         ) : (
           <div />
         )}
@@ -137,7 +134,7 @@ export default function SubjectExplorer({
               placeholder="Search subjects..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-card border-2 border-border focus:border-foreground rounded-full py-5 pl-14 pr-6 text-lg font-medium text-foreground placeholder:text-muted-foreground outline-none transition-all shadow-sm focus:shadow-xl"
+              className="w-full bg-card border-2 border-border focus:border-foreground rounded-full py-5 pl-14 pr-6 text-lg font-medium text-foreground placeholder:text-muted-foreground outline-none transition-all shadow-sm focus:shadow-md"
             />
           </div>
 
@@ -199,7 +196,7 @@ export default function SubjectExplorer({
               <div className="hidden sm:flex items-center gap-1 font-bold text-[15px]">
                 {sortBy} <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
               </div>
-              <div className="hidden sm:block absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
+              <div className="hidden sm:block absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-xl shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 py-2">
                 {["Popular", "A-Z", "Newest", "Most Lessons"].map(option => (
                   <div 
                     key={option} 
@@ -230,11 +227,11 @@ export default function SubjectExplorer({
 
         {/* SUBJECT GRID */}
         {filteredSubjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredSubjects.map(subject => {
               const totalLessons = subject.topics.reduce((acc, t) => acc + (t.subtopics.length > 0 ? t.subtopics.length : 1), 0);
               
-              const baseSlug = subject.slug.split('-class')[0];
+              const baseSlug = subject.slug.replace(/-class\d+/, '');
               const queryString = searchParams.toString();
               const subjectHref = queryString ? `/subjects/${level}/${baseSlug}?${queryString}` : `/subjects/${level}/${baseSlug}`;
               

@@ -77,7 +77,9 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-background selection:bg-subject-math/20">
       {/* Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full absolute top-0 left-0 right-0 z-50">
-        <div className="text-2xl font-bold tracking-tight">Avenpath.</div>
+        <div className="flex items-center gap-2">
+          <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+        </div>
         <div className="flex items-center gap-8">
           <button onClick={() => window.dispatchEvent(new Event("open-search"))} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <Search className="w-4 h-4" />
@@ -524,7 +526,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-16 mb-32">
             
             <div className="col-span-1 md:col-span-4 lg:col-span-2">
-              <div className="text-3xl font-extrabold tracking-tight mb-8">Avenpath.</div>
+              <div className="flex items-center gap-2 mb-8">
+                <img src="/logo.png" alt="Avenpath Logo" className="h-14 w-auto" />
+              </div>
               <p className="text-muted-foreground text-[14px] font-medium leading-[1.6] max-w-sm mb-8">
                 Learn with structured lessons, practical quizzes, and curated study paths across a growing library of subjects.
               </p>

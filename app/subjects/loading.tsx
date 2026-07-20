@@ -14,7 +14,7 @@ export default function LoadingSubjectsDirectory() {
           <div className="h-6 w-5/6 bg-muted rounded-md animate-pulse"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
           {[1, 2, 3].map((i) => (
             <div key={i} className="bg-card border border-border rounded-3xl p-10 h-full flex flex-col relative overflow-hidden">
               <div className="w-12 h-12 bg-muted rounded-xl animate-pulse mb-6"></div>

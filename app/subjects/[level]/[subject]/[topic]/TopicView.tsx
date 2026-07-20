@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Clock, BookOpen, CheckCircle2, ChevronRight, Lock } from "lucide-react";
-import type { Subject, Topic } from "@/lib/curriculum";
+import type { Subject, Topic } from "@/types/curriculum";
 
 export default function TopicView({ level, subject, topic }: { level: string, subject: Subject, topic: Topic }) {
   const searchParams = useSearchParams();
@@ -28,7 +28,9 @@ export default function TopicView({ level, subject, topic }: { level: string, su
     <div className="flex flex-col min-h-screen bg-background">
       {/* Top Bar Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
-        <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+        </Link>
         <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
           <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
           <ChevronRight className="w-4 h-4 shrink-0" />

@@ -13,7 +13,9 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-extrabold tracking-tight">Avenpath.</Link>
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+          </Link>
           
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
@@ -62,7 +64,9 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             
             <div className="col-span-2 md:col-span-1">
-              <Link href="/" className="text-xl font-extrabold tracking-tight mb-4 inline-block">Avenpath.</Link>
+              <Link href="/" className="inline-block mb-4">
+                <img src="/logo.png" alt="Avenpath Logo" className="h-14 w-auto" />
+              </Link>
               <p className="text-sm font-medium text-muted-foreground mb-6">
                 The open educational platform designed to help university and high school students study smarter.
               </p>

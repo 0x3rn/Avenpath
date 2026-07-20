@@ -37,7 +37,7 @@ export default function LoadingSubjectExplorer() {
         </div>
 
         {/* SUBJECT GRID SKELETON */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
             <div key={i} className="bg-card border border-border rounded-3xl p-6 h-[320px] flex flex-col relative overflow-hidden">
               <div className="w-14 h-14 bg-muted rounded-2xl animate-pulse mb-6"></div>

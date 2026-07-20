@@ -15,7 +15,15 @@ export default async function EditLessonPage({ params }: { params: Promise<{ id:
   const lesson = await db.query.subtopics.findFirst({
     where: eq(schema.subtopics.id, lessonId),
     with: {
-      topic: true
+      topic: {
+        with: {
+          term: {
+            with: {
+              subject: true
+            }
+          }
+        }
+      }
     }
   });
 

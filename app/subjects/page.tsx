@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import Link from "next/link";
-import { ArrowRight, BookOpen, GraduationCap, Palette } from "lucide-react";
+import { ArrowRight, BookOpen, GraduationCap, Pencil } from "lucide-react";
 import { getLevels } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";
 
@@ -17,7 +17,7 @@ export default async function SubjectsDirectory() {
   };
 
   const getLevelIcon = (level: string) => {
-    if (level === 'primaryschool') return <Palette className="w-12 h-12 mb-6 text-foreground" />;
+    if (level === 'primaryschool') return <Pencil className="w-12 h-12 mb-6 text-foreground" />;
     if (level === 'highschool') return <BookOpen className="w-12 h-12 mb-6 text-foreground" />;
     if (level === 'university') return <GraduationCap className="w-12 h-12 mb-6 text-foreground" />;
     return <BookOpen className="w-12 h-12 mb-6 text-foreground" />;
@@ -33,9 +33,9 @@ export default async function SubjectsDirectory() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
-      <nav className={`sticky ${profile ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
+      <nav className={`sticky ${profile ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border`}>
         {!profile ? (
-          <Link href="/" className="text-2xl font-bold tracking-tight">Avenpath.</Link>
+          <Link href="/" className="flex items-center gap-2"><img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" /></Link>
         ) : (
           <div />
         )}
@@ -58,7 +58,7 @@ export default async function SubjectsDirectory() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
           {levels.map(level => (
             <Link key={level} href={`/subjects/${level}`}>
               <div className="group bg-card border border-border hover:border-foreground/20 rounded-3xl p-10 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden h-full flex flex-col cursor-pointer">

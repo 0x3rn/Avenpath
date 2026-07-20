@@ -9,7 +9,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
           <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
             <BookOpen className="w-4 h-4 text-background" />
           </div>
-          <span className="text-xl font-bold tracking-tight">Avenpath.</span>
+          <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
         </div>
       </header>
       
