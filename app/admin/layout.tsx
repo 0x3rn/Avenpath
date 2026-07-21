@@ -128,6 +128,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   </Link>
                 );
               })}
+
+              <div className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-4 px-2 mt-8">System</div>
+              {userProfile?.role === "admin" && SYSTEM_LINKS.map(link => (
+                <Link 
+                  key={link.name}  
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-sm text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+                >
+                  <link.icon className="w-4 h-4" /> {link.name}
+                </Link>
+              ))}
             </nav>
           </aside>
         </div>
