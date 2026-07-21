@@ -33,13 +33,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
   const totalLessons = subject.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
   const totalHours = subject.topics.reduce((acc, t) => acc + (t.estimatedHours || 0), 0);
 
-  const tabs = ["Overview", "Topics", "Learning Paths", "Popular Lessons", "Resources"];
-
-  // Mock data for placeholders
-  const learningPaths = [
-    { title: `${subject.name} Foundations`, hours: 18, difficulty: "Beginner" },
-    { title: `Advanced ${subject.name}`, hours: 32, difficulty: "Advanced" }
-  ];
+  const tabs = ["Overview", "Topics"];
 
   const popularLessons = subject.topics.length > 0 
     ? subject.topics[0].subtopics.slice(0, 4)
@@ -51,7 +45,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
       <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
         {!isLoggedIn ? (
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
         ) : (
           <div />
@@ -98,10 +92,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
                 <span className="text-3xl font-extrabold text-foreground">{totalLessons}</span>
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Lessons</span>
               </div>
-              <div className="flex flex-col">
-                <span className="text-3xl font-extrabold text-foreground">2</span>
-                <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Learning Paths</span>
-              </div>
+
               <div className="flex flex-col">
                 <span className="text-3xl font-extrabold text-foreground">~{totalHours}h</span>
                 <span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Estimated</span>
@@ -226,9 +217,6 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
                           <div className="flex items-center justify-between mt-auto">
                             <div className="flex flex-col gap-3">
                               <span className="text-[13px] font-bold text-muted-foreground">{topic.subtopics.length} Lessons</span>
-                              <span className="text-[13px] font-bold text-foreground px-2 py-0.5 bg-muted rounded-md w-fit">
-                                {idx === 0 ? "Beginner" : "Intermediate"}
-                              </span>
                             </div>
                             <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
                               <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-background" />
@@ -245,50 +233,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
           </section>
         )}
 
-        {/* LEARNING PATHS */}
-        {(activeTab === "Overview" || activeTab === "Learning Paths") && (
-          <section className="mb-24">
-            <h2 className="text-3xl font-extrabold mb-8">Learning Paths</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {learningPaths.map((path, i) => (
-                <div key={i} className="flex items-center bg-card border border-border rounded-3xl p-6 hover:shadow-lg transition-all cursor-pointer group">
-                  <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mr-6 group-hover:scale-105 transition-transform">
-                    <BookOpen className="w-8 h-8 text-foreground" />
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl font-bold mb-2">{path.title}</h3>
-                    <div className="flex items-center gap-4 text-[14px] font-bold text-muted-foreground">
-                      <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {path.hours} Hours</span>
-                      <span className="px-2 py-1 bg-muted rounded-md text-foreground">{path.difficulty}</span>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
-        {/* POPULAR LESSONS */}
-        {(activeTab === "Overview" || activeTab === "Popular Lessons") && popularLessons.length > 0 && (
-          <section className="mb-24">
-            <h2 className="text-3xl font-extrabold mb-8">Popular Lessons</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {popularLessons.map((lesson, i) => (
-                <div key={i} className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer group">
-                  <h4 className="font-bold text-[15px] mb-4 line-clamp-2">{lesson.name}</h4>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 text-[13px] font-bold text-muted-foreground">
-                      <span>12 min</span>
-                      <span className="flex items-center gap-1 text-yellow-500"><Star className="w-3.5 h-3.5 fill-current" /> 4.9</span>
-                    </div>
-                    <Play className="w-5 h-5 text-muted-foreground group-hover:text-foreground" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
       </main>
     </div>

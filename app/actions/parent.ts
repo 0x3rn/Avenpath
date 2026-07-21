@@ -183,8 +183,10 @@ export async function createAssignment(childId: string, entityType: string, enti
     userId: childId,
     type: 'system',
     title: 'New Assignment',
-    message: `${parent.name} has assigned you a new ${entityType}: ${title}`,
-    actionUrl: `/dashboard`,
+    message: entityType === "subject" 
+      ? `${parent.name} assigned the subject "${title}" to you.`
+      : `${parent.name} assigned a new task to you: ${title}`,
+    actionUrl: entityType === "subject" ? null : `/dashboard`,
   })
 
   // Send Email

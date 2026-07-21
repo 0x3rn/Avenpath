@@ -61,7 +61,7 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
     setLoading(true);
     await saveLessonContent(lesson.id, content);
     setLoading(false);
-    router.push("/admin/lessons");
+    router.back();
   }
 
   async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -103,9 +103,9 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
       {/* HEADER */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Link href="/admin/lessons" className="p-2 border border-border text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
+          <button onClick={() => router.back()} className="p-2 border border-border text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
             <ArrowLeft className="w-4 h-4" />
-          </Link>
+          </button>
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight">Edit Lesson</h1>
             <p className="text-sm font-medium text-muted-foreground mt-1">Editing: {lesson.title}</p>

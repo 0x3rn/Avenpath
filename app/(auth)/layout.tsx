@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-subject-science/20 rounded-full blur-[100px]" />
 
         <Link href="/" className="relative z-10 flex items-center gap-3 w-fit">
-          <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+          <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
         </Link>
 
         <div className="relative z-10 mt-auto mb-auto max-w-lg">
@@ -54,7 +54,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
               <BookOpen className="w-4 h-4 text-background" />
             </div>
-            <img src="/logo.png" alt="Avenpath Logo" className="h-12 w-auto" />
+            <img src="/logo.png" alt="Avenpath Logo" className="h-20 w-auto" />
           </Link>
         </div>
 

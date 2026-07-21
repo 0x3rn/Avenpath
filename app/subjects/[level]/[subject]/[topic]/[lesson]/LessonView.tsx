@@ -16,12 +16,14 @@ export default function LessonView({
   level, 
   subject, 
   topic,
-  lesson
+  lesson,
+  completedSlugs = []
 }: { 
   level: string, 
   subject: Subject, 
   topic: Topic,
-  lesson: Subtopic
+  lesson: Subtopic,
+  completedSlugs?: string[]
 }) {
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
@@ -95,11 +97,11 @@ export default function LessonView({
             <div className="mb-8">
               <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">Course Progress</h3>
               <div className="flex items-center justify-between text-sm font-bold mb-2">
-                <span>14% Complete</span>
-                <span>2/14 Lessons</span>
+                <span>{topic.subtopics.length > 0 ? Math.round((completedSlugs.length / topic.subtopics.length) * 100) : 0}% Complete</span>
+                <span>{completedSlugs.length}/{topic.subtopics.length} Lessons</span>
               </div>
               <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                <div className="h-full bg-foreground rounded-full w-[14%]" />
+                <div className="h-full bg-foreground rounded-full transition-all" style={{ width: `${topic.subtopics.length > 0 ? (completedSlugs.length / topic.subtopics.length) * 100 : 0}%` }} />
               </div>
             </div>
 
@@ -107,7 +109,7 @@ export default function LessonView({
             <ul className="space-y-2">
               {topic.subtopics.map((sub, idx) => {
                 const isActive = sub.slug === lesson.slug;
-                const isCompleted = idx === 0;
+                const isCompleted = completedSlugs.includes(sub.slug);
                 return (
                   <li key={sub.slug}>
                     <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}/${sub.slug}`}
@@ -139,10 +141,7 @@ export default function LessonView({
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-[14px] font-bold">
               <div className="flex items-center gap-2 bg-muted text-muted-foreground px-3 py-1.5 rounded-lg">
-                <Clock className="w-4 h-4" /> 15 mins
-              </div>
-              <div className="flex items-center gap-2 bg-muted text-muted-foreground px-3 py-1.5 rounded-lg">
-                <BookOpen className="w-4 h-4" /> Beginner
+                <Clock className="w-4 h-4" /> {Math.max(1, Math.ceil((lesson.content?.split(' ').length || 0) / 200))} mins
               </div>
             </div>
           </header>
@@ -225,20 +224,7 @@ export default function LessonView({
               <li><a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground">Summary</a></li>
             </ul>
 
-            <div className="mt-12">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">Resources</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-card border border-border rounded-xl cursor-pointer hover:border-foreground/30 transition-colors">
-                  <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center shrink-0">
-                    <Download className="w-4 h-4 text-foreground" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-foreground line-clamp-1">Lesson Notes</div>
-                    <div className="text-xs font-medium text-muted-foreground">PDF • 1.2 MB</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </aside>
 

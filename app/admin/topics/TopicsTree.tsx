@@ -93,7 +93,7 @@ const FolderNode = ({ node, pathKey, level, openFolders, toggleFolder, renderSub
   );
 };
 
-export default function TopicsTree({ subjects }: { subjects: any[] }) {
+export default function TopicsTree({ subjects, mode = 'default' }: { subjects: any[], mode?: 'default' | 'lessons' }) {
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
   const [openSubject, setOpenSubject] = useState<string | null>(null);
   const [openTerms, setOpenTerms] = useState<Set<number>>(new Set());
@@ -147,13 +147,15 @@ export default function TopicsTree({ subjects }: { subjects: any[] }) {
                   {openTerms.has(term.id) ? <FolderOpen className="w-4 h-4 text-orange-500" /> : <Folder className="w-4 h-4 text-orange-500" />}
                   <span className="font-medium text-sm text-muted-foreground">{term.name}</span>
                 </div>
-                <button 
-                  onClick={(e) => { e.stopPropagation(); setAddingTopicToTerm(term.id); }}
-                  className="p-1 hover:bg-card border border-transparent hover:border-border rounded opacity-0 group-hover:opacity-100 transition-opacity"
-                  title="Add Topic"
-                >
-                  <Plus className="w-3 h-3 text-muted-foreground" />
-                </button>
+                {mode !== 'lessons' && (
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); setAddingTopicToTerm(term.id); }}
+                    className="p-1 hover:bg-card border border-transparent hover:border-border rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                    title="Add Topic"
+                  >
+                    <Plus className="w-3 h-3 text-muted-foreground" />
+                  </button>
+                )}
               </div>
               
               {openTerms.has(term.id) && (
@@ -167,14 +169,16 @@ export default function TopicsTree({ subjects }: { subjects: any[] }) {
                         </div>
                         <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity" onClick={e => e.stopPropagation()}>
                           <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-2 py-0.5 rounded uppercase">Published</span>
-                          <button 
-                            onClick={() => setAddingSubtopicToTopic(topic.id)}
-                            className="p-1 hover:bg-card border border-transparent hover:border-border rounded"
-                            title="Add Lesson"
-                          >
-                            <Plus className="w-3 h-3 text-muted-foreground" />
-                          </button>
-                          <TopicMenu topicId={topic.id} />
+                          {mode !== 'lessons' && (
+                            <button 
+                              onClick={() => setAddingSubtopicToTopic(topic.id)}
+                              className="p-1 hover:bg-card border border-transparent hover:border-border rounded"
+                              title="Add Lesson"
+                            >
+                              <Plus className="w-3 h-3 text-muted-foreground" />
+                            </button>
+                          )}
+                          {mode !== 'lessons' && <TopicMenu topicId={topic.id} />}
                         </div>
                       </div>
 

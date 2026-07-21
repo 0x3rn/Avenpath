@@ -114,7 +114,7 @@ export default function SubjectExplorer({
       <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md`}>
         {!isLoggedIn ? (
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
         ) : (
           <div />
@@ -280,11 +280,7 @@ export default function SubjectExplorer({
                       </div>
                       
                       <div className="flex items-center justify-between">
-                        {/* Difficulty Badge - Hardcoded to 'Intermediate' for now as placeholder */}
-                        <div className="px-3 py-1 rounded-full bg-muted text-[13px] font-bold text-muted-foreground">
-                          Intermediate
-                        </div>
-                        
+
                         <div className="w-10 h-10 rounded-full flex items-center justify-center border border-border group-hover:border-transparent transition-all duration-300" style={{ backgroundColor: "transparent" }}>
                           <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-all duration-300 group-hover:translate-x-0.5" />
                         </div>

@@ -35,7 +35,7 @@ export default function SubjectsError({
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <nav className="sticky top-0 flex items-center px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md">
-        <Link href="/" className="text-2xl font-bold tracking-tight text-foreground">Avenpath.</Link>
+        <Link href="/" className="flex items-center gap-2"><img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" /></Link>
       </nav>
 
       <div className="flex-grow flex flex-col items-center justify-center p-6 text-center">

@@ -35,7 +35,7 @@ export default async function SubjectsDirectory() {
       {/* Navigation Bar */}
       <nav className={`sticky ${profile ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border`}>
         {!profile ? (
-          <Link href="/" className="flex items-center gap-2"><img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" /></Link>
+          <Link href="/" className="flex items-center gap-2"><img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" /></Link>
         ) : (
           <div />
         )}

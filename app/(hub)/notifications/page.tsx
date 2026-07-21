@@ -87,7 +87,12 @@ export default function NotificationsPage() {
                   </p>
                   {notif.actionUrl && (
                     <button onClick={() => handleAction(notif.id, notif.actionUrl)} className="flex items-center gap-2 text-sm font-bold bg-foreground text-background px-4 py-2 rounded-lg hover:bg-foreground/90 transition-colors">
-                      Action Required <ArrowRight className="w-4 h-4" />
+                      {(() => {
+                        const msg = (notif.message || "").toLowerCase();
+                        if (msg.includes("test") || msg.includes("quiz")) return "Take Test";
+                        if (msg.includes("lesson") || msg.includes("read")) return "Read Lesson";
+                        return "Action Required";
+                      })()} <ArrowRight className="w-4 h-4" />
                     </button>
                   )}
                   {!notif.actionUrl && !notif.isRead && (

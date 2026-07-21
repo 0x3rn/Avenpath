@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { ArrowRight, Clock, BookOpen, CheckCircle2, ChevronRight, Lock } from "lucide-react";
 import type { Subject, Topic } from "@/types/curriculum";
 
-export default function TopicView({ level, subject, topic }: { level: string, subject: Subject, topic: Topic }) {
+export default function TopicView({ level, subject, topic, completedSlugs = [] }: { level: string, subject: Subject, topic: Topic, completedSlugs?: string[] }) {
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
   
@@ -15,21 +15,16 @@ export default function TopicView({ level, subject, topic }: { level: string, su
   
   const [activeTab, setActiveTab] = useState("Lessons");
   
-  // Mock data for UI presentation based on the spec
-  const progress = 14;
-  const learningOutcomes = [
-    "Understand the core principles",
-    "Apply concepts to real-world scenarios",
-    "Analyze case studies",
-    "Master the terminology"
-  ];
+  const progress = topic.subtopics.length > 0 
+    ? Math.round((completedSlugs.length / topic.subtopics.length) * 100) 
+    : 0;
   
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Top Bar Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
         <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+          <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
         </Link>
         <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
           <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
@@ -89,17 +84,7 @@ export default function TopicView({ level, subject, topic }: { level: string, su
             )}
           </div>
           
-          <div>
-            <h2 className="text-xl font-extrabold mb-6">Learning Outcomes</h2>
-            <ul className="space-y-4">
-              {learningOutcomes.map((outcome, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-foreground shrink-0 mt-0.5" />
-                  <span className="text-[15px] font-medium text-muted-foreground">{outcome}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+
         </div>
 
         {/* SUBTOPIC TIMELINE */}
@@ -108,9 +93,14 @@ export default function TopicView({ level, subject, topic }: { level: string, su
           
           <div className="relative border-l-2 border-border ml-6 space-y-8 pb-12">
             {topic.subtopics.map((subtopic, idx) => {
-              const isCompleted = idx === 0;
-              const isCurrent = idx === 1;
-              const isLocked = idx > 1;
+              const isCompleted = completedSlugs.includes(subtopic.slug);
+              // Find first uncompleted lesson as the "current" one. If all completed, last one is current? Or none?
+              // Let's just say a lesson is "current" if it's the first one in the array that is not completed.
+              const firstUncompletedIdx = topic.subtopics.findIndex(s => !completedSlugs.includes(s.slug));
+              const isCurrent = idx === firstUncompletedIdx;
+              
+              // No actual locking logic required for now, we just visually show what is completed/current
+              const isLocked = false;
               const subtopicHref = queryString 
                 ? `/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}?${queryString}`
                 : `/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}`;

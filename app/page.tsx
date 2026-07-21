@@ -78,7 +78,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full absolute top-0 left-0 right-0 z-50">
         <div className="flex items-center gap-2">
-          <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+          <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
         </div>
         <div className="flex items-center gap-8">
           <button onClick={() => window.dispatchEvent(new Event("open-search"))} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
@@ -527,7 +527,7 @@ export default function Home() {
             
             <div className="col-span-1 md:col-span-4 lg:col-span-2">
               <div className="flex items-center gap-2 mb-8">
-                <img src="/logo.png" alt="Avenpath Logo" className="h-14 w-auto" />
+                <img src="/logo.png" alt="Avenpath Logo" className="h-20 w-auto" />
               </div>
               <p className="text-muted-foreground text-[14px] font-medium leading-[1.6] max-w-sm mb-8">
                 Learn with structured lessons, practical quizzes, and curated study paths across a growing library of subjects.

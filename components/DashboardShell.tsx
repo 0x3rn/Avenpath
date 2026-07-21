@@ -77,7 +77,7 @@ export default function DashboardShell({ children, initialProfile }: { children:
       <aside className="hidden md:flex flex-col w-[280px] bg-card border-r border-border fixed h-screen top-0 left-0 z-40 overflow-y-auto shrink-0">
         <div className="p-6">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
         </div>
 
@@ -180,7 +180,7 @@ export default function DashboardShell({ children, initialProfile }: { children:
           <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
           <aside className="w-[280px] bg-card border-r border-border relative flex flex-col shadow-2xl h-full animate-in slide-in-from-left duration-300">
             <div className="p-6 flex items-center justify-between">
-              <img src="/logo.png" alt="Avenpath Logo" className="h-10 w-auto" />
+              <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
               <button onClick={() => setMobileMenuOpen(false)} className="p-2 -mr-2 bg-muted rounded-full">
                 <X className="w-5 h-5" />
               </button>
