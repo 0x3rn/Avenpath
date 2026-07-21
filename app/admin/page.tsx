@@ -4,14 +4,29 @@ import { db } from "@/db";
 import { sql } from "drizzle-orm";
 import * as schema from "@/db/schema";
 
+import { createClient } from "@/utils/supabase/server";
+
 export default async function AdminDashboard() {
-  // Fetch real counts from the database
-  const [subjectCount] = await db.select({ count: sql<number>`count(*)` }).from(schema.subjects);
-  const [topicCount] = await db.select({ count: sql<number>`count(*)` }).from(schema.topics);
-  const [lessonCount] = await db.select({ count: sql<number>`count(*)` }).from(schema.subtopics);
-  const [quizCount] = await db.select({ count: sql<number>`count(*)` }).from(schema.quizzes);
-  const [userCount] = await db.select({ count: sql<number>`count(*)` }).from(schema.userProfiles);
-  const [questionCount] = await db.select({ count: sql<number>`count(*)` }).from(schema.quizQuestions);
+  const supabase = await createClient();
+
+  const { count: subjectCount } = await supabase.from("subjects").select("*", { count: "exact", head: true });
+  const { count: topicCount } = await supabase.from("topics").select("*", { count: "exact", head: true });
+  const { count: lessonCount } = await supabase.from("subtopics").select("*", { count: "exact", head: true });
+  const { count: quizCount } = await supabase.from("quizzes").select("*", { count: "exact", head: true });
+  const { count: userCount } = await supabase.from("user_profiles").select("*", { count: "exact", head: true });
+  const { count: quizQCount } = await supabase.from("quiz_questions").select("*", { count: "exact", head: true });
+
+  const { data: subtopicsWithFlashcards } = await supabase.from("subtopics").select("flashcards").not("flashcards", "is", null);
+  let flashcardCount = 0;
+  if (subtopicsWithFlashcards) {
+    for (const st of subtopicsWithFlashcards) {
+      if (Array.isArray(st.flashcards)) {
+        flashcardCount += st.flashcards.length;
+      }
+    }
+  }
+
+  const totalQuestions = (quizQCount || 0) + flashcardCount;
 
   // Recent lessons (subtopics) with their parent subject
   const recentLessons = await db.query.subtopics.findMany({
@@ -31,12 +46,12 @@ export default async function AdminDashboard() {
   });
 
   const kpis = [
-    { label: "Subjects", val: Number(subjectCount.count).toLocaleString(), icon: Layers, color: "text-orange-500" },
-    { label: "Topics", val: Number(topicCount.count).toLocaleString(), icon: BookOpen, color: "text-purple-500" },
-    { label: "Lessons", val: Number(lessonCount.count).toLocaleString(), icon: BookOpen, color: "text-blue-500" },
-    { label: "Quizzes", val: Number(quizCount.count).toLocaleString(), icon: HelpCircle, color: "text-pink-500" },
-    { label: "Questions", val: Number(questionCount.count).toLocaleString(), icon: HelpCircle, color: "text-yellow-500" },
-    { label: "Users", val: Number(userCount.count).toLocaleString(), icon: Users, color: "text-green-500" },
+    { label: "Subjects", val: (subjectCount || 0).toLocaleString(), icon: Layers, color: "text-orange-500" },
+    { label: "Topics", val: (topicCount || 0).toLocaleString(), icon: BookOpen, color: "text-purple-500" },
+    { label: "Lessons", val: (lessonCount || 0).toLocaleString(), icon: BookOpen, color: "text-blue-500" },
+    { label: "Quizzes", val: (quizCount || 0).toLocaleString(), icon: HelpCircle, color: "text-pink-500" },
+    { label: "Questions", val: totalQuestions.toLocaleString(), icon: HelpCircle, color: "text-yellow-500" },
+    { label: "Users", val: (userCount || 0).toLocaleString(), icon: Users, color: "text-green-500" },
   ];
 
   return (

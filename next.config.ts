@@ -11,10 +11,10 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     serverActions: {
-      bodySizeLimit: "20mb"
+      bodySizeLimit: "50mb",
     },
-    proxyClientMaxBodySize: 20971520
-  }
+    proxyClientMaxBodySize: 52428800,
+  },
 };
 
 export default nextConfig;

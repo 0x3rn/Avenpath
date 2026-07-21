@@ -85,8 +85,9 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
     try {
       const text = await extractTextFromPDF(formData);
       setReferenceText(prev => prev ? prev + "\n\n" + text : text);
-    } catch (err) {
-      toast.error("Failed to parse PDF.");
+      toast.success("PDF extracted successfully!");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to parse PDF.");
     } finally {
       setIsPdfLoading(false);
       e.target.value = ""; // Reset input
@@ -192,7 +193,7 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
                   <div>
                     <input 
                       type="file" 
-                      accept="application/pdf"
+                      accept="application/pdf,.pdf"
                       id="pdf-upload"
                       className="hidden"
                       onChange={handlePdfUpload}

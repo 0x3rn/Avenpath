@@ -8,16 +8,23 @@ export async function extractTextFromPDF(formData: FormData): Promise<string> {
     throw new Error("No file uploaded");
   }
 
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = new Uint8Array(arrayBuffer);
-
   try {
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
     const { extractText } = await import("unpdf");
     const { text } = await extractText(buffer);
-    return text.join("\n\n");
-  } catch (error) {
+
+    const extractedText = Array.isArray(text) ? text.join("\n\n").trim() : String(text || "").trim();
+
+    if (!extractedText) {
+      throw new Error("No selectable text found in PDF. If this is a scanned document or image, please paste text directly.");
+    }
+
+    return extractedText;
+  } catch (error: any) {
     console.error("PDF Parsing error:", error);
-    throw new Error("Failed to parse PDF");
+    throw new Error(error.message || "Failed to parse PDF");
   }
 }
 
