@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { CheckCircle, XCircle, Eye, AlertCircle, RefreshCw } from "lucide-react";
 import { approveRevision, rejectRevision } from "@/app/admin/actions";
 import { createClient } from "@/utils/supabase/client";
+import { toast } from "sonner";
 
 export default function ReviewQueuePage() {
   const [revisions, setRevisions] = useState<any[]>([]);
@@ -33,7 +34,7 @@ export default function ReviewQueuePage() {
       setSelectedRevision(null);
       fetchRevisions();
     } catch (e: any) {
-      alert("Error approving: " + e.message);
+      toast.error("Error approving: " + e.message);
     }
   };
 
@@ -43,7 +44,7 @@ export default function ReviewQueuePage() {
       setSelectedRevision(null);
       fetchRevisions();
     } catch (e: any) {
-      alert("Error rejecting: " + e.message);
+      toast.error("Error rejecting: " + e.message);
     }
   };
 

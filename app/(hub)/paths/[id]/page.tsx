@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Lock, Play, Award, Clock } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Lock, Play, Award, Clock, Copy } from "lucide-react";
 
 export default function PathRoadmap() {
   
@@ -88,6 +88,17 @@ export default function PathRoadmap() {
                   <div className="mt-6 pt-6 border-t border-border flex justify-end">
                     <button className="w-full sm:w-auto bg-foreground text-background px-8 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
                       Continue Learning <Play className="w-4 h-4 fill-background" />
+                    </button>
+                  </div>
+                )}
+
+                {step.status === "completed" && (
+                  <div className="mt-6 pt-6 border-t border-border flex justify-end gap-3">
+                    <Link href={`/flashcards`} className="w-full sm:w-auto bg-muted text-foreground px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-border transition-colors">
+                      <Copy className="w-4 h-4" /> Practice Flashcards
+                    </Link>
+                    <button className="w-full sm:w-auto bg-card border border-border text-foreground px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-muted transition-colors">
+                      Review Lesson
                     </button>
                   </div>
                 )}

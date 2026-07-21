@@ -1,7 +1,7 @@
 "use client";
 
 import { TopicMenu, SubtopicMenu, NewTopicDialog, NewSubtopicDialog } from "./TopicClientActions";
-import { Plus, Search, Filter, Folder, FolderOpen, MoreVertical, FileText, MoveRight } from "lucide-react";
+import { Plus, Search, Filter, Folder, FolderOpen, MoreVertical, FileText, MoveRight, Copy } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -93,7 +93,7 @@ const FolderNode = ({ node, pathKey, level, openFolders, toggleFolder, renderSub
   );
 };
 
-export default function TopicsTree({ subjects, mode = 'default' }: { subjects: any[], mode?: 'default' | 'lessons' }) {
+export default function TopicsTree({ subjects, mode = 'default' }: { subjects: any[], mode?: 'default' | 'lessons' | 'flashcards' }) {
   const [openFolders, setOpenFolders] = useState<Set<string>>(new Set());
   const [openSubject, setOpenSubject] = useState<string | null>(null);
   const [openTerms, setOpenTerms] = useState<Set<number>>(new Set());
@@ -185,18 +185,24 @@ export default function TopicsTree({ subjects, mode = 'default' }: { subjects: a
                       {/* Subtopics */}
                       {openTopics.has(topic.id) && (
                         <div className="ml-5 border-l border-border pl-4 space-y-1">
-                          {(topic.subtopics || []).map((sub: any) => (
+                          {(topic.subtopics || []).map((sub: any) => {
+                            const isFlashcards = mode === 'flashcards';
+                            const baseUrl = isFlashcards ? `/admin/flashcards/${sub.id}/edit` : `/admin/lessons/${sub.id}/edit`;
+                            const Icon = isFlashcards ? Copy : FileText;
+
+                            return (
                             <div key={sub.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 group">
-                              <Link href={`/admin/lessons/${sub.id}/edit`} className="flex flex-1 items-center gap-2 cursor-pointer">
-                                <FileText className="w-4 h-4 text-muted-foreground" />
+                              <Link href={baseUrl} className="flex flex-1 items-center gap-2 cursor-pointer">
+                                <Icon className="w-4 h-4 text-muted-foreground" />
                                 <span className="font-medium text-sm text-muted-foreground group-hover:text-foreground transition-colors">{sub.title}</span>
                               </Link>
                               <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Link href={`/admin/lessons/${sub.id}/edit`} className="p-1 hover:bg-card border border-transparent hover:border-border rounded"><MoveRight className="w-3 h-3 text-muted-foreground" /></Link>
+                                <Link href={baseUrl} className="p-1 hover:bg-card border border-transparent hover:border-border rounded"><MoveRight className="w-3 h-3 text-muted-foreground" /></Link>
                                 <SubtopicMenu subtopicId={sub.id} />
                               </div>
                             </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       )}
                     </div>

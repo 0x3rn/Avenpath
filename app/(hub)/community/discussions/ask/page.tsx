@@ -5,6 +5,7 @@ import { createDiscussion } from "@/app/actions/community";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, MessageSquarePlus } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function AskQuestionPage() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function AskQuestionPage() {
       router.push(`/community/discussions/${result.id}`);
     } else {
       setSubmitting(false);
-      alert("Failed to create discussion");
+      toast.error("Failed to create discussion");
     }
   };
 

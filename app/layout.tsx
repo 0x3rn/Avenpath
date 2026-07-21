@@ -25,6 +25,8 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
+import { Toaster } from "sonner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,6 +40,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans font-medium text-foreground bg-background selection:bg-primary/20 selection:text-primary">
         <GlobalSearch />
         {children}
+        <Toaster position="bottom-right" theme="system" />
       </body>
     </html>
   );

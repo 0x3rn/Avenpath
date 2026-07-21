@@ -7,10 +7,14 @@ export default async function TopicsManager() {
     orderBy: (subjects, { asc }) => [asc(subjects.name)],
     with: {
       terms: {
+        orderBy: (terms, { asc }) => [asc(terms.id)],
         with: {
           topics: {
+            orderBy: (topics, { asc }) => [asc(topics.order)],
             with: {
-              subtopics: true
+              subtopics: {
+                orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
+              }
             }
           }
         }

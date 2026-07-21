@@ -5,8 +5,10 @@ import { ArrowLeft, Save } from "lucide-react";
 import Link from "next/link";
 import { saveLessonContent } from "../../../actions";
 import { useRouter } from "next/navigation";
-import { generateLessonContent, extractTextFromPDF } from "../../../ai-actions";
+import { generateLessonContent, extractTextFromPDF } from "../../ai-actions";
 import { UploadCloud, Wand2, RefreshCw } from "lucide-react";
+import { toast } from "sonner";
+import { InteractivePreview } from "./InteractivePreview";
 
 export default function LessonEditor({ lesson }: { lesson: any }) {
   const [content, setContent] = useState(lesson.content || "");
@@ -18,6 +20,15 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
   if (moduleTitle.toLowerCase().includes("term") || moduleTitle.toLowerCase() === "general") {
     moduleTitle = ""; // Eliminate time-based terms as they provide no context to the AI
   }
+
+  // Construct structured upload path
+  const levelSlug = lesson.topic?.term?.subject?.category?.level?.slug || "general";
+  const categorySlug = lesson.topic?.term?.subject?.category?.slug || "general";
+  const subjectSlug = lesson.topic?.term?.subject?.slug || "general";
+  const termName = lesson.topic?.term?.termId || "general";
+  const topicSlug = lesson.topic?.slug || "general";
+  const subtopicSlug = lesson.slug || "general";
+  const uploadPathPrefix = `uploads/${levelSlug}/${categorySlug}/${subjectSlug}/${termName}/${topicSlug}/${subtopicSlug}`;
 
   // AI & PDF State
   const subject = lesson.topic?.term?.subject;
@@ -61,7 +72,7 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
     setLoading(true);
     await saveLessonContent(lesson.id, content);
     setLoading(false);
-    router.back();
+    toast.success("Lesson saved successfully!");
   }
 
   async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -75,7 +86,7 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
       const text = await extractTextFromPDF(formData);
       setReferenceText(prev => prev ? prev + "\n\n" + text : text);
     } catch (err) {
-      alert("Failed to parse PDF.");
+      toast.error("Failed to parse PDF.");
     } finally {
       setIsPdfLoading(false);
       e.target.value = ""; // Reset input
@@ -84,15 +95,20 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
 
   async function handleGenerateNotes() {
     if (!referenceText.trim()) {
-      alert("Please provide some reference text first.");
+      toast.error("Please provide some reference text first.");
       return;
     }
+
+    if (content.trim() && !window.confirm("This will overwrite your existing lesson content. Do you want to proceed?")) {
+      return;
+    }
+
     setIsAiLoading(true);
     try {
       const generatedMarkdown = await generateLessonContent(referenceText, audience, moduleTitle, topicTitle, lessonTitle);
-      setContent((prev: string) => prev.trim() ? prev + "\n\n" + generatedMarkdown : generatedMarkdown);
+      setContent(generatedMarkdown);
     } catch (err) {
-      alert("AI Generation failed. Check console or API key.");
+      toast.error("AI Generation failed. Check console or API key.");
     } finally {
       setIsAiLoading(false);
     }
@@ -103,7 +119,7 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
       {/* HEADER */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.back()} className="p-2 border border-border text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
+          <button onClick={() => router.push("/admin/lessons")} className="p-2 border border-border text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div>
@@ -226,6 +242,19 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
           </div>
         </div>
 
+      </div>
+
+      {/* NEW PREVIEW PANE */}
+      <div className="mt-8 border-t border-border pt-8">
+        <div className="flex items-center gap-2 mb-6">
+          <h2 className="text-xl font-bold">Interactive Preview</h2>
+          <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-md font-medium">Click placeholders to upload images</span>
+        </div>
+        <InteractivePreview 
+          content={content} 
+          onChange={setContent} 
+          uploadPathPrefix={uploadPathPrefix} 
+        />
       </div>
     </div>
   );

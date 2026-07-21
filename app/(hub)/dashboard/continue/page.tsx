@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Play, ArrowRight, CheckCircle2, History, Target, BookOpen } from "lucide-react";
+import { Play, ArrowRight, CheckCircle2, History, Target, BookOpen, Copy } from "lucide-react";
 import { getContinueLearning, getRecentLessons } from "@/app/actions/dashboard";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
@@ -105,8 +105,11 @@ export default function ContinueLearningPage() {
                       <p className="text-sm font-medium text-muted-foreground">{item.subjectName}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 text-sm font-bold">
-                    <span className="text-muted-foreground">{item.date ? formatDistanceToNow(new Date(item.date), { addSuffix: true }) : "Recently"}</span>
+                  <div className="flex items-center gap-3 text-sm font-bold">
+                    <span className="text-muted-foreground mr-2">{item.date ? formatDistanceToNow(new Date(item.date), { addSuffix: true }) : "Recently"}</span>
+                    <Link href={`/flashcards`} className="px-4 py-2 bg-indigo-500/10 text-indigo-500 rounded-lg hover:bg-indigo-500 hover:text-white transition-colors flex items-center gap-2">
+                      <Copy className="w-4 h-4" /> Flashcards
+                    </Link>
                     <Link href="/dashboard" className="px-4 py-2 bg-muted text-foreground rounded-lg hover:bg-border transition-colors">
                       Review
                     </Link>

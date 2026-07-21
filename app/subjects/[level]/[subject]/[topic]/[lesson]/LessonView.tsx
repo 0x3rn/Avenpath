@@ -6,11 +6,14 @@ import { useSearchParams } from "next/navigation";
 import { 
   ChevronRight, Bookmark, Share2, Moon, Sun, Clock, BookOpen, 
   AlertTriangle, Lightbulb, Info, CheckCircle2, XCircle, ArrowRight,
-  List, Check, Search, Download
+  List, Check, Search, Download, Menu, Loader2
 } from "lucide-react";
 import type { Subject, Topic, Subtopic } from "@/types/curriculum";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useRouter } from "next/navigation";
+import { markLessonComplete } from "@/app/actions/progress";
+import LessonFlashcards from "./LessonFlashcards";
 
 export default function LessonView({ 
   level, 
@@ -36,6 +39,32 @@ export default function LessonView({
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isCompleting, setIsCompleting] = useState(false);
+  const router = useRouter();
+
+  const currentIndex = topic.subtopics.findIndex(s => s.slug === lesson.slug);
+  const prevLesson = currentIndex > 0 ? topic.subtopics[currentIndex - 1] : null;
+  const nextLesson = currentIndex < topic.subtopics.length - 1 ? topic.subtopics[currentIndex + 1] : null;
+
+  const handleNextLesson = async () => {
+    setIsCompleting(true);
+    const durationMinutes = Math.max(1, Math.ceil((lesson.content?.split(' ').length || 0) / 80));
+    
+    await markLessonComplete(
+      Number(lesson.id), 
+      subject.slug, 
+      topic.slug, 
+      (lesson as any).title || lesson.name, 
+      durationMinutes
+    );
+
+    if (nextLesson) {
+      router.push(`/subjects/${level}/${subject.slug}/${topic.slug}/${nextLesson.slug}`);
+    } else {
+      router.push(`/subjects/${level}/${subject.slug}/${topic.slug}`);
+    }
+  };
 
   // Mock progress tracking
   useEffect(() => {
@@ -59,16 +88,21 @@ export default function LessonView({
       {/* TOP BAR */}
       <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border px-6 py-4 flex items-center justify-between">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
-          <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
-          <ChevronRight className="w-4 h-4 shrink-0" />
-          <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
-          <ChevronRight className="w-4 h-4 shrink-0" />
-          <Link href={subjectHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{subject.name}</Link>
-          <ChevronRight className="w-4 h-4 shrink-0" />
-          <Link href={topicHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{topic.name}</Link>
-          <ChevronRight className="w-4 h-4 shrink-0" />
-          <span className="text-foreground shrink-0 max-w-[150px] truncate">{lesson.name}</span>
+        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 mr-2 text-foreground hover:bg-muted rounded-lg transition-colors hidden lg:block">
+            <Menu className="w-5 h-5" />
+          </button>
+          <div className="hidden md:flex items-center gap-2">
+            <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <Link href={subjectHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{subject.name}</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <Link href={topicHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{topic.name}</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <span className="text-foreground shrink-0 max-w-[150px] truncate">{lesson.name}</span>
+          </div>
         </div>
 
         {/* Actions */}
@@ -92,6 +126,7 @@ export default function LessonView({
       <div className="flex-grow max-w-[1600px] mx-auto w-full flex flex-col lg:flex-row px-4 md:px-8 py-8 gap-12">
         
         {/* LEFT SIDEBAR (Navigation) */}
+        {sidebarOpen && (
         <aside className="hidden lg:block w-64 shrink-0">
           <div className="sticky top-24">
             <div className="mb-8">
@@ -130,9 +165,10 @@ export default function LessonView({
             </ul>
           </div>
         </aside>
+        )}
 
         {/* CENTER CONTENT (The Lesson) */}
-        <main className="flex-grow max-w-3xl min-w-0">
+        <main className="flex-grow max-w-[720px] mx-auto w-full min-w-0">
           
           {/* Header */}
           <header className="mb-12">
@@ -141,13 +177,13 @@ export default function LessonView({
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-[14px] font-bold">
               <div className="flex items-center gap-2 bg-muted text-muted-foreground px-3 py-1.5 rounded-lg">
-                <Clock className="w-4 h-4" /> {Math.max(1, Math.ceil((lesson.content?.split(' ').length || 0) / 200))} mins
+                <Clock className="w-4 h-4" /> {Math.max(1, Math.ceil((lesson.content?.split(' ').length || 0) / 80))} mins
               </div>
             </div>
           </header>
 
           {/* Article Content */}
-          <article className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-[1.8] font-medium text-[17px]">
+          <article className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-[1.7] font-medium text-[1.125rem]">
             {lesson.content ? (
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {lesson.content}
@@ -197,36 +233,37 @@ export default function LessonView({
                 ))}
               </div>
             )}
+            
+            <LessonFlashcards cards={(lesson as any).flashcards || []} />
           </article>
 
           {/* BOTTOM NAVIGATION */}
           <div className="mt-20 pt-8 border-t border-border flex flex-col sm:flex-row gap-6 items-center justify-between">
-            <button className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
-              <ChevronRight className="w-5 h-5 rotate-180" /> Previous Lesson
-            </button>
-            <button className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-foreground text-background font-bold hover:scale-[1.02] transition-transform shadow-xl">
-              Next Lesson <ArrowRight className="w-5 h-5" />
+            {prevLesson ? (
+              <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}/${prevLesson.slug}`} className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
+                <ChevronRight className="w-5 h-5 rotate-180" /> Previous Lesson
+              </Link>
+            ) : (
+              <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}`} className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
+                <ChevronRight className="w-5 h-5 rotate-180" /> Back to Topic
+              </Link>
+            )}
+            <button 
+              onClick={handleNextLesson}
+              disabled={isCompleting}
+              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-foreground text-background font-bold hover:scale-[1.02] transition-transform shadow-xl disabled:opacity-70 disabled:hover:scale-100"
+            >
+              {isCompleting ? (
+                <><Loader2 className="w-5 h-5 animate-spin" /> Completing...</>
+              ) : nextLesson ? (
+                <>Next Lesson <ArrowRight className="w-5 h-5" /></>
+              ) : (
+                <>Complete Topic <CheckCircle2 className="w-5 h-5" /></>
+              )}
             </button>
           </div>
 
         </main>
-
-        {/* RIGHT SIDEBAR (TOC & Resources) */}
-        <aside className="hidden xl:block w-64 shrink-0">
-          <div className="sticky top-24">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
-              <List className="w-4 h-4" /> Table of Contents
-            </h3>
-            <ul className="space-y-3 border-l-2 border-border pl-4">
-              <li><a href="#" className="text-sm font-bold text-foreground">Understanding the Basics</a></li>
-              <li><a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground">Interactive Example</a></li>
-              <li><a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground">Knowledge Check</a></li>
-              <li><a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground">Summary</a></li>
-            </ul>
-
-
-          </div>
-        </aside>
 
       </div>
     </div>

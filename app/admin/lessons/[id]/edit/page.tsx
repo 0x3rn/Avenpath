@@ -19,7 +19,15 @@ export default async function EditLessonPage({ params }: { params: Promise<{ id:
         with: {
           term: {
             with: {
-              subject: true
+              subject: {
+                with: {
+                  category: {
+                    with: {
+                      level: true
+                    }
+                  }
+                }
+              }
             }
           }
         }

@@ -212,10 +212,19 @@ export const bookmarksRelations = relations(bookmarks, ({ one }) => ({
 export const quizzes = pgTable("quizzes", {
   id: serial("id").primaryKey(),
   subtopicId: integer("subtopic_id").references(() => subtopics.id, { onDelete: "cascade" }),
+  topicId: integer("topic_id").references(() => topics.id, { onDelete: "cascade" }),
   termId: integer("term_id").references(() => terms.id, { onDelete: "cascade" }),
+  assessmentType: text("assessment_type").default("quiz").notNull(),
   title: text("title").notNull(),
   description: text("description"),
 });
+
+export const quizzesRelations = relations(quizzes, ({ one, many }) => ({
+  subtopic: one(subtopics, { fields: [quizzes.subtopicId], references: [subtopics.id] }),
+  topic: one(topics, { fields: [quizzes.topicId], references: [topics.id] }),
+  term: one(terms, { fields: [quizzes.termId], references: [terms.id] }),
+  questions: many(quizQuestions),
+}));
 
 export const quizQuestions = pgTable("quiz_questions", {
   id: serial("id").primaryKey(),

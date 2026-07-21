@@ -133,7 +133,7 @@ export async function deleteSubtopic(subtopicId: number) {
 }
 
 // --- QUIZZES ---
-export async function createQuiz(data: { title: string, description: string, subtopicId?: number, termId?: number }) {
+export async function createQuiz(data: { title: string, description: string, subtopicId?: number, topicId?: number, termId?: number, assessmentType: string }) {
   const user = await getAdminOrModerator();
   if (user.role === "moderator") {
     await db.insert(schema.contentRevisions).values({ authorId: user.userId, entityType: "quiz", entityId: null, proposedPayload: data });
@@ -144,7 +144,9 @@ export async function createQuiz(data: { title: string, description: string, sub
     title: data.title,
     description: data.description,
     subtopicId: data.subtopicId,
+    topicId: data.topicId,
     termId: data.termId,
+    assessmentType: data.assessmentType,
   });
   revalidatePath("/admin/quizzes");
   return { success: true };

@@ -30,10 +30,14 @@ export async function getSubjectsByLevel(levelSlug: string): Promise<Subject[]> 
     with: {
       category: true,
       terms: {
+        orderBy: (terms, { asc }) => [asc(terms.id)],
         with: {
           topics: {
+            orderBy: (topics, { asc }) => [asc(topics.order)],
             with: {
-              subtopics: true
+              subtopics: {
+                orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
+              }
             }
           }
         }

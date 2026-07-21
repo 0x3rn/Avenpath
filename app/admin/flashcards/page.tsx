@@ -2,7 +2,7 @@ import { Search } from "lucide-react";
 import { db } from "@/db";
 import TopicsTree from "../topics/TopicsTree";
 
-export default async function LessonsManager() {
+export default async function FlashcardsManager() {
   const subjects = await db.query.subjects.findMany({
     orderBy: (subjects, { asc }) => [asc(subjects.name)],
     with: {
@@ -28,8 +28,8 @@ export default async function LessonsManager() {
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-tight">Lessons</h1>
-          <p className="text-sm font-medium text-muted-foreground mt-1">Manage all educational content and track versions.</p>
+          <h1 className="text-2xl font-extrabold tracking-tight">Flashcards</h1>
+          <p className="text-sm font-medium text-muted-foreground mt-1">Manage spaced-repetition flashcards for all lessons.</p>
         </div>
       </div>
       {/* FILTERS & SEARCH */}
@@ -38,7 +38,7 @@ export default async function LessonsManager() {
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input 
             type="text" 
-            placeholder="Search lessons..."
+            placeholder="Search flashcards..."
             className="w-full pl-9 pr-4 py-2 bg-muted/50 border border-transparent focus:border-foreground/30 focus:bg-transparent rounded-lg font-medium text-sm outline-none transition-colors"
           />
         </div>
@@ -50,8 +50,8 @@ export default async function LessonsManager() {
           </select>
       </div>
 
-      {/* LESSONS HIERARCHY */}
-      <TopicsTree subjects={subjects} mode="lessons" />
+      {/* FLASHCARDS HIERARCHY */}
+      <TopicsTree subjects={subjects} mode="flashcards" />
 
     </div>
   );

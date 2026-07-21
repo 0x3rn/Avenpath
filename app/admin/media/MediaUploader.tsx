@@ -5,6 +5,7 @@ import { Upload, X, Loader2, Image as ImageIcon, Video, FileText, File } from "l
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { saveMediaMetadata } from "../actions";
+import { toast } from "sonner";
 
 export function MediaUploader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +64,7 @@ export function MediaUploader() {
       }, 500);
 
     } catch (error: any) {
-      alert(`Error uploading file: ${error.message}`);
+      toast.error(`Error uploading file: ${error.message}`);
       setUploading(false);
       setProgress(0);
     }
@@ -179,7 +180,7 @@ export function MediaDeleteButton({ id }: { id: string }) {
       const { deleteMediaAsset } = await import('../actions');
       await deleteMediaAsset(id);
     } catch (err) {
-      alert("Error deleting file.");
+      toast.error("Error deleting file.");
     } finally {
       setLoading(false);
     }
