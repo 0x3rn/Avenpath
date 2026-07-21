@@ -16,6 +16,7 @@
     "@stripe/stripe-js": "^9.10.0",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.6",
+    "@tailwindcss/typography": "^0.5.20",
     "@tiptap/pm": "^3.27.4",
     "@tiptap/react": "^3.27.4",
     "@tiptap/starter-kit": "^3.27.4",
