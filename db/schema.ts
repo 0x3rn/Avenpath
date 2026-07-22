@@ -244,6 +244,25 @@ export const quizAttempts = pgTable("quiz_attempts", {
   completedAt: timestamp("completed_at").defaultNow().notNull(),
 });
 
+export const assessmentSubmissions = pgTable("assessment_submissions", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").references(() => userProfiles.id, { onDelete: "cascade" }).notNull(),
+  title: text("title").notNull(),
+  assessmentType: text("assessment_type").notNull(), // 'quiz' | 'test' | 'exam'
+  score: integer("score").notNull(),
+  totalScore: integer("total_score").default(100).notNull(),
+  percentage: integer("percentage").notNull(),
+  breakdown: jsonb("breakdown").$type<any[]>(),
+  completedAt: timestamp("completed_at").defaultNow().notNull(),
+});
+
+export const assessmentSubmissionsRelations = relations(assessmentSubmissions, ({ one }) => ({
+  user: one(userProfiles, {
+    fields: [assessmentSubmissions.userId],
+    references: [userProfiles.id],
+  }),
+}));
+
 // --- Community ---
 export const discussions = pgTable("discussions", {
   id: serial("id").primaryKey(),

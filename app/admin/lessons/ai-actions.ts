@@ -1,54 +1,22 @@
 "use server";
 
+import { db } from "@/db";
+import { subtopics } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
+export async function generateLessonNotes(title: string, outline?: string): Promise<string> {
+  const systemPrompt = `You are an expert Educational Content Creator for "Avenpath," a top-tier EdTech platform.
+Your task is to write comprehensive, beautifully structured, engaging, and clear lesson notes in Markdown format based on the provided title and outline.
 
-export async function extractTextFromPDF(formData: FormData): Promise<string> {
-  const file = formData.get("file") as File;
-  if (!file) {
-    throw new Error("No file uploaded");
-  }
+STRICT INSTRUCTIONS:
+1. Format strictly using Markdown (headers #, ##, ###, bullet points, bold text, code blocks if relevant).
+2. Make the content extremely rich, highly educational, easy to understand, and thorough.
+3. Include real-world examples, key terms, definitions, and clear explanations.
+4. Exclude All Assessments: Completely ignore and remove any quizzes, test questions, exercises, homework assignments, or practice problems found in the source text.
+5. Return ONLY the Markdown content. Do NOT wrap it in a code block like \`\`\`markdown.`;
 
-  try {
-    const arrayBuffer = await file.arrayBuffer();
-    const uint8Array = new Uint8Array(arrayBuffer);
-
-    const { extractText } = await import("unpdf");
-    const { text } = await extractText(uint8Array);
-
-    const extractedText = Array.isArray(text) ? text.join("\n\n").trim() : String(text || "").trim();
-
-    if (!extractedText) {
-      throw new Error("No selectable text found in PDF. If this is a scanned document or image, please paste text directly.");
-    }
-
-    return extractedText;
-  } catch (error: any) {
-    console.error("PDF Parsing error:", error);
-    throw new Error(error.message || "Failed to parse PDF");
-  }
-}
-
-export async function generateLessonContent(sourceText: string, audienceLevel: string, moduleTitle: string, topicTitle: string, lessonTitle: string): Promise<string> {
-  const systemPrompt = `You are an expert Instructional Designer and Educational Content Creator for "Avenpath," a top-tier EdTech platform. Your objective is to parse copyrighted educational reference texts and distill the core facts, concepts, and syllabus structure into completely original, easy-to-understand lesson notes.
-
-STRICT RULES FOR DISTILLATION:
-1. Zero Copy-Pasting (Copyright Compliance): Extract only the raw facts, theories, and concepts. Rewrite the explanations entirely from scratch in your own words. Do not use the exact phrasing or creative expression of the original text.
-2. Retain Structure: Keep the main topics, sub-topics, and logical progression of the original text. Use clear headings based on the source.
-3. Exclude All Assessments: Completely ignore and remove any quizzes, test questions, exercises, homework assignments, or practice problems found in the source text.
-4. Localize Context: Where examples are needed to explain a concept, invent completely new, original examples. IF the Target Audience is "Nigerian Senior Highschool", "Nigerian Junior School", or "Nigerian Primary School", use localized Nigerian markets, names, or relatable African scenarios. For all other audiences, keep examples general. If the topic is strict historical fact (e.g., European inventors) that cannot be altered, retain what was said in the reference text and ignore this rule. Only make examples localized if it can be.
-5. MANDATORY IMAGE PLACEHOLDERS (CRITICAL): You are acting as an Art Director. You MUST actively scan the original text for references to figures, charts, or visual examples (e.g., "Figure 2.1", "illustrated in"). Even if the text does not explicitly say "Figure", if a visual aid is crucial for a student to understand the concept being explained, you MUST insert a placeholder. 
-Format it EXACTLY like this on a new line:
-[IMAGE REQUIRED: Insert a clear diagram/illustration showing <describe the exact visual the student needs here based on the text>]
-6. Formatting: Output strictly in clean, well-structured Markdown format. Use \`##\` and \`###\` for subheadings, bullet points, bold text (\`**text**\`), and short paragraphs for readability. Ignore the first heading if it is the same as the lesson title, do not output the lesson title as the first heading. If there is an introductory paragraph at the beginning of the topic, evaluate it: if it contains historical facts, names, or dates (as outlined in Rule 8), it IS important and you MUST include it as the first part of the lesson using \`## Introduction\`, using \`###\` for subsequent subtopics. If it contains zero factual value, ignore it.
-7. Strict Topic Scope: You are ONLY allowed to generate content for the specific subtopic requested. (Note: Any introductory text immediately following your requested subtopic heading is considered part of the scope). Ignore ALL other information in the reference text. If the reference text does not contain any information about the requested subtopic, you must output EXACTLY: "I could not find content for the subtopic in the provided material." and absolutely nothing else.
-8. MANDATORY FACT RETENTION (CRITICAL): You are strictly forbidden from omitting historical dates, names of inventors/innovators, formulas, equations, or key definitions. Before writing, you MUST actively scan the ENTIRE scoped text (including the introduction) for years (e.g., "1830", "20th century"), capitalized names of people (e.g., "Joseph Jackson Lister"), and keywords like "invented", "created", "discovered", or "developed". EVERY SINGLE ONE of these entities found in the requested section MUST be explicitly integrated and stated in your generated notes.
-
-API OUTPUT CONSTRAINTS:
-Output ONLY the raw Markdown content. Do not include conversational filler, greetings, or explanations of what you did. Start directly with the first Heading.
-
-Remember: Output ONLY markdown. Generate mandatory [IMAGE REQUIRED: ...] tags where figures/visuals were mentioned. Strictly cover only the requested subtopic. Do not output the lesson title as the first heading. If the introduction contains vital facts, dates, or inventors, you must include it; otherwise, ignore it. Do not miss any names, dates, or formulas.`;
-  const moduleContextStr = moduleTitle ? `\nModule Context: ${moduleTitle}` : '';
-  const userPrompt = `Target Audience: ${audienceLevel}${moduleContextStr}\nTopic Context: ${topicTitle}\nSubtopic To Generate: ${lessonTitle}\n\nPlease distill the following reference text into original Avenpath lesson notes specifically for the "Subtopic To Generate" within the context of the given Topic. Follow your strict topic scope instructions:\n\n${sourceText}`;
+  const userPrompt = `Write full, detailed lesson notes for the topic: "${title}".
+${outline ? `Outline / Key Points to cover:\n${outline}` : ""}`;
 
   const response = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
@@ -58,7 +26,7 @@ Remember: Output ONLY markdown. Generate mandatory [IMAGE REQUIRED: ...] tags wh
     },
     body: JSON.stringify({
       model: "deepseek-chat",
-      temperature: 0.2,
+      temperature: 0.3,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
@@ -69,16 +37,51 @@ Remember: Output ONLY markdown. Generate mandatory [IMAGE REQUIRED: ...] tags wh
   if (!response.ok) {
     const errorData = await response.text();
     console.error("DeepSeek API Error:", errorData);
-    throw new Error("Failed to generate content with DeepSeek");
+    throw new Error("Failed to generate lesson notes with DeepSeek");
   }
 
   const data = await response.json();
   return data.choices[0].message.content.trim();
 }
 
-export async function generateFlashcards(lessonNotes: string): Promise<any[]> {
+export async function generateLessonContent(
+  titleOrText: string,
+  outlineOrAudience?: string,
+  moduleTitle?: string,
+  topicTitle?: string,
+  lessonTitle?: string
+): Promise<string> {
+  const combinedTitle = lessonTitle || titleOrText;
+  const combinedOutline = [outlineOrAudience, moduleTitle, topicTitle].filter(Boolean).join(" • ");
+  return generateLessonNotes(combinedTitle, combinedOutline || undefined);
+}
+
+export async function extractTextFromPDF(formData: FormData): Promise<string> {
+  const file = formData.get("file") as File;
+  if (!file) {
+    throw new Error("No file provided");
+  }
+  const buffer = await file.arrayBuffer();
+  const text = new TextDecoder().decode(buffer);
+  return text;
+}
+
+export async function generateFlashcards(lessonNotes: string, levelInfo?: string): Promise<any[]> {
+  const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
+
   const systemPrompt = `You are an expert Educational Content Creator for "Avenpath," a top-tier EdTech platform.
 Your task is to read the provided lesson notes and generate a set of highly effective study flashcards.
+
+GRADE & AGE CALIBRATION DIRECTIVE (CRITICAL):
+Calibrate question difficulty, vocabulary, and conceptual depth strictly to the target education level and specific class grade:
+- Primary School (Ages 6–11):
+  * Lower Primary (e.g. Primary 1–3, Ages 6–8): Use clear, simple language, encouraging phrasing, direct factual questions, and foundational concepts suitable for young learners.
+  * Upper Primary (e.g. Primary 4–6, Ages 9–11): Introduce age-appropriate analytical questions, structured vocabulary, and step-by-step reasoning while maintaining an accessible tone.
+- High School (Ages 12–16+):
+  * Junior High (e.g. JSS 1–3 / Grades 7–9, Ages 12–14): Focus on core academic terminology, structured application of rules/definitions, and moderate problem-solving.
+  * Senior High (e.g. SSS 1–3 / Grades 10–12, Ages 15–16+): Formulate rigorous, academically challenging questions with subtle distractors, deep theoretical reasoning, and precise terminology.
+- University / Higher Education:
+  * Advanced undergraduate depth: Expect comprehensive synthesis of complex concepts, professional domain terminology, rigorous analysis, and academic precision.
 
 STRICT RULES:
 1. Generate between 5 to 10 flashcards based ONLY on the most critical information in the text.
@@ -99,7 +102,7 @@ JSON SCHEMA:
   }
 ]`;
 
-  const userPrompt = `Generate a JSON flashcard deck based on these Avenpath lesson notes:\n\n${lessonNotes}`;
+  const userPrompt = `Generate a JSON flashcard deck based on these Avenpath lesson notes:${targetLevelText}\n\n${lessonNotes}`;
 
   const response = await fetch("https://api.deepseek.com/chat/completions", {
     method: "POST",
@@ -133,4 +136,30 @@ JSON SCHEMA:
     console.error("Failed to parse JSON flashcards:", content);
     throw new Error("Failed to parse flashcards JSON from AI");
   }
+}
+
+export async function generateOfficialFlashcardsForSubtopic(subtopicId: number) {
+  const sub = await db.query.subtopics.findFirst({
+    where: eq(subtopics.id, subtopicId),
+    with: {
+      topic: {
+        with: {
+          term: {
+            with: {
+              subject: true
+            }
+          }
+        }
+      }
+    }
+  });
+
+  if (!sub || !sub.content) {
+    throw new Error("Subtopic not found or has no content to generate flashcards.");
+  }
+
+  const subjectObj = sub.topic?.term?.subject;
+  const levelInfo = subjectObj ? `${subjectObj.levelName} (${subjectObj.className || "Standard Class"})` : undefined;
+
+  return await generateFlashcards(sub.content, levelInfo);
 }

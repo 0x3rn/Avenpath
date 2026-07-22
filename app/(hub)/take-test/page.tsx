@@ -12,6 +12,8 @@ export default async function TakeTestPage() {
       content: subtopics.content,
       topicTitle: topics.title,
       subjectName: subjects.name,
+      levelName: subjects.levelName,
+      className: subjects.className,
     })
     .from(subtopics)
     .innerJoin(topics, eq(subtopics.topicId, topics.id))

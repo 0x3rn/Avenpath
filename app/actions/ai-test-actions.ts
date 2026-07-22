@@ -52,15 +52,31 @@ export interface EvaluationResult {
   grading_breakdown: QuestionGrade[];
 }
 
+const GRADE_AGE_CALIBRATION_PROMPT = `
+GRADE & AGE CALIBRATION DIRECTIVE (CRITICAL):
+Calibrate question difficulty, vocabulary, and conceptual depth strictly to the target education level and specific class grade:
+- Primary School (Ages 6–11):
+  * Lower Primary (e.g. Primary 1–3, Ages 6–8): Use clear, simple language, encouraging phrasing, direct factual questions, and foundational concepts suitable for young learners.
+  * Upper Primary (e.g. Primary 4–6, Ages 9–11): Introduce age-appropriate analytical questions, structured vocabulary, and step-by-step reasoning while maintaining an accessible tone.
+- High School (Ages 12–16+):
+  * Junior High (e.g. JSS 1–3 / Grades 7–9, Ages 12–14): Focus on core academic terminology, structured application of rules/definitions, and moderate problem-solving.
+  * Senior High (e.g. SSS 1–3 / Grades 10–12, Ages 15–16+): Formulate rigorous, academically challenging questions with subtle distractors, deep theoretical reasoning, and precise terminology.
+- University / Higher Education:
+  * Advanced undergraduate depth: Expect comprehensive synthesis of complex concepts, professional domain terminology, rigorous analysis, and academic precision.`;
+
 /**
  * PROMPT 1: The Quiz & Rubric Generator (20 Objective MCQ Questions)
  */
-export async function generateQuizAndRubric(lessonNotes: string): Promise<GeneratedQuiz> {
+export async function generateQuizAndRubric(lessonNotes: string, levelInfo?: string): Promise<GeneratedQuiz> {
+  const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
+
   const systemPrompt = `You are an expert Educational Assessor and Content Creator for "Avenpath," a top-tier EdTech platform. 
 Your objective is to read the provided lesson notes and generate a comprehensive 20-question Objective Quiz formatted STRICTLY in JSON.
 
 QUIZ STRUCTURE (20 Questions Total):
 - Exactly 20 Objective Questions (Multiple Choice)
+
+${GRADE_AGE_CALIBRATION_PROMPT}
 
 STRICT RULES FOR GENERATION:
 1. Scope Constraint (CRITICAL): Generate questions and answers based ONLY on the facts, concepts, and definitions present in the provided text. Do not include ANY outside knowledge. Avenpath's credibility relies on testing students ONLY on what they just read.
@@ -86,7 +102,7 @@ REQUIRED JSON SCHEMA:
   ]
 }`;
 
-  const userPrompt = `Generate the 20-question JSON Objective Quiz based on the following Avenpath lesson notes:\n\n${lessonNotes}`;
+  const userPrompt = `Generate the 20-question JSON Objective Quiz based on the following Avenpath lesson notes:${targetLevelText}\n\n${lessonNotes}`;
 
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
@@ -135,8 +151,6 @@ REQUIRED JSON SCHEMA:
 
 /**
  * INSTANT JS QUIZ EVALUATOR (0.001s Latency, Zero API Token Cost)
- * Compares MCQ student_answer === correct_answer, awards 5 points per question (100% total),
- * and returns the teaching explanation.
  */
 export async function evaluateQuizSubmission(
   quizRubric: GeneratedQuiz,
@@ -177,7 +191,9 @@ export async function evaluateQuizSubmission(
 /**
  * PROMPT 1: The Test & Rubric Generator (20 Questions)
  */
-export async function generateTestAndRubric(lessonNotes: string): Promise<GeneratedTest> {
+export async function generateTestAndRubric(lessonNotes: string, levelInfo?: string): Promise<GeneratedTest> {
+  const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
+
   const systemPrompt = `You are an expert Educational Assessor and Content Creator for "Avenpath," a top-tier EdTech platform. 
 Your objective is to read the provided lesson notes and generate a comprehensive 20-question test formatted STRICTLY in JSON.
 
@@ -185,6 +201,8 @@ TEST STRUCTURE:
 - Exactly 10 Objective Questions (Multiple Choice)
 - Exactly 5 Subjective Questions (Fill-in-the-gap)
 - Exactly 5 Theory Questions (Short Essay/Explanation)
+
+${GRADE_AGE_CALIBRATION_PROMPT}
 
 STRICT RULES FOR GENERATION:
 1. Scope Constraint (CRITICAL): Generate questions, acceptable answers, and ideal answers based ONLY on the facts, concepts, and definitions present in the provided text. Do not include ANY outside knowledge. Avenpath's credibility relies on testing students ONLY on what they just read.
@@ -225,7 +243,7 @@ REQUIRED JSON SCHEMA:
   ]
 }`;
 
-  const userPrompt = `Generate the 20-question JSON test based on the following Avenpath lesson notes:\n\n${lessonNotes}`;
+  const userPrompt = `Generate the 20-question JSON test based on the following Avenpath lesson notes:${targetLevelText}\n\n${lessonNotes}`;
 
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {
@@ -386,7 +404,9 @@ ${JSON.stringify(studentSubmission, null, 2)}`;
 /**
  * PROMPT 1: The Exam & Rubric Generator (50 Questions Total)
  */
-export async function generateExamAndRubric(lessonNotes: string): Promise<GeneratedTest> {
+export async function generateExamAndRubric(lessonNotes: string, levelInfo?: string): Promise<GeneratedTest> {
+  const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
+
   const systemPrompt = `You are an expert Educational Assessor and Content Creator for "Avenpath," a top-tier EdTech platform. 
 Your objective is to read the provided lesson notes and generate a comprehensive 50-question EXAM formatted STRICTLY in JSON.
 
@@ -394,6 +414,8 @@ EXAM STRUCTURE (50 Questions Total):
 - Exactly 30 Objective Questions (Multiple Choice)
 - Exactly 10 Subjective Questions (Fill-in-the-gap)
 - Exactly 10 Theory Questions (Short Essay/Explanation)
+
+${GRADE_AGE_CALIBRATION_PROMPT}
 
 STRICT RULES FOR GENERATION:
 1. Scope Constraint (CRITICAL): Generate questions, acceptable answers, and ideal answers based ONLY on the facts, concepts, and definitions present in the provided text. Do not include ANY outside knowledge. Avenpath's credibility relies on testing students ONLY on what they just read.
@@ -434,7 +456,7 @@ REQUIRED JSON SCHEMA:
   ]
 }`;
 
-  const userPrompt = `Generate the 50-question JSON Exam based on the following Avenpath lesson notes:\n\n${lessonNotes}`;
+  const userPrompt = `Generate the 50-question JSON Exam based on the following Avenpath lesson notes:${targetLevelText}\n\n${lessonNotes}`;
 
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) {

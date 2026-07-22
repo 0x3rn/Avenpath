@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { quizzes, quizQuestions, subtopics, terms } from "@/db/schema";
+import { quizzes, quizQuestions, subtopics, terms, subjects } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { generateTestAndRubric, generateExamAndRubric } from "@/app/actions/ai-test-actions";
 
@@ -71,15 +71,29 @@ JSON SCHEMA:
  */
 export async function generateOfficialTestForSubtopic(subtopicId: number) {
   const sub = await db.query.subtopics.findFirst({
-    where: eq(subtopics.id, subtopicId)
+    where: eq(subtopics.id, subtopicId),
+    with: {
+      topic: {
+        with: {
+          term: {
+            with: {
+              subject: true
+            }
+          }
+        }
+      }
+    }
   });
 
   if (!sub || !sub.content) {
     throw new Error("Subtopic not found or has no content to generate a test.");
   }
 
-  // 1. Generate full 20-question rubric (10 MCQ, 5 Subjective, 5 Theory)
-  const rubric = await generateTestAndRubric(sub.content);
+  const subjectObj = sub.topic?.term?.subject;
+  const levelInfo = subjectObj ? `${subjectObj.levelName} (${subjectObj.className || "Standard Class"})` : undefined;
+
+  // 1. Generate full 20-question rubric (10 MCQ, 5 Subjective, 5 Theory) with Age/Grade Calibration
+  const rubric = await generateTestAndRubric(sub.content, levelInfo);
 
   // 2. Check if official test quiz record exists
   const existingQuizzes = await db.query.quizzes.findMany({
@@ -176,8 +190,14 @@ export async function generateOfficialExamForRange(
     throw new Error("No lesson notes found in the selected module range.");
   }
 
-  // 3. Generate 50-Question Exam via DeepSeek (max_tokens: 8000)
-  const rubric = await generateExamAndRubric(aggregatedNotes);
+  // 3. Fetch Subject Details for Grade Calibration
+  const parentSubject = await db.query.subjects.findFirst({
+    where: eq(subjects.id, subjectId)
+  });
+  const levelInfo = parentSubject ? `${parentSubject.levelName} (${parentSubject.className || "Standard Class"})` : undefined;
+
+  // 4. Generate 50-Question Exam via DeepSeek with Grade & Age Calibration (max_tokens: 8000)
+  const rubric = await generateExamAndRubric(aggregatedNotes, levelInfo);
   const title = examTitle || `Official Exam (${startTerm.name} - ${endTerm.name})`;
 
   // 4. Save into quizzes table attached to endTerm.id (endModuleId)

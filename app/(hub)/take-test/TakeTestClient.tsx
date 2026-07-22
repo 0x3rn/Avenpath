@@ -1,4 +1,3 @@
-"use server";
 "use client";
 
 import { useState } from "react";
@@ -14,6 +13,7 @@ import {
   GeneratedQuiz,
   EvaluationResult 
 } from "@/app/actions/ai-test-actions";
+import { saveAssessmentSubmission } from "@/app/actions/assessment-history-actions";
 
 interface LessonOption {
   id: number;
@@ -22,6 +22,8 @@ interface LessonOption {
   content: string;
   topicTitle: string;
   subjectName: string;
+  levelName?: string | null;
+  className?: string | null;
 }
 
 export default function TakeTestClient({ lessons }: { lessons: LessonOption[] }) {
@@ -53,14 +55,15 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
     setUserAnswers({});
 
     try {
+      const levelInfo = `${selectedLesson.levelName || selectedLesson.subjectName} (${selectedLesson.className || selectedLesson.topicTitle})`;
       if (assessmentMode === "quiz") {
-        const rubric = await generateQuizAndRubric(selectedLesson.content);
+        const rubric = await generateQuizAndRubric(selectedLesson.content, levelInfo);
         setQuizRubric(rubric);
       } else if (assessmentMode === "exam") {
-        const rubric = await generateExamAndRubric(selectedLesson.content);
+        const rubric = await generateExamAndRubric(selectedLesson.content, levelInfo);
         setTestRubric(rubric);
       } else {
-        const rubric = await generateTestAndRubric(selectedLesson.content);
+        const rubric = await generateTestAndRubric(selectedLesson.content, levelInfo);
         setTestRubric(rubric);
       }
     } catch (err: any) {
@@ -88,6 +91,16 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
         // Instant 0.001s JS Evaluator with 0 API token cost!
         const result = await evaluateQuizSubmission(quizRubric, submissionPayload);
         setEvaluationResult(result);
+
+        // Auto-save to assessment history
+        await saveAssessmentSubmission({
+          title: `${selectedLesson?.title || "Lesson"} Quiz`,
+          assessmentType: "quiz",
+          score: result.total_score,
+          totalScore: 100,
+          percentage: Math.round(result.total_score),
+          breakdown: result.grading_breakdown,
+        });
       } else if (testRubric) {
         const submissionPayload = [
           ...testRubric.objective.map(q => ({ question_id: q.id, answer: userAnswers[q.id] || "" })),
@@ -95,13 +108,23 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
           ...testRubric.theory.map(q => ({ question_id: q.id, answer: userAnswers[q.id] || "" })),
         ];
 
+        let result: EvaluationResult;
         if (assessmentMode === "exam") {
-          const result = await evaluateExamSubmission(testRubric, submissionPayload);
-          setEvaluationResult(result);
+          result = await evaluateExamSubmission(testRubric, submissionPayload);
         } else {
-          const result = await evaluateTestSubmission(testRubric, submissionPayload);
-          setEvaluationResult(result);
+          result = await evaluateTestSubmission(testRubric, submissionPayload);
         }
+        setEvaluationResult(result);
+
+        // Auto-save to assessment history
+        await saveAssessmentSubmission({
+          title: `${selectedLesson?.title || "Lesson"} ${assessmentMode === "exam" ? "50-Q Exam" : "Test"}`,
+          assessmentType: assessmentMode === "exam" ? "exam" : "test",
+          score: result.total_score,
+          totalScore: 100,
+          percentage: Math.round(result.total_score),
+          breakdown: result.grading_breakdown,
+        });
       }
     } catch (err: any) {
       console.error(err);

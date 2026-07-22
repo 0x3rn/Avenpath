@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { generateFlashcards } from "@/app/admin/lessons/ai-actions";
+import { generateOfficialFlashcardsForSubtopic } from "@/app/admin/lessons/ai-actions";
 import { saveFlashcards } from "@/app/admin/actions";
 import { ArrowLeft, Save, AlertCircle, Copy } from "lucide-react";
 import Link from "next/link";
@@ -22,7 +22,7 @@ export default function FlashcardEditor({ lesson }: { lesson: any }) {
 
     setIsGenerating(true);
     try {
-      const generated = await generateFlashcards(lesson.content);
+      const generated = await generateOfficialFlashcardsForSubtopic(lesson.id);
       setFlashcards(generated);
       toast.success("Flashcards generated successfully!");
     } catch (error: any) {
