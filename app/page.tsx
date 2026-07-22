@@ -31,7 +31,7 @@ function Counter({ from, to, duration = 2 }: { from: number, to: number, duratio
 }
 
 // --- Subject Chip Component (Desktop Hero) ---
-function SubjectChip({ name, topics, colorCls, bgCls, delay }: { name: string, topics: string[], colorCls: string, bgCls: string, delay: number }) {
+function SubjectChip({ name, topics, colorCls, bgCls, delay, hoverPos = "left-1/2 -translate-x-1/2 top-full pt-3" }: { name: string, topics: string[], colorCls: string, bgCls: string, delay: number, hoverPos?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -46,7 +46,7 @@ function SubjectChip({ name, topics, colorCls, bgCls, delay }: { name: string, t
         <h3 className={`text-foreground font-bold text-lg transition-colors ${colorCls.replace('text-', 'group-hover:text-')}`}>{name}</h3>
         
         {/* Hover Reveal Topics */}
-        <div className="absolute left-1/2 -translate-x-1/2 w-52 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-50 top-full pt-3">
+        <div className={`absolute w-52 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 z-50 ${hoverPos}`}>
           <div className="bg-card border border-border rounded-2xl p-4 shadow-xl">
             <ul className="space-y-3 mb-4">
               {topics.map(topic => (
@@ -110,8 +110,8 @@ export default function Home() {
             {mounted && (
               <div className="flex flex-col justify-between h-full py-32 w-[340px] justify-self-end pointer-events-auto">
                 <div className="w-64 self-start"><SubjectChip name="Mathematics" topics={["Algebra", "Geometry", "Calculus"]} colorCls="text-subject-math" bgCls="bg-subject-math" delay={0.1} /></div>
-                <div className="w-64 self-end mt-32"><SubjectChip name="Physics" topics={["Mechanics", "Optics", "Quantum"]} colorCls="text-subject-physics" bgCls="bg-subject-physics" delay={0.4} /></div>
-                <div className="w-64 self-start"><SubjectChip name="History" topics={["World War II", "Rome", "Ancient"]} colorCls="text-subject-history" bgCls="bg-subject-history" delay={0.2} /></div>
+                <div className="w-64 self-end mt-32"><SubjectChip name="Physics" topics={["Mechanics", "Optics", "Quantum"]} colorCls="text-subject-physics" bgCls="bg-subject-physics" delay={0.4} hoverPos="left-full top-full ml-2 mt-2" /></div>
+                <div className="w-64 self-start"><SubjectChip name="Medicine" topics={["Anatomy", "Physiology", "Pathology"]} colorCls="text-subject-history" bgCls="bg-subject-history" delay={0.2} hoverPos="left-full ml-4 top-1/2 -translate-y-1/2" /></div>
               </div>
             )}
             
@@ -122,8 +122,8 @@ export default function Home() {
             {mounted && (
               <div className="flex flex-col justify-between h-full py-32 w-[340px] justify-self-start pointer-events-auto">
                  <div className="w-64 self-end"><SubjectChip name="Biology" topics={["Cells", "Genetics", "Evolution"]} colorCls="text-subject-biology" bgCls="bg-subject-biology" delay={0.3} /></div>
-                 <div className="w-64 self-start mt-32"><SubjectChip name="Chemistry" topics={["Organic", "Physical", "Inorganic"]} colorCls="text-subject-chemistry" bgCls="bg-subject-chemistry" delay={0.6} /></div>
-                 <div className="w-64 self-end"><SubjectChip name="Computer Science" topics={["Algorithms", "AI", "Data"]} colorCls="text-subject-cs" bgCls="bg-subject-cs" delay={0.5} /></div>
+                 <div className="w-64 self-start mt-32"><SubjectChip name="Chemistry" topics={["Organic", "Physical", "Inorganic"]} colorCls="text-subject-chemistry" bgCls="bg-subject-chemistry" delay={0.6} hoverPos="right-full top-full mr-2 mt-2" /></div>
+                 <div className="w-64 self-end"><SubjectChip name="Computer Science" topics={["Algorithms", "AI", "Data"]} colorCls="text-subject-cs" bgCls="bg-subject-cs" delay={0.5} hoverPos="right-full mr-4 top-1/2 -translate-y-1/2" /></div>
               </div>
             )}
           </motion.div>

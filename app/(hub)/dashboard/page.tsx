@@ -9,6 +9,9 @@ import {
 import { getUserProfile } from "@/app/actions/user";
 import { getDashboardStats, getRecentLessons, getContinueLearning, seedStudySession } from "@/app/actions/dashboard";
 import { formatDistanceToNow } from "date-fns";
+import { Suspense } from "react";
+
+
 
 export default function DashboardPage() {
   const [profile, setProfile] = useState<{ name: string } | null>(null);

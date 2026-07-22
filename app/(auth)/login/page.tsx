@@ -142,16 +142,7 @@ export default function LoginPage() {
           </svg>
           Continue with Google
         </button>
-        <button className="w-full flex items-center justify-center gap-3 bg-card border border-border py-3.5 rounded-xl font-bold hover:bg-muted transition-colors">
-          <svg className="w-5 h-5" viewBox="0 0 23 23">
-            <path d="M11.4 24l-6.8-6.8c-.8-.8-1.2-1.8-1.2-2.9V7.5C3.4 5.6 5 4 6.9 4h6.8c1.1 0 2.1.4 2.9 1.2l6.8 6.8c1.6 1.6 1.6 4.1 0 5.7l-6.2 6.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2z" fill="#000000" fillOpacity="0"/>
-            <path d="M11.5 0H0v11.5l11.5 11.5L23 11.5 11.5 0z" fill="#F25022"/>
-            <path d="M11.5 0v11.5H0L11.5 0z" fill="#7FBA00"/>
-            <path d="M23 11.5v11.5L11.5 11.5H23z" fill="#00A4EF"/>
-            <path d="M11.5 23L0 11.5h11.5V23z" fill="#FFB900"/>
-          </svg>
-          Continue with Microsoft
-        </button>
+
       </div>
 
       {/* Footer */}

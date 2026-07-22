@@ -77,12 +77,6 @@ export default function LessonFlashcards({ cards }: { cards: Flashcard[] | null 
           <ArrowLeft className="w-4 h-4" /> Previous
         </button>
 
-        <button
-          onClick={() => setIsFlipped(!isFlipped)}
-          className="text-sm font-extrabold text-indigo-500 hover:text-indigo-600 transition-colors"
-        >
-          {isFlipped ? "Show Question" : "Flip Card"}
-        </button>
 
         <button
           onClick={handleNext}

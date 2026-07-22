@@ -2,6 +2,9 @@ import { db } from "@/db";
 import { subtopics, topics, terms, subjects } from "@/db/schema";
 import { eq, isNotNull, ne } from "drizzle-orm";
 import TakeTestClient from "./TakeTestClient";
+import { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Practice Tests" };
 
 export default async function TakeTestPage() {
   const availableLessons = await db
@@ -31,7 +34,7 @@ export default async function TakeTestPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500 pb-16">
-      <TakeTestClient lessons={cleanLessons} />
+      <TakeTestClient lessons={cleanLessons} fixedMode="test" />
     </div>
   );
 }

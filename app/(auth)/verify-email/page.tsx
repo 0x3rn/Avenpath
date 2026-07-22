@@ -66,12 +66,12 @@ function VerifyEmailContent() {
 
       {/* Primary Actions */}
       <div className="w-full space-y-3 mb-10">
-        <button 
-          onClick={simulateVerification} // Hidden trick to proceed in demo
+        <a 
+          href="mailto:"
           className="w-full bg-foreground text-background font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-foreground/90 active:scale-[0.98]"
         >
           Open Email App <ExternalLink className="w-4 h-4" />
-        </button>
+        </a>
         
         <div className="grid grid-cols-2 gap-3">
           <button 

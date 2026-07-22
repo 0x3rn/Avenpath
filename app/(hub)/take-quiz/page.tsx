@@ -1,12 +1,12 @@
 import { db } from "@/db";
 import { subtopics, topics, terms, subjects } from "@/db/schema";
-import { eq, ne } from "drizzle-orm";
-import TakeExamClient from "./TakeExamClient";
+import { eq, isNotNull, ne } from "drizzle-orm";
+import TakeTestClient from "../take-test/TakeTestClient";
 import { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Exams" };
+export const metadata: Metadata = { title: "Quizzes" };
 
-export default async function TakeExamPage() {
+export default async function TakeQuizPage() {
   const availableLessons = await db
     .select({
       id: subtopics.id,
@@ -15,6 +15,8 @@ export default async function TakeExamPage() {
       content: subtopics.content,
       topicTitle: topics.title,
       subjectName: subjects.name,
+      levelName: subjects.levelName,
+      className: subjects.className,
     })
     .from(subtopics)
     .innerJoin(topics, eq(subtopics.topicId, topics.id))
@@ -32,7 +34,7 @@ export default async function TakeExamPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500 pb-16">
-      <TakeExamClient lessons={cleanLessons} />
+      <TakeTestClient lessons={cleanLessons} fixedMode="quiz" />
     </div>
   );
 }

@@ -68,6 +68,9 @@ Calibrate question difficulty, vocabulary, and conceptual depth strictly to the 
  * PROMPT 1: The Quiz & Rubric Generator (20 Objective MCQ Questions)
  */
 export async function generateQuizAndRubric(lessonNotes: string, levelInfo?: string): Promise<GeneratedQuiz> {
+  if (!lessonNotes || lessonNotes.trim().length < 10) {
+    throw new Error("lesson note unavailable");
+  }
   const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
 
   const systemPrompt = `You are an expert Educational Assessor and Content Creator for "Avenpath," a top-tier EdTech platform. 
@@ -192,6 +195,9 @@ export async function evaluateQuizSubmission(
  * PROMPT 1: The Test & Rubric Generator (20 Questions)
  */
 export async function generateTestAndRubric(lessonNotes: string, levelInfo?: string): Promise<GeneratedTest> {
+  if (!lessonNotes || lessonNotes.trim().length < 10) {
+    throw new Error("lesson note unavailable");
+  }
   const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
 
   const systemPrompt = `You are an expert Educational Assessor and Content Creator for "Avenpath," a top-tier EdTech platform. 
@@ -407,6 +413,9 @@ ${JSON.stringify(studentSubmission, null, 2)}`;
  * PROMPT 1: The Exam & Rubric Generator (50 Questions Total)
  */
 export async function generateExamAndRubric(lessonNotes: string, levelInfo?: string): Promise<GeneratedTest> {
+  if (!lessonNotes || lessonNotes.trim().length < 10) {
+    throw new Error("lesson note unavailable");
+  }
   const targetLevelText = levelInfo ? `\nTarget Level & Class: ${levelInfo}` : "";
 
   const systemPrompt = `You are an expert Educational Assessor and Content Creator for "Avenpath," a top-tier EdTech platform. 

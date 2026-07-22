@@ -164,7 +164,7 @@ export default function TopicView({ level, subject, topic, completedSlugs = [], 
                   <p className="text-xs font-semibold text-muted-foreground mt-1">Test your recall across all lessons in this topic with an instant 20-question MCQ Quiz.</p>
                 </div>
                 <Link 
-                  href={`/take-test?mode=quiz`}
+                  href={`/quizzes`}
                   className="bg-foreground text-background font-extrabold text-xs px-6 py-3 rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2 shrink-0 shadow-md"
                 >
                   Take Topic Quiz <ArrowRight className="w-4 h-4" />

@@ -25,7 +25,7 @@ const PRIMARY_LINKS = [
 const SECONDARY_LINKS = [
   { name: "Take a Test", href: "/take-test", icon: FileCheck },
   { name: "Take an Exam", href: "/take-exam", icon: GraduationCap },
-  { name: "Quizzes", href: "/take-test?mode=quiz", icon: FileQuestion },
+  { name: "Take a Quiz", href: "/take-quiz", icon: FileQuestion },
   { name: "Assessment History", href: "/assessment-history", icon: History },
   { name: "Flashcards", href: "/flashcards", icon: Layers },
   { name: "Study Planner", href: "/planner", icon: Calendar },
@@ -74,7 +74,7 @@ export default function DashboardShell({ children, initialProfile }: { children:
     : SETTINGS_LINKS;
 
   return (
-    <div className="min-h-screen bg-muted/30 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-muted/30">
       
       {/* --- DESKTOP SIDEBAR --- */}
       <aside className="hidden md:flex flex-col w-[280px] bg-card border-r border-border fixed h-screen top-0 left-0 z-40 overflow-y-auto shrink-0">
@@ -221,7 +221,7 @@ export default function DashboardShell({ children, initialProfile }: { children:
       )}
 
       {/* --- MAIN CONTENT WRAPPER --- */}
-      <div className="flex-1 md:ml-[280px] flex flex-col min-h-screen">
+      <div className="w-full md:pl-[280px] flex flex-col min-h-screen">
         
         {/* --- TOP NAV --- */}
         <header className="h-20 bg-background border-b border-border sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">

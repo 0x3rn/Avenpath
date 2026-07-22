@@ -26,9 +26,9 @@ interface LessonOption {
   className?: string | null;
 }
 
-export default function TakeTestClient({ lessons }: { lessons: LessonOption[] }) {
+export default function TakeTestClient({ lessons, fixedMode }: { lessons: LessonOption[], fixedMode?: "quiz" | "test" | "exam" }) {
   const [selectedLessonId, setSelectedLessonId] = useState<number>(lessons[0]?.id || 0);
-  const [assessmentMode, setAssessmentMode] = useState<"quiz" | "test" | "exam">("quiz");
+  const [assessmentMode, setAssessmentMode] = useState<"quiz" | "test" | "exam">(fixedMode || "quiz");
   const [generating, setGenerating] = useState<boolean>(false);
   
   const [quizRubric, setQuizRubric] = useState<GeneratedQuiz | null>(null);
@@ -140,11 +140,11 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-border p-6 sm:p-8 rounded-3xl shadow-sm">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold uppercase tracking-wider mb-2">
-            <GraduationCap className="w-3.5 h-3.5" /> AI Self-Study Hub
+            <GraduationCap className="w-3.5 h-3.5" /> Self-Study Hub
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Practice Quizzes, Tests & 50-Q Exams</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight">Practice {assessmentMode === 'quiz' ? 'Quizzes' : assessmentMode === 'test' ? 'Tests' : 'Exams'}</h1>
           <p className="text-sm font-semibold text-muted-foreground mt-1">
-            Generate unlimited 20-question MCQ Quizzes, 20-question Practice Tests, or 50-question Full Exams.
+            Generate unlimited {assessmentMode === 'quiz' ? '20-question MCQ Quizzes' : assessmentMode === 'test' ? '20-question Practice Tests' : '50-question Full Exams'}.
           </p>
         </div>
       </div>
@@ -161,6 +161,7 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
       <div className="bg-card border border-border p-6 rounded-3xl space-y-6 shadow-sm">
         
         {/* MODE SELECTOR */}
+        {!fixedMode && (
         <div className="flex flex-wrap items-center gap-2 p-1.5 bg-muted/50 rounded-2xl border border-border w-fit">
           <button
             type="button"
@@ -196,6 +197,7 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
             <Award className="w-3.5 h-3.5 text-amber-400" /> 50-Q Full Exam
           </button>
         </div>
+        )}
 
         {/* LESSON DROPDOWN & GENERATE BUTTON */}
         <div className="space-y-2">
@@ -206,7 +208,7 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
             <select
               value={selectedLessonId}
               onChange={(e) => setSelectedLessonId(Number(e.target.value))}
-              className="flex-1 bg-muted/50 border border-border rounded-xl px-4 py-3 text-sm font-bold outline-none cursor-pointer focus:border-foreground/30 transition-colors"
+              className="flex-1 min-w-0 max-w-full bg-muted/50 border border-border rounded-xl px-4 py-3 text-sm font-bold outline-none cursor-pointer focus:border-foreground/30 transition-colors"
             >
               {lessons.map(l => (
                 <option key={l.id} value={l.id}>
@@ -447,10 +449,10 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
           </div>
 
           {/* DETAILED QUESTION BREAKDOWN */}
-          <div className="bg-card border border-border p-6 sm:p-8 rounded-3xl space-y-6 shadow-sm">
+          <div className="bg-card border border-border p-6 sm:p-8 rounded-3xl space-y-6 shadow-sm overflow-hidden">
             <h2 className="text-xl font-extrabold tracking-tight border-b border-border pb-4">Detailed Question Review & Explanations</h2>
 
-            <div className="space-y-6">
+            <div className="space-y-6 overflow-x-auto">
               {evaluationResult.grading_breakdown.map((item, idx) => {
                 const isFull = item.points_awarded === item.max_points;
                 const isPartial = item.points_awarded > 0 && item.points_awarded < item.max_points;
@@ -459,7 +461,13 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
                   <div key={item.question_id || idx} className="p-5 rounded-2xl bg-muted/30 border border-border space-y-4">
                     <div className="flex items-start justify-between gap-4">
                       <div className="font-bold text-sm text-foreground">
-                        <span className="text-muted-foreground mr-2">Q{idx + 1}.</span> {item.question_id}
+                        <span className="text-muted-foreground mr-2">Q{idx + 1}.</span> {
+                          quizRubric?.objective.find(q => q.id === item.question_id)?.question ||
+                          testRubric?.objective.find(q => q.id === item.question_id)?.question ||
+                          testRubric?.subjective.find(q => q.id === item.question_id)?.question ||
+                          testRubric?.theory.find(q => q.id === item.question_id)?.question ||
+                          item.question_id
+                        }
                       </div>
                       <span className={`px-3 py-1 rounded-full text-xs font-extrabold whitespace-nowrap ${
                         isFull 

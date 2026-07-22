@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
+import { getHomepageStats } from "@/app/actions/marketing";
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default async function AuthLayout({ children }: { children: React.ReactNode }) {
+  const stats = await getHomepageStats();
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-background">
       
@@ -13,7 +15,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-subject-science/20 rounded-full blur-[100px]" />
 
         <Link href="/" className="relative z-10 flex items-center gap-3 w-fit">
-          <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
+          <img src="/logo.png?v=2" alt="Avenpath Logo" className="h-16 w-auto" />
         </Link>
 
         <div className="relative z-10 mt-auto mb-auto max-w-lg">
@@ -26,16 +28,16 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
           <div className="grid grid-cols-2 gap-8">
             <div>
-              <div className="text-2xl font-extrabold text-foreground mb-1">150+</div>
+              <div className="text-2xl font-extrabold text-foreground mb-1">{stats.subjects || 150}+</div>
               <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Subjects</div>
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-foreground mb-1">18,000+</div>
+              <div className="text-2xl font-extrabold text-foreground mb-1">{stats.lessons || 18000}+</div>
               <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Lessons</div>
             </div>
             <div>
-              <div className="text-2xl font-extrabold text-foreground mb-1">2.8M+</div>
-              <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Study Sessions</div>
+              <div className="text-2xl font-extrabold text-foreground mb-1">{stats.studyHours || 2800}+</div>
+              <div className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Study Hours</div>
             </div>
             <div>
               <div className="text-2xl font-extrabold text-foreground mb-1">97%</div>
@@ -46,15 +48,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </div>
 
       {/* Right Side - Form Container */}
-      <div className="flex-1 flex flex-col p-6 sm:p-12 md:p-16 relative">
+      <div className="flex-1 flex flex-col p-4 sm:p-12 md:p-16 relative">
         
         {/* Mobile Header */}
-        <div className="md:hidden flex items-center justify-between mb-12">
+        <div className="md:hidden flex items-center justify-between mb-6">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center">
               <BookOpen className="w-4 h-4 text-background" />
             </div>
-            <img src="/logo.png" alt="Avenpath Logo" className="h-20 w-auto" />
+            <img src="/logo.png?v=2" alt="Avenpath Logo" className="h-10 w-auto" />
           </Link>
         </div>
 

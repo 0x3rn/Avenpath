@@ -14,7 +14,10 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Avenpath | Digital Library",
+  title: {
+    template: "%s | Avenpath",
+    default: "Avenpath | A Comprehensive Educational Platform"
+  },
   description: "Knowledge, organized beautifully.",
 };
 
@@ -37,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${manrope.variable} ${newsreader.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans font-medium text-foreground bg-background selection:bg-primary/20 selection:text-primary">
+      <body className="min-h-full flex flex-col font-sans font-medium text-foreground bg-background selection:bg-primary/20 selection:text-primary overflow-x-hidden">
         <GlobalSearch />
         {children}
         <Toaster position="bottom-right" theme="system" />
