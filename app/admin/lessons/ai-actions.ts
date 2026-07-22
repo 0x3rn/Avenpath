@@ -63,14 +63,22 @@ Remember: Output ONLY markdown. Generate mandatory [IMAGE REQUIRED: ...] tags wh
   return data.choices[0].message.content.trim();
 }
 
+import { extractText } from "unpdf";
+
 export async function extractTextFromPDF(formData: FormData): Promise<string> {
   const file = formData.get("file") as File;
   if (!file) {
     throw new Error("No file provided");
   }
   const buffer = await file.arrayBuffer();
-  const text = new TextDecoder().decode(buffer);
-  return text;
+  
+  try {
+    const { text } = await extractText(new Uint8Array(buffer));
+    return Array.isArray(text) ? text.join("\n\n") : (text || "");
+  } catch (err: any) {
+    console.error("PDF Parsing Error:", err);
+    throw new Error("Failed to parse the uploaded PDF file. Please ensure it is a valid PDF containing text.");
+  }
 }
 
 export async function generateFlashcards(lessonNotes: string, levelInfo?: string): Promise<any[]> {
