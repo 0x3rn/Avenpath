@@ -1,14 +1,15 @@
 import { db } from "../db";
 import * as schema from "../db/schema";
-import { eq, and } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import type { Subject, Term, Topic, Subtopic } from "../types/curriculum";
+import { cache } from "react";
 
-export async function getLevels(): Promise<string[]> {
+export const getLevels = cache(async (): Promise<string[]> => {
   const allLevels = await db.query.levels.findMany();
   return allLevels.map((l) => l.slug);
-}
+});
 
-export async function getCategories(levelSlug: string): Promise<string[]> {
+export const getCategories = cache(async (levelSlug: string): Promise<string[]> => {
   const level = await db.query.levels.findFirst({
     where: eq(schema.levels.slug, levelSlug)
   });
@@ -18,15 +19,78 @@ export async function getCategories(levelSlug: string): Promise<string[]> {
     where: eq(schema.categories.levelId, level.id)
   });
   return cats.map((c) => c.slug);
+});
+
+function formatSubjectHelper(s: any, levelSlug: string): Subject {
+  const topics: Topic[] = [];
+  const terms: Term[] = [];
+  
+  if (s.terms) {
+    for (const term of s.terms) {
+      const termTopics: Topic[] = [];
+      if (term.topics) {
+        for (const t of term.topics) {
+          const topicObj = {
+            id: t.slug,
+            name: t.title,
+            slug: t.slug,
+            description: t.summary || "",
+            estimatedHours: 2,
+            prerequisites: [],
+            subtopics: (t.subtopics || []).map((st: any) => ({
+              id: st.slug,
+              name: st.title,
+              slug: st.slug,
+              content: st.content
+            }))
+          };
+          topics.push(topicObj);
+          termTopics.push(topicObj);
+        }
+      }
+      
+      terms.push({
+        id: term.termId,
+        name: term.name,
+        theme: term.theme,
+        topics: termTopics
+      });
+    }
+  }
+
+  const formatName = (name: string) => name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+  return {
+    id: s.id,
+    name: formatName(s.name),
+    slug: s.slug,
+    levelName: s.levelName,
+    className: s.className,
+    description: s.description || "",
+    icon: s.icon || "BookOpen",
+    color: s.color || "#3b82f6",
+    levels: [levelSlug],
+    category: s.category?.slug || "",
+    categoryName: s.category?.name || "",
+    topics,
+    terms
+  };
 }
 
-export async function getSubjectsByLevel(levelSlug: string): Promise<Subject[]> {
+export const getSubjectsByLevel = cache(async (levelSlug: string): Promise<Subject[]> => {
   const level = await db.query.levels.findFirst({
     where: eq(schema.levels.slug, levelSlug)
   });
   if (!level) return [];
 
+  const cats = await db.query.categories.findMany({
+    where: eq(schema.categories.levelId, level.id)
+  });
+  if (cats.length === 0) return [];
+  const catIds = cats.map(c => c.id);
+
   const subjectsWithRelations = await db.query.subjects.findMany({
+    where: inArray(schema.subjects.categoryId, catIds),
     with: {
       category: true,
       terms: {
@@ -45,99 +109,56 @@ export async function getSubjectsByLevel(levelSlug: string): Promise<Subject[]> 
     }
   });
 
-  // Filter subjects by levelSlug manually (since filtering by nested relation is complex)
-  // or we can join, but we already have category.levelId which we could filter if we fetch categories first.
-  const cats = await db.query.categories.findMany({
-    where: eq(schema.categories.levelId, level.id)
-  });
-  const catIds = cats.map(c => c.id);
+  return subjectsWithRelations.map(s => formatSubjectHelper(s, levelSlug));
+});
 
-  const filteredSubjects = subjectsWithRelations.filter(s => catIds.includes(s.categoryId));
-
-  const result: Subject[] = [];
-  
-  for (const s of filteredSubjects) {
-    const topics: Topic[] = [];
-    const terms: Term[] = [];
-    
-    for (const term of s.terms) {
-      const termTopics: Topic[] = [];
-      for (const t of term.topics) {
-        const topicObj = {
-          id: t.slug,
-          name: t.title,
-          slug: t.slug,
-          description: "", // Fallback
-          estimatedHours: 2, // Fallback
-          prerequisites: [], // Fallback
-          subtopics: t.subtopics.map(st => ({
-            id: st.slug,
-            name: st.title,
-            slug: st.slug
-          }))
-        };
-        topics.push(topicObj);
-        termTopics.push(topicObj);
+export const getSubject = cache(async (levelSlug: string, subjectSlug: string): Promise<Subject | null> => {
+  const s = await db.query.subjects.findFirst({
+    where: eq(schema.subjects.slug, subjectSlug),
+    with: {
+      category: true,
+      terms: {
+        orderBy: (terms, { asc }) => [asc(terms.id)],
+        with: {
+          topics: {
+            orderBy: (topics, { asc }) => [asc(topics.order)],
+            with: {
+              subtopics: {
+                orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
+              }
+            }
+          }
+        }
       }
-      
-      terms.push({
-        id: term.termId,
-        name: term.name,
-        theme: term.theme,
-        topics: termTopics
-      });
     }
+  });
 
-    // Capitalize slug if name is stored as lowercase slug in DB
-    const formatName = (name: string) => name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-
-    result.push({
-      id: s.id,
-      name: formatName(s.name),
-      slug: s.slug,
-      levelName: s.levelName,
-      className: s.className,
-      description: s.description || "",
-      icon: s.icon || "BookOpen",
-      color: s.color || "#3b82f6",
-      levels: [levelSlug],
-      category: s.category.slug,
-      categoryName: s.category.name,
-      topics,
-      terms
-    });
-  }
-
-  return result;
-}
-
-export async function getSubject(levelSlug: string, subjectSlug: string): Promise<Subject | null> {
-  const subjects = await getSubjectsByLevel(levelSlug);
-  return subjects.find(s => s.slug === subjectSlug) || null;
-}
+  if (!s) return null;
+  return formatSubjectHelper(s, levelSlug);
+});
 
 export function getSubjectGroupId(slug: string) {
   return slug.replace(/-class\d+/, '');
 }
 
-export async function getSubjectsGroup(levelSlug: string, baseSlug: string): Promise<Subject[]> {
+export const getSubjectsGroup = cache(async (levelSlug: string, baseSlug: string): Promise<Subject[]> => {
   const subjects = await getSubjectsByLevel(levelSlug);
   return subjects.filter(s => getSubjectGroupId(s.slug) === baseSlug || s.slug === baseSlug);
-}
+});
 
-export async function getTopic(levelSlug: string, subjectSlug: string, topicSlug: string): Promise<Topic | null> {
+export const getTopic = cache(async (levelSlug: string, subjectSlug: string, topicSlug: string): Promise<Topic | null> => {
   const subject = await getSubject(levelSlug, subjectSlug);
   if (!subject) return null;
   return subject.topics.find(t => t.slug === topicSlug) || null;
-}
+});
 
-export async function getSubtopic(levelSlug: string, subjectSlug: string, topicSlug: string, subtopicSlug: string): Promise<Subtopic | null> {
+export const getSubtopic = cache(async (levelSlug: string, subjectSlug: string, topicSlug: string, subtopicSlug: string): Promise<Subtopic | null> => {
   const topic = await getTopic(levelSlug, subjectSlug, topicSlug);
   if (!topic) return null;
   return topic.subtopics.find(s => s.slug === subtopicSlug) || null;
-}
+});
 
-export async function getSubtopicWithContent(subtopicSlug: string) {
+export const getSubtopicWithContent = cache(async (subtopicSlug: string) => {
   const st = await db.query.subtopics.findFirst({
     where: eq(schema.subtopics.slug, subtopicSlug)
   });
@@ -149,4 +170,4 @@ export async function getSubtopicWithContent(subtopicSlug: string) {
   });
   
   return { ...st, name: st.title, quizzes: quizzesData };
-}
+});

@@ -4,7 +4,7 @@ export default function LoadingLessonView() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="sticky top-0 flex items-center justify-between px-8 py-4 w-full z-50 bg-background/90 backdrop-blur-md border-b border-border">
+      <nav className="sticky top-0 flex items-center justify-between px-8 py-4 w-full z-50 bg-background border-b border-border">
         <div className="w-24 h-8 bg-muted rounded-md animate-pulse"></div>
         <div className="flex items-center gap-2 text-sm">
           <div className="w-12 h-4 bg-muted rounded animate-pulse hidden md:block"></div>

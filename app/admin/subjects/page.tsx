@@ -1,34 +1,10 @@
-import { db } from "@/db";
 import { Download } from "lucide-react";
 import { NewSubjectButton } from "./SubjectClientActions";
 import SubjectsFolderTree from "./SubjectsFolderTree";
+import { getAdminLevelsTree } from "@/lib/admin-curriculum";
 
 export default async function SubjectsManager() {
-  // Query the actual hierarchy: levels → categories → subjects
-  const levels = await db.query.levels.findMany({
-    orderBy: (levels, { asc }) => [asc(levels.name)],
-    with: {
-      categories: {
-        orderBy: (categories, { asc }) => [asc(categories.slug)],
-        with: {
-          subjects: {
-            orderBy: (subjects, { asc }) => [asc(subjects.name)],
-            with: {
-              terms: {
-                with: {
-                  topics: {
-                    with: {
-                      subtopics: true
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  });
+  const levels = await getAdminLevelsTree();
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500 pb-12">

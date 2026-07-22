@@ -86,7 +86,7 @@ export default function LessonView({
       </div>
 
       {/* TOP BAR */}
-      <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border px-6 py-4 flex items-center justify-between">
+      <nav className="sticky top-0 z-50 bg-background border-b border-border px-6 py-4 flex items-center justify-between">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2 mr-2 text-foreground hover:bg-muted rounded-lg transition-colors hidden lg:block">

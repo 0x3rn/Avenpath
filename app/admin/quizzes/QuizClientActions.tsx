@@ -129,15 +129,24 @@ export function NewQuizButton({ subjects = [] }: { subjects?: any[] }) {
   );
 }
 
+import { ConfirmModal } from "@/app/components/ConfirmModal";
+
 export function QuizMenu({ quizId }: { quizId: number }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  async function handleDelete() {
-    if (confirm("Are you sure you want to delete this quiz and all its questions?")) {
-      setLoading(true);
+  async function executeDelete() {
+    setLoading(true);
+    try {
       await deleteQuiz(quizId);
-      toast.success("Quiz deleted successfully");
+      toast.success("Assessment deleted successfully");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to delete assessment");
+    } finally {
+      setLoading(false);
+      setShowConfirmModal(false);
+      setIsOpen(false);
     }
   }
 
@@ -158,7 +167,7 @@ export function QuizMenu({ quizId }: { quizId: number }) {
               <Edit3 className="w-3 h-3" /> Edit
             </Link>
             <button 
-              onClick={handleDelete}
+              onClick={() => setShowConfirmModal(true)}
               disabled={loading}
               className="w-full text-left px-4 py-2 text-[10px] font-bold text-red-500 hover:bg-red-500/10 flex items-center gap-2 disabled:opacity-50"
             >
@@ -167,6 +176,18 @@ export function QuizMenu({ quizId }: { quizId: number }) {
           </div>
         </>
       )}
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Delete Assessment?"
+        description="Are you sure you want to delete this assessment and all its questions? This action cannot be undone."
+        confirmText="Delete Assessment"
+        cancelText="Cancel"
+        variant="danger"
+        isLoading={loading}
+        onConfirm={executeDelete}
+        onClose={() => setShowConfirmModal(false)}
+      />
     </div>
   );
 }

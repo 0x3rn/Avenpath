@@ -9,6 +9,7 @@ import { generateLessonContent, extractTextFromPDF } from "../../ai-actions";
 import { UploadCloud, Wand2, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { InteractivePreview } from "./InteractivePreview";
+import { ConfirmModal } from "@/app/components/ConfirmModal";
 
 export default function LessonEditor({ lesson }: { lesson: any }) {
   const [content, setContent] = useState(lesson.content || "");
@@ -94,25 +95,34 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
     }
   }
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  async function executeGenerateNotes() {
+    setIsAiLoading(true);
+    try {
+      const generatedMarkdown = await generateLessonContent(referenceText, audience, moduleTitle, topicTitle, lessonTitle);
+      setContent(generatedMarkdown);
+      toast.success("Lesson notes generated successfully!");
+    } catch (err) {
+      toast.error("AI Generation failed. Check console or API key.");
+    } finally {
+      setIsAiLoading(false);
+      setShowConfirmModal(false);
+    }
+  }
+
   async function handleGenerateNotes() {
     if (!referenceText.trim()) {
       toast.error("Please provide some reference text first.");
       return;
     }
 
-    if (content.trim() && !window.confirm("This will overwrite your existing lesson content. Do you want to proceed?")) {
+    if (content.trim()) {
+      setShowConfirmModal(true);
       return;
     }
 
-    setIsAiLoading(true);
-    try {
-      const generatedMarkdown = await generateLessonContent(referenceText, audience, moduleTitle, topicTitle, lessonTitle);
-      setContent(generatedMarkdown);
-    } catch (err) {
-      toast.error("AI Generation failed. Check console or API key.");
-    } finally {
-      setIsAiLoading(false);
-    }
+    await executeGenerateNotes();
   }
 
   return (
@@ -120,9 +130,9 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
       {/* HEADER */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push("/admin/lessons")} className="p-2 border border-border text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
+          <Link href="/admin/lessons" className="p-2 border border-border text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
             <ArrowLeft className="w-4 h-4" />
-          </button>
+          </Link>
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight">Edit Lesson</h1>
             <p className="text-sm font-medium text-muted-foreground mt-1">Editing: {lesson.title}</p>
@@ -257,6 +267,18 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
           uploadPathPrefix={uploadPathPrefix} 
         />
       </div>
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Overwrite Lesson Content?"
+        description="Generating new lesson notes will overwrite your existing draft content. Are you sure you want to proceed?"
+        confirmText="Overwrite & Generate"
+        cancelText="Cancel"
+        variant="warning"
+        isLoading={isAiLoading}
+        onConfirm={executeGenerateNotes}
+        onClose={() => setShowConfirmModal(false)}
+      />
     </div>
   );
 }

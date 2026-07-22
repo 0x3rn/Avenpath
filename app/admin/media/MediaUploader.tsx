@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Upload, X, Loader2, Image as ImageIcon, Video, FileText, File } from "lucide-react";
+import { Upload, X, Loader2, Image as ImageIcon, Video, FileText, File, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { saveMediaMetadata } from "../actions";
 import { toast } from "sonner";
+import { ConfirmModal } from "@/app/components/ConfirmModal";
 
 export function MediaUploader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -166,12 +167,11 @@ export function MediaUploader() {
 
 export function MediaDeleteButton({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const supabase = createClient();
 
-  const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this file? This cannot be undone.")) return;
+  const executeDelete = async () => {
     setLoading(true);
-    
     try {
       // Delete from bucket
       await supabase.storage.from('media').remove([id]);
@@ -179,21 +179,37 @@ export function MediaDeleteButton({ id }: { id: string }) {
       // Delete from DB (action handles revalidation)
       const { deleteMediaAsset } = await import('../actions');
       await deleteMediaAsset(id);
+      toast.success("File deleted successfully.");
     } catch (err) {
       toast.error("Error deleting file.");
     } finally {
       setLoading(false);
+      setShowConfirmModal(false);
     }
   };
 
   return (
-    <button 
-      onClick={handleDelete}
-      disabled={loading}
-      className="text-red-500 hover:text-red-600 p-1"
-      title="Delete"
-    >
-      {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <X className="w-3 h-3" />}
-    </button>
+    <>
+      <button 
+        onClick={() => setShowConfirmModal(true)} 
+        disabled={loading}
+        className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors disabled:opacity-50"
+        title="Delete asset"
+      >
+        <Trash2 className="w-4 h-4" />
+      </button>
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        title="Delete Media Asset?"
+        description="Are you sure you want to delete this file from storage? This cannot be undone."
+        confirmText="Delete File"
+        cancelText="Cancel"
+        variant="danger"
+        isLoading={loading}
+        onConfirm={executeDelete}
+        onClose={() => setShowConfirmModal(false)}
+      />
+    </>
   );
 }

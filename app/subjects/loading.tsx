@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 export default function LoadingSubjectsDirectory() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md">
+      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
         <div className="w-24 h-8 bg-muted rounded-md animate-pulse"></div>
       </nav>
 

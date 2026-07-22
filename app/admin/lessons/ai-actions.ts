@@ -10,10 +10,10 @@ export async function extractTextFromPDF(formData: FormData): Promise<string> {
 
   try {
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    const uint8Array = new Uint8Array(arrayBuffer);
 
     const { extractText } = await import("unpdf");
-    const { text } = await extractText(buffer);
+    const { text } = await extractText(uint8Array);
 
     const extractedText = Array.isArray(text) ? text.join("\n\n").trim() : String(text || "").trim();
 

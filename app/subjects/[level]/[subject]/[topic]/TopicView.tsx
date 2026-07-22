@@ -22,7 +22,7 @@ export default function TopicView({ level, subject, topic, completedSlugs = [] }
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Top Bar Navigation */}
-      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 border-b border-border">
+      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 bg-background border-b border-border">
         <Link href="/" className="flex items-center gap-2">
           <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
         </Link>

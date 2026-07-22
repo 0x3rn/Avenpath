@@ -1,26 +1,9 @@
 import { Search } from "lucide-react";
-import { db } from "@/db";
 import TopicsTree from "../topics/TopicsTree";
+import { getAdminSubjectsTree } from "@/lib/admin-curriculum";
 
 export default async function LessonsManager() {
-  const subjects = await db.query.subjects.findMany({
-    orderBy: (subjects, { asc }) => [asc(subjects.name)],
-    with: {
-      terms: {
-        orderBy: (terms, { asc }) => [asc(terms.id)],
-        with: {
-          topics: {
-            orderBy: (topics, { asc }) => [asc(topics.order)],
-            with: {
-              subtopics: {
-                orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
-              }
-            }
-          }
-        }
-      }
-    }
-  });
+  const subjects = await getAdminSubjectsTree();
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500 pb-12">

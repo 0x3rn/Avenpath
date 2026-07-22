@@ -1,26 +1,10 @@
 import { Search, HelpCircle, BookOpen, Layers, Target } from "lucide-react";
 import { db } from "@/db";
 import { NewQuizButton, QuizMenu } from "./QuizClientActions";
+import { getAdminSubjectsTree } from "@/lib/admin-curriculum";
 
 export default async function QuizzesManager() {
-  const subjects = await db.query.subjects.findMany({
-    orderBy: (subjects, { asc }) => [asc(subjects.name)],
-    with: {
-      terms: {
-        orderBy: (terms, { asc }) => [asc(terms.id)],
-        with: {
-          topics: {
-            orderBy: (topics, { asc }) => [asc(topics.order)],
-            with: {
-              subtopics: {
-                orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
-              }
-            }
-          }
-        }
-      }
-    }
-  });
+  const subjects = await getAdminSubjectsTree();
 
   const quizzesData = await db.query.quizzes.findMany({
     with: {
@@ -30,10 +14,12 @@ export default async function QuizzesManager() {
     }
   });
   
-  const allQuestions = await db.query.quizQuestions.findMany();
+  const questionIds = await db.query.quizQuestions.findMany({
+    columns: { quizId: true }
+  });
 
   const getQuestionCount = (quizId: number) => {
-    return allQuestions.filter(q => q.quizId === quizId).length;
+    return questionIds.filter(q => q.quizId === quizId).length;
   };
 
   return (
