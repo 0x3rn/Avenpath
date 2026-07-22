@@ -6,14 +6,17 @@ import { getAdminSubjectsTree } from "@/lib/admin-curriculum";
 export default async function QuizzesManager() {
   const subjects = await getAdminSubjectsTree();
 
-  const quizzesData = await db.query.quizzes.findMany({
+  const allQuizzesData = await db.query.quizzes.findMany({
     with: {
       subtopic: true,
       topic: true,
       term: true
     }
   });
-  
+
+  // Strictly filter for Quizzes, Tests, and Knowledge Checks ONLY (EXCLUDE EXAMS)
+  const quizzesData = allQuizzesData.filter(q => q.assessmentType !== 'exam');
+
   const questionIds = await db.query.quizQuestions.findMany({
     columns: { quizId: true }
   });
@@ -29,7 +32,9 @@ export default async function QuizzesManager() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight">Quizzes & Tests</h1>
-          <p className="text-sm font-medium text-muted-foreground mt-1">Manage tests for modules, quizzes for topics, and knowledge checks for lessons.</p>
+          <p className="text-sm font-medium text-muted-foreground mt-1">
+            Manage 20-question Topic Quizzes and Module Tests automatically placed at the end of topics and modules.
+          </p>
         </div>
         <NewQuizButton subjects={subjects} />
       </div>
@@ -40,7 +45,7 @@ export default async function QuizzesManager() {
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input 
             type="text" 
-            placeholder="Search assessments..."
+            placeholder="Search quizzes and tests..."
             className="w-full pl-9 pr-4 py-2 bg-muted/50 border border-transparent focus:border-foreground/30 focus:bg-transparent rounded-lg font-medium text-sm outline-none transition-colors"
           />
         </div>
@@ -91,7 +96,7 @@ export default async function QuizzesManager() {
                     <td className="p-4">
                       <div className="flex flex-col gap-1">
                         <span className="text-xs font-bold uppercase tracking-wider">
-                          {quiz.assessmentType === 'test' ? 'Test' : quiz.assessmentType === 'knowledge_check' ? 'Knowledge Check' : 'Quiz'}
+                          {quiz.assessmentType === 'test' ? 'Module Test' : quiz.assessmentType === 'knowledge_check' ? 'Knowledge Check' : 'Topic Quiz'}
                         </span>
                         <span className="text-xs text-muted-foreground">{locationText}</span>
                       </div>
@@ -111,7 +116,7 @@ export default async function QuizzesManager() {
               {quizzesData.length === 0 && (
                 <tr>
                   <td colSpan={6} className="p-8 text-center text-muted-foreground font-medium">
-                    No assessments found.
+                    No quizzes or tests found.
                   </td>
                 </tr>
               )}
@@ -119,7 +124,6 @@ export default async function QuizzesManager() {
           </table>
         </div>
       </div>
-
     </div>
   );
 }

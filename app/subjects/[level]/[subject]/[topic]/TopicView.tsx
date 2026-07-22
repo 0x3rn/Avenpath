@@ -140,17 +140,23 @@ export default function TopicView({ level, subject, topic, completedSlugs = [] }
               );
             })}
 
-            {/* Mastery Quiz Node */}
+            {/* Topic Quiz Node */}
             <div className="relative pl-10 flex items-center mt-8">
-              <div className="absolute -left-[15px] w-[28px] h-[28px] rounded-full border-4 border-background bg-muted-foreground/20 flex items-center justify-center">
-                 <div className="w-2 h-2 rounded-full bg-background"></div>
+              <div className="absolute -left-[15px] w-[28px] h-[28px] rounded-full border-4 border-background bg-blue-500 flex items-center justify-center">
+                 <div className="w-2.5 h-2.5 rounded-full bg-background"></div>
               </div>
-              <div className="flex-grow flex items-center justify-between p-6 rounded-2xl border border-dashed border-border bg-transparent">
+              <div className="flex-grow flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl border border-blue-500/30 bg-blue-500/5 shadow-sm">
                 <div>
-                  <h3 className="text-lg font-bold text-muted-foreground">Mastery Quiz</h3>
-                  <p className="text-sm font-medium text-muted-foreground mt-1">Unlock by completing all lessons</p>
+                  <div className="text-xs font-bold uppercase tracking-wider text-blue-500 mb-1">End of Topic Assessment</div>
+                  <h3 className="text-lg font-extrabold text-foreground">{topic.name} Quiz</h3>
+                  <p className="text-xs font-semibold text-muted-foreground mt-1">Test your recall across all lessons in this topic with an instant 20-question MCQ Quiz.</p>
                 </div>
-                <Lock className="w-5 h-5 text-muted-foreground/50" />
+                <Link 
+                  href={`/take-test?mode=quiz`}
+                  className="bg-foreground text-background font-extrabold text-xs px-6 py-3 rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2 shrink-0 shadow-md"
+                >
+                  Take Topic Quiz <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>
