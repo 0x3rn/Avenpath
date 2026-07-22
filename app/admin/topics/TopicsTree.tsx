@@ -194,11 +194,14 @@ export default function TopicsTree({ subjects, mode = 'default' }: { subjects: a
                             <div key={sub.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 group">
                               <Link href={baseUrl} className="flex flex-1 items-center gap-2 cursor-pointer">
                                 <Icon className="w-4 h-4 text-muted-foreground" />
-                                <span className="font-medium text-sm text-muted-foreground group-hover:text-foreground transition-colors">{sub.title}</span>
+                                <span className="font-medium text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                                  {sub.title}
+                                  {!sub.isPublished && mode !== 'flashcards' && <span className="ml-2 px-1.5 py-0.5 rounded-full bg-orange-500/10 text-orange-500 text-[10px] font-bold">Draft</span>}
+                                </span>
                               </Link>
                               <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                 <Link href={baseUrl} className="p-1 hover:bg-card border border-transparent hover:border-border rounded"><MoveRight className="w-3 h-3 text-muted-foreground" /></Link>
-                                <SubtopicMenu subtopicId={sub.id} />
+                                <SubtopicMenu subtopicId={sub.id} isPublished={sub.isPublished} />
                               </div>
                             </div>
                             );

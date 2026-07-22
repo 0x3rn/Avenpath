@@ -106,13 +106,23 @@ export default function AssessmentConfigurator({ subjects, filterMode = "all" }:
               setEndTermId(newSub.terms[newSub.terms.length - 1].id);
             }
           }}
-          className="bg-muted/50 border border-border rounded-xl px-4 py-2.5 text-sm font-bold outline-none cursor-pointer focus:border-foreground/30 transition-colors min-w-[200px]"
+          className="bg-card border border-border rounded-xl px-4 py-2.5 text-sm font-bold outline-none cursor-pointer focus:border-foreground/30 transition-colors min-w-[200px]"
         >
-          {subjects.map(s => (
-            <option key={s.id} value={s.id}>
-              {s.name} ({s.levelName || "Course"})
-            </option>
-          ))}
+          {(() => {
+            const grouped = subjects.reduce((acc: any, s: any) => {
+              const categoryName = `${s.country || 'Global'} - ${s.levelName || 'General'} - ${s.className || 'General'}`;
+              if (!acc[categoryName]) acc[categoryName] = [];
+              acc[categoryName].push(s);
+              return acc;
+            }, {});
+            return Object.keys(grouped).map(categoryName => (
+              <optgroup key={categoryName} label={categoryName}>
+                {grouped[categoryName].map((s: any) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </optgroup>
+            ));
+          })()}
         </select>
       </div>
 

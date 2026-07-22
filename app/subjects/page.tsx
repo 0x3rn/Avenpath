@@ -33,20 +33,17 @@ export default async function SubjectsDirectory() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
-      <nav className={`sticky ${profile ? 'top-20' : 'top-0'} flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border`}>
-        {!profile ? (
+      {!profile ? (
+        <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
           <Link href="/" className="flex items-center gap-2"><img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" /></Link>
-        ) : (
-          <div />
-        )}
-        {profile && (
-          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-            <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
-            <ArrowRight className="w-4 h-4" />
-            <span className="text-foreground">Subjects</span>
-          </div>
-        )}
-      </nav>
+        </nav>
+      ) : (
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 max-w-7xl mx-auto w-full">
+          <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
+          <ArrowRight className="w-4 h-4" />
+          <span className="text-foreground">Subjects</span>
+        </div>
+      )}
 
       <main className="flex-grow flex flex-col items-center justify-center pt-12 pb-24 px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">

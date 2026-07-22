@@ -26,7 +26,7 @@ export interface QuizQuestion extends ObjectiveQuestion {
 }
 
 export interface GeneratedTest {
-  objective: ObjectiveQuestion[];
+  objective: QuizQuestion[];
   subjective: SubjectiveQuestion[];
   theory: TheoryQuestion[];
 }
@@ -60,7 +60,7 @@ Calibrate question difficulty, vocabulary, and conceptual depth strictly to the 
   * Upper Primary (e.g. Primary 4–6, Ages 9–11): Introduce age-appropriate analytical questions, structured vocabulary, and step-by-step reasoning while maintaining an accessible tone.
 - High School (Ages 12–16+):
   * Junior High (e.g. JSS 1–3 / Grades 7–9, Ages 12–14): Focus on core academic terminology, structured application of rules/definitions, and moderate problem-solving.
-  * Senior High (e.g. SSS 1–3 / Grades 10–12, Ages 15–16+): Formulate rigorous, academically challenging questions with subtle distractors, deep theoretical reasoning, and precise terminology.
+  * Senior High (e.g. SSS 1–3 / Grades 10–12, Ages 15–16+): Formulate clear, well-structured questions using professional academic terminology. Avoid overly subtle distractors and ensure questions remain accessible and preparatory for standard high school exams.
 - University / Higher Education:
   * Advanced undergraduate depth: Expect comprehensive synthesis of complex concepts, professional domain terminology, rigorous analysis, and academic precision.`;
 
@@ -80,8 +80,8 @@ ${GRADE_AGE_CALIBRATION_PROMPT}
 
 STRICT RULES FOR GENERATION:
 1. Scope Constraint (CRITICAL): Generate questions and answers based ONLY on the facts, concepts, and definitions present in the provided text. Do not include ANY outside knowledge. Avenpath's credibility relies on testing students ONLY on what they just read.
-2. Objective (MCQ): Provide exactly 4 options (A, B, C, D). Distractors must be academically plausible but definitively wrong based on the text. Avoid "all of the above" or "none of the above".
-3. Explanation: Provide a brief, encouraging explanation of why the correct answer is right. Treat this as a teaching moment.
+2. Objective (MCQ): Provide exactly 4 options (A, B, C, D). CRITICAL: You MUST strictly randomize the placement of the correct answer evenly across A, B, C, and D. Do NOT default to making 'A' the correct answer. Distractors must be academically plausible but definitively wrong based on the text. Avoid "all of the above" or "none of the above".
+3. Explanation: Provide a brief, authoritative explanation of why the correct answer is right. Do NOT evaluate the user (e.g., "Great job", "You are correct"). DO NOT use robotic phrases like "The text states that" or "According to the lesson". Write it like a premium expert educator explaining the concept directly.
 4. JSON Output ONLY: Output STRICTLY valid JSON. Do not wrap the output in markdown code blocks (e.g., \`\`\`json). No conversational filler.
 
 REQUIRED JSON SCHEMA:
@@ -97,7 +97,7 @@ REQUIRED JSON SCHEMA:
         "D": "To change the wavelength of the light source."
       },
       "correct_answer": "B",
-      "explanation": "Spot on! The text specifies that the condenser lens, located below the stage, focuses all light rays onto the specimen to maximize illumination."
+      "explanation": "The condenser lens, located below the stage, focuses all light rays onto the specimen to maximize illumination."
     }
   ]
 }`;
@@ -206,10 +206,11 @@ ${GRADE_AGE_CALIBRATION_PROMPT}
 
 STRICT RULES FOR GENERATION:
 1. Scope Constraint (CRITICAL): Generate questions, acceptable answers, and ideal answers based ONLY on the facts, concepts, and definitions present in the provided text. Do not include ANY outside knowledge. Avenpath's credibility relies on testing students ONLY on what they just read.
-2. Objective (MCQ): Provide 4 options (A, B, C, D). Distractors must be plausible.
+2. Objective (MCQ): Provide 4 options (A, B, C, D). CRITICAL: You MUST strictly randomize the placement of the correct answer evenly across A, B, C, and D. Do NOT default to making 'A' the correct answer. Distractors must be plausible.
 3. Subjective (Fill-in-the-gap): Formulate a sentence with a missing key term, name, or date. Provide an array of "acceptable_answers" and one "ideal_answer" for the UI to display later.
 4. Theory: Ask a "Why", "How", or "Explain" question. Generate a well-structured "ideal_answer" (summarized strictly from the notes) and an array of 3 to 4 "crucial_details" that a student needs to mention to get full marks.
-5. JSON Output ONLY: Output STRICTLY valid JSON. Do not wrap the output in markdown code blocks (e.g., \`\`\`json). No conversational filler.
+5. Explanation (MCQ ONLY): Include a short, authoritative explanation for WHY the correct answer is right. DO NOT say "Great job" or evaluate the user. DO NOT use robotic phrases like "The text states that" or "According to the lesson". Write it like a premium expert educator explaining the concept directly.
+6. JSON Output ONLY: Output STRICTLY valid JSON. Do not wrap the output in markdown code blocks (e.g., \`\`\`json). No conversational filler.
 
 REQUIRED JSON SCHEMA:
 {
@@ -218,7 +219,8 @@ REQUIRED JSON SCHEMA:
       "id": "obj_1",
       "question": "What is the primary function of...?",
       "options": { "A": "...", "B": "...", "C": "...", "D": "..." },
-      "correct_answer": "B"
+      "correct_answer": "B",
+      "explanation": "..."
     }
   ],
   "subjective": [
@@ -419,10 +421,11 @@ ${GRADE_AGE_CALIBRATION_PROMPT}
 
 STRICT RULES FOR GENERATION:
 1. Scope Constraint (CRITICAL): Generate questions, acceptable answers, and ideal answers based ONLY on the facts, concepts, and definitions present in the provided text. Do not include ANY outside knowledge. Avenpath's credibility relies on testing students ONLY on what they just read.
-2. Objective (MCQ): Provide 4 options (A, B, C, D). Distractors must be plausible.
+2. Objective (MCQ): Provide 4 options (A, B, C, D). CRITICAL: You MUST strictly randomize the placement of the correct answer evenly across A, B, C, and D. Do NOT default to making 'A' the correct answer. Distractors must be plausible.
 3. Subjective (Fill-in-the-gap): Formulate a sentence with a missing key term, name, or date. Provide an array of "acceptable_answers" and one "ideal_answer" for the UI to display later.
 4. Theory: Ask a "Why", "How", or "Explain" question. Generate a well-structured "ideal_answer" (summarized strictly from the notes) and an array of 3 to 4 "crucial_details" that a student needs to mention to get full marks.
-5. JSON Output ONLY: Output STRICTLY valid JSON. Do not wrap the output in markdown code blocks (e.g., \`\`\`json). No conversational filler.
+5. Explanation (MCQ ONLY): Include a short, authoritative explanation for WHY the correct answer is right. DO NOT say "Great job" or evaluate the user. DO NOT use robotic phrases like "The text states that" or "According to the lesson". Write it like a premium expert educator explaining the concept directly.
+6. JSON Output ONLY: Output STRICTLY valid JSON. Do not wrap the output in markdown code blocks (e.g., \`\`\`json). No conversational filler.
 
 REQUIRED JSON SCHEMA:
 {
@@ -431,7 +434,8 @@ REQUIRED JSON SCHEMA:
       "id": "obj_1",
       "question": "What is the primary function of...?",
       "options": { "A": "...", "B": "...", "C": "...", "D": "..." },
-      "correct_answer": "B"
+      "correct_answer": "B",
+      "explanation": "..."
     }
   ],
   "subjective": [

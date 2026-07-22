@@ -96,6 +96,7 @@ export const subtopics = pgTable("subtopics", {
   order: integer("order").notNull(),
   content: text("content"),
   flashcards: jsonb("flashcards").$type<any[]>(),
+  isPublished: boolean("is_published").default(true).notNull(),
 });
 
 export const subtopicsRelations = relations(subtopics, ({ one }) => ({
@@ -217,6 +218,8 @@ export const quizzes = pgTable("quizzes", {
   assessmentType: text("assessment_type").default("quiz").notNull(),
   title: text("title").notNull(),
   description: text("description"),
+  rubric: jsonb("rubric").$type<any>(),
+  isPublished: boolean("is_published").default(false).notNull(),
 });
 
 export const quizzesRelations = relations(quizzes, ({ one, many }) => ({
@@ -229,9 +232,13 @@ export const quizzesRelations = relations(quizzes, ({ one, many }) => ({
 export const quizQuestions = pgTable("quiz_questions", {
   id: serial("id").primaryKey(),
   quizId: integer("quiz_id").references(() => quizzes.id, { onDelete: "cascade" }).notNull(),
+  questionType: text("question_type").default("objective").notNull(),
   questionText: text("question_text").notNull(),
-  options: jsonb("options").$type<string[]>().notNull(),
-  correctAnswer: integer("correct_answer").notNull(), 
+  options: jsonb("options").$type<string[]>(),
+  correctAnswer: integer("correct_answer"),
+  idealAnswer: text("ideal_answer"),
+  acceptableAnswers: jsonb("acceptable_answers").$type<string[]>(),
+  crucialDetails: jsonb("crucial_details").$type<string[]>(),
   explanation: text("explanation"),
 });
 

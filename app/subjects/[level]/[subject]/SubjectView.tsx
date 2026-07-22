@@ -42,15 +42,29 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
-      <nav className={`sticky ${isLoggedIn ? 'top-20' : 'top-0'} flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border`}>
-        {!isLoggedIn ? (
+      {!isLoggedIn ? (
+        <nav className="sticky top-0 flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
-        ) : (
-          <div />
-        )}
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+            <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+            <ChevronRight className="w-4 h-4" />
+            <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
+            <ChevronRight className="w-4 h-4" />
+            {subject.category && subject.categoryName && (
+              <>
+                <Link href={`/subjects/${level}?category=${subject.category}#${subject.slug.replace(/-class\d+/, '')}`} className="hover:text-foreground transition-colors">
+                  {subject.categoryName}
+                </Link>
+                <ChevronRight className="w-4 h-4" />
+              </>
+            )}
+            <span className="text-foreground">{subject.name}</span>
+          </div>
+        </nav>
+      ) : (
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-4 max-w-7xl mx-auto w-full">
           <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
           <ChevronRight className="w-4 h-4" />
           <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
@@ -65,7 +79,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
           )}
           <span className="text-foreground">{subject.name}</span>
         </div>
-      </nav>
+      )}
 
       {/* HERO SECTION */}
       <section 

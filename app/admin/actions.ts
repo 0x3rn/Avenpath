@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import * as schema from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 
@@ -94,9 +94,23 @@ export async function createSubtopic(data: { topicId: number, title: string, slu
     title: data.title,
     slug: data.slug,
     order: 0,
+    isPublished: false,
   });
   revalidatePath("/admin/lessons");
   revalidatePath("/admin/topics");
+  return { success: true };
+}
+
+export async function toggleSubtopicPublishStatus(subtopicId: number, isPublished: boolean) {
+  const user = await getAdminOrModerator();
+  if (user.role === "moderator") throw new Error("Moderators cannot toggle publish status");
+
+  await db.update(schema.subtopics)
+    .set({ isPublished })
+    .where(eq(schema.subtopics.id, subtopicId));
+  
+  revalidatePath("/admin/curriculum");
+  revalidatePath("/admin/lessons");
   return { success: true };
 }
 
@@ -132,7 +146,8 @@ export async function deleteSubtopic(subtopicId: number) {
   return { success: true };
 }
 
-// --- QUIZZES ---
+import { generateQuizAndRubric, generateTestAndRubric, generateExamAndRubric } from "../actions/ai-test-actions";
+
 export async function createQuiz(data: { title: string, description: string, subtopicId?: number, topicId?: number, termId?: number, assessmentType: string }) {
   const user = await getAdminOrModerator();
   if (user.role === "moderator") {
@@ -140,14 +155,160 @@ export async function createQuiz(data: { title: string, description: string, sub
     return { success: true, pending: true };
   }
 
-  await db.insert(schema.quizzes).values({
+  // Aggregate Notes & Level Info for AI Generation
+  let aggregatedNotes = "";
+  let levelInfo: string | undefined = undefined;
+
+  if (data.assessmentType === 'quiz' && data.topicId) {
+    const topic = await db.query.topics.findFirst({
+      where: eq(schema.topics.id, data.topicId),
+      with: { term: { with: { subject: true } } }
+    });
+    if (topic?.term?.subject) {
+      levelInfo = `${topic.term.subject.levelName} (${topic.term.subject.className || "Standard Class"})`;
+    }
+    const topicSubtopics = await db.query.subtopics.findMany({
+      where: eq(schema.subtopics.topicId, data.topicId)
+    });
+    aggregatedNotes = topicSubtopics.map(s => s.content || "").join("\n\n");
+  } else if (data.assessmentType === 'test' && data.termId) {
+    const term = await db.query.terms.findFirst({
+      where: eq(schema.terms.id, data.termId),
+      with: { subject: true }
+    });
+    if (term?.subject) {
+      levelInfo = `${term.subject.levelName} (${term.subject.className || "Standard Class"})`;
+    }
+    const termTopics = await db.query.topics.findMany({
+      where: eq(schema.topics.termId, data.termId)
+    });
+    const topicIds = termTopics.map(t => t.id);
+    if (topicIds.length > 0) {
+      const allSubtopics = await db.query.subtopics.findMany({
+        where: inArray(schema.subtopics.topicId, topicIds)
+      });
+      aggregatedNotes = allSubtopics.map(s => s.content || "").join("\n\n");
+    }
+  } else if (data.assessmentType === 'exam' && data.termId) {
+    // If exam is passed, we aggregate based on termId for now
+    const term = await db.query.terms.findFirst({
+      where: eq(schema.terms.id, data.termId),
+      with: { subject: true }
+    });
+    if (term?.subject) {
+      levelInfo = `${term.subject.levelName} (${term.subject.className || "Standard Class"})`;
+    }
+    const termTopics = await db.query.topics.findMany({
+      where: eq(schema.topics.termId, data.termId)
+    });
+    const topicIds = termTopics.map(t => t.id);
+    if (topicIds.length > 0) {
+      const allSubtopics = await db.query.subtopics.findMany({
+        where: inArray(schema.subtopics.topicId, topicIds)
+      });
+      aggregatedNotes = allSubtopics.map(s => s.content || "").join("\n\n");
+    }
+  }
+
+  // 1. If we have aggregated notes, generate the Rubric FIRST
+  let rubric: any = null;
+  if (aggregatedNotes.trim()) {
+    try {
+      if (data.assessmentType === 'test') {
+        rubric = await generateTestAndRubric(aggregatedNotes, levelInfo);
+      } else if (data.assessmentType === 'exam') {
+        rubric = await generateExamAndRubric(aggregatedNotes, levelInfo);
+      } else {
+        rubric = await generateQuizAndRubric(aggregatedNotes, levelInfo);
+      }
+    } catch (e: any) {
+      console.error("AI Generation failed for new assessment:", e);
+      return { success: false, error: `AI Generation failed: ${e.message || e}` };
+    }
+  }
+
+  // 2. Insert the quiz record with the full rubric
+  const [newQuiz] = await db.insert(schema.quizzes).values({
     title: data.title,
     description: data.description,
+    rubric: rubric,
     subtopicId: data.subtopicId,
     topicId: data.topicId,
     termId: data.termId,
     assessmentType: data.assessmentType,
-  });
+    isPublished: false,
+  }).returning();
+
+  // 3. Insert all questions (objective, subjective, theory) for the UI to preview/manage
+  if (rubric) {
+    try {
+      const optionKeys = ["A", "B", "C", "D"];
+      let allQuestionRows: any[] = [];
+
+      // Map Objective Questions
+      if (rubric.objective) {
+        allQuestionRows = allQuestionRows.concat(rubric.objective.map((q: any) => {
+          let correctIndex = optionKeys.indexOf(q.correct_answer);
+          if (correctIndex === -1) correctIndex = 0;
+          return {
+            quizId: newQuiz.id,
+            questionType: "objective",
+            questionText: q.question,
+            options: [
+              q.options.A || "",
+              q.options.B || "",
+              q.options.C || "",
+              q.options.D || ""
+            ],
+            correctAnswer: correctIndex,
+            explanation: q.explanation || ""
+          };
+        }));
+      }
+
+      // Map Subjective Questions
+      if (rubric.subjective) {
+        allQuestionRows = allQuestionRows.concat(rubric.subjective.map((q: any) => ({
+          quizId: newQuiz.id,
+          questionType: "subjective",
+          questionText: q.question,
+          idealAnswer: q.ideal_answer,
+          acceptableAnswers: q.acceptable_answers || [],
+          explanation: ""
+        })));
+      }
+
+      // Map Theory Questions
+      if (rubric.theory) {
+        allQuestionRows = allQuestionRows.concat(rubric.theory.map((q: any) => ({
+          quizId: newQuiz.id,
+          questionType: "theory",
+          questionText: q.question,
+          idealAnswer: q.ideal_answer,
+          crucialDetails: q.crucial_details || [],
+          explanation: ""
+        })));
+      }
+
+      if (allQuestionRows.length > 0) {
+        await db.insert(schema.quizQuestions).values(allQuestionRows);
+      }
+    } catch (e) {
+      console.error("Failed to insert detailed questions:", e);
+    }
+  }
+
+  revalidatePath("/admin/quizzes");
+  return { success: true, quizId: newQuiz.id };
+}
+
+export async function toggleQuizPublishStatus(quizId: number, isPublished: boolean) {
+  const user = await getAdminOrModerator();
+  if (user.role === "moderator") {
+    throw new Error("Moderators cannot directly toggle publish status.");
+  }
+
+  await db.update(schema.quizzes).set({ isPublished }).where(eq(schema.quizzes.id, quizId));
   revalidatePath("/admin/quizzes");
   return { success: true };
 }
@@ -165,9 +326,13 @@ export async function saveQuiz(quizId: number, title: string, description: strin
   for (const q of questions) {
     await db.insert(schema.quizQuestions).values({
       quizId: quizId,
+      questionType: q.questionType || "objective",
       questionText: q.questionText,
-      options: q.options,
-      correctAnswer: q.correctAnswer,
+      options: q.options || [],
+      correctAnswer: q.correctAnswer ?? 0,
+      idealAnswer: q.idealAnswer || null,
+      acceptableAnswers: q.acceptableAnswers || [],
+      crucialDetails: q.crucialDetails || [],
       explanation: q.explanation || ""
     });
   }

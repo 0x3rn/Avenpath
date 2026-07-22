@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash, MoreVertical, Edit3 } from "lucide-react";
-import { createTopic, createSubtopic, deleteTopic, deleteSubtopic } from "../actions";
+import { Plus, Trash, MoreVertical, Edit3, Eye, EyeOff } from "lucide-react";
+import { createTopic, createSubtopic, deleteTopic, deleteSubtopic, toggleSubtopicPublishStatus } from "../actions";
 
 import { ConfirmModal } from "@/app/components/ConfirmModal";
 import { toast } from "sonner";
@@ -62,7 +62,7 @@ export function TopicMenu({ topicId }: { topicId: number }) {
   );
 }
 
-export function SubtopicMenu({ subtopicId }: { subtopicId: number }) {
+export function SubtopicMenu({ subtopicId, isPublished }: { subtopicId: number, isPublished?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);

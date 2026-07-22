@@ -34,5 +34,5 @@ export default async function TopicPage({ params }: { params: Promise<{ level: s
       .map(s => s.slug);
   }
 
-  return <TopicView level={level} subject={subject} topic={topic} completedSlugs={completedSlugs} />;
+  return <TopicView level={level} subject={subject} topic={topic} completedSlugs={completedSlugs} isLoggedIn={!!user} />;
 }

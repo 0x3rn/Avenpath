@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { ArrowRight, Clock, BookOpen, CheckCircle2, ChevronRight, Lock } from "lucide-react";
 import type { Subject, Topic } from "@/types/curriculum";
 
-export default function TopicView({ level, subject, topic, completedSlugs = [] }: { level: string, subject: Subject, topic: Topic, completedSlugs?: string[] }) {
+export default function TopicView({ level, subject, topic, completedSlugs = [], isLoggedIn = false }: { level: string, subject: Subject, topic: Topic, completedSlugs?: string[], isLoggedIn?: boolean }) {
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
   
@@ -22,11 +22,23 @@ export default function TopicView({ level, subject, topic, completedSlugs = [] }
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Top Bar Navigation */}
-      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 bg-background border-b border-border">
-        <Link href="/" className="flex items-center gap-2">
-          <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
-        </Link>
-        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
+      {!isLoggedIn ? (
+        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 bg-background border-b border-border">
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
+          </Link>
+          <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis hidden md:flex">
+            <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <Link href={subjectHref} className="hover:text-foreground transition-colors shrink-0 max-w-[120px] truncate">{subject.name}</Link>
+            <ChevronRight className="w-4 h-4 shrink-0" />
+            <span className="text-foreground shrink-0 max-w-[150px] truncate">{topic.name}</span>
+          </div>
+        </nav>
+      ) : (
+        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis px-8 py-4 max-w-7xl mx-auto w-full">
           <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
           <ChevronRight className="w-4 h-4 shrink-0" />
           <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
@@ -35,7 +47,7 @@ export default function TopicView({ level, subject, topic, completedSlugs = [] }
           <ChevronRight className="w-4 h-4 shrink-0" />
           <span className="text-foreground shrink-0 max-w-[150px] truncate">{topic.name}</span>
         </div>
-      </nav>
+      )}
 
       <main className="flex-grow max-w-4xl mx-auto px-6 py-16 w-full">
         {/* HERO */}

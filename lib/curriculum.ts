@@ -1,6 +1,6 @@
 import { db } from "../db";
 import * as schema from "../db/schema";
-import { eq, inArray } from "drizzle-orm";
+import { eq, inArray, and } from "drizzle-orm";
 import type { Subject, Term, Topic, Subtopic } from "../types/curriculum";
 import { cache } from "react";
 
@@ -100,6 +100,7 @@ export const getSubjectsByLevel = cache(async (levelSlug: string): Promise<Subje
             orderBy: (topics, { asc }) => [asc(topics.order)],
             with: {
               subtopics: {
+                where: (subtopics, { eq }) => eq(subtopics.isPublished, true),
                 orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
               }
             }
@@ -124,6 +125,7 @@ export const getSubject = cache(async (levelSlug: string, subjectSlug: string): 
             orderBy: (topics, { asc }) => [asc(topics.order)],
             with: {
               subtopics: {
+                where: (subtopics, { eq }) => eq(subtopics.isPublished, true),
                 orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
               }
             }
@@ -160,7 +162,7 @@ export const getSubtopic = cache(async (levelSlug: string, subjectSlug: string, 
 
 export const getSubtopicWithContent = cache(async (subtopicSlug: string) => {
   const st = await db.query.subtopics.findFirst({
-    where: eq(schema.subtopics.slug, subtopicSlug)
+    where: and(eq(schema.subtopics.slug, subtopicSlug), eq(schema.subtopics.isPublished, true))
   });
   
   if (!st) return null;

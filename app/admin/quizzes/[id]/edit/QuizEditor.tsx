@@ -9,7 +9,15 @@ import { useRouter } from "next/navigation";
 export default function QuizEditor({ quiz, initialQuestions }: { quiz: any, initialQuestions: any[] }) {
   const [title, setTitle] = useState(quiz.title);
   const [description, setDescription] = useState(quiz.description || "");
-  const [questions, setQuestions] = useState(initialQuestions);
+  const [questions, setQuestions] = useState(initialQuestions.map(q => ({
+    ...q,
+    questionType: q.questionType || "objective",
+    options: q.options || ["", "", "", ""],
+    correctAnswer: q.correctAnswer ?? 0,
+    idealAnswer: q.idealAnswer || "",
+    acceptableAnswers: q.acceptableAnswers || [],
+    crucialDetails: q.crucialDetails || []
+  })));
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -20,13 +28,17 @@ export default function QuizEditor({ quiz, initialQuestions }: { quiz: any, init
     router.push("/admin/quizzes");
   }
 
-  function addQuestion() {
+  function addQuestion(type: "objective" | "subjective" | "theory") {
     setQuestions([
       ...questions,
       {
+        questionType: type,
         questionText: "",
         options: ["", "", "", ""],
         correctAnswer: 0,
+        idealAnswer: "",
+        acceptableAnswers: [],
+        crucialDetails: [],
         explanation: ""
       }
     ]);
@@ -43,6 +55,28 @@ export default function QuizEditor({ quiz, initialQuestions }: { quiz: any, init
     const newOptions = [...updated[qIndex].options];
     newOptions[optIndex] = value;
     updated[qIndex].options = newOptions;
+    setQuestions(updated);
+  }
+
+  function updateArrayField(qIndex: number, field: "acceptableAnswers" | "crucialDetails", arrayIndex: number, value: string) {
+    const updated = [...questions];
+    const newArr = [...updated[qIndex][field]];
+    newArr[arrayIndex] = value;
+    updated[qIndex][field] = newArr;
+    setQuestions(updated);
+  }
+
+  function addToArrayField(qIndex: number, field: "acceptableAnswers" | "crucialDetails") {
+    const updated = [...questions];
+    updated[qIndex][field] = [...updated[qIndex][field], ""];
+    setQuestions(updated);
+  }
+
+  function removeFromArrayField(qIndex: number, field: "acceptableAnswers" | "crucialDetails", arrayIndex: number) {
+    const updated = [...questions];
+    const newArr = [...updated[qIndex][field]];
+    newArr.splice(arrayIndex, 1);
+    updated[qIndex][field] = newArr;
     setQuestions(updated);
   }
 
@@ -99,52 +133,147 @@ export default function QuizEditor({ quiz, initialQuestions }: { quiz: any, init
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold">Questions ({questions.length})</h2>
-          <button 
-            onClick={addQuestion}
-            className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-muted/80 text-foreground font-bold text-sm rounded-lg border border-border transition-colors"
-          >
-            <Plus className="w-4 h-4" /> Add Question
-          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => addQuestion("objective")}
+              className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-foreground font-bold text-xs rounded-lg border border-border transition-colors"
+            >
+              <Plus className="w-3 h-3" /> Objective
+            </button>
+            <button 
+              onClick={() => addQuestion("subjective")}
+              className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-foreground font-bold text-xs rounded-lg border border-border transition-colors"
+            >
+              <Plus className="w-3 h-3" /> Subjective
+            </button>
+            <button 
+              onClick={() => addQuestion("theory")}
+              className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-muted/80 text-foreground font-bold text-xs rounded-lg border border-border transition-colors"
+            >
+              <Plus className="w-3 h-3" /> Theory
+            </button>
+          </div>
         </div>
 
         {questions.map((q, qIndex) => (
           <div key={qIndex} className="bg-card border border-border rounded-2xl p-6 shadow-sm relative group">
-            <button 
-              onClick={() => removeQuestion(qIndex)}
-              className="absolute top-4 right-4 p-2 text-red-500 hover:bg-red-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <Trash className="w-4 h-4" />
-            </button>
-            <div className="mb-4">
+            <div className="absolute top-4 right-4 flex items-center gap-2">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground bg-muted px-2 py-1 rounded-md">
+                {q.questionType}
+              </span>
+              <button 
+                onClick={() => removeQuestion(qIndex)}
+                className="p-1.5 text-red-500 hover:bg-red-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <Trash className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="mb-4 pr-32">
               <label className="block text-sm font-bold text-muted-foreground mb-1">Question {qIndex + 1}</label>
               <input 
                 value={q.questionText}
                 onChange={(e) => updateQuestion(qIndex, "questionText", e.target.value)}
                 className="w-full bg-muted border border-border rounded-lg px-4 py-2 outline-none focus:border-foreground" 
-                placeholder="What is the..."
+                placeholder="Type your question here..."
               />
             </div>
             
-            <div className="space-y-2 mb-4">
-              <label className="block text-sm font-bold text-muted-foreground mb-1">Options (Select the correct one)</label>
-              {q.options.map((opt: string, optIndex: number) => (
-                <div key={optIndex} className="flex items-center gap-3">
+            {/* OBJECTIVE UI */}
+            {q.questionType === "objective" && (
+              <div className="space-y-2 mb-4">
+                <label className="block text-sm font-bold text-muted-foreground mb-1">Options (Select the correct one)</label>
+                {q.options.map((opt: string, optIndex: number) => (
+                  <div key={optIndex} className="flex items-center gap-3">
+                    <input 
+                      type="radio" 
+                      name={`correct-${qIndex}`} 
+                      checked={q.correctAnswer === optIndex}
+                      onChange={() => updateQuestion(qIndex, "correctAnswer", optIndex)}
+                      className="w-4 h-4"
+                    />
+                    <input 
+                      value={opt}
+                      onChange={(e) => updateOption(qIndex, optIndex, e.target.value)}
+                      className={`flex-1 bg-muted border rounded-lg px-4 py-2 outline-none transition-colors ${q.correctAnswer === optIndex ? 'border-green-500' : 'border-border focus:border-foreground'}`}
+                      placeholder={`Option ${optIndex + 1}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* SUBJECTIVE UI */}
+            {q.questionType === "subjective" && (
+              <div className="space-y-4 mb-4">
+                <div>
+                  <label className="block text-sm font-bold text-muted-foreground mb-1">Ideal Answer</label>
                   <input 
-                    type="radio" 
-                    name={`correct-${qIndex}`} 
-                    checked={q.correctAnswer === optIndex}
-                    onChange={() => updateQuestion(qIndex, "correctAnswer", optIndex)}
-                    className="w-4 h-4"
-                  />
-                  <input 
-                    value={opt}
-                    onChange={(e) => updateOption(qIndex, optIndex, e.target.value)}
-                    className={`flex-1 bg-muted border rounded-lg px-4 py-2 outline-none transition-colors ${q.correctAnswer === optIndex ? 'border-green-500' : 'border-border focus:border-foreground'}`}
-                    placeholder={`Option ${optIndex + 1}`}
+                    value={q.idealAnswer || ""}
+                    onChange={(e) => updateQuestion(qIndex, "idealAnswer", e.target.value)}
+                    className="w-full bg-muted border border-border rounded-lg px-4 py-2 outline-none focus:border-foreground border-green-500/50" 
+                    placeholder="The exact correct word or phrase"
                   />
                 </div>
-              ))}
-            </div>
+                <div>
+                  <label className="block text-sm font-bold text-muted-foreground mb-1">Acceptable Alternative Answers</label>
+                  <div className="space-y-2">
+                    {q.acceptableAnswers.map((ans: string, arrIdx: number) => (
+                      <div key={arrIdx} className="flex gap-2">
+                        <input 
+                          value={ans}
+                          onChange={(e) => updateArrayField(qIndex, "acceptableAnswers", arrIdx, e.target.value)}
+                          className="flex-1 bg-muted border border-border rounded-lg px-4 py-2 outline-none focus:border-foreground" 
+                          placeholder="Alternative valid answer"
+                        />
+                        <button onClick={() => removeFromArrayField(qIndex, "acceptableAnswers", arrIdx)} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg">
+                          <Trash className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    <button onClick={() => addToArrayField(qIndex, "acceptableAnswers")} className="text-xs font-bold text-blue-500 hover:underline">
+                      + Add Alternative
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* THEORY UI */}
+            {q.questionType === "theory" && (
+              <div className="space-y-4 mb-4">
+                <div>
+                  <label className="block text-sm font-bold text-muted-foreground mb-1">Ideal Explanatory Answer</label>
+                  <textarea 
+                    value={q.idealAnswer || ""}
+                    onChange={(e) => updateQuestion(qIndex, "idealAnswer", e.target.value)}
+                    className="w-full bg-muted border border-border rounded-lg px-4 py-2 outline-none focus:border-foreground border-green-500/50 resize-none h-20" 
+                    placeholder="The full ideal essay or explanation answer"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-muted-foreground mb-1">Crucial Details (Points required for full marks)</label>
+                  <div className="space-y-2">
+                    {q.crucialDetails.map((detail: string, arrIdx: number) => (
+                      <div key={arrIdx} className="flex gap-2">
+                        <input 
+                          value={detail}
+                          onChange={(e) => updateArrayField(qIndex, "crucialDetails", arrIdx, e.target.value)}
+                          className="flex-1 bg-muted border border-border rounded-lg px-4 py-2 outline-none focus:border-foreground" 
+                          placeholder="e.g. Must mention the chloroplast"
+                        />
+                        <button onClick={() => removeFromArrayField(qIndex, "crucialDetails", arrIdx)} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg">
+                          <Trash className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    <button onClick={() => addToArrayField(qIndex, "crucialDetails")} className="text-xs font-bold text-blue-500 hover:underline">
+                      + Add Detail Required
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div>
               <label className="block text-sm font-bold text-muted-foreground mb-1">Explanation (Optional)</label>
@@ -160,7 +289,7 @@ export default function QuizEditor({ quiz, initialQuestions }: { quiz: any, init
 
         {questions.length === 0 && (
           <div className="text-center py-12 border-2 border-dashed border-border rounded-2xl text-muted-foreground">
-            No questions yet. Click "Add Question" to start.
+            No questions yet. Click an "Add" button to start.
           </div>
         )}
       </div>

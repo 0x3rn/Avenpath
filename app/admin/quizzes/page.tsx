@@ -76,7 +76,7 @@ export default async function QuizzesManager() {
             <tbody className="divide-y divide-border bg-card">
               {quizzesData.map((quiz) => {
                 const qCount = getQuestionCount(quiz.id);
-                const isPublished = qCount > 0;
+                const isPublished = quiz.isPublished;
                 
                 let locationText = "Unattached";
                 if (quiz.term) locationText = `Module: ${quiz.term.name}`;
@@ -96,7 +96,7 @@ export default async function QuizzesManager() {
                     <td className="p-4">
                       <div className="flex flex-col gap-1">
                         <span className="text-xs font-bold uppercase tracking-wider">
-                          {quiz.assessmentType === 'test' ? 'Module Test' : quiz.assessmentType === 'knowledge_check' ? 'Knowledge Check' : 'Topic Quiz'}
+                          {quiz.assessmentType === 'test' ? 'Module Test' : 'Topic Quiz'}
                         </span>
                         <span className="text-xs text-muted-foreground">{locationText}</span>
                       </div>
@@ -108,7 +108,7 @@ export default async function QuizzesManager() {
                       </span>
                     </td>
                     <td className="p-4 text-right">
-                      <QuizMenu quizId={quiz.id} />
+                      <QuizMenu quizId={quiz.id} isPublished={quiz.isPublished} />
                     </td>
                   </tr>
                 );

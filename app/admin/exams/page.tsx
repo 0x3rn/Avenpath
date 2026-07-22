@@ -88,7 +88,7 @@ export default async function ExamsManagerPage() {
               <tbody className="divide-y divide-border bg-card">
                 {examsData.map((quiz) => {
                   const qCount = getQuestionCount(quiz.id);
-                  const isPublished = qCount > 0;
+                  const isPublished = quiz.isPublished;
                   
                   let locationText = "Course Level";
                   if (quiz.term) locationText = `Module: ${quiz.term.name}`;
@@ -119,7 +119,7 @@ export default async function ExamsManagerPage() {
                         </span>
                       </td>
                       <td className="p-4 text-right">
-                        <QuizMenu quizId={quiz.id} />
+                        <QuizMenu quizId={quiz.id} isPublished={quiz.isPublished} />
                       </td>
                     </tr>
                   );
