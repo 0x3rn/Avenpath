@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, CheckCircle2, AlertCircle, Loader2, BookOpen, Trophy, ArrowRight, RotateCcw, HelpCircle, FileText, Award } from "lucide-react";
+import { GraduationCap, CheckCircle2, AlertCircle, Loader2, BookOpen, Trophy, ArrowRight, RotateCcw, HelpCircle, FileText, Award, FileCheck } from "lucide-react";
 import { 
   generateQuizAndRubric, 
   evaluateQuizSubmission, 
@@ -140,7 +140,7 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-card border border-border p-6 sm:p-8 rounded-3xl shadow-sm">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-extrabold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5" /> AI Self-Study Hub
+            <GraduationCap className="w-3.5 h-3.5" /> AI Self-Study Hub
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight">Practice Quizzes, Tests & 50-Q Exams</h1>
           <p className="text-sm font-semibold text-muted-foreground mt-1">
@@ -182,7 +182,7 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5" /> 20-Q Practice Test
+            <FileCheck className="w-3.5 h-3.5" /> 20-Q Practice Test
           </button>
           <button
             type="button"
@@ -222,7 +222,7 @@ export default function TakeTestClient({ lessons }: { lessons: LessonOption[] })
               {generating ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Generating {assessmentMode.toUpperCase()}...</>
               ) : (
-                <><Sparkles className="w-4 h-4 text-amber-400" /> Generate {assessmentMode === "quiz" ? "20-Q MCQ Quiz" : assessmentMode === "exam" ? "50-Q Exam" : "20-Q Practice Test"}</>
+                <><GraduationCap className="w-4 h-4 text-amber-400" /> Generate {assessmentMode === "quiz" ? "20-Q MCQ Quiz" : assessmentMode === "exam" ? "50-Q Exam" : "20-Q Practice Test"}</>
               )}
             </button>
           </div>

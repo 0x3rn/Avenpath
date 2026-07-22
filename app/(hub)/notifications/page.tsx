@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Bell, BookOpen, Target, PlayCircle, Layers, Map, Trophy, Flame, Sparkles, MessageSquare, Users, Settings2, MoreHorizontal, CalendarCheck2, ArrowRight } from "lucide-react";
+import { Bell, BookOpen, Target, PlayCircle, Layers, Map, Trophy, Flame, GraduationCap, MessageSquare, Users, Settings2, MoreHorizontal, CalendarCheck2, ArrowRight } from "lucide-react";
 import { getUserNotifications, markNotificationRead } from "@/app/actions/notifications";
 import Link from "next/link";
 import { toast } from "sonner";

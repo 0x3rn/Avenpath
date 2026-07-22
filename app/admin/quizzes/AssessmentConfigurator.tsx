@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { calculateSubjectAssessments, AssessmentCheckpoint } from "@/lib/assessment-rules";
-import { Sparkles, Award, HelpCircle, FileCheck, CheckCircle2, Loader2, ShieldCheck, Plus, Calendar, ArrowRight } from "lucide-react";
+import { GraduationCap, Award, HelpCircle, FileCheck, CheckCircle2, Loader2, ShieldCheck, Plus, Calendar, ArrowRight } from "lucide-react";
 import { generateOfficialTestForSubtopic, generateOfficialExamForRange } from "./ai-actions";
 
 export default function AssessmentConfigurator({ subjects, filterMode = "all" }: { subjects: any[]; filterMode?: "all" | "exam_only" | "quiz_test_only" }) {
@@ -164,7 +164,7 @@ export default function AssessmentConfigurator({ subjects, filterMode = "all" }:
               {generatingId === "range_exam" ? (
                 <><Loader2 className="w-4 h-4 animate-spin text-black" /> Generating 50-Q Range Exam...</>
               ) : (
-                <><Sparkles className="w-4 h-4" /> Generate & Place 50-Q Range Exam <ArrowRight className="w-4 h-4" /></>
+                <><GraduationCap className="w-4 h-4" /> Generate & Place 50-Q Range Exam <ArrowRight className="w-4 h-4" /></>
               )}
             </button>
           </div>
@@ -227,7 +227,7 @@ export default function AssessmentConfigurator({ subjects, filterMode = "all" }:
                 {isGenerating ? (
                   <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Generating AI Exam...</>
                 ) : (
-                  <><Sparkles className="w-3.5 h-3.5 text-amber-400" /> Generate Official 50-Q EXAM</>
+                  <><GraduationCap className="w-3.5 h-3.5 text-amber-400" /> Generate Official 50-Q EXAM</>
                 )}
               </button>
             </div>

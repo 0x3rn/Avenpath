@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { History, Award, Sparkles, HelpCircle, FileCheck, CheckCircle2, XCircle, ChevronRight, Calendar, Search, Filter, ArrowLeft, Trophy, Percent } from "lucide-react";
+import { History, Award, GraduationCap, HelpCircle, FileCheck, CheckCircle2, XCircle, ChevronRight, Calendar, Search, Filter, ArrowLeft, Trophy, Percent } from "lucide-react";
 import Link from "next/link";
 
 export default function AssessmentHistoryClient({ initialHistory }: { initialHistory: any[] }) {
@@ -42,7 +42,7 @@ export default function AssessmentHistoryClient({ initialHistory }: { initialHis
           href="/take-test"
           className="bg-foreground text-background font-extrabold text-sm px-6 py-3.5 rounded-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 shrink-0 shadow-md"
         >
-          <Sparkles className="w-4 h-4 text-amber-400" /> Take New Assessment
+          <GraduationCap className="w-4 h-4 text-amber-400" /> Take New Assessment
         </Link>
       </div>
 
@@ -208,7 +208,7 @@ export default function AssessmentHistoryClient({ initialHistory }: { initialHis
               href="/take-test"
               className="inline-flex items-center gap-2 bg-foreground text-background font-extrabold text-xs px-5 py-2.5 rounded-xl hover:opacity-90 transition-all mt-2"
             >
-              Take First Assessment <Sparkles className="w-4 h-4 text-amber-400" />
+              Take First Assessment <GraduationCap className="w-4 h-4 text-amber-400" />
             </Link>
           </div>
         )}

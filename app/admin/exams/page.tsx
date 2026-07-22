@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { getAdminSubjectsTree } from "@/lib/admin-curriculum";
 import AssessmentConfigurator from "../quizzes/AssessmentConfigurator";
-import { Award, ShieldCheck, Sparkles, Target, HelpCircle, Search } from "lucide-react";
+import { Award, ShieldCheck, GraduationCap, Target, HelpCircle, Search } from "lucide-react";
 import { QuizMenu } from "../quizzes/QuizClientActions";
 
 export default async function ExamsManagerPage() {

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Award, Sparkles, CheckCircle2, XCircle, Calendar, HelpCircle, FileCheck, RefreshCw, Trophy, BookOpen } from "lucide-react";
+import { ArrowLeft, Award, GraduationCap, CheckCircle2, XCircle, Calendar, HelpCircle, FileCheck, RefreshCw, Trophy, BookOpen, Brain } from "lucide-react";
 
 export default function AssessmentDetailClient({ submission }: { submission: any }) {
   const isExam = submission.assessmentType === "exam";
@@ -62,7 +62,7 @@ export default function AssessmentDetailClient({ submission }: { submission: any
             Score: {submission.score} / {submission.totalScore}
           </div>
           <div className="inline-flex items-center gap-1 text-[11px] font-extrabold mt-2 px-2.5 py-0.5 rounded-full bg-card/60">
-            {isHighGrade ? <Sparkles className="w-3 h-3 text-amber-400" /> : null}
+            {isHighGrade ? <GraduationCap className="w-3.5 h-3.5 text-amber-400" /> : null}
             {isHighGrade ? "Grade A • Excellent" : isPassed ? "Grade B • Passed" : "Needs Review"}
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function AssessmentDetailClient({ submission }: { submission: any
                 {q.feedback && (
                   <div className="p-4 rounded-xl bg-muted/40 border border-border text-xs font-medium text-muted-foreground space-y-1">
                     <div className="font-extrabold text-foreground flex items-center gap-1.5 text-xs">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-500" /> AI Evaluator Explanation:
+                      <Brain className="w-3.5 h-3.5 text-amber-500" /> AI Evaluator Explanation:
                     </div>
                     <p className="leading-relaxed">{q.feedback}</p>
                   </div>

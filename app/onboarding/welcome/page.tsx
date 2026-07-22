@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight, BookOpen, Clock, Activity, CheckCircle2, FileText, ChevronRight } from "lucide-react";
+import { GraduationCap, ArrowRight, BookOpen, Clock, Activity, CheckCircle2, FileText, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function WelcomePage() {
@@ -35,7 +35,7 @@ export default function WelcomePage() {
       {/* Header */}
       <div className="text-center mb-16">
         <div className="w-20 h-20 bg-foreground text-background rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-foreground/20">
-          <Sparkles className="w-10 h-10" />
+          <GraduationCap className="w-10 h-10" />
         </div>
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
           Welcome to Avenpath!

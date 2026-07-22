@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, Library, PlayCircle, TrendingUp, Bookmark, 
   FileQuestion, Layers, Calendar, User, Settings, 
-  Bell, Search, Flame, Menu, X, BookOpen, MessageSquare, Users, Trophy, Compass, Award, LogOut, Sparkles, History
+  Bell, Search, Flame, Menu, X, BookOpen, MessageSquare, Users, Trophy, Compass, Award, LogOut, History, GraduationCap
 } from "lucide-react";
 import { getUserProfile } from "@/app/actions/user";
 import { logout } from "@/app/actions/auth";
@@ -23,7 +23,7 @@ const PRIMARY_LINKS = [
 ];
 
 const SECONDARY_LINKS = [
-  { name: "Take a Test", href: "/take-test", icon: Sparkles },
+  { name: "Take a Test", href: "/take-test", icon: GraduationCap },
   { name: "Take an Exam", href: "/take-exam", icon: Award },
   { name: "Quizzes", href: "/take-test?mode=quiz", icon: FileQuestion },
   { name: "Assessment History", href: "/assessment-history", icon: History },
