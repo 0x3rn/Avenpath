@@ -4,7 +4,7 @@ export default function LoadingSubjectView() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
-      <nav className="sticky top-0 flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background/90 backdrop-blur-md">
+      <nav className="sticky top-0 flex items-center justify-between px-8 h-20 w-full z-40 bg-background/90 backdrop-blur-md">
         <div className="w-24 h-8 bg-muted rounded-md animate-pulse"></div>
         <div className="flex items-center gap-4 text-sm">
           <div className="w-16 h-4 bg-muted rounded animate-pulse"></div>
@@ -17,7 +17,7 @@ export default function LoadingSubjectView() {
 
       {/* HERO SECTION SKELETON */}
       <section className="border-b border-border w-full py-20 relative overflow-hidden bg-muted/20">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="w-full  px-6 relative z-10">
           <div className="max-w-3xl">
             <div className="h-16 w-3/4 bg-muted rounded-2xl animate-pulse mb-6"></div>
             <div className="h-6 w-full bg-muted rounded-lg animate-pulse mb-2"></div>
@@ -44,7 +44,7 @@ export default function LoadingSubjectView() {
 
       {/* TABS SKELETON */}
       <div className="border-b border-border shadow-sm">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="w-full  px-6">
           <div className="flex items-center gap-8 py-5">
             {[1, 2, 3, 4].map(i => (
               <div key={i} className="w-20 h-5 bg-muted rounded animate-pulse"></div>
@@ -53,7 +53,7 @@ export default function LoadingSubjectView() {
         </div>
       </div>
 
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-16 w-full">
+      <main className="flex-grow w-full  px-6 py-16 w-full">
         {/* Class/Term Switchers */}
         <div className="flex gap-3 mb-10">
           {[1, 2, 3].map(i => (

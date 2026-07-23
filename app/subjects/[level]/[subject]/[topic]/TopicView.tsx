@@ -23,7 +23,7 @@ export default function TopicView({ level, subject, topic, completedSlugs = [], 
     <div className="flex flex-col min-h-screen bg-background">
       {/* Top Bar Navigation */}
       {!isLoggedIn ? (
-        <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-50 bg-background border-b border-border">
+        <nav className="flex items-center justify-between px-8 py-6 w-full z-50 bg-background border-b border-border">
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
@@ -38,7 +38,7 @@ export default function TopicView({ level, subject, topic, completedSlugs = [], 
           </div>
         </nav>
       ) : (
-        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis px-8 py-4 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis px-8 py-4 w-full">
           <Link href="/subjects" className="hover:text-foreground transition-colors shrink-0">Subjects</Link>
           <ChevronRight className="w-4 h-4 shrink-0" />
           <Link href={levelHref} className="hover:text-foreground transition-colors capitalize shrink-0">{level}</Link>
@@ -49,7 +49,7 @@ export default function TopicView({ level, subject, topic, completedSlugs = [], 
         </div>
       )}
 
-      <main className="flex-grow max-w-4xl mx-auto px-6 py-16 w-full">
+      <main className="flex-grow w-full  px-6 py-16 w-full">
         {/* HERO */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 text-foreground">

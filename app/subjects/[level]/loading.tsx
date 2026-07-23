@@ -3,7 +3,7 @@ import { Search, ChevronRight } from "lucide-react";
 export default function LoadingSubjectExplorer() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
+      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 w-full z-40 bg-background border-b border-border">
         <div className="w-24 h-8 bg-muted rounded-md animate-pulse"></div>
         <div className="flex items-center gap-4 text-sm">
           <div className="w-16 h-4 bg-muted rounded animate-pulse"></div>
@@ -12,9 +12,9 @@ export default function LoadingSubjectExplorer() {
         </div>
       </nav>
 
-      <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-16">
+      <main className="flex-grow w-full  px-6 py-16">
         {/* HERO SKELETON */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+        <div className="flex flex-col items-center text-center w-full  mb-16">
           <div className="h-16 w-3/4 bg-muted rounded-2xl animate-pulse mb-6"></div>
           <div className="h-6 w-full bg-muted rounded-lg animate-pulse mb-2"></div>
           <div className="h-6 w-5/6 bg-muted rounded-lg animate-pulse mb-10"></div>

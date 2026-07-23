@@ -45,7 +45,7 @@ const SETTINGS_LINKS = [
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
-export default function DashboardShell({ children, initialProfile }: { children: React.ReactNode, initialProfile?: any }) {
+export default function DashboardShell({ children, initialProfile, noPadding = false }: { children: React.ReactNode, initialProfile?: any, noPadding?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -266,7 +266,7 @@ export default function DashboardShell({ children, initialProfile }: { children:
         </header>
 
         {/* --- PAGE CONTENT --- */}
-        <main className="flex-1 p-4 sm:p-8 pb-24 md:pb-8">
+        <main className={`flex-1 pb-24 md:pb-8 ${noPadding ? '' : 'p-4 sm:p-8'}`}>
           {children}
         </main>
 

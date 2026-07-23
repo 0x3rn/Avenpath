@@ -33,7 +33,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
   const totalLessons = subject.topics.reduce((acc, t) => acc + t.subtopics.length, 0);
   const totalHours = subject.topics.reduce((acc, t) => acc + (t.estimatedHours || 0), 0);
 
-  const tabs = ["Overview", "Topics"];
+  const tabs = ["Overview", "Topics", "Assessments"];
 
   const popularLessons = subject.topics.length > 0 
     ? subject.topics[0].subtopics.slice(0, 4)
@@ -43,7 +43,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
       {!isLoggedIn ? (
-        <nav className="sticky top-0 flex items-center justify-between px-8 h-20 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
+        <nav className="sticky top-0 flex items-center justify-between px-8 h-20 w-full z-40 bg-background border-b border-border">
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
@@ -64,7 +64,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
           </div>
         </nav>
       ) : (
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-4 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-4 w-full">
           <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
           <ChevronRight className="w-4 h-4" />
           <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
@@ -87,7 +87,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
         style={{ backgroundColor: `${subject.color}0A` }}
       >
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="w-full  px-6 relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6" style={{ color: subject.color }}>
               {subject.name}
@@ -127,14 +127,14 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
       </section>
 
       {/* QUICK NAVIGATION (Sticky Tabs) */}
-      <div className={`sticky ${isLoggedIn ? 'top-40' : 'top-20'} z-30 bg-background/80 backdrop-blur-xl border-b border-border shadow-sm`}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-8 overflow-x-auto hide-scrollbar">
+      <div className="sticky top-20 z-40 bg-background border-b border-border shadow-sm">
+        <div className="w-full  px-6">
+          <div className="flex items-center overflow-x-auto hide-scrollbar w-full">
             {tabs.map(tab => (
               <button 
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`py-5 text-[15px] font-bold whitespace-nowrap transition-colors relative ${activeTab === tab ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                className={`flex-1 min-w-[120px] text-center py-5 text-[15px] font-bold whitespace-nowrap transition-colors relative ${activeTab === tab ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
                 {tab}
                 {activeTab === tab && (
@@ -146,9 +146,35 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
         </div>
       </div>
 
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-16 w-full">
+      <main className="flex-grow w-full  px-6 py-16 w-full">
         {/* OVERVIEW / ABOUT */}
-        {(activeTab === "Overview" || activeTab === "Topics") && (
+        {activeTab === "Overview" && (
+          <section className="mb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <h2 className="text-3xl font-extrabold mb-6">About this Subject</h2>
+            <div className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-relaxed font-medium">
+              <p>{subject.description}</p>
+              <div className="grid sm:grid-cols-2 gap-8 mt-12">
+                <div className="bg-card border border-border p-6 rounded-3xl shadow-sm">
+                  <h3 className="text-xl font-bold text-foreground mb-4">What you'll learn</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3"><span className="text-primary font-bold">•</span> Core concepts and foundational principles</li>
+                    <li className="flex items-start gap-3"><span className="text-primary font-bold">•</span> Practical applications and problem solving</li>
+                    <li className="flex items-start gap-3"><span className="text-primary font-bold">•</span> Advanced theoretical frameworks</li>
+                  </ul>
+                </div>
+                <div className="bg-card border border-border p-6 rounded-3xl shadow-sm">
+                  <h3 className="text-xl font-bold text-foreground mb-4">Requirements</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3"><span className="text-primary font-bold">•</span> Basic understanding of prior level concepts</li>
+                    <li className="flex items-start gap-3"><span className="text-primary font-bold">•</span> Commitment to consistent practice</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {(activeTab === "Topics" || activeTab === "Assessments") && (
           <section className="mb-24">
             {/* Class Switcher */}
             {hasClasses && availableClasses.length > 1 && (
@@ -210,7 +236,9 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
 
               return (
                 <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <h2 className="text-3xl font-extrabold mb-8">{displayTheme}</h2>
+                  <h2 className="text-3xl font-extrabold mb-8">{activeTab === "Assessments" ? "Available Assessments" : displayTheme}</h2>
+                  
+                  {activeTab === "Topics" && (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {displayTopics.map((topic, idx) => {
                       const topicHref = queryString 
@@ -241,9 +269,12 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
                       );
                     })}
                   </div>
+                  )}
 
-                  {/* End of Module Test Card */}
-                  <div className="mt-12 p-8 rounded-3xl bg-card border border-border shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+                  {activeTab === "Assessments" && (
+                    <div className="space-y-6">
+                      {/* End of Module Test Card */}
+                      <div className="p-8 rounded-3xl bg-card border border-border shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                     <div>
                       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-500 text-xs font-extrabold uppercase tracking-wider mb-2">
                         <FileCheck className="w-3.5 h-3.5" /> End of Module Assessment
@@ -314,6 +345,8 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
 
                     return null; // Intermediate modules without placed range exams show NO exam card!
                   })()}
+                  </div>
+                  )}
                 </div>
               );
             })()}

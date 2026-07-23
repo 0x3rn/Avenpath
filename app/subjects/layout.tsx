@@ -5,7 +5,7 @@ export default async function SubjectsLayout({ children }: { children: React.Rea
   const profile = await getUserProfile();
   
   if (profile) {
-    return <DashboardShell initialProfile={profile}>{children}</DashboardShell>;
+    return <DashboardShell initialProfile={profile} noPadding={true}>{children}</DashboardShell>;
   }
 
   return <>{children}</>;

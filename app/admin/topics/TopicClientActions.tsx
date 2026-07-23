@@ -67,6 +67,19 @@ export function SubtopicMenu({ subtopicId, isPublished }: { subtopicId: number, 
   const [loading, setLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+  async function executeTogglePublish() {
+    setLoading(true);
+    try {
+      await toggleSubtopicPublishStatus(subtopicId, !isPublished);
+      toast.success(!isPublished ? "Lesson published successfully" : "Lesson unpublished successfully");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to update publish status");
+    } finally {
+      setLoading(false);
+      setIsOpen(false);
+    }
+  }
+
   async function executeDelete() {
     setLoading(true);
     try {
@@ -91,6 +104,13 @@ export function SubtopicMenu({ subtopicId, isPublished }: { subtopicId: number, 
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
           <div className="absolute right-0 mt-2 w-32 bg-card border border-border rounded-xl shadow-lg z-50 overflow-hidden animate-in zoom-in-95 duration-100">
+            <button 
+              onClick={executeTogglePublish}
+              disabled={loading}
+              className="w-full text-left px-4 py-2 text-[10px] font-bold text-foreground hover:bg-muted flex items-center gap-2 disabled:opacity-50"
+            >
+              {isPublished ? <><EyeOff className="w-3 h-3" /> Unpublish</> : <><Eye className="w-3 h-3" /> Publish</>}
+            </button>
             <button 
               onClick={() => setShowConfirmModal(true)}
               disabled={loading}

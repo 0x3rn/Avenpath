@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 export default function LoadingSubjectsDirectory() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
+      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 w-full z-40 bg-background border-b border-border">
         <div className="w-24 h-8 bg-muted rounded-md animate-pulse"></div>
       </nav>
 
@@ -14,7 +14,7 @@ export default function LoadingSubjectsDirectory() {
           <div className="h-6 w-5/6 bg-muted rounded-md animate-pulse"></div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 w-full ">
           {[1, 2, 3].map((i) => (
             <div key={i} className="bg-card border border-border rounded-3xl p-10 h-full flex flex-col relative overflow-hidden">
               <div className="w-12 h-12 bg-muted rounded-xl animate-pulse mb-6"></div>

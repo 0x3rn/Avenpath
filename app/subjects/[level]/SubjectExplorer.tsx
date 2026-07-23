@@ -112,7 +112,7 @@ export default function SubjectExplorer({
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
       {!isLoggedIn ? (
-        <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
+        <nav className="sticky top-0 flex items-center justify-between px-8 py-6 w-full z-40 bg-background border-b border-border">
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
@@ -123,21 +123,21 @@ export default function SubjectExplorer({
           </div>
         </nav>
       ) : (
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
           <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
           <ChevronRight className="w-4 h-4" />
           <span className="text-foreground">{formattedLevel}</span>
         </div>
       )}
 
-      <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-16">
+      <main className="flex-grow w-full  px-6 py-16">
         
         {/* HERO SECTION */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-foreground">
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-foreground">
             Explore {formattedLevel}
           </h1>
-          <p className="text-xl text-muted-foreground font-medium mb-10 leading-relaxed">
+          <p className="text-lg text-muted-foreground font-medium mb-8 leading-relaxed">
             From science to humanities, discover structured learning paths designed specifically for {formattedLevel.toLowerCase()} students.
           </p>
           
@@ -264,21 +264,21 @@ export default function SubjectExplorer({
                     />
                     
                     <div className="flex-grow">
-                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300" style={{ backgroundColor: `${subject.color}15`, color: subject.color }}>
-                        <SubjectIcon name={subject.icon} className="w-7 h-7" />
+                      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 duration-300" style={{ backgroundColor: `${subject.color}15`, color: subject.color }}>
+                        <SubjectIcon name={subject.icon} className="w-6 h-6" />
                       </div>
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-extrabold text-foreground group-hover:text-foreground transition-colors">
+                        <h3 className="text-lg font-bold text-foreground group-hover:text-foreground transition-colors">
                           {subject.name}
                         </h3>
                       </div>
-                      <p className="text-muted-foreground text-[15px] font-medium leading-relaxed mb-6 line-clamp-3">
+                      <p className="text-muted-foreground text-[14px] font-medium leading-relaxed mb-4 line-clamp-3">
                         {subject.description}
                       </p>
                     </div>
 
-                    <div className="pt-6 border-t border-border mt-auto">
-                      <div className="flex items-center gap-4 text-[13px] font-bold text-muted-foreground mb-6">
+                    <div className="pt-4 border-t border-border mt-auto">
+                      <div className="flex items-center gap-4 text-[12px] font-bold text-muted-foreground mb-4">
                         <div className="flex items-center gap-1.5"><BookOpen className="w-4 h-4" /> {subject.topics.length} Topics</div>
                         <div className="flex items-center gap-1.5"><Activity className="w-4 h-4" /> {totalLessons} Lessons</div>
                       </div>

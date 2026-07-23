@@ -34,11 +34,11 @@ export default async function SubjectsDirectory() {
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
       {!profile ? (
-        <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full z-40 bg-background border-b border-border">
+        <nav className="sticky top-0 flex items-center justify-between px-8 py-6 w-full z-40 bg-background border-b border-border">
           <Link href="/" className="flex items-center gap-2"><img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" /></Link>
         </nav>
       ) : (
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
           <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
           <ArrowRight className="w-4 h-4" />
           <span className="text-foreground">Subjects</span>
@@ -55,7 +55,7 @@ export default async function SubjectsDirectory() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 w-full ">
           {levels.map(level => (
             <Link key={level} href={`/subjects/${level}`}>
               <div className="group bg-card border border-border hover:border-foreground/20 rounded-3xl p-10 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden h-full flex flex-col cursor-pointer">

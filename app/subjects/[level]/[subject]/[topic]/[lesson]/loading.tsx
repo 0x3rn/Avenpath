@@ -31,7 +31,7 @@ export default function LoadingLessonView() {
         </aside>
 
         {/* Main Content Skeleton */}
-        <main className="flex-1 w-full max-w-4xl mx-auto p-6 md:p-12 pb-32">
+        <main className="flex-1 w-full  p-6 md:p-12 pb-32">
           {/* Header */}
           <div className="mb-12">
             <div className="w-24 h-8 bg-muted rounded-full animate-pulse mb-6"></div>

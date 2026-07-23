@@ -4,7 +4,7 @@ export default function LoadingTopicView() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 max-w-4xl mx-auto w-full z-40 bg-background border-b border-border">
+      <nav className="sticky top-0 flex items-center justify-between px-8 py-6 w-full z-40 bg-background border-b border-border">
         <div className="w-24 h-8 bg-muted rounded-md animate-pulse"></div>
         <div className="flex items-center gap-3 text-sm">
           <div className="w-16 h-4 bg-muted rounded animate-pulse"></div>
@@ -15,7 +15,7 @@ export default function LoadingTopicView() {
         </div>
       </nav>
 
-      <main className="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
+      <main className="flex-grow w-full  px-6 py-12">
         {/* Header Skeleton */}
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-6">
