@@ -1,12 +1,19 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Folder, FolderOpen, Search, Filter, BookOpen, ChevronRight } from "lucide-react";
+import { Folder, FolderOpen, Search, Filter, BookOpen } from "lucide-react";
 import { SubjectMenu } from "./SubjectClientActions";
 
 interface SubjectsFolderTreeProps {
   levels: any[];
 }
+
+type TreeNode = {
+  name: string;
+  isSubject: boolean;
+  subject?: any;
+  children: Record<string, TreeNode>;
+};
 
 export default function SubjectsFolderTree({ levels }: SubjectsFolderTreeProps) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,39 +49,6 @@ export default function SubjectsFolderTree({ levels }: SubjectsFolderTreeProps) 
     return true;
   };
 
-  // For Nigerian highschool subjects, we need to group by sub-level and class
-  // to match the file structure: nigeria/senior-highschool/class1/subject
-  const buildNigerianSubFolders = (subjects: any[]) => {
-    const groups: Record<string, Record<string, any[]>> = {};
-
-    subjects.forEach(subject => {
-      const levelName = (subject.levelName || "").toLowerCase();
-      let subLevel: string;
-      if (levelName.includes("junior")) {
-        subLevel = "junior-highschool";
-      } else if (levelName.includes("senior")) {
-        subLevel = "senior-highschool";
-      } else {
-        subLevel = "other";
-      }
-
-      const cls = subject.className || "general";
-
-      if (!groups[subLevel]) groups[subLevel] = {};
-      if (!groups[subLevel][cls]) groups[subLevel][cls] = [];
-      groups[subLevel][cls].push(subject);
-    });
-
-    return groups;
-  };
-
-  const isSearching = searchQuery.length > 0;
-
-  // Count subjects recursively in a category (accounting for filters)
-  const countFilteredSubjects = (subjects: any[]) => {
-    return subjects.filter(subjectMatchesFilter).length;
-  };
-
   const folderColors = [
     "text-blue-500",
     "text-emerald-500",
@@ -83,60 +57,145 @@ export default function SubjectsFolderTree({ levels }: SubjectsFolderTreeProps) 
     "text-pink-500",
   ];
 
-  const renderSubject = (subject: any) => {
-    const { topicsCount, lessonsCount } = getStats(subject);
-    const hasContent = topicsCount > 0;
+  const allSubjects = useMemo(() => {
+    const subjects: any[] = [];
+    levels.forEach((level: any) => {
+      level.categories?.forEach((cat: any) => {
+        cat.subjects?.forEach((subj: any) => {
+          subjects.push({ ...subj, region: level.region });
+        });
+      });
+    });
+    return subjects;
+  }, [levels]);
 
-    return (
-      <div key={subject.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 group transition-colors">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="w-6 h-6 bg-muted/80 rounded flex items-center justify-center shrink-0">
-            <BookOpen className="w-3 h-3 text-muted-foreground" />
-          </div>
-          <div className="min-w-0">
-            <span className="font-bold text-sm block truncate">{subject.name}</span>
-            <div className="flex gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-0.5">
-              <span>{topicsCount} Topics</span>
-              <span>{lessonsCount} Lessons</span>
+  const tree = useMemo(() => {
+    const root: Record<string, TreeNode> = {};
+    allSubjects.forEach(subject => {
+      if (!subjectMatchesFilter(subject)) return;
+      
+      const region = subject.region || "international";
+      const formattedRegion = region.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      
+      let path: string[] = [];
+
+      if (region === "nigerian-university") {
+        const faculty = subject.category?.level?.name || "Unknown Faculty";
+        const department = subject.category?.name || "Unknown Department";
+        const level = subject.levelName || "General Level";
+        const semester = subject.className || "General Semester";
+        path = [formattedRegion, faculty, department, level, semester, subject.name];
+      } else {
+        const level = subject.levelName || "Other";
+        const className = subject.className || "General";
+        
+        let subLevel = null;
+        if (subject.id?.includes("junior-highschool") || subject.slug?.includes("junior-highschool")) {
+          subLevel = "Junior High School";
+        } else if (subject.id?.includes("senior-highschool") || subject.slug?.includes("senior-highschool")) {
+          subLevel = "Senior High School";
+        }
+        
+        path = [formattedRegion, level];
+        if (subLevel) path.push(subLevel);
+        path.push(className, subject.name);
+      }
+      
+      path = path.filter(p => p !== "General" && p !== "General Semester" && p !== "General Level");
+
+      let currentLevel = root;
+      for (let i = 0; i < path.length; i++) {
+        const part = path[i];
+        if (!currentLevel[part]) {
+          currentLevel[part] = {
+            name: part,
+            isSubject: i === path.length - 1,
+            subject: i === path.length - 1 ? subject : undefined,
+            children: {}
+          };
+        }
+        currentLevel = currentLevel[part].children;
+      }
+    });
+    return root;
+  }, [allSubjects, searchQuery, statusFilter]);
+
+  const FolderNode = ({ node, pathKey, depth }: { node: TreeNode, pathKey: string, depth: number }) => {
+    const isOpen = openFolders.has(pathKey) || searchQuery.length > 0;
+    const childrenKeys = Object.keys(node.children).sort();
+
+    if (node.isSubject && node.subject) {
+      const subject = node.subject;
+      const { topicsCount, lessonsCount } = getStats(subject);
+      const hasContent = topicsCount > 0;
+
+      return (
+        <div key={subject.id} className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 group transition-colors">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-6 h-6 bg-muted/80 rounded flex items-center justify-center shrink-0">
+              <BookOpen className="w-3 h-3 text-muted-foreground" />
+            </div>
+            <div className="min-w-0">
+              <span className="font-bold text-sm block truncate">{subject.name}</span>
+              <div className="flex gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-0.5">
+                <span>{topicsCount} Topics</span>
+                <span>{lessonsCount} Lessons</span>
+              </div>
             </div>
           </div>
+          <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+            <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${hasContent ? 'text-green-500 bg-green-500/10' : 'text-orange-500 bg-orange-500/10'}`}>
+              {hasContent ? 'Published' : 'Draft'}
+            </span>
+            <SubjectMenu subjectId={subject.id} />
+          </div>
         </div>
-        <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${hasContent ? 'text-green-500 bg-green-500/10' : 'text-orange-500 bg-orange-500/10'}`}>
-            {hasContent ? 'Published' : 'Draft'}
-          </span>
-          <SubjectMenu subjectId={subject.id} />
-        </div>
-      </div>
-    );
-  };
+      );
+    }
 
-  const renderFolderRow = (name: string, path: string, count: number, depth: number) => {
-    const isOpen = openFolders.has(path) || isSearching;
+    const countSubjects = (n: TreeNode): number => {
+      let count = 0;
+      if (n.isSubject) count++;
+      for (const child of Object.values(n.children)) {
+        count += countSubjects(child);
+      }
+      return count;
+    };
+
+    const count = countSubjects(node);
     const color = folderColors[depth % folderColors.length];
 
     return (
-      <div
-        className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors group"
-        onClick={() => toggleFolder(path)}
-      >
-        {isOpen
-          ? <FolderOpen className={`w-5 h-5 ${color} shrink-0`} />
-          : <Folder className={`w-5 h-5 ${color} shrink-0`} />
-        }
-        <span className="font-bold text-sm">{name}</span>
-        <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded ml-auto shrink-0">
-          {count}
-        </span>
+      <div key={pathKey}>
+        <div
+          className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors group"
+          onClick={() => toggleFolder(pathKey)}
+        >
+          {isOpen
+            ? <FolderOpen className={`w-5 h-5 ${color} shrink-0`} />
+            : <Folder className={`w-5 h-5 ${color} shrink-0`} />
+          }
+          <span className="font-bold text-sm">{node.name}</span>
+          <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded ml-auto shrink-0">
+            {count}
+          </span>
+        </div>
+
+        {isOpen && childrenKeys.length > 0 && (
+          <div className="ml-5 mt-1 border-l border-border pl-4 space-y-1">
+            {childrenKeys.map(key => (
+              <FolderNode 
+                key={key} 
+                node={node.children[key]} 
+                pathKey={`${pathKey}/${key}`} 
+                depth={depth + 1} 
+              />
+            ))}
+          </div>
+        )}
       </div>
     );
   };
-
-  const renderNested = (children: React.ReactNode) => (
-    <div className="ml-5 mt-1 border-l border-border pl-4 space-y-1">
-      {children}
-    </div>
-  );
 
   return (
     <div className="space-y-6">
@@ -166,109 +225,20 @@ export default function SubjectsFolderTree({ levels }: SubjectsFolderTreeProps) 
       {/* FOLDER TREE */}
       <div className="bg-card border border-border rounded-2xl p-4 overflow-hidden shadow-sm">
         <div className="space-y-2">
-          {levels.map((level) => {
-            // Count all filtered subjects across all categories in this level
-            const totalInLevel = level.categories.reduce((acc: number, cat: any) =>
-              acc + countFilteredSubjects(cat.subjects), 0
-            );
-
-            if (totalInLevel === 0) return null;
-
-            const levelPath = level.slug;
-            const isLevelOpen = openFolders.has(levelPath) || isSearching;
-
-            return (
-              <div key={level.id}>
-                {renderFolderRow(level.slug, levelPath, totalInLevel, 0)}
-
-                {isLevelOpen && renderNested(
-                  <>
-                    {level.categories
-                      .sort((a: any, b: any) => a.slug.localeCompare(b.slug))
-                      .map((category: any) => {
-                        const filteredSubjects = category.subjects
-                          .filter(subjectMatchesFilter)
-                          .sort((a: any, b: any) => a.name.localeCompare(b.name));
-
-                        if (filteredSubjects.length === 0) return null;
-
-                        const catPath = `${levelPath}/${category.slug}`;
-                        const isCatOpen = openFolders.has(catPath) || isSearching;
-
-                        // For Nigerian highschool: needs deeper nesting
-                        const isNigerian = category.slug === "nigeria";
-
-                        if (isNigerian) {
-                          const subFolders = buildNigerianSubFolders(filteredSubjects);
-                          const sortedSubLevels = Object.keys(subFolders).sort();
-
-                          return (
-                            <div key={category.id}>
-                              {renderFolderRow(category.slug, catPath, filteredSubjects.length, 1)}
-                              {isCatOpen && renderNested(
-                                <>
-                                  {sortedSubLevels.map(subLevel => {
-                                    const classGroups = subFolders[subLevel];
-                                    const sortedClasses = Object.keys(classGroups).sort();
-                                    const subLevelPath = `${catPath}/${subLevel}`;
-                                    const isSubLevelOpen = openFolders.has(subLevelPath) || isSearching;
-                                    const subLevelCount = sortedClasses.reduce((acc, cls) => acc + classGroups[cls].length, 0);
-
-                                    return (
-                                      <div key={subLevel}>
-                                        {renderFolderRow(subLevel, subLevelPath, subLevelCount, 2)}
-                                        {isSubLevelOpen && renderNested(
-                                          <>
-                                            {sortedClasses.map(cls => {
-                                              const subjects = classGroups[cls].sort((a: any, b: any) => a.name.localeCompare(b.name));
-                                              const clsSlug = cls.toLowerCase().replace(/\s+/g, "");
-                                              const clsPath = `${subLevelPath}/${clsSlug}`;
-                                              const isClsOpen = openFolders.has(clsPath) || isSearching;
-
-                                              return (
-                                                <div key={cls}>
-                                                  {renderFolderRow(clsSlug, clsPath, subjects.length, 3)}
-                                                  {isClsOpen && renderNested(
-                                                    subjects.map(renderSubject)
-                                                  )}
-                                                </div>
-                                              );
-                                            })}
-                                          </>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-                                </>
-                              )}
-                            </div>
-                          );
-                        }
-
-                        // For primaryschool categories (class1, class2...) or
-                        // university categories (engineering, science...) or
-                        // highschool/general — subjects sit directly inside
-                        return (
-                          <div key={category.id}>
-                            {renderFolderRow(category.slug, catPath, filteredSubjects.length, 1)}
-                            {isCatOpen && renderNested(
-                              filteredSubjects.map(renderSubject)
-                            )}
-                          </div>
-                        );
-                      })}
-                  </>
-                )}
-              </div>
-            );
-          })}
+          {Object.keys(tree).sort().map(key => (
+            <FolderNode 
+              key={key} 
+              node={tree[key]} 
+              pathKey={key} 
+              depth={0} 
+            />
+          ))}
+          {Object.keys(tree).length === 0 && (
+            <div className="text-center py-8 text-muted-foreground">
+              No subjects found matching your filters.
+            </div>
+          )}
         </div>
-
-        {levels.every(l => l.categories.reduce((acc: number, c: any) => acc + countFilteredSubjects(c.subjects), 0) === 0) && (
-          <div className="p-8 text-center text-muted-foreground font-medium">
-            No subjects found matching your filters.
-          </div>
-        )}
       </div>
     </div>
   );

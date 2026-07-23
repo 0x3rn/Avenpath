@@ -11,6 +11,7 @@ export const levels = pgTable("levels", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   slug: text("slug").notNull().unique(),
+  region: text("region").default('international').notNull(),
 });
 
 export const categories = pgTable("categories", {

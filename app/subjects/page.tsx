@@ -1,33 +1,29 @@
 export const dynamic = "force-dynamic";
 import Link from "next/link";
-import { ArrowRight, BookOpen, GraduationCap, Pencil } from "lucide-react";
-import { getLevels } from "@/lib/curriculum";
+import { ArrowRight, Globe, MapPin } from "lucide-react";
+import { getRegions } from "@/lib/curriculum";
 import { getUserProfile } from "@/app/actions/user";
 
 export default async function SubjectsDirectory() {
-  const levels = await getLevels();
+  const regions = await getRegions();
   const profile = await getUserProfile();
   
-  // Custom format for presentation (e.g. "highschool" -> "High School")
-  const formatLevelName = (level: string) => {
-    if (level === 'primaryschool') return 'Primary School';
-    if (level === 'highschool') return 'High School';
-    if (level === 'university') return 'University';
-    return level.charAt(0).toUpperCase() + level.slice(1);
+  const formatRegionName = (region: string) => {
+    if (region === 'nigerian-education') return 'Nigerian Education';
+    if (region === 'international') return 'International Curriculum';
+    return region.charAt(0).toUpperCase() + region.slice(1);
   };
 
-  const getLevelIcon = (level: string) => {
-    if (level === 'primaryschool') return <Pencil className="w-12 h-12 mb-6 text-foreground" />;
-    if (level === 'highschool') return <BookOpen className="w-12 h-12 mb-6 text-foreground" />;
-    if (level === 'university') return <GraduationCap className="w-12 h-12 mb-6 text-foreground" />;
-    return <BookOpen className="w-12 h-12 mb-6 text-foreground" />;
+  const getRegionIcon = (region: string) => {
+    if (region === 'nigerian-education') return <MapPin className="w-12 h-12 mb-6 text-foreground" />;
+    if (region === 'international') return <Globe className="w-12 h-12 mb-6 text-foreground" />;
+    return <Globe className="w-12 h-12 mb-6 text-foreground" />;
   };
 
-  const getLevelDescription = (level: string) => {
-    if (level === 'primaryschool') return "Discover fun, interactive basics in math, language, and the world around us.";
-    if (level === 'highschool') return "Build a strong foundation with structured paths across core subjects.";
-    if (level === 'university') return "Dive deep into advanced concepts, professional studies, and specialized fields.";
-    return "Explore subjects and structured learning paths.";
+  const getRegionDescription = (region: string) => {
+    if (region === 'nigerian-education') return "Explore tailored subjects and curriculum aligned with the Nigerian educational standard.";
+    if (region === 'international') return "Discover globally recognized curriculum paths from primary to university level.";
+    return "Explore educational paths.";
   };
 
   return (
@@ -41,37 +37,37 @@ export default async function SubjectsDirectory() {
         <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
           <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
           <ArrowRight className="w-4 h-4" />
-          <span className="text-foreground">Subjects</span>
+          <span className="text-foreground">Curriculum</span>
         </div>
       )}
 
       <main className="flex-grow flex flex-col items-center justify-center pt-12 pb-24 px-6">
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-            Choose your path
+            Choose your curriculum
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground font-medium">
-            Select an education level to explore tailored subjects, structured learning paths, and interactive lessons.
+            Select an educational region to explore tailored learning paths and subjects.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 w-full ">
-          {levels.map(level => (
-            <Link key={level} href={`/subjects/${level}`}>
+        <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+          {regions.map(region => (
+            <Link key={region} href={`/subjects/${region}`}>
               <div className="group bg-card border border-border hover:border-foreground/20 rounded-3xl p-10 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden h-full flex flex-col cursor-pointer">
                 
                 {/* Accent Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-foreground/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 <div className="relative z-10 flex flex-col flex-grow">
-                  {getLevelIcon(level)}
-                  <h2 className="text-3xl font-extrabold mb-4">{formatLevelName(level)}</h2>
+                  {getRegionIcon(region)}
+                  <h2 className="text-3xl font-extrabold mb-4">{formatRegionName(region)}</h2>
                   <p className="text-muted-foreground text-[17px] font-medium leading-relaxed flex-grow">
-                    {getLevelDescription(level)}
+                    {getRegionDescription(region)}
                   </p>
                   
                   <div className="mt-10 flex items-center gap-2 font-bold text-foreground group-hover:gap-4 transition-all duration-300">
-                    Explore {level === 'university' ? 'Courses' : 'Subjects'} <ArrowRight className="w-5 h-5" />
+                    Explore Region <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
               </div>

@@ -7,8 +7,8 @@ import { db } from "@/db";
 import { eq, and } from "drizzle-orm";
 import * as schema from "@/db/schema";
 
-export default async function SubjectPage({ params }: { params: Promise<{ level: string, subject: string }> }) {
-  const { level, subject: subjectSlug } = await params;
+export default async function SubjectPage({ params }: { params: Promise<{ region: string, level: string, subject: string }> }) {
+  const { region, level, subject: subjectSlug } = await params;
 
   // Fetch the subjects group
   const subjectsGroup = await getSubjectsGroup(level, subjectSlug);
@@ -28,5 +28,5 @@ export default async function SubjectPage({ params }: { params: Promise<{ level:
     isSaved = !!saved;
   }
 
-  return <SubjectView level={level} subjects={subjectsGroup} isLoggedIn={!!profile} isSaved={isSaved} />;
+  return <SubjectView region={region} level={level} subjects={subjectsGroup} isLoggedIn={!!profile} isSaved={isSaved} />;
 }

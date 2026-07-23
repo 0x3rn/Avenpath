@@ -9,6 +9,18 @@ export const getLevels = cache(async (): Promise<string[]> => {
   return allLevels.map((l) => l.slug);
 });
 
+export const getRegions = cache(async (): Promise<string[]> => {
+  const allLevels = await db.query.levels.findMany();
+  const regions = new Set(allLevels.map(l => l.region));
+  return Array.from(regions);
+});
+
+export const getLevelsByRegion = cache(async (regionSlug: string): Promise<any[]> => {
+  return await db.query.levels.findMany({
+    where: eq(schema.levels.region, regionSlug)
+  });
+});
+
 export const getCategories = cache(async (levelSlug: string): Promise<string[]> => {
   const level = await db.query.levels.findFirst({
     where: eq(schema.levels.slug, levelSlug)
@@ -21,7 +33,7 @@ export const getCategories = cache(async (levelSlug: string): Promise<string[]> 
   return cats.map((c) => c.slug);
 });
 
-function formatSubjectHelper(s: any, levelSlug: string): Subject {
+function formatSubjectHelper(s: any, levelSlug: string, regionSlug: string): Subject {
   const topics: Topic[] = [];
   const terms: Term[] = [];
   
@@ -72,6 +84,7 @@ function formatSubjectHelper(s: any, levelSlug: string): Subject {
     levels: [levelSlug],
     category: s.category?.slug || "",
     categoryName: s.category?.name || "",
+    regionSlug,
     topics,
     terms
   };
@@ -110,7 +123,7 @@ export const getSubjectsByLevel = cache(async (levelSlug: string): Promise<Subje
     }
   });
 
-  return subjectsWithRelations.map(s => formatSubjectHelper(s, levelSlug));
+  return subjectsWithRelations.map(s => formatSubjectHelper(s, levelSlug, level.region));
 });
 
 export const getSubject = cache(async (levelSlug: string, subjectSlug: string): Promise<Subject | null> => {
@@ -136,7 +149,8 @@ export const getSubject = cache(async (levelSlug: string, subjectSlug: string): 
   });
 
   if (!s) return null;
-  return formatSubjectHelper(s, levelSlug);
+  const level = await db.query.levels.findFirst({ where: eq(schema.levels.slug, levelSlug) });
+  return formatSubjectHelper(s, levelSlug, level?.region || 'international');
 });
 
 export function getSubjectGroupId(slug: string) {
@@ -172,4 +186,26 @@ export const getSubtopicWithContent = cache(async (subtopicSlug: string) => {
   });
   
   return { ...st, name: st.title, quizzes: quizzesData };
+});
+
+export const getPublicUniversityTree = cache(async () => {
+  return await db.query.levels.findMany({
+    where: eq(schema.levels.region, 'nigerian-university'),
+    orderBy: (levels, { asc }) => [asc(levels.name)],
+    with: {
+      categories: {
+        orderBy: (categories, { asc }) => [asc(categories.slug)],
+        with: {
+          subjects: {
+            orderBy: (subjects, { asc }) => [asc(subjects.name)],
+            with: {
+              terms: {
+                orderBy: (terms, { asc }) => [asc(terms.id)]
+              }
+            }
+          }
+        }
+      }
+    }
+  });
 });

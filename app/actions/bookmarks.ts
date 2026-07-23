@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { bookmarks, subtopics, topics, terms, subjects } from "@/db/schema";
+import { bookmarks, subtopics, topics, terms, subjects, categories, levels } from "@/db/schema";
 import { eq, desc, and } from "drizzle-orm";
 import { createClient } from "@/utils/supabase/server";
 
@@ -21,13 +21,20 @@ export async function getBookmarks() {
       subjectName: subjects.name,
       color: subjects.color,
       topicId: topics.id,
-      subjectId: subjects.id
+      subjectId: subjects.id,
+      subjectSlug: subjects.slug,
+      topicSlug: topics.slug,
+      subtopicSlug: subtopics.slug,
+      levelSlug: levels.slug,
+      regionSlug: levels.region
     })
     .from(bookmarks)
     .innerJoin(subtopics, eq(bookmarks.subtopicId, subtopics.id))
     .innerJoin(topics, eq(subtopics.topicId, topics.id))
     .innerJoin(terms, eq(topics.termId, terms.id))
     .innerJoin(subjects, eq(terms.subjectId, subjects.id))
+    .innerJoin(categories, eq(subjects.categoryId, categories.id))
+    .innerJoin(levels, eq(categories.levelId, levels.id))
     .where(eq(bookmarks.userId, userId))
     .orderBy(desc(bookmarks.createdAt));
 

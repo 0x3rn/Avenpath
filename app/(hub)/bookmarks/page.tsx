@@ -97,7 +97,7 @@ export default function BookmarksPage() {
                 </p>
               </div>
 
-              <Link href={`/subjects/${bookmark.subjectId}/${bookmark.topicId}/${bookmark.subtopicId}`} className="bg-muted text-foreground px-4 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-foreground hover:text-background transition-colors">
+              <Link href={`/subjects/${bookmark.regionSlug}/${bookmark.levelSlug}/${bookmark.subjectSlug}/${bookmark.topicSlug}/${bookmark.subtopicSlug}`} className="bg-muted text-foreground px-4 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-foreground hover:text-background transition-colors">
                 <BookOpen className="w-4 h-4" /> Open Lesson
               </Link>
             </div>

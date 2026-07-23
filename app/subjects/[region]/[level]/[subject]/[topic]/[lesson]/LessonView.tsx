@@ -16,13 +16,16 @@ import { markLessonComplete } from "@/app/actions/progress";
 import LessonFlashcards from "./LessonFlashcards";
 
 export default function LessonView({ 
+  region,
   level, 
   subject, 
   topic,
   lesson,
   completedSlugs = []
 }: { 
+  region: string,
   level: string, 
+
   subject: Subject, 
   topic: Topic,
   lesson: Subtopic,
@@ -31,9 +34,9 @@ export default function LessonView({
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
   
-  const levelHref = queryString ? `/subjects/${level}?${queryString}` : `/subjects/${level}`;
-  const subjectHref = queryString ? `/subjects/${level}/${subject.slug}?${queryString}` : `/subjects/${level}/${subject.slug}`;
-  const topicHref = queryString ? `/subjects/${level}/${subject.slug}/${topic.slug}?${queryString}` : `/subjects/${level}/${subject.slug}/${topic.slug}`;
+  const levelHref = queryString ? `/subjects/${region}/${level}?${queryString}` : `/subjects/${region}/${level}`;
+  const subjectHref = queryString ? `/subjects/${region}/${level}/${subject.slug}?${queryString}` : `/subjects/${region}/${level}/${subject.slug}`;
+  const topicHref = queryString ? `/subjects/${region}/${level}/${subject.slug}/${topic.slug}?${queryString}` : `/subjects/${region}/${level}/${subject.slug}/${topic.slug}`;
 
   const [readingProgress, setReadingProgress] = useState(0);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -60,9 +63,9 @@ export default function LessonView({
     );
 
     if (nextLesson) {
-      router.push(`/subjects/${level}/${subject.slug}/${topic.slug}/${nextLesson.slug}`);
+      router.push(`/subjects/${region}/${level}/${subject.slug}/${topic.slug}/${nextLesson.slug}`);
     } else {
-      router.push(`/subjects/${level}/${subject.slug}/${topic.slug}`);
+      router.push(`/subjects/${region}/${level}/${subject.slug}/${topic.slug}`);
     }
   };
 
@@ -147,7 +150,7 @@ export default function LessonView({
                 const isCompleted = completedSlugs.includes(sub.slug);
                 return (
                   <li key={sub.slug}>
-                    <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}/${sub.slug}`}
+                    <Link href={`/subjects/${region}/${level}/${subject.slug}/${topic.slug}/${sub.slug}`}
                       className={`flex items-center gap-3 p-3 rounded-xl transition-colors ${
                         isActive ? "bg-muted text-foreground font-bold" : "text-muted-foreground hover:bg-muted/50 font-medium"
                       }`}
@@ -240,11 +243,11 @@ export default function LessonView({
           {/* BOTTOM NAVIGATION */}
           <div className="mt-20 pt-8 border-t border-border flex flex-col sm:flex-row gap-6 items-center justify-between">
             {prevLesson ? (
-              <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}/${prevLesson.slug}`} className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
+              <Link href={`/subjects/${region}/${level}/${subject.slug}/${topic.slug}/${prevLesson.slug}`} className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
                 <ChevronRight className="w-5 h-5 rotate-180" /> Previous Lesson
               </Link>
             ) : (
-              <Link href={`/subjects/${level}/${subject.slug}/${topic.slug}`} className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
+              <Link href={`/subjects/${region}/${level}/${subject.slug}/${topic.slug}`} className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-card text-foreground font-bold hover:bg-muted transition-colors">
                 <ChevronRight className="w-5 h-5 rotate-180" /> Back to Topic
               </Link>
             )}

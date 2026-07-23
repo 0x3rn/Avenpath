@@ -135,7 +135,7 @@ export default function ProgressPage() {
                   <div className="h-2 w-full bg-muted rounded-full overflow-hidden mb-4">
                     <div className={`h-full ${item.color ? item.color.replace('text-', 'bg-') : 'bg-foreground'} rounded-full`} style={{ width: `${item.percentage}%` }} />
                   </div>
-                  <Link href={`/subjects/${item.id}`} className="text-sm font-bold bg-muted px-4 py-2 rounded-lg hover:bg-foreground hover:text-background transition-colors inline-block">
+                  <Link href={`/subjects/${item.regionSlug}/${item.levelSlug}/${item.slug}`} className="text-sm font-bold bg-muted px-4 py-2 rounded-lg hover:bg-foreground hover:text-background transition-colors inline-block">
                     Continue
                   </Link>
                 </div>

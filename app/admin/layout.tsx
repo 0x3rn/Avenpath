@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, BookOpen, Layers, Edit3, HelpCircle, 
   Image as ImageIcon, Users, BarChart3, FileText, Settings, 
-  Bell, Search, Menu, X, ShieldAlert, User, ShieldCheck, Home, CheckCircle2, Copy
+  Bell, Search, Menu, X, ShieldAlert, User, ShieldCheck, Home, CheckCircle2, Copy, GraduationCap
 } from "lucide-react";
 
 const ADMIN_LINKS = [
@@ -19,6 +19,7 @@ const ADMIN_LINKS = [
   { name: "Quizzes & Tests", href: "/admin/quizzes", icon: HelpCircle, roles: ["admin", "moderator"] },
   { name: "Exams Engine", href: "/admin/exams", icon: ShieldCheck, roles: ["admin", "moderator"] },
   { name: "Flashcards", href: "/admin/flashcards", icon: Copy, roles: ["admin", "moderator"] },
+  { name: "Nigerian University", href: "/admin/nigerian-university", icon: GraduationCap, roles: ["admin", "moderator"] },
   { name: "Media", href: "/admin/media", icon: ImageIcon, roles: ["admin", "moderator"] },
   { name: "Users", href: "/admin/users", icon: Users, roles: ["admin"] },
   { name: "Analytics", href: "/admin/analytics", icon: BarChart3, roles: ["admin"] },

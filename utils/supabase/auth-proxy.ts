@@ -35,10 +35,6 @@ export async function updateSession(request: NextRequest) {
   // supabase.auth.getUser(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
   // Protect private routes
   const protectedPaths = [
     '/dashboard',
@@ -62,36 +58,41 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith(path)
   )
 
-  if (isProtected && !user) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
+  if (isProtected) {
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/login'
+      return NextResponse.redirect(url)
+    }
+
+    // Admin Route Protection
+    if (request.nextUrl.pathname.startsWith('/admin')) {
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single()
+        
+      if (!profile || (profile.role !== 'admin' && profile.role !== 'moderator')) {
+        const url = request.nextUrl.clone()
+        url.pathname = '/dashboard'
+        return NextResponse.redirect(url)
+      }
+    }
   }
 
-  // Admin Route Protection
-  if (request.nextUrl.pathname.startsWith('/admin') && user) {
-    const { data: profile } = await supabase
-      .from('user_profiles')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-      
-    if (!profile || profile.role !== 'admin') {
+  // Handle Auth routes (redirect to dashboard if already logged in)
+  if (['/login', '/sign-up'].includes(request.nextUrl.pathname) || request.nextUrl.pathname === '/') {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session) {
       const url = request.nextUrl.clone()
       url.pathname = '/dashboard'
       return NextResponse.redirect(url)
     }
   }
 
-  // If user is logged in, restrict access to auth pages like /login and /sign-up
-  const authPaths = ['/login', '/sign-up']
-  const isAuthPage = authPaths.some(path => request.nextUrl.pathname.startsWith(path))
-  
-  if ((isAuthPage || request.nextUrl.pathname === '/') && user) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/dashboard'
-    return NextResponse.redirect(url)
-  }
 
   return supabaseResponse
 }

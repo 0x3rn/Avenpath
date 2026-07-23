@@ -10,11 +10,13 @@ import dynamic from "next/dynamic";
 import { SubjectIcon } from "@/components/SubjectIcon";
 
 export default function SubjectExplorer({ 
+  region,
   level, 
   initialSubjects, 
   categories,
   isLoggedIn = false
 }: { 
+  region: string;
   level: string; 
   initialSubjects: Subject[]; 
   categories: string[]; 
@@ -28,19 +30,11 @@ export default function SubjectExplorer({
   
   const [optimisticCategory, setOptimisticCategory] = useState<string | null>(null);
   const activeCategory = optimisticCategory || searchParams.get('category') || defaultCategory;
-  const activeSubLevel = searchParams.get('sublevel') || "Junior High School";
   
   const setActiveCategory = (cat: string) => {
     setOptimisticCategory(cat);
     const params = new URLSearchParams(searchParams.toString());
     params.set('category', cat);
-    params.set('sublevel', "Junior High School");
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  };
-
-  const setActiveSubLevel = (sub: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('sublevel', sub);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
@@ -62,6 +56,7 @@ export default function SubjectExplorer({
 
   // Format level
   const formattedLevel = level === 'highschool' ? 'High School' : 
+                         level === 'primaryschool' ? 'Primary School' :
                          level === 'university' ? 'University' : 
                          level.charAt(0).toUpperCase() + level.slice(1);
 
@@ -70,14 +65,6 @@ export default function SubjectExplorer({
   
   if (activeCategory !== "All") {
     filteredSubjects = filteredSubjects.filter(s => s.category === activeCategory);
-  }
-
-  if (activeCategory === "nigeria" && activeSubLevel !== "All") {
-    if (activeSubLevel === "Junior High School") {
-      filteredSubjects = filteredSubjects.filter(s => s.slug.includes("junior-highschool"));
-    } else if (activeSubLevel === "Senior High School") {
-      filteredSubjects = filteredSubjects.filter(s => s.slug.includes("senior-highschool"));
-    }
   }
   
   // Deduplicate by name
@@ -156,49 +143,40 @@ export default function SubjectExplorer({
           </div>
 
           {/* CATEGORY CHIPS - Desktop */}
-          <div className="hidden sm:flex flex-wrap items-center justify-center gap-3">
-            {categories.map(cat => {
-              const formattedCat = cat.charAt(0).toUpperCase() + cat.slice(1);
-              return (
-                <button 
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2.5 rounded-full text-[15px] font-bold transition-all ${activeCategory === cat ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"}`}
-                >
-                  {formattedCat}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* CATEGORY DROPDOWN - Mobile */}
-          <div className="sm:hidden w-full max-w-xs mx-auto relative mb-4">
-             <select 
-               value={activeCategory} 
-               onChange={(e) => setActiveCategory(e.target.value)}
-               className="w-full bg-card border-2 border-border focus:border-foreground rounded-full py-3 px-5 text-lg font-bold appearance-none relative z-10 outline-none text-foreground"
-             >
-               {categories.map(cat => (
-                 <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
-               ))}
-             </select>
-             <ChevronDown className="w-5 h-5 text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 z-0 pointer-events-none" />
-          </div>
-
-          {/* SUB-LEVEL CHIPS (For Nigeria) */}
-          {activeCategory === 'nigeria' && (
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-5 animate-in fade-in slide-in-from-top-2 duration-300">
-              {["Junior High School", "Senior High School"].map(subLvl => (
-                <button 
-                  key={subLvl}
-                  onClick={() => setActiveSubLevel(subLvl)}
-                  className={`px-4 py-1.5 rounded-full text-[13px] font-bold transition-all ${activeSubLevel === subLvl ? "bg-muted-foreground text-background" : "bg-card border border-border text-muted-foreground hover:bg-muted"}`}
-                >
-                  {subLvl}
-                </button>
-              ))}
+          {categories.length > 1 && (
+            <div className="hidden sm:flex flex-wrap items-center justify-center gap-3">
+              {categories.map(cat => {
+                const formattedCat = cat.charAt(0).toUpperCase() + cat.slice(1);
+                return (
+                  <button 
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-5 py-2.5 rounded-full text-[15px] font-bold transition-all ${activeCategory === cat ? "bg-foreground text-background shadow-md" : "bg-card border border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground"}`}
+                  >
+                    {formattedCat}
+                  </button>
+                );
+              })}
             </div>
           )}
+
+          {/* CATEGORY DROPDOWN - Mobile */}
+          {categories.length > 1 && (
+            <div className="sm:hidden w-full max-w-xs mx-auto relative mb-4">
+               <select 
+                 value={activeCategory} 
+                 onChange={(e) => setActiveCategory(e.target.value)}
+                 className="w-full bg-card border-2 border-border focus:border-foreground rounded-full py-3 px-5 text-lg font-bold appearance-none relative z-10 outline-none text-foreground"
+               >
+                 {categories.map(cat => (
+                   <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+                 ))}
+               </select>
+               <ChevronDown className="w-5 h-5 text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 z-0 pointer-events-none" />
+            </div>
+          )}
+
+
         </div>
 
         {/* CONTROLS */}
@@ -250,10 +228,10 @@ export default function SubjectExplorer({
               
               const baseSlug = subject.slug.replace(/-class\d+/, '');
               const queryString = searchParams.toString();
-              const subjectHref = queryString ? `/subjects/${level}/${baseSlug}?${queryString}` : `/subjects/${level}/${baseSlug}`;
+              const subjectHref = queryString ? `/subjects/${region}/${level}/${baseSlug}?${queryString}` : `/subjects/${region}/${level}/${baseSlug}`;
               
               return (
-                <Link key={subject.id} href={subjectHref} id={baseSlug} className="scroll-mt-24">
+                <Link key={subject.id} href={subjectHref} id={baseSlug} className="scroll-mt-24" prefetch={false}>
                   <div 
                     className="group flex flex-col h-full bg-card border border-border rounded-3xl p-6 hover:shadow-md transition-all duration-300 relative overflow-hidden -translate-y-0 hover:-translate-y-1"
                   >

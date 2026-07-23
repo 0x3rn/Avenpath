@@ -7,10 +7,10 @@ import { ArrowRight, BookOpen, Activity, Play, Star, ChevronRight, Download, Use
 import type { Subject } from "@/types/curriculum";
 import { SaveSubjectButton } from "./SaveSubjectButton";
 
-export default function SubjectView({ level, subjects, isLoggedIn = false, isSaved = false }: { level: string, subjects: Subject[], isLoggedIn?: boolean, isSaved?: boolean }) {
+export default function SubjectView({ region, level, subjects, isLoggedIn = false, isSaved = false }: { region: string, level: string, subjects: Subject[], isLoggedIn?: boolean, isSaved?: boolean }) {
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
-  const levelHref = queryString ? `/subjects/${level}?${queryString}` : `/subjects/${level}`;
+  const levelHref = queryString ? `/subjects/${region}/${level}?${queryString}` : `/subjects/${region}/${level}`;
   
   const availableClasses = subjects.map(s => s.className).filter(Boolean);
   const hasClasses = availableClasses.length > 0;
@@ -50,7 +50,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
           <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
             <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
             <ChevronRight className="w-4 h-4" />
-            <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
+            <Link href={`/subjects/${region}/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
             <ChevronRight className="w-4 h-4" />
             {subject.category && subject.categoryName && (
               <>
@@ -67,7 +67,7 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
         <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-4 w-full">
           <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
           <ChevronRight className="w-4 h-4" />
-          <Link href={`/subjects/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
+          <Link href={`/subjects/${region}/${level}`} className="hover:text-foreground transition-colors capitalize">{level}</Link>
           <ChevronRight className="w-4 h-4" />
           {subject.category && subject.categoryName && (
             <>
@@ -242,11 +242,11 @@ export default function SubjectView({ level, subjects, isLoggedIn = false, isSav
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {displayTopics.map((topic, idx) => {
                       const topicHref = queryString 
-                        ? `/subjects/${level}/${subject.slug}/${topic.slug}?${queryString}`
-                        : `/subjects/${level}/${subject.slug}/${topic.slug}`;
+                        ? `/subjects/${region}/${level}/${subject.slug}/${topic.slug}?${queryString}`
+                        : `/subjects/${region}/${level}/${subject.slug}/${topic.slug}`;
                       
                       return (
-                      <Link key={topic.slug} href={topicHref}>
+                      <Link key={topic.slug} href={topicHref} prefetch={false}>
                         <div 
                           className="group border border-border rounded-3xl p-8 hover:shadow-xl transition-all duration-300 h-full flex flex-col relative overflow-hidden"
                           style={{ backgroundColor: `${subject.color}05` }}

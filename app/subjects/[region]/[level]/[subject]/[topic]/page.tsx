@@ -7,8 +7,8 @@ import { eq } from "drizzle-orm";
 import { createClient } from "@/utils/supabase/server";
 
 
-export default async function TopicPage({ params }: { params: Promise<{ level: string, subject: string, topic: string }> }) {
-  const { level, subject: subjectSlug, topic: topicSlug } = await params;
+export default async function TopicPage({ params }: { params: Promise<{ region: string, level: string, subject: string, topic: string }> }) {
+  const { region, level, subject: subjectSlug, topic: topicSlug } = await params;
 
   // Fetch the subject and topic
   const subject = await getSubject(level, subjectSlug);
@@ -34,5 +34,5 @@ export default async function TopicPage({ params }: { params: Promise<{ level: s
       .map(s => s.slug);
   }
 
-  return <TopicView level={level} subject={subject} topic={topic} completedSlugs={completedSlugs} isLoggedIn={!!user} />;
+  return <TopicView region={region} level={level} subject={subject} topic={topic} completedSlugs={completedSlugs} isLoggedIn={!!user} />;
 }

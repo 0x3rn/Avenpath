@@ -16,26 +16,34 @@ const buildTree = (subjects: any[]) => {
   const root: Record<string, TreeNode> = {};
 
   subjects.forEach(subject => {
-    let path: string[] = [];
-    
-    if (subject.levelName === "University") {
-      path = ["University", subject.name];
-    } else if (subject.levelName === "Highschool") {
-      if (subject.country === "Nigeria") {
-        const isJunior = subject.id.includes("junior-highschool");
-        const isSenior = subject.id.includes("senior-highschool");
-        const section = isJunior ? "Junior Highschool" : (isSenior ? "Senior Highschool" : "General Highschool");
-        path = ["Highschool", "Nigeria", section, subject.className, subject.name];
-      } else {
-        path = ["Highschool", "International", subject.className, subject.name];
-      }
-    } else if (subject.levelName === "Primaryschool" || subject.levelName === "Primary School") {
-      path = ["Primary School", subject.className, subject.name];
-    } else {
-      path = [subject.levelName || "Other", subject.className, subject.name];
-    }
+    const region = subject.category?.level?.region || "international";
+    const formattedRegion = region.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-    path = path.filter(p => p !== "General");
+    let path: string[] = [];
+
+    if (region === "nigerian-university") {
+      const faculty = subject.category?.level?.name || "Unknown Faculty";
+      const department = subject.category?.name || "Unknown Department";
+      const level = subject.levelName || "General Level";
+      const semester = subject.className || "General Semester";
+      path = [formattedRegion, faculty, department, level, semester, subject.name];
+    } else {
+      const level = subject.category?.level?.name || subject.levelName || "Other";
+      const className = subject.className || "General";
+      
+      let subLevel = null;
+      if (subject.id?.includes("junior-highschool") || subject.slug?.includes("junior-highschool")) {
+        subLevel = "Junior High School";
+      } else if (subject.id?.includes("senior-highschool") || subject.slug?.includes("senior-highschool")) {
+        subLevel = "Senior High School";
+      }
+      
+      path = [formattedRegion, level];
+      if (subLevel) path.push(subLevel);
+      path.push(className, subject.name);
+    }
+    
+    path = path.filter(p => p !== "General" && p !== "General Semester" && p !== "General Level");
 
     let currentLevel = root;
     for (let i = 0; i < path.length; i++) {

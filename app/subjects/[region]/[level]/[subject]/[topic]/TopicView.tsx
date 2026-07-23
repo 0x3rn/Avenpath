@@ -6,12 +6,12 @@ import { useSearchParams } from "next/navigation";
 import { ArrowRight, Clock, BookOpen, CheckCircle2, ChevronRight, Lock } from "lucide-react";
 import type { Subject, Topic } from "@/types/curriculum";
 
-export default function TopicView({ level, subject, topic, completedSlugs = [], isLoggedIn = false }: { level: string, subject: Subject, topic: Topic, completedSlugs?: string[], isLoggedIn?: boolean }) {
+export default function TopicView({ region, level, subject, topic, completedSlugs = [], isLoggedIn = false }: { region: string, level: string, subject: Subject, topic: Topic, completedSlugs?: string[], isLoggedIn?: boolean }) {
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
   
-  const levelHref = queryString ? `/subjects/${level}?${queryString}` : `/subjects/${level}`;
-  const subjectHref = queryString ? `/subjects/${level}/${subject.slug}?${queryString}` : `/subjects/${level}/${subject.slug}`;
+  const levelHref = queryString ? `/subjects/${region}/${level}?${queryString}` : `/subjects/${region}/${level}`;
+  const subjectHref = queryString ? `/subjects/${region}/${level}/${subject.slug}?${queryString}` : `/subjects/${region}/${level}/${subject.slug}`;
   
   const [activeTab, setActiveTab] = useState("Lessons");
   
@@ -114,11 +114,11 @@ export default function TopicView({ level, subject, topic, completedSlugs = [], 
               // No actual locking logic required for now, we just visually show what is completed/current
               const isLocked = false;
               const subtopicHref = queryString 
-                ? `/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}?${queryString}`
-                : `/subjects/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}`;
+                ? `/subjects/${region}/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}?${queryString}`
+                : `/subjects/${region}/${level}/${subject.slug}/${topic.slug}/${subtopic.slug}`;
 
               return (
-                <Link key={subtopic.slug} href={subtopicHref} className="block group">
+                <Link key={subtopic.slug} href={subtopicHref} className="block group" prefetch={false}>
                   <div className="relative pl-10 flex items-center">
                     {/* Timeline Node */}
                     <div className={`absolute -left-[11px] w-[20px] h-[20px] rounded-full border-4 border-background transition-colors ${

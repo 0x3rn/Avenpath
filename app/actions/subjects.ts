@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/db";
-import { subjects, userProgress, terms, subtopics, topics, userSubjects } from "@/db/schema";
+import { subjects, userProgress, terms, subtopics, topics, userSubjects, categories, levels } from "@/db/schema";
 import { eq, inArray, sql } from "drizzle-orm";
 import { createClient } from "@/utils/supabase/server";
 
@@ -49,10 +49,18 @@ export async function getMySubjects() {
     return acc;
   }, {} as Record<string, number>);
 
-  // 4. Fetch those subjects
-  const mySubjects = await db.select().from(subjects).where(inArray(subjects.id, activeSubjectIds));
+  // 4. Fetch those subjects with their categories and levels
+  const mySubjects = await db.select({
+    subject: subjects,
+    levelSlug: levels.slug,
+    regionSlug: levels.region
+  })
+  .from(subjects)
+  .innerJoin(categories, eq(subjects.categoryId, categories.id))
+  .innerJoin(levels, eq(categories.levelId, levels.id))
+  .where(inArray(subjects.id, activeSubjectIds));
 
-  return mySubjects.map(sub => {
+  return mySubjects.map(({ subject: sub, levelSlug, regionSlug }) => {
      const completed = progress.filter(p => p.subjectId === sub.id).length;
      const total = subjectTotals[sub.id] || 0; 
      const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
@@ -80,6 +88,8 @@ export async function getMySubjects() {
        percentage,
        slug: sub.slug,
        levelName: sub.levelName,
+       levelSlug,
+       regionSlug,
        levelPill,
        status
      };

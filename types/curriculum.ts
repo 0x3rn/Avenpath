@@ -37,4 +37,5 @@ export interface Subject {
   terms: Term[];
   category?: string;
   categoryName?: string;
+  regionSlug?: string;
 }
