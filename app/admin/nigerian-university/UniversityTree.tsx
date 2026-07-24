@@ -2,7 +2,12 @@
 
 import { useState, useMemo } from "react";
 import { Folder, FolderOpen, Search, BookOpen, Layers } from "lucide-react";
-import { AddDepartmentButton, AddCourseButton } from "./ClientActions";
+import { 
+  AddDepartmentButton, AddCourseButton, 
+  EditFacultyButton, DeleteFacultyButton,
+  EditDepartmentButton, DeleteDepartmentButton,
+  EditCourseButton, DeleteCourseButton
+} from "./ClientActions";
 import Link from "next/link";
 
 interface UniversityTreeProps {
@@ -136,12 +141,14 @@ export default function UniversityTree({ faculties }: UniversityTreeProps) {
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+          <div className="flex items-center gap-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shrink-0 flex-wrap justify-end">
+            <EditCourseButton course={course} />
+            <DeleteCourseButton courseId={course.id} name={course.name} />
             <Link 
               href={`/admin/subjects`} 
               className="text-[10px] font-bold px-3 py-1.5 rounded-md bg-primary text-primary-foreground uppercase tracking-wider hover:bg-primary/90 transition-colors"
             >
-              Manage Course
+              Manage
             </Link>
           </div>
         </div>
@@ -178,12 +185,20 @@ export default function UniversityTree({ faculties }: UniversityTreeProps) {
           </div>
           
           {/* Action Buttons for Faculties and Departments */}
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-2 shrink-0 pr-2">
+          <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex gap-1.5 shrink-0 pr-2 flex-wrap justify-end">
             {depth === 0 && node.facultyId && (
-              <AddDepartmentButton facultyId={node.facultyId} facultyName={node.name} />
+              <>
+                <AddDepartmentButton facultyId={node.facultyId} facultyName={node.name} />
+                <EditFacultyButton faculty={{ id: node.facultyId, name: node.name }} />
+                <DeleteFacultyButton facultyId={node.facultyId} name={node.name} />
+              </>
             )}
             {depth === 1 && node.departmentId && (
-              <AddCourseButton departmentId={node.departmentId} departmentName={node.name} />
+              <>
+                <AddCourseButton departmentId={node.departmentId} departmentName={node.name} />
+                <EditDepartmentButton department={{ departmentId: node.departmentId, name: node.name }} />
+                <DeleteDepartmentButton departmentId={node.departmentId} name={node.name} />
+              </>
             )}
           </div>
         </div>

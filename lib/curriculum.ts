@@ -11,7 +11,7 @@ export const getLevels = cache(async (): Promise<string[]> => {
 
 export const getRegions = cache(async (): Promise<string[]> => {
   const allLevels = await db.query.levels.findMany();
-  const regions = new Set(allLevels.map(l => l.region));
+  const regions = new Set(allLevels.map(l => l.region).filter(r => r !== 'nigerian-university'));
   return Array.from(regions);
 });
 

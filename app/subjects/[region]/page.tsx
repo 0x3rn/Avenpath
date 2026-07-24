@@ -15,7 +15,7 @@ export default async function RegionLevelsPage({ params }: { params: Promise<{ r
   }
   
   const formatLevelName = (levelSlug: string, levelName: string) => {
-    if (levelSlug === 'nigeria-university') return 'Nigerian University';
+    if (levelSlug === 'nigeria-university') return 'University';
     if (levelSlug === 'primaryschool' || levelName === 'PrimarySchool') return 'Primary School';
     return levelName;
   };
@@ -43,8 +43,6 @@ export default async function RegionLevelsPage({ params }: { params: Promise<{ r
         </nav>
       ) : (
         <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
-          <Link href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link>
-          <ArrowRight className="w-4 h-4" />
           <Link href="/subjects" className="hover:text-foreground transition-colors">Curriculum</Link>
           <ArrowRight className="w-4 h-4" />
           <span className="text-foreground capitalize">{region.split('-').map(w => w === 'education' && region === 'nigerian-education' ? '' : w).join(' ').trim()}</span>

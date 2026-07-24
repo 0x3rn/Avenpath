@@ -91,6 +91,12 @@ export default function UniversityExplorer({ region, level, tree, isLoggedIn = f
     setActiveSemesterDropdown(null);
   };
 
+  const formatRegionName = (r: string) => {
+    if (r === 'nigerian-education') return 'Nigerian Education';
+    if (r === 'international') return 'International Curriculum';
+    return r.charAt(0).toUpperCase() + r.slice(1);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       {/* Navigation Bar */}
@@ -99,17 +105,65 @@ export default function UniversityExplorer({ region, level, tree, isLoggedIn = f
           <Link href="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
-          <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-            <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+          <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-muted-foreground">
+            <Link href="/subjects" className="hover:text-foreground transition-colors">Curriculum</Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-foreground">Nigerian University</span>
+            <Link href={`/subjects/${region}`} className="hover:text-foreground transition-colors">{formatRegionName(region)}</Link>
+            <ChevronRight className="w-4 h-4" />
+            <span 
+              className={!activeFaculty ? "text-foreground" : "hover:text-foreground transition-colors cursor-pointer"}
+              onClick={() => { setActiveFacultyId(null); setActiveDepartmentId(null); }}
+            >
+              University
+            </span>
+            {activeFaculty && (
+              <>
+                <ChevronRight className="w-4 h-4" />
+                <span 
+                  className={!activeDepartment ? "text-foreground" : "hover:text-foreground transition-colors cursor-pointer"}
+                  onClick={() => setActiveDepartmentId(null)}
+                >
+                  {activeFaculty.name}
+                </span>
+              </>
+            )}
+            {activeDepartment && (
+              <>
+                <ChevronRight className="w-4 h-4" />
+                <span className="text-foreground">{activeDepartment.name}</span>
+              </>
+            )}
           </div>
         </nav>
       ) : (
-        <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
-          <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+        <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
+          <Link href="/subjects" className="hover:text-foreground transition-colors">Curriculum</Link>
           <ChevronRight className="w-4 h-4" />
-          <span className="text-foreground">Nigerian University</span>
+          <Link href={`/subjects/${region}`} className="hover:text-foreground transition-colors">{formatRegionName(region)}</Link>
+          <ChevronRight className="w-4 h-4" />
+          <span 
+            className={!activeFaculty ? "text-foreground" : "hover:text-foreground transition-colors cursor-pointer"}
+            onClick={() => { setActiveFacultyId(null); setActiveDepartmentId(null); }}
+          >
+            University
+          </span>
+          {activeFaculty && (
+            <>
+              <ChevronRight className="w-4 h-4" />
+              <span 
+                className={!activeDepartment ? "text-foreground" : "hover:text-foreground transition-colors cursor-pointer"}
+                onClick={() => setActiveDepartmentId(null)}
+              >
+                {activeFaculty.name}
+              </span>
+            </>
+          )}
+          {activeDepartment && (
+            <>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-foreground">{activeDepartment.name}</span>
+            </>
+          )}
         </div>
       )}
 
@@ -118,7 +172,7 @@ export default function UniversityExplorer({ region, level, tree, isLoggedIn = f
         <div className="mb-10">
           <h2 className="text-3xl font-extrabold flex items-center gap-3">
             <GraduationCap className="w-8 h-8 text-emerald-500" />
-            Nigerian University
+            University
           </h2>
         
         {activeFaculty && (

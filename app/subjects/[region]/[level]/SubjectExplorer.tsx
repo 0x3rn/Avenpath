@@ -60,6 +60,12 @@ export default function SubjectExplorer({
                          level === 'university' ? 'University' : 
                          level.charAt(0).toUpperCase() + level.slice(1);
 
+  const formatRegionName = (r: string) => {
+    if (r === 'nigerian-education') return 'Nigerian Education';
+    if (r === 'international') return 'International Curriculum';
+    return r.charAt(0).toUpperCase() + r.slice(1);
+  };
+
   // Filter subjects
   let filteredSubjects = initialSubjects;
   
@@ -104,16 +110,42 @@ export default function SubjectExplorer({
             <img src="/logo.png" alt="Avenpath Logo" className="h-16 w-auto" />
           </Link>
           <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-            <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+            <Link href="/subjects" className="hover:text-foreground transition-colors">Curriculum</Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-foreground">{formattedLevel}</span>
+            <Link href={`/subjects/${region}`} className="hover:text-foreground transition-colors">{formatRegionName(region)}</Link>
+            <ChevronRight className="w-4 h-4" />
+            <span 
+              className={activeCategory === 'All' ? "text-foreground" : "hover:text-foreground transition-colors cursor-pointer"} 
+              onClick={() => activeCategory !== 'All' && setActiveCategory('All')}
+            >
+              {formattedLevel}
+            </span>
+            {activeCategory !== 'All' && (
+              <>
+                <ChevronRight className="w-4 h-4" />
+                <span className="text-foreground capitalize">{activeCategory.replace('-', ' ')}</span>
+              </>
+            )}
           </div>
         </nav>
       ) : (
         <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground px-8 py-6 w-full">
-          <Link href="/subjects" className="hover:text-foreground transition-colors">Subjects</Link>
+          <Link href="/subjects" className="hover:text-foreground transition-colors">Curriculum</Link>
           <ChevronRight className="w-4 h-4" />
-          <span className="text-foreground">{formattedLevel}</span>
+          <Link href={`/subjects/${region}`} className="hover:text-foreground transition-colors">{formatRegionName(region)}</Link>
+          <ChevronRight className="w-4 h-4" />
+          <span 
+            className={activeCategory === 'All' ? "text-foreground" : "hover:text-foreground transition-colors cursor-pointer"} 
+            onClick={() => activeCategory !== 'All' && setActiveCategory('All')}
+          >
+            {formattedLevel}
+          </span>
+          {activeCategory !== 'All' && (
+            <>
+              <ChevronRight className="w-4 h-4" />
+              <span className="text-foreground capitalize">{activeCategory.replace('-', ' ')}</span>
+            </>
+          )}
         </div>
       )}
 
