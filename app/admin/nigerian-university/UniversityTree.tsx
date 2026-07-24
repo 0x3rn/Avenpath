@@ -143,7 +143,7 @@ export default function UniversityTree({ faculties }: UniversityTreeProps) {
           </div>
           <div className="flex items-center gap-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shrink-0 flex-wrap justify-end">
             <EditCourseButton course={course} />
-            <DeleteCourseButton courseId={course.id} name={course.name} />
+            <DeleteCourseButton course={course} />
             <Link 
               href={`/admin/subjects`} 
               className="text-[10px] font-bold px-3 py-1.5 rounded-md bg-primary text-primary-foreground uppercase tracking-wider hover:bg-primary/90 transition-colors"

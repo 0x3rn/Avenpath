@@ -70,6 +70,12 @@ export const getAdminLevelsTree = cache(async () => {
 });
 
 export const getAdminUniversityTree = cache(async () => {
+  const allShares = await db.query.courseShares.findMany();
+  const shareCounts = allShares.reduce((acc, curr) => {
+    acc[curr.subjectId] = (acc[curr.subjectId] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
   const levels = await db.query.levels.findMany({
     where: eq(schema.levels.region, 'nigerian-university'),
     orderBy: (levels, { asc }) => [asc(levels.name)],
@@ -130,10 +136,27 @@ export const getAdminUniversityTree = cache(async () => {
     return {
       ...level,
       categories: level.categories.map(category => {
-        const sharedSubjects = (category.courseShares || []).map(cs => cs.subject);
+        const ownedSubjects = category.subjects.map(s => ({
+          ...s,
+          isShared: false,
+          shareCount: shareCounts[s.id] || 0,
+        }));
+        
+        const sharedSubjects = (category.courseShares || []).map(cs => {
+          const s = cs.subject;
+          return {
+            ...s,
+            isShared: true,
+            shareCount: shareCounts[s.id] || 0,
+            name: cs.aliasName || s.name,
+            slug: cs.aliasSlug || s.slug,
+            originalName: s.name,
+          };
+        });
+
         return {
           ...category,
-          subjects: [...category.subjects, ...sharedSubjects].sort((a, b) => a.name.localeCompare(b.name))
+          subjects: [...ownedSubjects, ...sharedSubjects].sort((a, b) => a.name.localeCompare(b.name))
         };
       })
     };

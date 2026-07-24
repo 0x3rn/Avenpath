@@ -61,6 +61,8 @@ export const courseShares = pgTable("course_shares", {
   id: serial("id").primaryKey(),
   subjectId: text("subject_id").references(() => subjects.id, { onDelete: "cascade" }).notNull(),
   categoryId: integer("category_id").references(() => categories.id, { onDelete: "cascade" }).notNull(),
+  aliasName: text("alias_name"),
+  aliasSlug: text("alias_slug"),
 });
 
 export const courseSharesRelations = relations(courseShares, ({ one }) => ({
