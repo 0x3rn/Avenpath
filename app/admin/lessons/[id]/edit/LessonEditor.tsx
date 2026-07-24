@@ -50,6 +50,8 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
       } else {
         defaultAudience = "Highschool";
       }
+    } else if (level.includes("nigerian-university")) {
+      defaultAudience = "Nigerian University Undergraduate";
     } else if (level.includes("university")) {
       defaultAudience = "University Undergraduate";
     }
@@ -60,6 +62,7 @@ export default function LessonEditor({ lesson }: { lesson: any }) {
     "Nigerian Primary School",
     "Nigerian Junior Highschool",
     "Nigerian Senior Highschool",
+    "Nigerian University Undergraduate",
     "Highschool",
     "University Undergraduate"
   ]));

@@ -258,7 +258,7 @@ export default function SubjectView({ region, level, subjects, isLoggedIn = fals
                           
                           <div className="flex items-center justify-between mt-auto">
                             <div className="flex flex-col gap-3">
-                              <span className="text-[13px] font-bold text-muted-foreground">{topic.subtopics.length} Lessons</span>
+                              <span className="text-[13px] font-bold text-muted-foreground">{topic.subtopics.length} {topic.subtopics.length <= 1 ? 'Lesson' : 'Lessons'}</span>
                             </div>
                             <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
                               <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-background" />

@@ -70,7 +70,7 @@ export const getAdminLevelsTree = cache(async () => {
 });
 
 export const getAdminUniversityTree = cache(async () => {
-  return await db.query.levels.findMany({
+  const levels = await db.query.levels.findMany({
     where: eq(schema.levels.region, 'nigerian-university'),
     orderBy: (levels, { asc }) => [asc(levels.name)],
     with: {
@@ -96,9 +96,46 @@ export const getAdminUniversityTree = cache(async () => {
                 }
               }
             }
+          },
+          courseShares: {
+            with: {
+              subject: {
+                with: {
+                  terms: {
+                    with: {
+                      topics: {
+                        with: {
+                          subtopics: {
+                            columns: {
+                              id: true,
+                              title: true,
+                              slug: true,
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
+  });
+
+  // Merge course shares into subjects
+  return levels.map(level => {
+    return {
+      ...level,
+      categories: level.categories.map(category => {
+        const sharedSubjects = (category.courseShares || []).map(cs => cs.subject);
+        return {
+          ...category,
+          subjects: [...category.subjects, ...sharedSubjects].sort((a, b) => a.name.localeCompare(b.name))
+        };
+      })
+    };
   });
 });

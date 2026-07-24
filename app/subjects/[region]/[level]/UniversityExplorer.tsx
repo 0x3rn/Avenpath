@@ -215,7 +215,7 @@ export default function UniversityExplorer({ region, level, tree, isLoggedIn = f
               <Building2 className="w-8 h-8 mb-4 text-muted-foreground group-hover:text-emerald-500 transition-colors" />
               <h3 className="font-bold text-lg mb-2">{faculty.name}</h3>
               <p className="text-xs font-semibold text-muted-foreground bg-muted inline-block px-2 py-1 rounded">
-                {faculty.categories.length} Departments
+                {faculty.categories.length} {faculty.categories.length <= 1 ? 'Department' : 'Departments'}
               </p>
             </div>
           ))}
@@ -241,7 +241,7 @@ export default function UniversityExplorer({ region, level, tree, isLoggedIn = f
                   <h3 className="font-bold text-lg mb-2">{dept.name}</h3>
                 </div>
                 <p className="text-xs font-semibold text-muted-foreground mt-4">
-                  {dept.subjects.length} Courses available
+                  {dept.subjects.length} {dept.subjects.length <= 1 ? 'Course' : 'Courses'} available
                 </p>
               </div>
             ))}

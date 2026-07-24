@@ -142,7 +142,10 @@ export default function TopicsTree({ subjects, mode = 'default' }: { subjects: a
         {openSubject === subject.id ? <FolderOpen className="w-4 h-4 text-blue-500" /> : <Folder className="w-4 h-4 text-blue-500" />}
         <span className="font-bold text-sm">{subject.name}</span>
         <span className="text-xs font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded ml-auto">
-          {(subject.terms || []).reduce((acc: number, t: any) => acc + (t.topics?.length || 0), 0)} Topics
+          {(() => {
+            const count = (subject.terms || []).reduce((acc: number, t: any) => acc + (t.topics?.length || 0), 0);
+            return `${count} ${count <= 1 ? 'Topic' : 'Topics'}`;
+          })()}
         </span>
       </div>
 

@@ -138,8 +138,8 @@ export default function SubjectsFolderTree({ levels }: SubjectsFolderTreeProps) 
             <div className="min-w-0">
               <span className="font-bold text-sm block truncate">{subject.name}</span>
               <div className="flex gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-0.5">
-                <span>{topicsCount} Topics</span>
-                <span>{lessonsCount} Lessons</span>
+                <span>{topicsCount} {topicsCount <= 1 ? 'Topic' : 'Topics'}</span>
+                <span>{lessonsCount} {lessonsCount <= 1 ? 'Lesson' : 'Lessons'}</span>
               </div>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function SubjectsFolderTree({ levels }: SubjectsFolderTreeProps) 
           }
           <span className="font-bold text-sm">{node.name}</span>
           <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded ml-auto shrink-0">
-            {count}
+            {count} {count <= 1 ? 'Subject' : 'Subjects'}
           </span>
         </div>
 

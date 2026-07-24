@@ -214,7 +214,7 @@ export default function SubjectExplorer({
         {/* CONTROLS */}
         <div className="flex items-center justify-between mb-8 pb-4 border-b border-border">
           <div className="text-muted-foreground font-semibold text-[15px]">
-            Showing {filteredSubjects.length} subjects
+            Showing {filteredSubjects.length} {filteredSubjects.length <= 1 ? 'subject' : 'subjects'}
           </div>
           <div className="flex items-center gap-3">
             <span className="text-muted-foreground font-medium text-sm">Sort by:</span>
@@ -289,8 +289,8 @@ export default function SubjectExplorer({
 
                     <div className="pt-4 border-t border-border mt-auto">
                       <div className="flex items-center gap-4 text-[12px] font-bold text-muted-foreground mb-4">
-                        <div className="flex items-center gap-1.5"><BookOpen className="w-4 h-4" /> {subject.topics.length} Topics</div>
-                        <div className="flex items-center gap-1.5"><Activity className="w-4 h-4" /> {totalLessons} Lessons</div>
+                        <div className="flex items-center gap-1.5"><BookOpen className="w-4 h-4" /> {subject.topics.length} {subject.topics.length <= 1 ? 'Topic' : 'Topics'}</div>
+                        <div className="flex items-center gap-1.5"><Activity className="w-4 h-4" /> {totalLessons} {totalLessons <= 1 ? 'Lesson' : 'Lessons'}</div>
                       </div>
                       
                       <div className="flex items-center justify-between">

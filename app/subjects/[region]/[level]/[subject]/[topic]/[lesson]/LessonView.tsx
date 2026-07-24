@@ -136,7 +136,7 @@ export default function LessonView({
               <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">Course Progress</h3>
               <div className="flex items-center justify-between text-sm font-bold mb-2">
                 <span>{topic.subtopics.length > 0 ? Math.round((completedSlugs.length / topic.subtopics.length) * 100) : 0}% Complete</span>
-                <span>{completedSlugs.length}/{topic.subtopics.length} Lessons</span>
+                <span>{completedSlugs.length}/{topic.subtopics.length} {topic.subtopics.length <= 1 ? 'Lesson' : 'Lessons'}</span>
               </div>
               <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
                 <div className="h-full bg-foreground rounded-full transition-all" style={{ width: `${topic.subtopics.length > 0 ? (completedSlugs.length / topic.subtopics.length) * 100 : 0}%` }} />

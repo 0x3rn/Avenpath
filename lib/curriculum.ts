@@ -123,7 +123,35 @@ export const getSubjectsByLevel = cache(async (levelSlug: string): Promise<Subje
     }
   });
 
-  return subjectsWithRelations.map(s => formatSubjectHelper(s, levelSlug, level.region));
+  const sharedShares = await db.query.courseShares.findMany({
+    where: inArray(schema.courseShares.categoryId, catIds),
+    with: {
+      subject: {
+        with: {
+          category: true,
+          terms: {
+            orderBy: (terms, { asc }) => [asc(terms.id)],
+            with: {
+              topics: {
+                orderBy: (topics, { asc }) => [asc(topics.order)],
+                with: {
+                  subtopics: {
+                    where: (subtopics, { eq }) => eq(subtopics.isPublished, true),
+                    orderBy: (subtopics, { asc }) => [asc(subtopics.order)]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+
+  const sharedSubjects = sharedShares.map((s: any) => s.subject);
+  const allSubjects = [...subjectsWithRelations, ...sharedSubjects];
+
+  return allSubjects.map((s: any) => formatSubjectHelper(s, levelSlug, level.region));
 });
 
 export const getSubject = cache(async (levelSlug: string, subjectSlug: string): Promise<Subject | null> => {

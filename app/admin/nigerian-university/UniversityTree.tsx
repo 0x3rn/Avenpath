@@ -136,8 +136,8 @@ export default function UniversityTree({ faculties }: UniversityTreeProps) {
             <div className="min-w-0">
               <span className="font-bold text-sm block truncate">{course.name}</span>
               <div className="flex gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-wider mt-0.5">
-                <span>{topicsCount} Topics</span>
-                <span>{lessonsCount} Lessons</span>
+                <span>{topicsCount} {topicsCount <= 1 ? 'Topic' : 'Topics'}</span>
+                <span>{lessonsCount} {lessonsCount <= 1 ? 'Lesson' : 'Lessons'}</span>
               </div>
             </div>
           </div>
@@ -155,16 +155,25 @@ export default function UniversityTree({ faculties }: UniversityTreeProps) {
       );
     }
 
-    const countCourses = (n: TreeNode): number => {
-      let count = 0;
-      if (n.isCourse) count++;
-      for (const child of Object.values(n.children)) {
-        count += countCourses(child);
-      }
-      return count;
-    };
+    let count = 0;
+    let label = "";
 
-    const count = countCourses(node);
+    if (depth === 0) {
+      count = Object.keys(node.children).length;
+      label = count === 1 ? 'Department' : 'Departments';
+    } else {
+      const countCourses = (n: TreeNode): number => {
+        let c = 0;
+        if (n.isCourse) c++;
+        for (const child of Object.values(n.children)) {
+          c += countCourses(child);
+        }
+        return c;
+      };
+      count = countCourses(node);
+      label = count === 1 ? 'Course' : 'Courses';
+    }
+
     const color = folderColors[depth % folderColors.length] || "text-muted-foreground";
 
     return (
@@ -180,7 +189,7 @@ export default function UniversityTree({ faculties }: UniversityTreeProps) {
             }
             <span className="font-bold text-sm">{node.name}</span>
             <span className="text-[10px] font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded ml-auto shrink-0">
-              {count} {count === 1 ? 'Course' : 'Courses'}
+              {count} {label}
             </span>
           </div>
           

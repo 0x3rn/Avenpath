@@ -27,6 +27,7 @@ export const categoriesRelations = relations(categories, ({ one, many }) => ({
     references: [levels.id],
   }),
   subjects: many(subjects),
+  courseShares: many(courseShares),
 }));
 
 export const levelsRelations = relations(levels, ({ many }) => ({
@@ -53,6 +54,24 @@ export const subjectsRelations = relations(subjects, ({ one, many }) => ({
     references: [categories.id],
   }),
   terms: many(terms),
+  courseShares: many(courseShares),
+}));
+
+export const courseShares = pgTable("course_shares", {
+  id: serial("id").primaryKey(),
+  subjectId: text("subject_id").references(() => subjects.id, { onDelete: "cascade" }).notNull(),
+  categoryId: integer("category_id").references(() => categories.id, { onDelete: "cascade" }).notNull(),
+});
+
+export const courseSharesRelations = relations(courseShares, ({ one }) => ({
+  subject: one(subjects, {
+    fields: [courseShares.subjectId],
+    references: [subjects.id],
+  }),
+  category: one(categories, {
+    fields: [courseShares.categoryId],
+    references: [categories.id],
+  }),
 }));
 
 export const terms = pgTable("terms", {

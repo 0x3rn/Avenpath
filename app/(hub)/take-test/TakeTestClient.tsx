@@ -298,7 +298,7 @@ export default function TakeTestClient({ lessons, fixedMode }: { lessons: Lesson
             <div className="flex items-center gap-3 border-b border-border pb-4">
               <span className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-500 font-extrabold flex items-center justify-center text-sm">1</span>
               <div>
-                <h2 className="text-lg font-extrabold">Section A: Objective Questions ({testRubric.objective.length} Questions • 30%)</h2>
+                <h2 className="text-lg font-extrabold">Section A: Objective Questions ({testRubric.objective.length} {testRubric.objective.length <= 1 ? 'Question' : 'Questions'} • 30%)</h2>
                 <p className="text-xs font-semibold text-muted-foreground">Select the single best answer for each question.</p>
               </div>
             </div>
@@ -341,7 +341,7 @@ export default function TakeTestClient({ lessons, fixedMode }: { lessons: Lesson
             <div className="flex items-center gap-3 border-b border-border pb-4">
               <span className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-500 font-extrabold flex items-center justify-center text-sm">2</span>
               <div>
-                <h2 className="text-lg font-extrabold">Section B: Subjective Fill-in-the-Gap ({testRubric.subjective.length} Questions • {assessmentMode === "exam" ? "20%" : "30%"})</h2>
+                <h2 className="text-lg font-extrabold">Section B: Subjective Fill-in-the-Gap ({testRubric.subjective.length} {testRubric.subjective.length <= 1 ? 'Question' : 'Questions'} • {assessmentMode === "exam" ? "20%" : "30%"})</h2>
                 <p className="text-xs font-semibold text-muted-foreground">Type the exact or approximate missing key term, name, or phrase.</p>
               </div>
             </div>
@@ -369,7 +369,7 @@ export default function TakeTestClient({ lessons, fixedMode }: { lessons: Lesson
             <div className="flex items-center gap-3 border-b border-border pb-4">
               <span className="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-500 font-extrabold flex items-center justify-center text-sm">3</span>
               <div>
-                <h2 className="text-lg font-extrabold">Section C: Theory & Explanation ({testRubric.theory.length} Questions • {assessmentMode === "exam" ? "50%" : "40%"})</h2>
+                <h2 className="text-lg font-extrabold">Section C: Theory & Explanation ({testRubric.theory.length} {testRubric.theory.length <= 1 ? 'Question' : 'Questions'} • {assessmentMode === "exam" ? "50%" : "40%"})</h2>
                 <p className="text-xs font-semibold text-muted-foreground">Explain the concepts in your own words based on the lesson notes.</p>
               </div>
             </div>

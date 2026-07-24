@@ -241,7 +241,7 @@ export default function Home() {
                     </div>
                     {/* Tinted Badge - Reduced saturation */}
                     <span className={`text-xs font-bold px-4 py-2 rounded-full tracking-wider ${subject.bgBadge} ${subject.color}`}>
-                      {subject.count} TOPICS
+                      {subject.count} {subject.count <= 1 ? 'TOPIC' : 'TOPICS'}
                     </span>
                   </div>
                   

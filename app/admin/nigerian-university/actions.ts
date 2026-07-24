@@ -32,6 +32,34 @@ export async function createDepartment(facultyId: number, name: string, slug: st
   }
 }
 
+export async function checkCourseExists(name: string) {
+  try {
+    const { eq } = await import("drizzle-orm");
+    const existing = await db.query.subjects.findFirst({
+      where: eq(schema.subjects.name, name)
+    });
+    if (existing) {
+      return { exists: true, subjectId: existing.id };
+    }
+    return { exists: false, subjectId: null };
+  } catch (error: any) {
+    return { exists: false, subjectId: null, error: error.message };
+  }
+}
+
+export async function shareUniversityCourse(subjectId: string, departmentId: number) {
+  try {
+    await db.insert(schema.courseShares).values({
+      subjectId,
+      categoryId: departmentId
+    });
+    revalidatePath("/admin/nigerian-university");
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
+
 export async function createUniversityCourse(
   departmentId: number, 
   levelName: string, 

@@ -6,7 +6,8 @@ import {
   createFaculty, createDepartment, createUniversityCourse,
   editFaculty, deleteFaculty,
   editDepartment, deleteDepartment,
-  editUniversityCourse, deleteUniversityCourse
+  editUniversityCourse, deleteUniversityCourse,
+  checkCourseExists, shareUniversityCourse
 } from "./actions";
 
 // Generate slug helper
@@ -161,6 +162,8 @@ export function AddCourseButton({ departmentId, departmentName }: { departmentId
   const [slug, setSlug] = useState("");
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [confirmShare, setConfirmShare] = useState(false);
+  const [existingSubjectId, setExistingSubjectId] = useState<string | null>(null);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -171,6 +174,26 @@ export function AddCourseButton({ departmentId, departmentName }: { departmentId
   const handleSave = async () => {
     if (!name || !slug || !id || !levelName || !className) return;
     setLoading(true);
+
+    if (confirmShare && existingSubjectId) {
+      await shareUniversityCourse(existingSubjectId, departmentId);
+      setLoading(false);
+      setIsOpen(false);
+      setConfirmShare(false);
+      setExistingSubjectId(null);
+      setName("");
+      setSlug("");
+      return;
+    }
+
+    const existsCheck = await checkCourseExists(name);
+    if (existsCheck.exists) {
+      setExistingSubjectId(existsCheck.subjectId);
+      setConfirmShare(true);
+      setLoading(false);
+      return;
+    }
+
     await createUniversityCourse(departmentId, levelName, className, name, slug, id);
     setLoading(false);
     setIsOpen(false);
@@ -193,71 +216,88 @@ export function AddCourseButton({ departmentId, departmentName }: { departmentId
           <div className="bg-card w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl shadow-xl border border-border p-6 animate-in zoom-in-95 duration-200">
             <h2 className="text-xl font-extrabold flex items-center gap-2 mb-1">
               <BookOpen className="w-5 h-5 text-blue-500" />
-              Add Course
+              {confirmShare ? "Course Already Exists" : "Add Course"}
             </h2>
             <p className="text-sm text-muted-foreground mb-4">Under {departmentName}</p>
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Level</label>
-                  <select 
-                    value={levelName} onChange={(e) => setLevelName(e.target.value)}
-                    className="w-full bg-muted/50 border border-border px-3 py-2 rounded-lg font-medium outline-none cursor-pointer"
-                  >
-                    <option>100 Level</option>
-                    <option>200 Level</option>
-                    <option>300 Level</option>
-                    <option>400 Level</option>
-                    <option>500 Level</option>
-                    <option>600 Level</option>
-                    <option>Postgraduate</option>
-                  </select>
+            
+            {confirmShare ? (
+              <div className="space-y-4">
+                <div className="bg-blue-500/10 text-blue-500 p-4 rounded-xl text-sm font-medium">
+                  The course <strong>{name}</strong> already exists in another department. Do you want to link it to {departmentName}?
+                  <br /><br />
+                  <span className="text-xs">Linking ensures that any future content updates (topics, quizzes) are synchronized across all departments that share this course.</span>
                 </div>
-                <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Semester</label>
-                  <select 
-                    value={className} onChange={(e) => setClassName(e.target.value)}
-                    className="w-full bg-muted/50 border border-border px-3 py-2 rounded-lg font-medium outline-none cursor-pointer"
-                  >
-                    <option>First Semester</option>
-                    <option>Second Semester</option>
-                  </select>
+                <div className="flex gap-3 justify-end mt-6">
+                  <button onClick={() => { setConfirmShare(false); setExistingSubjectId(null); }} className="px-4 py-2 font-bold text-sm text-muted-foreground hover:text-foreground">No, Cancel</button>
+                  <button onClick={handleSave} disabled={loading} className="px-4 py-2 font-bold text-sm bg-blue-500 text-white rounded-lg disabled:opacity-50 hover:bg-blue-600">
+                    {loading ? "Linking..." : "Yes, Link Course"}
+                  </button>
                 </div>
               </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Level</label>
+                    <select 
+                      value={levelName} onChange={(e) => setLevelName(e.target.value)}
+                      className="w-full bg-muted/50 border border-border px-3 py-2 rounded-lg font-medium outline-none cursor-pointer"
+                    >
+                      <option>100 Level</option>
+                      <option>200 Level</option>
+                      <option>300 Level</option>
+                      <option>400 Level</option>
+                      <option>500 Level</option>
+                      <option>600 Level</option>
+                      <option>Postgraduate</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Semester</label>
+                    <select 
+                      value={className} onChange={(e) => setClassName(e.target.value)}
+                      className="w-full bg-muted/50 border border-border px-3 py-2 rounded-lg font-medium outline-none cursor-pointer"
+                    >
+                      <option>First Semester</option>
+                      <option>Second Semester</option>
+                    </select>
+                  </div>
+                </div>
 
-              <div>
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Course Name</label>
-                <input 
-                  autoFocus
-                  placeholder="e.g. CSC 101 - Introduction to Computing"
-                  value={name} onChange={handleNameChange}
-                  className="w-full bg-muted/50 border border-border focus:border-blue-500 px-3 py-2 rounded-lg font-medium outline-none transition-colors"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">URL Slug</label>
+                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Course Name</label>
                   <input 
-                    value={slug} onChange={(e) => setSlug(e.target.value)}
+                    autoFocus
+                    placeholder="e.g. CSC 101 - Introduction to Computing"
+                    value={name} onChange={handleNameChange}
                     className="w-full bg-muted/50 border border-border focus:border-blue-500 px-3 py-2 rounded-lg font-medium outline-none transition-colors"
                   />
                 </div>
-                <div>
-                  <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Unique ID</label>
-                  <input 
-                    value={id} onChange={(e) => setId(e.target.value)}
-                    className="w-full bg-muted/50 border border-border focus:border-blue-500 px-3 py-2 rounded-lg font-medium outline-none transition-colors text-xs"
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">URL Slug</label>
+                    <input 
+                      value={slug} onChange={(e) => setSlug(e.target.value)}
+                      className="w-full bg-muted/50 border border-border focus:border-blue-500 px-3 py-2 rounded-lg font-medium outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5 block">Unique ID</label>
+                    <input 
+                      value={id} onChange={(e) => setId(e.target.value)}
+                      className="w-full bg-muted/50 border border-border focus:border-blue-500 px-3 py-2 rounded-lg font-medium outline-none transition-colors text-xs"
+                    />
+                  </div>
+                </div>
+                
+                <div className="flex gap-3 justify-end mt-6">
+                  <button onClick={() => setIsOpen(false)} className="px-4 py-2 font-bold text-sm text-muted-foreground hover:text-foreground">Cancel</button>
+                  <button onClick={handleSave} disabled={loading} className="px-4 py-2 font-bold text-sm bg-blue-500 text-white rounded-lg disabled:opacity-50 hover:bg-blue-600">
+                    {loading ? "Saving..." : "Save Course"}
+                  </button>
                 </div>
               </div>
-              
-              <div className="flex gap-3 justify-end mt-6">
-                <button onClick={() => setIsOpen(false)} className="px-4 py-2 font-bold text-sm text-muted-foreground hover:text-foreground">Cancel</button>
-                <button onClick={handleSave} disabled={loading} className="px-4 py-2 font-bold text-sm bg-blue-500 text-white rounded-lg disabled:opacity-50 hover:bg-blue-600">
-                  {loading ? "Saving..." : "Save Course"}
-                </button>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       )}
